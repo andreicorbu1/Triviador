@@ -8,6 +8,14 @@ void AccountManager::AddUser(const User& user)
 	}
 }
 
+void AccountManager::DeleteUser(const std::string& username)
+{
+	if(SearchUser(username))
+	{
+		m_accounts.erase(username);
+	}
+}
+
 bool AccountManager::SearchUser(const std::string& username) const
 {
 	// True if successful, false otherwise

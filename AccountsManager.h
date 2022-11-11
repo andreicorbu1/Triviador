@@ -8,6 +8,9 @@ class AccountManager
 public:
 	AccountManager() = default;
 	void AddUser(const User& user);
+	void DeleteUser(const std::string& username);
+	bool SearchUser(const std::string& username) const;
+	User GetUser(const std::string &username) const;
 	friend std::ostream& operator << (std::ostream& os, const AccountManager& manager);
 
 private:

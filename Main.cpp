@@ -14,6 +14,9 @@ int main() {
 	playerList.AddUser(user3);
 	playerList.AddUser(user4);
 	playerList.AddUser(user5);
+	std::cout << playerList.GetUser("2cristianciortea").GetUsername() << "\n";
+	std::cout << playerList;
+	playerList.DeleteUser(user5.GetUsername());
 	std::cout << playerList;
 	return 0;
 }
