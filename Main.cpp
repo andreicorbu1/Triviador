@@ -2,9 +2,13 @@
 #include "Board.h"
 
 int main() {
-	Board<3, 3> board;
+	Board board(5, 3);
 
-	std::cout << "Hello world!\n";
+	Territory t;
+
+	board[{1, 2}] = t;
+
+	std::cout << board;
 
 	return 0;
 }
