@@ -26,9 +26,9 @@ std::ostream& operator<<(std::ostream& out, const Board& b)
     for (line = 0; line < b.m_height; line++) {
         for (column = 0; column < b.m_width; column++) {
             if (b[pos])
-                out << "Player1[1000]";
+                out << *b[pos];
             else
-                out << "[___]";
+                out << "[____]";
             out << "  ";
         }
         out << "\n\n";

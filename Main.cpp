@@ -4,9 +4,11 @@
 int main() {
 	Board board(5, 3);
 
-	Territory t;
+	Territory t1("Sebi");
+	Territory t2("George");
 
-	board[{1, 2}] = t;
+	board[{0, 0}] = t1;
+	board[{1, 2}] = t2;
 
 	std::cout << board;
 

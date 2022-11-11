@@ -8,11 +8,12 @@ class Board
 {
 public:
     using Position = std::pair<uint8_t, uint8_t>;
+
 public:
     Board(std::size_t width, std::size_t height);
+
     // Getter
     const std::optional<Territory>& operator[] (Position pos) const;
-
     // Setter
     std::optional<Territory>& operator[] (Position pos);
 
