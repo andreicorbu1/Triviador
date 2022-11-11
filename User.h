@@ -4,13 +4,8 @@
 
 class User
 {
-private:
-	std::string m_username;
-	std::string m_password;
-	int m_level;
-	int m_gamesPlayed;
 public:
-	User();
+	User() = default;
 	User(const std::string& username, const std::string& password);
 
 public:
@@ -25,5 +20,10 @@ public:
 	const std::string GetPassword() const;
 	int GetLevel() const;
 	int GetGamesPlayed() const;
+private:
+	std::string m_username;
+	std::string m_password;
+	int m_level;
+	int m_gamesPlayed;
 };
 

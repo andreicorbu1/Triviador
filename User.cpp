@@ -1,14 +1,10 @@
 #include "User.h"
 
-User::User()
-{
-
-}
-
 User::User(const std::string& username, const std::string& password):
 	m_username(username), m_password(password)
 {
-	std::cout << "Constructor user apelat!\n";
+	m_level = 0;
+	m_gamesPlayed = 0;
 }
 
 void User::SetUsername(const std::string& username)
