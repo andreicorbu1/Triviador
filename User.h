@@ -10,7 +10,7 @@ private:
 	int m_level;
 	int m_gamesPlayed;
 public:
-	User() = default;
+	User();
 	User(const std::string& username, const std::string& password);
 
 public:
