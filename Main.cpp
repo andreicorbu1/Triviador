@@ -1,5 +1,8 @@
 #include <iostream>
+#include "User.h"
 
 int main() {
-	std::cout << "Hello world!\n";
+	User user("cristianciortea", "123456");
+
+	return 0;
 }
