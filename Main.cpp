@@ -1,7 +1,20 @@
+#include "Board.h"
 #include "AccountsManager.h"
 #include "User.h"
+int main() 
+{
+//testing for board&teritory
+	Board board(5, 3);
 
-int main() {
+	Territory t1("Sebi");
+	Territory t2("George");
+
+	board[{0, 0}] = t1;
+	board[{1, 2}] = t2;
+
+	std::cout << board;
+
+//testing for User and AccountsManager
 	User user("2cristianciortea", "123456sadS@");
 	User user2("3cristianciortea", "123456Dsa");
 	User user3("4cristianciortea", "12345621as");

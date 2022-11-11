@@ -130,10 +130,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccountsManager.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Territory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Territory.h" />
     <ClInclude Include="AccountsManager.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
