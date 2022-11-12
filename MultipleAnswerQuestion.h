@@ -3,11 +3,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
-class MultipleAnswerQuestion: public BasicQuestion
+class MultipleAnswerQuestion : public BasicQuestion
 {
 public:
-	MultipleAnswerQuestion()=default;
-	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, 
+	MultipleAnswerQuestion() = default;
+	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
 		const std::vector<std::string>& answers);
 
 public:

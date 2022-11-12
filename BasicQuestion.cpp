@@ -1,7 +1,7 @@
 #include "BasicQuestion.h"
 
-BasicQuestion::BasicQuestion(const std::string& question, const std::string& rightAnswer):
-	m_question(question), 
+BasicQuestion::BasicQuestion(const std::string& question, const std::string& rightAnswer) :
+	m_question(question),
 	m_rightAnswer(rightAnswer)
 {
 }
@@ -35,7 +35,7 @@ std::istream& operator>>(std::istream& is, BasicQuestion& basicQuestion)
 
 std::ostream& operator<<(std::ostream& os, const BasicQuestion& basic_question)
 {
-	os <<"\n";
+	os << "\n";
 	os << "The Question is: " << basic_question.m_question << "\n";
 	os << "The Answer of the Question is: " << basic_question.m_rightAnswer << "\n";
 	return os;
