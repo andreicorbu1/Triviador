@@ -166,8 +166,8 @@
     <ClInclude Include="src\Territory.h" />
     <ClInclude Include="src\AccountsManager.h" />
     <ClInclude Include="src\User.h" />
-    <ClCompile Include="src\BasicQuestion.h" />
-    <ClCompile Include="src\MultipleAnswerQuestion.h" />
+    <ClInclude Include="src\BasicQuestion.h" />
+    <ClInclude Include="src\MultipleAnswerQuestion.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

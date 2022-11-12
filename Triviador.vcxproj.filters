@@ -30,12 +30,12 @@
     <ClCompile Include="src\Territory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClInclude Include="src\BasicQuestion.cpp">
+    <ClCompile Include="src\BasicQuestion.cpp">
      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MultipleAnswerQuestion.cpp">
+    </ClCompile>
+    <ClCompile Include="src\MultipleAnswerQuestion.cpp">
      <Filter>Source Files</Filter>
-    </ClInclude>
+    </ClCompile>
 </ItemGroup>
 <ItemGroup>
     <ClInclude Include="src\User.h">
