@@ -15,34 +15,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="User.cpp">
+    <ClCompile Include="src\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AccountsManager.cpp">
+    <ClCompile Include="src\AccountsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
+    <ClCompile Include="src\Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Territory.cpp">
+    <ClCompile Include="src\Territory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-</ItemGroup>
-<ItemGroup>
-    <ClInclude Include="User.h">
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AccountsManager.h">
+    <ClInclude Include="src\AccountsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Territory.h">
+    <ClInclude Include="src\Territory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-     <Filter>Header Files</Filter>
+    <ClInclude Include="src\Board.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-</ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+  </ItemGroup>
 </Project>
