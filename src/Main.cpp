@@ -24,16 +24,16 @@ int main()
     User user4("5cristianciortea", "123456#");
     User user5("6cristianciortea", "12345aSs@6");
     user.SetGamesPlayed(2);
-    AccountManager playerList;
-    playerList.AddUser(user);
-    playerList.AddUser(user2);
-    playerList.AddUser(user3);
-    playerList.AddUser(user4);
-    playerList.AddUser(user5);
-    std::cout << playerList.GetUser("2cristianciortea").GetUsername() << "\n";
-    std::cout << playerList;
-    playerList.DeleteUser(user5.GetUsername());
-    std::cout << playerList;
+    AccountManager userList;
+    userList.AddUser(user);
+    userList.AddUser(user2);
+    userList.AddUser(user3);
+    userList.AddUser(user4);
+    userList.AddUser(user5);
+    std::cout << userList.GetUser("2cristianciortea").GetUsername() << "\n";
+    std::cout << userList;
+    userList.DeleteUser(user5.GetUsername());
+    std::cout << userList;
 
     //testing for QuestionManager
 

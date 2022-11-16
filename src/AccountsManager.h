@@ -11,6 +11,7 @@ public:
 	void DeleteUser(const std::string& username);
 	bool SearchUser(const std::string& username) const;
 	User GetUser(const std::string &username) const;
+	void UpdateUser(const User& user);
 	friend std::ostream& operator << (std::ostream& os, const AccountManager& manager);
 
 private:
