@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AccountsManager.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Territory.h" />
     <ClInclude Include="src\AccountsManager.h" />
     <ClInclude Include="src\User.h" />
