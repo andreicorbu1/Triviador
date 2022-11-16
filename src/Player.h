@@ -11,6 +11,10 @@ public:
 		Green,
 		Yellow
 	};
+	Player() = default;
+	Player(const std::string& playerName, const Color& color);
+	Player& operator+=(const int score);
+	
 private:
 	std::string m_playerName;
 	Color m_color;
