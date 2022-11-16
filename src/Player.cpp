@@ -7,7 +7,7 @@ Player::Player(const std::string& playerName, const Color& color) :
 	m_territoriesCount = 0;
 }
 
-Player& Player::operator+=(const int score)
+Player& Player::operator+=(int score)
 {
 	m_score += score;
 	return *this;
