@@ -18,6 +18,12 @@ User::User(const User& user) :
 	//empty
 }
 
+User::User(User&& user)
+{
+	*this = std::move(user);
+}
+
+
 void User::SetUsername(const std::string& username)
 {
 	m_username = username;
@@ -51,6 +57,20 @@ User& User::operator=(const User& user)
 	m_gamesPlayed = user.m_gamesPlayed;
 	m_points = user.m_points;
 
+	return *this;
+}
+
+User& User::operator=(User&& user)
+{
+	if (this != &user)
+	{
+		m_username = user.m_username;
+		m_password = user.m_password;
+		m_level = user.m_level;
+		m_gamesPlayed = user.m_gamesPlayed;
+		m_points = user.m_points;
+		new(&user)User;
+	}
 	return *this;
 }
 
