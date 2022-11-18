@@ -8,6 +8,16 @@ User::User(const std::string& username, const std::string& password):
 	m_points = 0;
 }
 
+User::User(const User& user) :
+	m_username(user.m_username),
+	m_password(user.m_password),
+	m_level(user.m_level),
+	m_gamesPlayed(user.m_gamesPlayed),
+	m_points(user.m_points)
+{
+	//empty
+}
+
 void User::SetUsername(const std::string& username)
 {
 	m_username = username;
@@ -31,6 +41,17 @@ void User::SetGamesPlayed(int gamesPlayed)
 void User::AddPoints(int points)
 {
 	m_points += points;
+}
+
+User& User::operator=(const User& user)
+{
+	m_username = user.m_username;
+	m_password = user.m_password;
+	m_level = user.m_level;
+	m_gamesPlayed = user.m_gamesPlayed;
+	m_points = user.m_points;
+
+	return *this;
 }
 
 void User::UpdateLevel(int matchPoints)
