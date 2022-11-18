@@ -13,6 +13,9 @@ public:
 	};
 	Player() = default;
 	Player(const std::string& playerName, const Color& color);
+	Player(const Player& other);
+	~Player() = default;
+	Player& operator =(const Player& other);
 	Player& operator+=(int score);
 
 private:
