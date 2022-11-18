@@ -31,13 +31,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\BasicQuestion.cpp">
-     <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\MultipleAnswerQuestion.cpp">
-     <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-</ItemGroup>
-<ItemGroup>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="src\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,17 +51,20 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Board.h">
-     <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\BasicQuestion.h">
-     <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\MultipleAnswerQuestion.h">
-     <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-</ItemGroup>
-<ItemGroup>
+    <ClInclude Include="src\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
-</ItemGroup>
+  </ItemGroup>
 </Project>

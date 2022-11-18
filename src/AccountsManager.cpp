@@ -48,7 +48,7 @@ bool AccountManager::ValidateCredentials(const User& user) const
 std::ostream& operator<<(std::ostream& os, const AccountManager& manager)
 {
 	//Temporary implementation, waiting for class User << operator override
-	for(auto it : manager.m_accounts)
+	for(const auto& it : manager.m_accounts)
 	{
 		os << it.second.GetUsername() << "\n" << it.second.GetPassword() << "\n" << it.second.GetGamesPlayed() << "\n" << it.second.GetLevel() << "\n";
 	}
