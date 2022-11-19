@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "Game.h"
 #include "AccountsManager.h"
 #include "User.h"
 #include "BasicQuestion.h"
@@ -6,6 +6,9 @@
 
 int main()
 {
+    // testing for game
+    Game game(Player(), Player());
+    
     //testing for board&teritory
     Board board(5, 3);
 

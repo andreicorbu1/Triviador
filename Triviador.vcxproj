@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\AccountsManager.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\User.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Territory.h" />
