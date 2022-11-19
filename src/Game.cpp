@@ -51,7 +51,7 @@ void Game::ChooseBaseTerritories()
             }
 
             std::cout << "You chose: " << pos.first << " " << pos.second << "\n";
-            m_board[pos] = Territory(player);
+            m_board[pos] = Territory(player, true);
             break;
         } while (true);
         std::cout << "\n";

@@ -8,6 +8,13 @@ Territory::Territory()
 
 Territory::Territory(const Player& owner)
     : m_owner(owner)
+    , m_score(kTerritoryScore)
+{
+    // empty
+}
+
+Territory::Territory(const Player& owner, const bool& isBase)
+    : m_owner(owner)
     , m_score(kBaseScore)
 {
     // empty
