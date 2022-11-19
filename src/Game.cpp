@@ -42,10 +42,12 @@ void Game::ChooseBaseTerritories()
         do {
             std::cout << m_board << std::endl;
             std::cout << player.GetName() << ", choose a territory: ";
-            Board::Position pos;
-            std::cin >> pos.first >> pos.second;
+            uint16_t line;
+            uint16_t column;
+            std::cin >> line >> column;
             
             try {
+                Board::Position pos = { line, column };
                 if (m_board[pos]) {
                     std::cerr << "This territory is already taken!\n";
                 }

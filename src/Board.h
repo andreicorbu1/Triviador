@@ -7,7 +7,7 @@
 class Board
 {
 public:
-    using Position = std::pair<unsigned int, unsigned int>;
+    using Position = std::pair<uint8_t, uint8_t>;
 
 public:
     Board(const std::size_t& width, const std::size_t& height);
