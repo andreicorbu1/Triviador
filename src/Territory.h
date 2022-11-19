@@ -9,6 +9,7 @@ class Territory
 public:
     Territory();
     explicit Territory(const Player& owner);
+    Territory(const Player& owner, const bool& isBase);
     Territory(const Territory& territory);
     Territory(Territory&& territory) noexcept;
     ~Territory() = default;
@@ -20,7 +21,8 @@ public:
     friend std::ostream& operator<< (std::ostream& out, const Territory& t);
 
 private:
-    const uint16_t kBaseScore = 100;
+    const uint16_t kBaseScore = 300;
+    const uint16_t kTerritoryScore = 100;
     
 private:
     std::optional<Player> m_owner;

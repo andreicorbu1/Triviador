@@ -8,6 +8,13 @@ Territory::Territory()
 
 Territory::Territory(const Player& owner)
     : m_owner(owner)
+    , m_score(kTerritoryScore)
+{
+    // empty
+}
+
+Territory::Territory(const Player& owner, const bool& isBase)
+    : m_owner(owner)
     , m_score(kBaseScore)
 {
     // empty
@@ -40,7 +47,7 @@ Territory& Territory::operator=(Territory&& territory) noexcept
 
 std::ostream& operator<< (std::ostream& out, const Territory& t)
 {
-    out << (t.m_owner.has_value() ? t.m_owner.value().GetPlayerName() : "No owner");
+    out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");
     out << "[" << t.m_score << "]";
     return out;
 }

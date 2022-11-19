@@ -19,8 +19,8 @@ public:
 	~Player() = default;
 
     // Getters:
-	const std::string& GetPlayerName() const;
-
+	const std::string& GetName() const;
+    
     // Operators:
 	Player& operator =(const Player& other);
 	Player& operator+=(int score);
