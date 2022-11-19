@@ -33,7 +33,7 @@ void MultipleAnswerQuestion::SetAnswers(const std::vector<std::string>& answers)
 	m_answers = answers;
 }
 
-const std::vector<std::string> MultipleAnswerQuestion::GetAnswers()
+const std::vector<std::string>& MultipleAnswerQuestion::GetAnswers() const
 {
 	return m_answers;
 }
@@ -55,11 +55,11 @@ std::ostream& operator<<(std::ostream& os, const MultipleAnswerQuestion& multipl
 {
 	os << "\n";
 	os << "The Question is: " << multipleAnswerQuestion.m_question << "\n";
-	os << "The Answer of the Question is: " << multipleAnswerQuestion.m_rightAnswer << "\n";
+	//os << "The Answer of the Question is: " << multipleAnswerQuestion.m_rightAnswer << "\n";
 	os << "Potential Right Answers: \n";
 	for (size_t i = 0; i < 4; i++)
 	{
-		os << multipleAnswerQuestion.m_answers[i] << "\n";
+		os <<i+1<<". "<< multipleAnswerQuestion.m_answers[i] << "\n";
 	}
 	return os;
 }

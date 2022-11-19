@@ -154,24 +154,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AccountsManager.cpp" />
+    <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
+    <ClCompile Include="src\Quiz.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Territory.cpp" />
-    <ClCompile Include="src\BasicQuestion.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\NumericalAnswerQuestion.h" />
+    <ClInclude Include="src\Quiz.h" />
     <ClInclude Include="src\Territory.h" />
     <ClInclude Include="src\AccountsManager.h" />
     <ClInclude Include="src\User.h" />
-    <ClInclude Include="src\BasicQuestion.h" />
     <ClInclude Include="src\MultipleAnswerQuestion.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="MultipleAnswerQuestions.txt" />
+    <Text Include="NumericalAnswerQuestions.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

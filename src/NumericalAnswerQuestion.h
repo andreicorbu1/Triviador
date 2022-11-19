@@ -16,8 +16,25 @@ public:
 	const T& GetRightAnswer() const;
 
 public:
-	friend std::istream& operator>>(std::istream& is, NumericalAnswerQuestion& numericalAnswerQuestion);
-	friend std::ostream& operator<<(std::ostream& os, const NumericalAnswerQuestion& numericalAnswerQuestion);
+	friend std::istream& operator>>(std::istream& is, NumericalAnswerQuestion& numericalAnswerQuestion)
+	{
+		std::getline(is, numericalAnswerQuestion.m_question);
+		is >> numericalAnswerQuestion.m_rightAnswer;
+
+		is.ignore(1024, '\n');
+		return is;
+	}
+	friend std::ostream& operator<<(std::ostream& os, const NumericalAnswerQuestion& numericalAnswerQuestion)
+	{
+		os << "\n";
+		os << "The Question is: " << numericalAnswerQuestion.m_question << "\n";
+		//os << "The Answer of the Question is: " << numericalAnswerQuestion.m_rightAnswer << "\n";
+		return os;
+	}
+	friend bool operator==(const NumericalAnswerQuestion<T>& naq1, const NumericalAnswerQuestion<T>& naq2)
+	{
+		return naq1.m_rightAnswer == naq2.m_rightAnswer && naq1.m_question == naq2.m_question;
+	}
 
 private:
 	std::string m_question;
@@ -25,7 +42,7 @@ private:
 };
 
 template <class T>
-NumericalAnswerQuestion<T>::NumericalAnswerQuestion(const std::string& question, const T& rightAnswer):
+NumericalAnswerQuestion<T>::NumericalAnswerQuestion(const std::string& question, const T& rightAnswer) :
 	m_question(question),
 	m_rightAnswer(rightAnswer)
 {
@@ -54,4 +71,8 @@ void NumericalAnswerQuestion<T>::SetRightAnswer(const T& rightAnswer)
 {
 	m_rightAnswer = rightAnswer;
 }
+
+
+
+
 

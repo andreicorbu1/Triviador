@@ -2,8 +2,8 @@
 
 Quiz::Quiz()
 {
-	ReadFromFile("NumericalAnswerQuestion.txt");
-	//ReadFromFile("MultipleAnswerQuestion.txt");
+	ReadFromFile("NumericalAnswerQuestions.txt");
+	ReadFromFile("MultipleAnswerQuestions.txt", false);
 }
 
 Quiz::Quiz(const std::unordered_set<NumericalAnswerQuestion<int>, HashFunctionForNumericalQuestion>& numericalAnswerQuestions,
@@ -11,8 +11,8 @@ Quiz::Quiz(const std::unordered_set<NumericalAnswerQuestion<int>, HashFunctionFo
 	m_numericalAnswerQuestions(numericalAnswerQuestions),
 	m_multipleAnswerQuestions(multipleAnswerQuestion)
 {
-	ReadFromFile("NumericalAnswerQuestion.txt");
-	//ReadFromFile("MultipleAnswerQuestion.txt");
+	ReadFromFile("NumericalAnswerQuestions.txt");
+	ReadFromFile("MultipleAnswerQuestions.txt", false);
 }
 
 size_t Quiz::HashFunctionForNumericalQuestion::operator()(const NumericalAnswerQuestion<int>& numericalAnswerQuestion) const
@@ -78,17 +78,63 @@ void Quiz::Start()
 {
 	uint16_t op = 1;
 	std::cout << "\nAlege tip intrebare: ";
-	std::cout << "1. Intrebare cu un singur raspuns numeric\n";
-	std::cout << "2. Intrebare cu mai multe variante de raspuns\n";
+	std::cout << "\n1. Intrebare cu un singur raspuns numeric";
+	std::cout << "\n2. Intrebare cu mai multe variante de raspuns\n";
 
+	std::cout << "Alege tip: ";
 	std::cin >> op;
 	if (op == 1)
 	{
-		//
+		auto it = m_numericalAnswerQuestions.begin();
+		while (op != 0 && it != m_numericalAnswerQuestions.end())
+		{
+			std::cout << *it;
+			std::cout << "\nSelecteaza raspunsul corect: ";
+			int answer;
+			std::cin >> answer;
+			if (answer == it->GetRightAnswer())
+			{
+				std::cout << "\nRaspunsul este corect";
+			}
+			else
+			{
+				std::cout << "\nRaspunsul este gresit";
+				std::cout << "\nRaspunsul corect era: " << it->GetRightAnswer();
+			}
+			it++;
+			std::cout << "\nCiteste un intreg diferit de zero daca doresti sa continui: ";
+			std::cin >> op;
+			if (it == m_numericalAnswerQuestions.end())
+			{
+				std::cout << "\nAi parcurs toate intrebarile";
+			}
+		}
 	}
-	while (op)
+	else
 	{
-
+		auto it = m_multipleAnswerQuestions.begin();
+		while (op != 0 && it != m_multipleAnswerQuestions.end())
+		{
+			std::cout << *it;
+			std::cout << "\nSelecteaza raspunsul corect: ";
+			int answer;
+			std::cin >> answer;
+			if (it->GetRightAnswer() == it->GetAnswers()[answer - 1])
+			{
+				std::cout << "\nRaspunsul este corect";
+			}
+			else
+			{
+				std::cout << "\nRaspunsul este gresit";
+			}
+			it++;
+			std::cout << "\nCiteste un intreg diferit de zero daca doresti sa continui: ";
+			std::cin >> op;
+		}
+		if (it == m_multipleAnswerQuestions.end())
+		{
+			std::cout << "\nAi parcurs toate intrebarile";
+		}
 	}
 }
 

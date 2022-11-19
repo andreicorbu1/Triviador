@@ -15,7 +15,7 @@ public:
 	const std::string& GetQuestion() const;
 	const std::string& GetRightAnswer() const;
 	void SetAnswers(const std::vector<std::string>& answers);
-	const std::vector<std::string> GetAnswers();
+	const std::vector<std::string>& GetAnswers() const;
 
 public:
 	friend std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion);
