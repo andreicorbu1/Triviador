@@ -7,13 +7,17 @@
 int main()
 {
     // testing for game
-    Game game(Player(), Player());
-    
-    //testing for board&teritory
-    Board board(5, 3);
-
     Player player1("Sebi", Player::Color::Blue);
     Player player2("George", Player::Color::Red);
+    Player player3("Marius", Player::Color::Green);
+    Game game(player1, player2, player3);
+
+    std::cout << "Gameboard:\n";
+    std::cout << game.GetBoard();
+    
+    //testing for board&teritory
+    Board board(3, 3);
+    
     Territory t1(player1);
     Territory t2(player2);
 
