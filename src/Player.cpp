@@ -15,7 +15,7 @@ Player::Player(const Player& other)
 	this->m_playerName = other.m_playerName;
 }
 
-const std::string& Player::GetPlayerName() const
+const std::string& Player::GetName() const
 {
 	return m_playerName;
 }

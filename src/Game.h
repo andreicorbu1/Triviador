@@ -19,6 +19,9 @@ public:
     void Start();
 
 private:
+    void ChooseBaseTerritories();
+    
+private:
     Board m_board;
     std::vector<Player> m_players;
     int m_gameRounds;

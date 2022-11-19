@@ -11,20 +11,7 @@ int main()
     Player player2("George", Player::Color::Red);
     Player player3("Marius", Player::Color::Green);
     Game game(player1, player2, player3);
-
-    std::cout << "Gameboard:\n";
-    std::cout << game.GetBoard();
-    
-    //testing for board&teritory
-    Board board(3, 3);
-    
-    Territory t1(player1);
-    Territory t2(player2);
-
-    board[{0, 0}] = t1;
-    board[{1, 2}] = t2;
-
-    std::cout << board;
+    game.Start();
 
     //testing for User and AccountsManager
     User user("2cristianciortea", "123456sadS@");

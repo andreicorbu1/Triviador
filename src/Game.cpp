@@ -31,5 +31,29 @@ const Board& Game::GetBoard() const
 
 void Game::Start()
 {
-    // empty
+    ChooseBaseTerritories();
+    std::cout << m_board;
+}
+
+void Game::ChooseBaseTerritories()
+{
+    std::cout << "Choose your base territories:\n";
+    for (const auto& player : m_players) {
+        do {
+            std::cout << m_board << std::endl;
+            std::cout << player.GetName() << ", choose a territory: ";
+            Board::Position pos;
+            std::cin >> pos.first >> pos.second;
+
+            if (m_board[pos]) {
+                std::cout << "This territory is already taken!\n";
+                continue;
+            }
+
+            std::cout << "You chose: " << pos.first << " " << pos.second << "\n";
+            m_board[pos] = Territory(player);
+            break;
+        } while (true);
+        std::cout << "\n";
+    }
 }
