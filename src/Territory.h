@@ -11,6 +11,7 @@ public:
     Territory(Territory&& territory) noexcept;
     ~Territory() = default;
 
+    // Operators:
     Territory& operator=(const Territory& territory);
     Territory& operator=(Territory&& territory) noexcept;
 
