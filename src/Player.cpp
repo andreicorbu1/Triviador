@@ -15,6 +15,11 @@ Player::Player(const Player& other)
 	this->m_playerName = other.m_playerName;
 }
 
+const std::string& Player::GetPlayerName() const
+{
+	return m_playerName;
+}
+
 Player& Player::operator=(const Player& other)
 {
 	if(this == &other)

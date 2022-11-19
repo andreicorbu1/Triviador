@@ -9,8 +9,10 @@ int main()
     //testing for board&teritory
     Board board(5, 3);
 
-    Territory t1("Sebi");
-    Territory t2("George");
+    Player player1("Sebi", Player::Color::Blue);
+    Player player2("George", Player::Color::Red);
+    Territory t1(player1);
+    Territory t2(player2);
 
     board[{0, 0}] = t1;
     board[{1, 2}] = t2;

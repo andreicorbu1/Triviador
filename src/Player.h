@@ -11,10 +11,17 @@ public:
 		Green,
 		Yellow
 	};
+    
+public:
 	Player() = default;
 	Player(const std::string& playerName, const Color& color);
 	Player(const Player& other);
 	~Player() = default;
+
+    // Getters:
+	const std::string& GetPlayerName() const;
+
+    // Operators:
 	Player& operator =(const Player& other);
 	Player& operator+=(int score);
 
