@@ -44,16 +44,19 @@ void Game::ChooseBaseTerritories()
             std::cout << player.GetName() << ", choose a territory: ";
             Board::Position pos;
             std::cin >> pos.first >> pos.second;
-
-            if (m_board[pos]) {
-                std::cout << "This territory is already taken!\n";
-                continue;
+            
+            try {
+                if (m_board[pos]) {
+                    std::cerr << "This territory is already taken!\n";
+                }
+                else {
+                    m_board[pos] = Territory(player, true);
+                    break;
+                }
             }
-
-            std::cout << "You chose: " << pos.first << " " << pos.second << "\n";
-            m_board[pos] = Territory(player, true);
-            break;
+            catch (const std::out_of_range& e) {
+                std::cerr << e.what() << "\n";
+            }
         } while (true);
-        std::cout << "\n";
     }
 }
