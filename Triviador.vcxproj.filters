@@ -30,10 +30,13 @@
     <ClCompile Include="src\Territory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BasicQuestion.cpp">
+    <ClCompile Include="src\MultipleAnswerQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MultipleAnswerQuestion.cpp">
+    <ClCompile Include="src\NumericalAnswerQuestion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Player.cpp">
@@ -56,10 +59,13 @@
     <ClInclude Include="src\Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\BasicQuestion.h">
+    <ClInclude Include="src\MultipleAnswerQuestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MultipleAnswerQuestion.h">
+    <ClInclude Include="src\NumericalAnswerQuestion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Player.h">
@@ -72,5 +78,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="NumericalAnswerQuestions.txt" />
+    <Text Include="MultipleAnswerQuestions.txt" />
   </ItemGroup>
 </Project>

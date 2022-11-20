@@ -1,8 +1,10 @@
 #include "Game.h"
 #include "AccountsManager.h"
 #include "User.h"
-#include "BasicQuestion.h"
 #include "MultipleAnswerQuestion.h"
+#include "NumericalAnswerQuestion.h"
+#include "NumericalAnswerQuestion.cpp"
+#include "Quiz.h"
 
 int main()
 {
@@ -32,13 +34,9 @@ int main()
     std::cout << userList;
 
     //testing for QuestionManager
-
-    BasicQuestion basic_question;
-    std::cin >> basic_question;
-    std::cout << basic_question;
-    MultipleAnswerQuestion maq;
-    std::cin >> maq;
-    std::cout << maq;
+    Quiz quiz;
+    quiz.Start();
+    
 
     return 0;
 }
