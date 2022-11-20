@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "Game.h"
 #include "AccountsManager.h"
 #include "User.h"
 #include "MultipleAnswerQuestion.h"
@@ -8,16 +8,12 @@
 
 int main()
 {
-    //testing for board&teritory
-    Board board(5, 3);
-
-    Territory t1("Sebi");
-    Territory t2("George");
-
-    board[{0, 0}] = t1;
-    board[{1, 2}] = t2;
-
-    std::cout << board;
+    // testing for game
+    Player player1("Sebi", Player::Color::Blue);
+    Player player2("George", Player::Color::Red);
+    Player player3("Marius", Player::Color::Green);
+    Game game(player1, player2, player3);
+    game.Start();
 
     //testing for User and AccountsManager
     User user("2cristianciortea", "123456sadS@");
@@ -26,16 +22,16 @@ int main()
     User user4("5cristianciortea", "123456#");
     User user5("6cristianciortea", "12345aSs@6");
     user.SetGamesPlayed(2);
-    AccountManager playerList;
-    playerList.AddUser(user);
-    playerList.AddUser(user2);
-    playerList.AddUser(user3);
-    playerList.AddUser(user4);
-    playerList.AddUser(user5);
-    std::cout << playerList.GetUser("2cristianciortea").GetUsername() << "\n";
-    std::cout << playerList;
-    playerList.DeleteUser(user5.GetUsername());
-    std::cout << playerList;
+    AccountManager userList;
+    userList.AddUser(user);
+    userList.AddUser(user2);
+    userList.AddUser(user3);
+    userList.AddUser(user4);
+    userList.AddUser(user5);
+    std::cout << userList.GetUser("2cristianciortea").GetUsername() << "\n";
+    std::cout << userList;
+    userList.DeleteUser(user5.GetUsername());
+    std::cout << userList;
 
     //testing for QuestionManager
     Quiz quiz;

@@ -1,13 +1,19 @@
 #include "Territory.h"
 
 Territory::Territory()
-    : m_owner(nullptr)
-    , m_score(kBaseScore)
+    : m_score(kBaseScore)
 {
     // empty
 }
 
-Territory::Territory(const std::string& owner)
+Territory::Territory(const Player& owner)
+    : m_owner(owner)
+    , m_score(kTerritoryScore)
+{
+    // empty
+}
+
+Territory::Territory(const Player& owner, const bool& isBase)
     : m_owner(owner)
     , m_score(kBaseScore)
 {
@@ -41,6 +47,7 @@ Territory& Territory::operator=(Territory&& territory) noexcept
 
 std::ostream& operator<< (std::ostream& out, const Territory& t)
 {
-    out << t.m_owner << "[" << t.m_score << "]";
+    out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");
+    out << "[" << t.m_score << "]";
     return out;
 }

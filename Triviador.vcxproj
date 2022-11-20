@@ -96,6 +96,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,9 +154,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\AccountsManager.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
     <ClCompile Include="src\Quiz.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -163,9 +166,11 @@
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\NumericalAnswerQuestion.h" />
     <ClInclude Include="src\Quiz.h" />
+    <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Territory.h" />
     <ClInclude Include="src\AccountsManager.h" />
     <ClInclude Include="src\User.h" />

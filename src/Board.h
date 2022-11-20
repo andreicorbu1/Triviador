@@ -12,14 +12,17 @@ public:
 public:
     Board(const std::size_t& width, const std::size_t& height);
 
-    // Getter
-    const std::optional<Territory>& operator[] (Position pos) const;
-    // Setter
+    // Setters:
     std::optional<Territory>& operator[] (Position pos);
+    
+    // Getters:
+    const std::optional<Territory>& operator[] (Position pos) const;
 
+    // Operators:
     friend std::ostream& operator<< (std::ostream& out, const Board& b);
 
 private:
+    // Constants:
     const std::size_t kWidth;
     const std::size_t kHeight;
     const std::size_t kSize = kWidth * kHeight;
