@@ -181,8 +181,8 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="MultipleAnswerQuestions.txt" />
-    <Text Include="NumericalAnswerQuestions.txt" />
+    <Text Include="res\NumericalAnswerQuestions.txt" />
+    <Text Include="res\MultipleAnswerQuestions.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

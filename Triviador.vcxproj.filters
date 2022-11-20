@@ -80,7 +80,11 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="NumericalAnswerQuestions.txt" />
-    <Text Include="MultipleAnswerQuestions.txt" />
+    <Text Include="res\NumericalAnswerQuestions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="res\MultipleAnswerQuestions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

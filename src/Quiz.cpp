@@ -2,8 +2,8 @@
 
 Quiz::Quiz()
 {
-	ReadFromFile("NumericalAnswerQuestions.txt");
-	ReadFromFile("MultipleAnswerQuestions.txt", false);
+	ReadFromFile("res\\NumericalAnswerQuestions.txt");
+	ReadFromFile("res\\MultipleAnswerQuestions.txt", false);
 }
 
 Quiz::Quiz(const std::unordered_set<NumericalAnswerQuestion<int>, HashFunctionForNumericalQuestion>& numericalAnswerQuestions,
@@ -11,8 +11,8 @@ Quiz::Quiz(const std::unordered_set<NumericalAnswerQuestion<int>, HashFunctionFo
 	m_numericalAnswerQuestions(numericalAnswerQuestions),
 	m_multipleAnswerQuestions(multipleAnswerQuestion)
 {
-	ReadFromFile("NumericalAnswerQuestions.txt");
-	ReadFromFile("MultipleAnswerQuestions.txt", false);
+	ReadFromFile("res\\NumericalAnswerQuestions.txt");
+	ReadFromFile("res\\MultipleAnswerQuestions.txt", false);
 }
 
 size_t Quiz::HashFunctionForNumericalQuestion::operator()(const NumericalAnswerQuestion<int>& numericalAnswerQuestion) const
