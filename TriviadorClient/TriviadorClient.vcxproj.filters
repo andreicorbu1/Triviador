@@ -23,29 +23,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="Client.qrc">
+    <QtRcc Include="resource\Client.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
     <QtUic Include="Client.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="Client.h">
+    <QtMoc Include="include\Client.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="Client.cpp">
+    <ClCompile Include="src\Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Triviador.ico">
+    <Image Include="resource\Triviador.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Triviador.png">
+    <Image Include="resource\Triviador.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
