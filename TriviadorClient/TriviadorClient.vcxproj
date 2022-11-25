@@ -33,12 +33,18 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.4.0_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
-    <QtBuildConfig>debug</QtBuildConfig>
+    <QtBuildConfig>$(SolutionDir)bin\$(Platform)\$(Configuration)\</QtBuildConfig>
+    <QtQMakeTemplate>vcapp</QtQMakeTemplate>
+    <QtPathBinaries>bin</QtPathBinaries>
+    <QtPathLibraryExecutables>bin</QtPathLibraryExecutables>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.4.0_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
-    <QtBuildConfig>release</QtBuildConfig>
+    <QtBuildConfig>$(SolutionDir)bin\$(Platform)\$(Configuration)\</QtBuildConfig>
+    <QtQMakeTemplate>vcapp</QtQMakeTemplate>
+    <QtPathBinaries>bin</QtPathBinaries>
+    <QtPathLibraryExecutables>bin</QtPathLibraryExecutables>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
@@ -72,6 +78,9 @@
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include</AdditionalLibraryDirectories>
     </Link>
+    <QtMoc>
+      <QtMocDir>$(IntDir)moc\</QtMocDir>
+    </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -81,6 +90,9 @@
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include</AdditionalLibraryDirectories>
     </Link>
+    <QtMoc>
+      <QtMocDir>$(IntDir)moc\</QtMocDir>
+    </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -109,15 +121,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="resource\Client.qrc" />
-    <QtUic Include="Client.ui" />
-    <QtMoc Include="include\Client.h" />
-    <ClCompile Include="src\Client.cpp" />
+    <QtRcc Include="resource\Triviador.qrc" />
+    <ClCompile Include="src\Registration.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <QtUic Include="form\Registration.ui" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resource\Title.png" />
+    <Image Include="resource\Triviador-castle.png" />
     <Image Include="resource\Triviador.ico" />
     <Image Include="resource\Triviador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\Registration.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\font\KiwiMaru-Light.ttf" />
+    <Font Include="resource\font\KiwiMaru-Medium.ttf" />
+    <Font Include="resource\font\KiwiMaru-Regular.ttf" />
+    <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
+    <Font Include="resource\KiwiMaru-Medium.ttf" />
+    <Font Include="resource\KiwiMaru-Regular.ttf" />
+    <Font Include="resource\LuckiestGuy-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
