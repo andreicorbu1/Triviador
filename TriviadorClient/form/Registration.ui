@@ -555,7 +555,7 @@ color: rgb(255, 255, 255);</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(252, 243, 33);</string>
+    <string notr="true">border: 2px solid rgb(252, 243, 33);</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="passwordInput">
@@ -586,7 +586,7 @@ color: rgb(255, 255, 255);</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">border: 2px solid rgb(252, 243, 33);</string>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
@@ -810,7 +810,8 @@ color: rgb(255, 255, 255);</string>
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(62, 45, 30);</string>
+    <string notr="true">background-color: rgb(62, 45, 30);
+border: none;</string>
    </property>
    <property name="text">
     <string>LOG IN</string>
@@ -1034,7 +1035,8 @@ color: rgb(255, 255, 255);</string>
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(128, 18, 18);</string>
+    <string notr="true">background-color: rgb(128, 18, 18);
+border: none;</string>
    </property>
    <property name="text">
     <string>SIGN UP</string>
