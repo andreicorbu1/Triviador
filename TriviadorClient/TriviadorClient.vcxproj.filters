@@ -21,6 +21,9 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{ca5be422-5125-420f-b5e8-756959e4e746}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="resource\Triviador.qrc">
@@ -34,6 +37,9 @@
     <ClCompile Include="src\Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Triviador.ico">
@@ -45,7 +51,7 @@
     <Image Include="resource\Triviador-castle.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="resource\Title.png">
+    <Image Include="resource\Banner.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -60,12 +66,22 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="resource\KiwiMaru-Medium.ttf" />
-    <Font Include="resource\KiwiMaru-Regular.ttf" />
-    <Font Include="resource\LuckiestGuy-Regular.ttf" />
-    <Font Include="resource\font\KiwiMaru-Light.ttf" />
-    <Font Include="resource\font\KiwiMaru-Medium.ttf" />
-    <Font Include="resource\font\KiwiMaru-Regular.ttf" />
-    <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
+    <Font Include="resource\font\KiwiMaru-Light.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="resource\font\KiwiMaru-Medium.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="resource\font\KiwiMaru-Regular.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="resource\font\LuckiestGuy-Regular.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

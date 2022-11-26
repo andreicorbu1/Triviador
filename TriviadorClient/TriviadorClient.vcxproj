@@ -122,12 +122,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="resource\Triviador.qrc" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Registration.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <QtUic Include="form\Registration.ui" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resource\Title.png" />
+    <Image Include="resource\Banner.png" />
     <Image Include="resource\Triviador-castle.png" />
     <Image Include="resource\Triviador.ico" />
     <Image Include="resource\Triviador.png" />
@@ -140,9 +141,9 @@
     <Font Include="resource\font\KiwiMaru-Medium.ttf" />
     <Font Include="resource\font\KiwiMaru-Regular.ttf" />
     <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
-    <Font Include="resource\KiwiMaru-Medium.ttf" />
-    <Font Include="resource\KiwiMaru-Regular.ttf" />
-    <Font Include="resource\LuckiestGuy-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

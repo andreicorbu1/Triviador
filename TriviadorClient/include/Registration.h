@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include <cpr/cpr.h>
+
 #include "ui_Registration.h"
 
 class Registration : public QWidget
@@ -11,9 +13,10 @@ public:
     Registration(QWidget *parent = nullptr);
     ~Registration();
     
-    bool isRegistered() const;
+private slots:
+    void on_logInButton_clicked() const;
+    void on_signUpButton_clicked() const;
 
 private:
     Ui::RegistrationClass ui;
-    bool m_isRegistered = true;
 };

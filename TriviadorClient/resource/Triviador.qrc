@@ -8,7 +8,7 @@
     <file>font/KiwiMaru-Regular.ttf</file>
     <file>font/LuckiestGuy-Regular.ttf</file>
   </qresource>
-  <qresource prefix="Title">
-    <file>Title.png</file>
+  <qresource prefix="Banner">
+    <file>Banner.png</file>
   </qresource>
 </RCC>
