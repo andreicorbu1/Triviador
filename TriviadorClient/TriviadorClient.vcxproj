@@ -120,9 +120,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="resource\Triviador.qrc" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Registration.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <QtUic Include="form\Menu.ui" />
     <QtUic Include="form\Registration.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +143,7 @@
     <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

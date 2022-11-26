@@ -40,6 +40,9 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Triviador.ico">
@@ -57,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="form\Registration.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="form\Menu.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -81,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
