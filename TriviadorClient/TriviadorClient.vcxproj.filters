@@ -37,6 +37,9 @@
     <ClCompile Include="src\Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Triviador.ico">
@@ -48,7 +51,7 @@
     <Image Include="resource\Triviador-castle.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="resource\Title.png">
+    <Image Include="resource\Banner.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -75,5 +78,10 @@
     <Font Include="resource\font\LuckiestGuy-Regular.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -236,6 +236,9 @@
     </disabled>
    </palette>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>Triviador</string>
   </property>
@@ -250,7 +253,7 @@
    <string notr="true">background-color: rgb(83, 66, 50);
 color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="banner">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -263,10 +266,10 @@ color: rgb(255, 255, 255);</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="../resource/Triviador.qrc">:/Title/Title.png</pixmap>
+    <pixmap resource="../resource/Triviador.qrc">:/Banner/Banner.png</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="usernameLabel">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -285,7 +288,7 @@ color: rgb(255, 255, 255);</string>
     <string>USERNAME</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="passwordLabel">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -304,7 +307,7 @@ color: rgb(255, 255, 255);</string>
     <string>PASSWORD</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="usernameInput">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -540,13 +543,13 @@ color: rgb(255, 255, 255);</string>
     </palette>
    </property>
    <property name="mouseTracking">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="focusPolicy">
-    <enum>Qt::ClickFocus</enum>
+    <enum>Qt::StrongFocus</enum>
    </property>
    <property name="contextMenuPolicy">
-    <enum>Qt::NoContextMenu</enum>
+    <enum>Qt::DefaultContextMenu</enum>
    </property>
    <property name="autoFillBackground">
     <bool>false</bool>
@@ -555,7 +558,7 @@ color: rgb(255, 255, 255);</string>
     <string notr="true">border-color: rgb(252, 243, 33);</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="passwordInput">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -564,14 +567,20 @@ color: rgb(255, 255, 255);</string>
      <height>30</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="mouseTracking">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="focusPolicy">
-    <enum>Qt::ClickFocus</enum>
+    <enum>Qt::StrongFocus</enum>
    </property>
    <property name="contextMenuPolicy">
-    <enum>Qt::NoContextMenu</enum>
+    <enum>Qt::DefaultContextMenu</enum>
    </property>
    <property name="autoFillBackground">
     <bool>false</bool>
@@ -579,8 +588,11 @@ color: rgb(255, 255, 255);</string>
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="logInButton">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -804,7 +816,7 @@ color: rgb(255, 255, 255);</string>
     <string>LOG IN</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="signUpButton">
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -1030,6 +1042,12 @@ color: rgb(255, 255, 255);</string>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>usernameInput</tabstop>
+  <tabstop>passwordInput</tabstop>
+  <tabstop>logInButton</tabstop>
+  <tabstop>signUpButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../resource/Triviador.qrc"/>
  </resources>
