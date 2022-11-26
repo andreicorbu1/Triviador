@@ -28,7 +28,7 @@ std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswe
 	{
 		std::getline(is, multipleAnswerQuestion.m_answers[i]);
 	}
-	is.ignore(1024, '\n');
+	//is.ignore(1024, '\n');
 	return is;
 }
 

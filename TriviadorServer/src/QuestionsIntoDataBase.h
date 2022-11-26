@@ -3,17 +3,17 @@
 #include <iostream>
 #include <memory>
 #include <sqlite_orm/sqlite_orm.h>
-namespace sql = sqlite_orm;
 #include "MultipleAnswerQuestion.h"
 #include "NumericalAnswerQuestion.h"
 #include <fstream>
 #include <string>
+namespace sql = sqlite_orm;
 
-class QuestionsIntoDataBase
+struct QuestionsIntoDataBase
 {
 public:
 	QuestionsIntoDataBase() = default;
-	auto createStorage(const std::string& databaseFileName, MultipleAnswerQuestion& multipleAnswerQuestion);
+	auto createStorage(const std::string& databaseFileName, const MultipleAnswerQuestion& multipleAnswerQuestion);
 	auto createStorage(const std::string& databaseFileName, const NumericalAnswerQuestion& numericalAnswerQuestion);
 };
 

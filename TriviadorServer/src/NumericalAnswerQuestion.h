@@ -1,11 +1,13 @@
 #pragma once
-#include "Question.hpp"
+#include "Question.h"
 #include <iostream>
 #include <string>
 
 class NumericalAnswerQuestion :
 	public Question<int>
 {
+	friend struct QuestionsIntoDataBase;
+
 public:
 	NumericalAnswerQuestion() = default;
 	NumericalAnswerQuestion(const std::string& question, int rightAnswer);
