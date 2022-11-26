@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 
-class MultipleAnswerQuestion: 
+class MultipleAnswerQuestion :
 	public Question<std::string>
 {
 public:
 	MultipleAnswerQuestion() = default;
-	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, int numberOfAnswers,
+	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, uint16_t numberOfAnswers,
 		const std::vector<std::string>& answers);
 
 public:
@@ -22,6 +22,5 @@ public:
 	friend bool operator==(const MultipleAnswerQuestion& map1, const MultipleAnswerQuestion& map2);
 
 private:
-	int m_numberOfAnswers;
 	std::vector<std::string> m_answers;
 };

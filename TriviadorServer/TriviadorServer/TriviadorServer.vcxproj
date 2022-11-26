@@ -131,12 +131,14 @@
   <ItemGroup>
     <ClCompile Include="MultipleAnswerQuestion.cpp" />
     <ClCompile Include="NumericalAnswerQuestion.cpp" />
+    <ClCompile Include="QuestionsIntoDataBase.cpp" />
     <ClCompile Include="TriviadorServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MultipleAnswerQuestion.h" />
     <ClInclude Include="NumericalAnswerQuestion.h" />
     <ClInclude Include="Question.hpp" />
+    <ClInclude Include="QuestionsIntoDataBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

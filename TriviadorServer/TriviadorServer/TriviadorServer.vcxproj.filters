@@ -24,6 +24,9 @@
     <ClCompile Include="NumericalAnswerQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QuestionsIntoDataBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MultipleAnswerQuestion.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Question.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestionsIntoDataBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

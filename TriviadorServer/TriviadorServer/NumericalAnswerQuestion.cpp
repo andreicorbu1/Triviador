@@ -1,7 +1,7 @@
 #include "NumericalAnswerQuestion.h"
 
-NumericalAnswerQuestion::NumericalAnswerQuestion(const std::string& question, int rightAnswer):
-	Question(question, rightAnswer)
+NumericalAnswerQuestion::NumericalAnswerQuestion(const std::string& question, int rightAnswer) :
+	Question(question, rightAnswer, rightAnswer)
 {
 }
 
