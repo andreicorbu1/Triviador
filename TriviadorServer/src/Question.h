@@ -16,7 +16,7 @@ public:
 	void SetRightAnswer(const T& m_rightAnswer);
 	void SetNumberOfAnswers(uint16_t numberOfAnswers);
 	void SetInputFileName(const std::string& fileName);
-	friend struct QuestionsIntoDataBase;
+	//friend class QuestionsIntoDataBase;
 
 protected:
 	int m_id;

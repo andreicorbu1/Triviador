@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -137,16 +137,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AccountsManager.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
     <ClCompile Include="src\QuestionsIntoDataBase.cpp" />
+    <ClCompile Include="src\User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AccountsManager.h" />
     <ClInclude Include="src\MultipleAnswerQuestion.h" />
     <ClInclude Include="src\NumericalAnswerQuestion.h" />
     <ClInclude Include="src\Question.h" />
     <ClInclude Include="src\QuestionsIntoDataBase.h" />
+    <ClInclude Include="src\User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

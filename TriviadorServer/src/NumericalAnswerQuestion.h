@@ -6,8 +6,6 @@
 class NumericalAnswerQuestion :
 	public Question<int>
 {
-	friend struct QuestionsIntoDataBase;
-
 public:
 	NumericalAnswerQuestion() = default;
 	NumericalAnswerQuestion(const std::string& question, int rightAnswer);
