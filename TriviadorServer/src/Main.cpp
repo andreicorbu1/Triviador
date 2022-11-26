@@ -45,7 +45,7 @@ int main()
 			return crow::response(200, "V-ati inregistrat cu succes!");
 		}
 	);
-	CROW_ROUTE(app, "/signin")(
+	CROW_ROUTE(app, "/login")(
 		[&userList](const crow::request& req) {
 			char* usernameChr = req.url_params.get("username");
 			char* passwordChr = req.url_params.get("password");
