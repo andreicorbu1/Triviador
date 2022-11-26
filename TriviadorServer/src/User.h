@@ -24,6 +24,7 @@ public:
 	int GetLevel() const;
 	int GetGamesPlayed() const;
 	int GetPoints() const;
+	int GetID() const;
 
 	//Operators:
 	User& operator=(const User& user) = default;

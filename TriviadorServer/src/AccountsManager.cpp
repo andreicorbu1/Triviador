@@ -1,10 +1,14 @@
 #include "AccountsManager.h"
-AccountManager::AccountManager(const std::string& databaseName)
+AccountManager::AccountManager()
 {
-	auto allUsers = db.get_all<User>();
-	for (auto& user : allUsers)
+	auto initUsersCount = db.count<User>();
+	if (initUsersCount > 0)
 	{
-		m_accounts.emplace(user.GetUsername(), user);
+		auto allUsers = db.get_all<User>();
+		for (auto& user : allUsers)
+		{
+			m_accounts.emplace(user.GetUsername(), user);
+		}
 	}
 }
 
@@ -12,7 +16,8 @@ void AccountManager::AddUser(User& user)
 {
 	if (ValidateCredentials(user))
 	{
-		user.SetID(db.insert(user));
+		auto id = db.insert(user);
+		user.SetID(id);
 		m_accounts[user.GetUsername()] = user;
 	}
 }
@@ -21,6 +26,7 @@ void AccountManager::DeleteUser(const std::string& username)
 {
 	if (SearchUser(username))
 	{
+		db.remove<User>(m_accounts[username].m_ID);
 		m_accounts.erase(username);
 	}
 }
@@ -50,7 +56,7 @@ bool AccountManager::ValidateCredentials(const User& user) const
 {
 	if (std::regex_match(user.GetPassword(), std::regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$")))
 	{
-		return m_accounts.contains(user.GetUsername()) == false;
+		return SearchUser(user.GetUsername()) == false;
 	}
 	return false;
 }

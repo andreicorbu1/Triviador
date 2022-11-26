@@ -92,6 +92,11 @@ int User::GetPoints() const
 	return m_points;
 }
 
+int User::GetID() const
+{
+	return m_ID;
+}
+
 std::ostream& operator<<(std::ostream& os, const User& user)
 {
 	os << "Username: " << user.m_username << std::endl;

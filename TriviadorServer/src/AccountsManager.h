@@ -8,7 +8,7 @@ namespace sql = sqlite_orm;
 
 static auto CreateStorage(const std::string& databaseFileName)
 {
-	return sql::make_storage(
+	auto db = sql::make_storage(
 		databaseFileName,
 		sql::make_table(
 		"User",
@@ -20,6 +20,8 @@ static auto CreateStorage(const std::string& databaseFileName)
 		sql::make_column("Games Played", &User::m_gamesPlayed)
 	)
 	);
+	db.sync_schema();
+	return db;
 }
 
 using Storage = decltype(CreateStorage(""));
@@ -27,8 +29,7 @@ using Storage = decltype(CreateStorage(""));
 class AccountManager
 {
 public:
-	AccountManager() = delete;
-	AccountManager(const std::string& databaseName);
+	AccountManager();
 	void AddUser(User& user);
 	void DeleteUser(const std::string& username);
 	bool SearchUser(const std::string& username) const;
@@ -38,7 +39,7 @@ public:
 
 private:
 	std::unordered_map<std::string, User> m_accounts;
-	Storage db = CreateStorage("Accounts.sqlite");
+	Storage db = CreateStorage("resource/Accounts.sqlite");
 	bool ValidateCredentials(const User& user) const;
 };
 
