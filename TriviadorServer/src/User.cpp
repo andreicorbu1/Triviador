@@ -36,6 +36,11 @@ void User::SetGamesPlayed(int gamesPlayed)
 	m_gamesPlayed = gamesPlayed;
 }
 
+void User::SetID(int ID)
+{
+	m_ID = ID;
+}
+
 void User::AddPoints(int points)
 {
 	m_points += points;

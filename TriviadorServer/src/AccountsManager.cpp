@@ -1,16 +1,25 @@
 #include "AccountsManager.h"
+AccountManager::AccountManager(const std::string& databaseName)
+{
+	auto allUsers = db.get_all<User>();
+	for (auto& user : allUsers)
+	{
+		m_accounts.emplace(user.GetUsername(), user);
+	}
+}
 
-void AccountManager::AddUser(const User& user)
+void AccountManager::AddUser(User& user)
 {
 	if (ValidateCredentials(user))
 	{
+		user.SetID(db.insert(user));
 		m_accounts[user.GetUsername()] = user;
 	}
 }
 
 void AccountManager::DeleteUser(const std::string& username)
 {
-	if(SearchUser(username))
+	if (SearchUser(username))
 	{
 		m_accounts.erase(username);
 	}
@@ -24,7 +33,7 @@ bool AccountManager::SearchUser(const std::string& username) const
 
 User AccountManager::GetUser(const std::string& username) const
 {
-	if(SearchUser(username))
+	if (SearchUser(username))
 	{
 		return m_accounts.at(username);
 	}
@@ -35,6 +44,7 @@ void AccountManager::UpdateUser(const User& user)
 {
 	m_accounts[user.GetUsername()] = user;
 }
+
 
 bool AccountManager::ValidateCredentials(const User& user) const
 {
@@ -48,9 +58,9 @@ bool AccountManager::ValidateCredentials(const User& user) const
 std::ostream& operator<<(std::ostream& os, const AccountManager& manager)
 {
 	//Temporary implementation, waiting for class User << operator override
-	for(const auto& it : manager.m_accounts)
+	for (const auto& it : manager.m_accounts)
 	{
-		os << it.second.GetUsername() << "\n" << it.second.GetPassword() << "\n" << it.second.GetGamesPlayed() << "\n" << it.second.GetLevel() << "\n";
+		os << it.second << "\n";
 	}
 	return os;
 }

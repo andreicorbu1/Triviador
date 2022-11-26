@@ -16,6 +16,7 @@ public:
 	void SetPassword(const std::string& password);
 	void SetLevel(int level);
 	void SetGamesPlayed(int gamesPlayed);
+	void SetID(int ID);
 
 	//Getters:
 	const std::string GetUsername() const;
@@ -28,7 +29,8 @@ public:
 	User& operator=(const User& user) = default;
 	User& operator=(User&& user);
     
-	friend auto createStorage(const std::string& databaseFileName);
+	friend auto CreateStorage(const std::string& databaseFileName);
+	friend class AccountManager;
 	friend std::ostream& operator << (std::ostream& os, const User& user);
     
 	// Other methods:
