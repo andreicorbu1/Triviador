@@ -4,7 +4,6 @@ MainMenu::MainMenu(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	
 }
 
 MainMenu::~MainMenu()
@@ -14,6 +13,11 @@ void MainMenu::hiMessage(const std::string& playerName)
 {
 	QString message = "Salut, " + QString::fromStdString(playerName);
 	ui.hiMessage->setText(message);
+}
+
+void MainMenu::on_mainButton_clicked() const
+{
+	this->ui.stackedWidget->setCurrentWidget(ui.main);
 }
 
 void MainMenu::on_myProfileButton_clicked() const
@@ -26,14 +30,18 @@ void MainMenu::on_creditsButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.credits);
 }
 
-void MainMenu::on_mainButton_clicked() const
+
+
+void MainMenu::on_playButton_clicked() 
 {
-	this->ui.stackedWidget->setCurrentWidget(ui.main);
+	Game *game = new Game;
+	close();
+	game->showMaximized();
 }
 
-void MainMenu::on_playButton_clicked() const
+void MainMenu::ShowMenu()
 {
-	qDebug() << "Play button clicked";
+	showMaximized();
 }
 
 void MainMenu::on_logOutButton_clicked() const
