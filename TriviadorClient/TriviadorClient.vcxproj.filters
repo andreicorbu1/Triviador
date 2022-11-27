@@ -40,6 +40,12 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Triviador.ico">
@@ -59,9 +65,21 @@
     <QtUic Include="form\Registration.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="form\MainMenu.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="form\Game.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Registration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\MainMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Game.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
