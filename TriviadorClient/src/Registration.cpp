@@ -8,16 +8,17 @@ Registration::Registration(QWidget *parent)
 
 Registration::~Registration()
 {
+    // empty
 }
 
 void Registration::on_logInButton_clicked() const
 {
-    std::string username = ui.usernameInput->text().toStdString();
-    std::string password = ui.passwordInput->text().toStdString();
+    std::string username = ui.usernameInput->text().toUtf8().constData();
+    std::string password = ui.passwordInput->text().toUtf8().constData();
 
     if (!ValidateCredentials(username, password)) return;
     
-    // cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/products" });
+    cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/" });
     
     qDebug() << "Log in button clicked";
     
@@ -25,10 +26,10 @@ void Registration::on_logInButton_clicked() const
 
 void Registration::on_signUpButton_clicked() const
 {
-    std::string x = std::string(ui.usernameInput->text().toUtf8().constData());
-    //std::string password = ui->passwordInput->text().toStdString();
-    //
-    ////if (!ValidateCredentials(username, password)) return;
+    std::string username = ui.usernameInput->text().toUtf8().constData();
+    std::string password = ui.passwordInput->text().toUtf8().constData();
+
+    if (!ValidateCredentials(username, password)) return;
 
     cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/" });
 
