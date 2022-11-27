@@ -25,10 +25,12 @@ void Registration::on_logInButton_clicked() const
 
 void Registration::on_signUpButton_clicked() const
 {
-    std::string username = ui.usernameInput->text().toStdString();
-    std::string password = ui.passwordInput->text().toStdString();
-    
-    if (!ValidateCredentials(username, password)) return;
+    std::string x = std::string(ui.usernameInput->text().toUtf8().constData());
+    //std::string password = ui->passwordInput->text().toStdString();
+    //
+    ////if (!ValidateCredentials(username, password)) return;
+
+    cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/" });
 
     qDebug() << "Sign up button clicked";
 }

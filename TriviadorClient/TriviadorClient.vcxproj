@@ -78,7 +78,11 @@
     </Link>
     <QtMoc>
       <QtMocDir>$(IntDir)moc\</QtMocDir>
+      <OverrideClCompile>replace</OverrideClCompile>
     </QtMoc>
+    <QtRcc>
+      <OverrideClCompile>replace</OverrideClCompile>
+    </QtRcc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -90,7 +94,11 @@
     </Link>
     <QtMoc>
       <QtMocDir>$(IntDir)moc\</QtMocDir>
+      <OverrideClCompile>replace</OverrideClCompile>
     </QtMoc>
+    <QtRcc>
+      <OverrideClCompile>replace</OverrideClCompile>
+    </QtRcc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
