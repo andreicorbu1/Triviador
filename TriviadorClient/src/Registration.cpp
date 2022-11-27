@@ -15,7 +15,9 @@ void Registration::on_logInButton_clicked() const
     std::string username = ui.usernameInput->text().toStdString();
     std::string password = ui.passwordInput->text().toStdString();
 
-    ValidateCredentials(username, password);
+    if (!ValidateCredentials(username, password)) return;
+    
+    // cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/products" });
     
     qDebug() << "Log in button clicked";
     
