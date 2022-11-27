@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainMenuClass</class>
+ <widget class="QWidget" name="MainMenuClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1547</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainMenu</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(83, 66, 50);
+color: rgb(255, 255, 255);</string>
+  </property>
+  <widget class="QPushButton" name="logOutButton">
+   <property name="geometry">
+    <rect>
+     <x>1240</x>
+     <y>10</y>
+     <width>241</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>44</pointsize>
+     <underline>false</underline>
+     <strikeout>false</strikeout>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(128, 18, 18);
+border: none;
+</string>
+   </property>
+   <property name="text">
+    <string>LOG OUT</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mainButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>130</y>
+     <width>471</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>35</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(62, 45, 30);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string>MAIN</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="myProfileButton">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>130</y>
+     <width>471</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>35</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(62, 45, 30);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string>MY PROFILE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="creditsButton">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>130</y>
+     <width>471</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>35</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(62, 45, 30);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string>CREDITS</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="hiMessage">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>40</y>
+     <width>241</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>250</y>
+     <width>1441</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>2</number>
+   </property>
+   <widget class="QWidget" name="main">
+    <widget class="QPushButton" name="playButton">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>200</y>
+       <width>471</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>44</pointsize>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(128, 18, 18);
+border: none;
+</string>
+     </property>
+     <property name="text">
+      <string>PLAY</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="myProfile">
+    <widget class="QLabel" name="profileInformation">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>1421</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Roșia (pătlăgica roșie sau mai rar tomata), numită științific Solanum lycopersicum, este o plantă din familia Solanaceae, apropiată pe linie genetică de următoarele plante, de asemenea originare din &quot;Lumea Nouă&quot;: tutun, ardei, cartof, vânătă și physalis alkekengi. Roșia este o plantă nativă a sudului Americii de Nord și nordului Americii de Sud, având un areal natural de extindere din centrul Mexicului până în Peru.
+
+Este o plantă perenă, crescută adesea în climate temperate ca o plantă anuală, atingând frecvent între 1 și 3 m înălțime, cu un trunchi mai mult ierbos, care crește de cele mai multe ori, ca orice altă plantă cățărătoare, pe tulpinile altor plante, pe bețe sau garduri.
+
+Este cultivată la aproape toate latitudinile, ocupând o suprafață de aproximativ 3 milioane de hectare, adică o treime din terenul consacrat legumelor.[necesită citare]
+
+Frunzele plantei sunt lungi de 10–25 cm, de formă penat-compusă, având 5–9 frunzulițe, fiecare dintre acestea având până la 8 cm lungime, cu margini serate. Atât trunchiul cât și crenguțele, respectiv frunzele sunt acoperite cu excrescențe asemănătoare părului animalelor. Florile sunt mici, de circa 1–2 cm, galbene, având corola formată din cinci sepale și cinci petale, fiind grupate în inflorescențe de 3 până la 12 flori. Rosia are un pH acid de 5,5.
+
+Cuvântul tomată, respectiv toate variantele sale din spaniolă, engleză și alte limbi, este un cuvânt derivat din limba populațiilor mezo-americane Nahua: tomatl. Numele științific al plantei, care provine din latină, lycopersicum, semnifică &quot;piersică-lup&quot;, conform lyco - lup și persicum - piersic(ă).
+
+Din punct de vedere botanic roșia este un fruct.[1] În anul 1893 Curtea Supremă a Statelor Unite ale Americii în mod unanim a decis că la colectarea taxelor vamale roșiile trebuie considerate legume (deși curtea a trecut în revistă faptul că din punct de vedere botanic, roșiile sunt fructe).[2] În anul 2001 Uniunea Europeană a decis oficial că roșia este fruct, și nu legumă.[3]</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="credits"/>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,14 +1,14 @@
 <RCC>
-  <qresource prefix="Icon">
-    <file>Triviador.ico</file>
-  </qresource>
-  <qresource prefix="Fonts">
-    <file>font/KiwiMaru-Light.ttf</file>
-    <file>font/KiwiMaru-Medium.ttf</file>
-    <file>font/KiwiMaru-Regular.ttf</file>
-    <file>font/LuckiestGuy-Regular.ttf</file>
-  </qresource>
-  <qresource prefix="Banner">
-    <file>Banner.png</file>
-  </qresource>
+    <qresource prefix="/Icon">
+        <file>Triviador.ico</file>
+    </qresource>
+    <qresource prefix="/Fonts">
+        <file>font/KiwiMaru-Light.ttf</file>
+        <file>font/KiwiMaru-Medium.ttf</file>
+        <file>font/KiwiMaru-Regular.ttf</file>
+        <file>font/LuckiestGuy-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/Banner">
+        <file>Banner.png</file>
+    </qresource>
 </RCC>
