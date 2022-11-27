@@ -1,6 +1,6 @@
 #include "Registration.h"
 
-Registration::Registration(QWidget *parent)
+Registration::Registration(QWidget* parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
@@ -18,10 +18,15 @@ void Registration::on_logInButton_clicked() const
 
     if (!ValidateCredentials(username, password)) return;
     
-    cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/" });
+    cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/login" }, cpr::Parameters{ {"username", username}, {"password", password} });
     
+    if (res.status_code == 200)
+    {
+        // TO DO: send user to Main Application
+        exit(0);
+    }
+
     qDebug() << "Log in button clicked";
-    
 }
 
 void Registration::on_signUpButton_clicked() const
@@ -31,8 +36,14 @@ void Registration::on_signUpButton_clicked() const
 
     if (!ValidateCredentials(username, password)) return;
 
-    cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/" });
+    cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/signup" }, cpr::Parameters{ {"username", username}, {"password", password} });
 
+    if (res.status_code == 200)
+    {
+        // TO DO: send user to Main Application
+        exit(0);
+    }
+    
     qDebug() << "Sign up button clicked";
 }
 

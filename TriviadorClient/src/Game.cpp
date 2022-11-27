@@ -3,7 +3,7 @@
 Game::Game()
 {
 	ui.setupUi(this);
-	MainMenu const* mainMenu = new MainMenu;
+	MainMenu* mainMenu = new MainMenu;
 	connect(ui.exitButton, &QPushButton::clicked, mainMenu, &MainMenu::showMaximized);
 }
 
