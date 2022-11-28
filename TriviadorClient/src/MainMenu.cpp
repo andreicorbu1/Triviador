@@ -36,7 +36,7 @@ void MainMenu::on_creditsButton_clicked() const
 void MainMenu::on_playButton_clicked() 
 {
 	Game *game = new Game;
-	close();
+	hide();
 	game->showMaximized();
 }
 

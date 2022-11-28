@@ -3,6 +3,7 @@
 #include <QWidget>
 #include "ui_MainMenu.h"
 #include "Game.h"
+#include "Registration.h"
 
 class MainMenu : public QWidget
 {

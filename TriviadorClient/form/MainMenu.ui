@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainMenu</string>
+   <string>Triviador</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource/Triviador.qrc">
+    <normaloff>:/Icon/Triviador.ico</normaloff>:/Icon/Triviador.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(83, 66, 50);
@@ -235,6 +239,8 @@ Din punct de vedere botanic roșia este un fruct.[1] În anul 1893 Curtea Suprem
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../resource/Triviador.qrc"/>
+ </resources>
  <connections/>
 </ui>
