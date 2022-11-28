@@ -137,7 +137,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="QuestionManager.cpp" />
     <ClCompile Include="src\AccountsManager.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
@@ -150,7 +149,6 @@
     <ClInclude Include="include\NumericalAnswerQuestion.h" />
     <ClInclude Include="include\Question.h" />
     <ClInclude Include="include\User.h" />
-    <ClInclude Include="QuestionManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
