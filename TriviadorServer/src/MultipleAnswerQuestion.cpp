@@ -1,10 +1,14 @@
 ﻿#include "MultipleAnswerQuestion.h"
-
-MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, uint16_t numberOfAnswers,
-	const std::vector<std::string>& answers) :
-	Question(question, rightAnswer, numberOfAnswers),
+MultipleAnswerQuestion::MultipleAnswerQuestion()
+{
+	m_answers.resize(m_numberOfAnswers);
+}
+MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, 
+	const std::vector<std::string>& answers):
+	Question(question, rightAnswer),
 	m_answers(answers)
 {
+	m_answers.resize(m_numberOfAnswers);
 }
 
 void MultipleAnswerQuestion::SetAnswers(const std::vector<std::string>& answers)
@@ -12,9 +16,19 @@ void MultipleAnswerQuestion::SetAnswers(const std::vector<std::string>& answers)
 	m_answers = answers;
 }
 
+void MultipleAnswerQuestion::SetNumberOfAnswers(uint16_t numberOfAnswers)
+{
+	m_numberOfAnswers = numberOfAnswers;
+}
+
 const std::vector<std::string>& MultipleAnswerQuestion::GetAnswers() const
 {
 	return m_answers;
+}
+
+uint16_t MultipleAnswerQuestion::GetNumberOfAnswers() const
+{
+	return m_numberOfAnswers;
 }
 
 std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion)
@@ -53,4 +67,6 @@ bool operator==(const MultipleAnswerQuestion& map1, const MultipleAnswerQuestion
 	}
 	return false;
 }
+
+uint16_t MultipleAnswerQuestion::m_numberOfAnswers = 4;
 

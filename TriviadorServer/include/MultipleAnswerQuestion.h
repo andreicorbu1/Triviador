@@ -8,19 +8,23 @@ class MultipleAnswerQuestion :
 	public Question<std::string>
 {
 public:
-	MultipleAnswerQuestion() = default;
-	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, uint16_t numberOfAnswers,
+	MultipleAnswerQuestion();
+	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, 
 		const std::vector<std::string>& answers);
 
-public:
+	//Setters
 	void SetAnswers(const std::vector<std::string>& answers);
-	const std::vector<std::string>& GetAnswers() const;
+	void SetNumberOfAnswers(uint16_t numberOfAnswers);
 
-public:
+	//Getters
+	const std::vector<std::string>& GetAnswers() const;
+	uint16_t GetNumberOfAnswers() const;
+	//Operators
 	friend std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion);
 	friend std::ostream& operator<<(std::ostream& os, const MultipleAnswerQuestion& multipleAnswerQuestion);
 	friend bool operator==(const MultipleAnswerQuestion& map1, const MultipleAnswerQuestion& map2);
 
 private:
 	std::vector<std::string> m_answers;
+	static uint16_t m_numberOfAnswers;
 };

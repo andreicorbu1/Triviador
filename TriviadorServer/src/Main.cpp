@@ -3,10 +3,27 @@
 #include <memory>
 #include "User.h"
 #include "AccountsManager.h"
+#include "MultipleAnswerQuestion.h"
+#include "QuestionManager.h"
 #include <crow.h>
 
 int main()
 {
+	MultipleAnswerQuestion maq;
+	QuestionStruct<std::string> qs;
+	maq.SetID(-1);
+	maq.SetQuestion("Ce zici tibi?");
+	/*qs.m_id=-1;
+	qs.m_question = "Cate puli are tibi in gura?";
+	qs.m_rightAnswer = "minim 67";
+	qs.m_answer1 = "cel putin una";
+	qs.m_answer2 = "nu stiu frate nu ma bag";
+	qs.m_answer3 = "ba, are cateva";
+	qs.m_answer4 = "pe a mea sigur";*/
+	QuestionManager questionManager;
+	questionManager.AddQuestion(maq);
+	//questionManager.AddQuestion(maq);
+	//NumericalAnswerQuestion naq;
 	AccountManager userList;
 	crow::SimpleApp app;
 	CROW_ROUTE(app, "/")([]() {return  "Testing the server"; });
