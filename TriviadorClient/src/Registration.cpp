@@ -11,7 +11,7 @@ Registration::~Registration()
     // empty
 }
 
-void Registration::on_logInButton_clicked() const
+void Registration::on_logInButton_clicked()
 {
     std::string username = ui.usernameInput->text().toUtf8().constData();
     std::string password = ui.passwordInput->text().toUtf8().constData();
@@ -22,14 +22,16 @@ void Registration::on_logInButton_clicked() const
     
     if (res.status_code == 200)
     {
-        // TO DO: send user to Main Application
-        exit(0);
+        close();
+        MainMenu* mainMenu = new MainMenu;
+        mainMenu->hiMessage(username);
+        mainMenu->showMaximized();
     }
 
     qDebug() << "Log in button clicked";
 }
 
-void Registration::on_signUpButton_clicked() const
+void Registration::on_signUpButton_clicked()
 {
     std::string username = ui.usernameInput->text().toUtf8().constData();
     std::string password = ui.passwordInput->text().toUtf8().constData();
@@ -40,8 +42,10 @@ void Registration::on_signUpButton_clicked() const
 
     if (res.status_code == 200)
     {
-        // TO DO: send user to Main Application
-        exit(0);
+        close();
+        MainMenu* mainMenu = new MainMenu;
+        mainMenu->hiMessage(username);
+        mainMenu->showMaximized();
     }
     
     qDebug() << "Sign up button clicked";

@@ -11,7 +11,8 @@ MainMenu::~MainMenu()
 
 void MainMenu::hiMessage(const std::string& playerName)
 {
-	QString message = "Salut, " + QString::fromStdString(playerName);
+	QString message = "Salut, ";
+    message += playerName.c_str();
 	ui.hiMessage->setText(message);
 }
 
@@ -44,7 +45,11 @@ void MainMenu::ShowMenu()
 	showMaximized();
 }
 
-void MainMenu::on_logOutButton_clicked() const
+void MainMenu::on_logOutButton_clicked()
 {
+    close();
+    Registration* registration = new Registration;
+    registration->show();
+    
 	qDebug() << "Log Out button clicked";
 }

@@ -2,6 +2,7 @@
 #include <qmainwindow.h>
 #include "ui_Game.h"
 #include "MainMenu.h"
+#include "Registration.h"
 
 class Game : public QMainWindow
 {

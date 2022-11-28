@@ -5,6 +5,7 @@
 #include <cpr/cpr.h>
 
 #include "ui_Registration.h"
+#include "MainMenu.h"
 
 class Registration : public QWidget
 {
@@ -15,8 +16,8 @@ public:
     ~Registration();
     
 private slots:
-    void on_logInButton_clicked() const;
-    void on_signUpButton_clicked() const;
+    void on_logInButton_clicked();
+    void on_signUpButton_clicked();
 
 private:
     bool IsValidUsername(const std::string& username) const;
