@@ -10,7 +10,7 @@ class Game : public QWidget
 public:
     Game(QWidget* mainMenu = nullptr);
     ~Game();
-    
+
 private slots:
     void on_exitButton_clicked();
 
