@@ -3,10 +3,14 @@
 #include <memory>
 #include "User.h"
 #include "AccountsManager.h"
+#include "QuestionManager.h"
 #include <crow.h>
 
 int main()
 {
+	MultipleAnswerQuestion maq;
+	NumericalAnswerQuestion naq;
+	QuestionsManager q;
 	AccountManager userList;
 	crow::SimpleApp app;
 	CROW_ROUTE(app, "/")([]() {return  "Testing the server"; });

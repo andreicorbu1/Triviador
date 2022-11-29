@@ -9,12 +9,16 @@ class MultipleAnswerQuestion :
 {
 public:
 	MultipleAnswerQuestion() = default;
-	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer, uint16_t numberOfAnswers,
+	MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
 		const std::vector<std::string>& answers);
 
-public:
+	//Setters
 	void SetAnswers(const std::vector<std::string>& answers);
+	void SetNumeberOfAnswers(uint16_t numberOfAnswers);
+
+	//Getters
 	const std::vector<std::string>& GetAnswers() const;
+	uint16_t GetNumberOfAnswers() const;
 
 public:
 	friend std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion);
@@ -23,4 +27,5 @@ public:
 
 private:
 	std::vector<std::string> m_answers;
+	static uint16_t m_numberOfAnswers;
 };
