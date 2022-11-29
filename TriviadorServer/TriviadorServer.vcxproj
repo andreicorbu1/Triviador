@@ -138,17 +138,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AccountsManager.cpp" />
+    <ClCompile Include="src\AddToAcountListHandler.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
     <ClCompile Include="src\User.cpp" />
+    <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h" />
+    <ClInclude Include="include\AddToAcountListHandler.h" />
     <ClInclude Include="include\MultipleAnswerQuestion.h" />
     <ClInclude Include="include\NumericalAnswerQuestion.h" />
     <ClInclude Include="include\Question.h" />
     <ClInclude Include="include\User.h" />
+    <ClInclude Include="include\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
