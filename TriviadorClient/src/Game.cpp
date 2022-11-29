@@ -1,10 +1,10 @@
 #include "Game.h"
 
-Game::Game()
+Game::Game(QWidget* mainMenu)
+    : m_mainMenu(mainMenu)
 {
-	ui.setupUi(this);
-	MainMenu* mainMenu = new MainMenu;
-	connect(ui.exitButton, &QPushButton::clicked, mainMenu, &MainMenu::showMaximized);
+    ui.setupUi(this);
+    m_mainMenu->hide();
 }
 
 Game::~Game()
@@ -12,8 +12,8 @@ Game::~Game()
     // empty
 }
 
-void Game::on_exitButton_clicked() 
+void Game::on_exitButton_clicked()
 {
-	close();
-	//emit notifyExitButtonClicked();
+    close();
+    m_mainMenu->showMaximized();
 }

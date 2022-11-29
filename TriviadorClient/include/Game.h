@@ -1,22 +1,20 @@
 #pragma once
-#include <qmainwindow.h>
-#include "ui_Game.h"
-#include "MainMenu.h"
 
-class Game : public QMainWindow
+#include <QWidget>
+#include "ui_Game.h"
+
+class Game : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
+
 public:
-	Game();
-	~Game();
+    Game(QWidget* mainMenu = nullptr);
+    ~Game();
 
 private slots:
-	void on_exitButton_clicked();
-
-//signals:
-//	void notifyExitButtonClicked() const;
-
+    void on_exitButton_clicked();
 
 private:
-	Ui::MainWindow ui;
+    Ui::GameClass ui;
+    QWidget* m_mainMenu;
 };
