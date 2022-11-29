@@ -44,13 +44,13 @@
     <ClInclude Include="include\NumericalAnswerQuestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Question.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\QuestionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Question.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

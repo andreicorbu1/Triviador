@@ -148,9 +148,9 @@
     <ClInclude Include="include\AccountsManager.h" />
     <ClInclude Include="include\MultipleAnswerQuestion.h" />
     <ClInclude Include="include\NumericalAnswerQuestion.h" />
-    <ClInclude Include="include\Question.h" />
     <ClInclude Include="include\QuestionManager.h" />
     <ClInclude Include="include\User.h" />
+    <ClInclude Include="include\Question.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

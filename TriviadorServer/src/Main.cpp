@@ -1,16 +1,18 @@
-#include <filesystem>
-#include <iostream>
-#include <memory>
 #include "User.h"
 #include "AccountsManager.h"
 #include "QuestionManager.h"
+
+#include <filesystem>
+#include <iostream>
+#include <memory>
 #include <crow.h>
 
 int main()
 {
-	MultipleAnswerQuestion maq;
-	NumericalAnswerQuestion naq;
-	QuestionsManager q;
+	MultipleAnswerQuestion maq("Care e capitala Romaniei?", "Bucuresti", { "Bucuresti", "Lisabona", "Paris", "Londra" });
+	QuestionManager q("resource/Questions.sqlite");
+	q.AddQuestion(maq);
+    
 	AccountManager userList;
 	crow::SimpleApp app;
 	CROW_ROUTE(app, "/")([]() {return  "Testing the server"; });
