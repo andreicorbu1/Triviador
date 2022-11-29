@@ -19,7 +19,10 @@ void Registration::on_logInButton_clicked()
 
 	if (!ValidateCredentials(username, password)) return;
 
-	cpr::Response res = cpr::Get(cpr::Url{"http://localhost:18080/login"}, cpr::Parameters{{"username", username}, {"password", password}});
+	auto res = cpr::Post(
+		cpr::Url{"http://localhost:18080/login"},
+		cpr::Body{"username=" + username + "&password=" + password}
+	);
 
 	if (res.status_code == 200)
 	{
@@ -29,7 +32,7 @@ void Registration::on_logInButton_clicked()
 		mainMenu->showMaximized();
 	}
 
-	qDebug() << "Log in button clicked";
+	qDebug() << "Log in button clicked\n" << res.text.c_str();
 }
 
 void Registration::on_signUpButton_clicked()
@@ -62,8 +65,8 @@ bool Registration::IsValidUsername(const std::string& username) const
 
 bool Registration::IsValidPassword(const std::string& password) const
 {
-	   std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$");
-	   return std::regex_match(password, passwordRegex);
+	std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$");
+	return std::regex_match(password, passwordRegex);
 }
 
 bool Registration::ValidateCredentials(const std::string& username, const std::string& password) const

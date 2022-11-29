@@ -29,11 +29,11 @@ public:
 	//Operators:
 	User& operator=(const User& user) = default;
 	User& operator=(User&& user);
-    
+
 	friend auto CreateStorage(const std::string& databaseFileName);
 	friend class AccountManager;
 	friend std::ostream& operator << (std::ostream& os, const User& user);
-    
+
 	// Other methods:
 	void UpdateLevel(int matchPoints);
 
