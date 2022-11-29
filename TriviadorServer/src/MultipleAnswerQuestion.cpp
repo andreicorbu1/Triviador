@@ -13,17 +13,17 @@ MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, cons
 
 void MultipleAnswerQuestion::SetId(const int& id)
 {
-    m_id = id;
+    Question::SetId(id);
 }
 
 void MultipleAnswerQuestion::SetQuestion(const std::string& question)
 {
-    m_question = question;
+    Question::SetQuestion(question);
 }
 
 void MultipleAnswerQuestion::SetRightAnswer(const std::string& rightAnswer)
 {
-    m_rightAnswer = rightAnswer;
+    Question<std::string>::SetRightAnswer(rightAnswer);
 }
 
 void MultipleAnswerQuestion::SetAnswer1(const std::string& answer)
@@ -48,17 +48,17 @@ void MultipleAnswerQuestion::SetAnswer4(const std::string& answer)
 
 const int& MultipleAnswerQuestion::GetId() const
 {
-    return m_id;
+    return Question::GetId();
 }
 
 const std::string& MultipleAnswerQuestion::GetQuestion() const
 {
-    return m_question;
+    return Question::GetQuestion();
 }
 
 const std::string& MultipleAnswerQuestion::GetRightAnswer() const
 {
-    return m_rightAnswer;
+    return Question<std::string>::GetRightAnswer();
 }
 
 const std::string& MultipleAnswerQuestion::GetAnswer1() const
