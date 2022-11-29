@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameClass</class>
+ <widget class="QWidget" name="GameClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Triviador</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource/Triviador.qrc">
+    <normaloff>:/Icon/Triviador.ico</normaloff>:/Icon/Triviador.ico</iconset>
+  </property>
+  <widget class="QPushButton" name="exitButton">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>50</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>EXIT</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="resource/Triviador.qrc"/>
+ </resources>
+ <connections/>
+</ui>

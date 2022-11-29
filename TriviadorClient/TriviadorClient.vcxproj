@@ -128,14 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="resource\Triviador.qrc" />
-    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Registration.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <QtUic Include="form\Game.ui" />
     <QtUic Include="form\MainMenu.ui" />
     <QtUic Include="form\Registration.ui" />
+    <QtUic Include="Game.ui" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Banner.png" />
@@ -154,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\MainMenu.h" />
-    <QtMoc Include="include\Game.h" />
+    <QtMoc Include="Game.h" />
     <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -43,7 +43,7 @@
     <ClCompile Include="src\MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
+    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +68,7 @@
     <QtUic Include="form\MainMenu.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="form\Game.ui">
+    <QtUic Include="Game.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -79,7 +79,7 @@
     <QtMoc Include="include\MainMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Game.h">
+    <QtMoc Include="Game.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -7,7 +7,9 @@ MainMenu::MainMenu(QWidget *parent)
 }
 
 MainMenu::~MainMenu()
-{}
+{
+	// empty	
+}
 
 void MainMenu::hiMessage(const std::string& playerName)
 {
@@ -31,12 +33,9 @@ void MainMenu::on_creditsButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.credits);
 }
 
-
-
 void MainMenu::on_playButton_clicked() 
 {
-	Game *game = new Game;
-	hide();
+	Game* game = new Game(this);
 	game->showMaximized();
 }
 
