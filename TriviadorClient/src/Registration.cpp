@@ -14,15 +14,25 @@ Registration::~Registration()
 
 void Registration::on_logInButton_clicked()
 {
+    ui.errorLabel->setText("");
 	std::string username = ui.usernameInput->text().toUtf8().constData();
 	std::string password = ui.passwordInput->text().toUtf8().constData();
 
-	if (!ValidateCredentials(username, password)) return;
+    if (!ValidateCredentials(username, password))
+    {
+        ui.errorLabel->setText("Error: Invalid username or password");
+        return;
+    }
 
 	auto res = cpr::Post(
-		cpr::Url{"http://localhost:18080/login"},
-		cpr::Body{"username=" + username + "&password=" + password}
+		cpr::Url{ "http://localhost:18080/login" },
+		cpr::Body{ "username=" + username + "&password=" + password }
 	);
+
+    if (res.error.code != cpr::ErrorCode::OK) {
+        ui.errorLabel->setText("Error: Couldn't connect to the server");
+        return;
+    }
 
 	if (res.status_code == 200)
 	{
@@ -31,20 +41,32 @@ void Registration::on_logInButton_clicked()
 		mainMenu->hiMessage(username);
 		mainMenu->showMaximized();
 	}
-
-	qDebug() << "Log in button clicked\n" << res.text.c_str();
+	else
+	{
+        ui.errorLabel->setText("Error: Username or password doesn't match");
+	}
 }
 
 void Registration::on_signUpButton_clicked()
 {
+	ui.errorLabel->setText("");
 	std::string username = ui.usernameInput->text().toUtf8().constData();
 	std::string password = ui.passwordInput->text().toUtf8().constData();
-	if (!ValidateCredentials(username, password)) return;
+    
+    if (!ValidateCredentials(username, password)) {
+        ui.errorLabel->setText("Error: Invalid username or password");
+        return;
+    }
 
 	auto res = cpr::Put(
 		cpr::Url{"http://localhost:18080/signup"},
 		cpr::Body{"username=" + username + "&password=" + password}
 	);
+
+	if (res.error.code != cpr::ErrorCode::OK) {
+		ui.errorLabel->setText("Error: Couldn't connect to the server");
+		return;
+	}
 
 	qDebug() << res.text.c_str() << "\n";
 	if (res.status_code == 201)
@@ -53,9 +75,11 @@ void Registration::on_signUpButton_clicked()
 		MainMenu* mainMenu = new MainMenu;
 		mainMenu->hiMessage(username);
 		mainMenu->showMaximized();
-	}
-
-	qDebug() << "Sign up button clicked";
+    }
+    else {
+        ui.errorLabel->setText("Error: Username already exists");
+        qDebug() << res.text.c_str() << "\n";
+    }
 }
 
 bool Registration::IsValidUsername(const std::string& username) const

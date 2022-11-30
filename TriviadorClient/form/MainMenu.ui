@@ -179,9 +179,9 @@ border: none;</string>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>250</y>
-     <width>1431</width>
+     <width>1421</width>
      <height>451</height>
     </rect>
    </property>
@@ -192,8 +192,8 @@ border: none;</string>
     <widget class="QPushButton" name="playButton">
      <property name="geometry">
       <rect>
-       <x>490</x>
-       <y>200</y>
+       <x>480</x>
+       <y>220</y>
        <width>470</width>
        <height>100</height>
       </rect>
@@ -247,7 +247,7 @@ Din punct de vedere botanic roșia este un fruct.[1] În anul 1893 Curtea Suprem
    </widget>
    <widget class="QWidget" name="credits"/>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="icon">
    <property name="geometry">
     <rect>
      <x>60</x>
