@@ -128,6 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\QuestionManager.cpp" />
     <ClCompile Include="src\AccountsManager.cpp" />
     <ClCompile Include="src\AddToAcountListHandler.cpp" />
     <ClCompile Include="src\LoginHandler.cpp" />
@@ -155,6 +157,7 @@
     <ClInclude Include="include\Question.h" />
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
+    <ClInclude Include="include\QuestionManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
