@@ -17,7 +17,6 @@ public:
 	{
 		return naq1.m_rightAnswer == naq2.m_rightAnswer && naq1.m_question == naq2.m_question;
 	}
-
 };
 
 

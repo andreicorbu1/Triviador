@@ -1,87 +1,94 @@
 #include "Registration.h"
-
+#include <iostream>
+#include <string>
 Registration::Registration(QWidget* parent)
-    : QWidget(parent)
+	: QWidget(parent)
 {
-    ui.setupUi(this);
+	ui.setupUi(this);
 }
 
 Registration::~Registration()
 {
-    // empty
+	// empty
 }
 
 void Registration::on_logInButton_clicked()
 {
-    std::string username = ui.usernameInput->text().toUtf8().constData();
-    std::string password = ui.passwordInput->text().toUtf8().constData();
+	std::string username = ui.usernameInput->text().toUtf8().constData();
+	std::string password = ui.passwordInput->text().toUtf8().constData();
 
-    if (!ValidateCredentials(username, password)) return;
-    
-    cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/login" }, cpr::Parameters{ {"username", username}, {"password", password} });
-    
-    if (res.status_code == 200)
-    {
-        close();
-        MainMenu* mainMenu = new MainMenu;
-        mainMenu->hiMessage(username);
-        mainMenu->showMaximized();
-    }
+	if (!ValidateCredentials(username, password)) return;
 
-    qDebug() << "Log in button clicked";
+	auto res = cpr::Post(
+		cpr::Url{"http://localhost:18080/login"},
+		cpr::Body{"username=" + username + "&password=" + password}
+	);
+
+	if (res.status_code == 200)
+	{
+		close();
+		MainMenu* mainMenu = new MainMenu;
+		mainMenu->hiMessage(username);
+		mainMenu->showMaximized();
+	}
+
+	qDebug() << "Log in button clicked\n" << res.text.c_str();
 }
 
 void Registration::on_signUpButton_clicked()
 {
-    std::string username = ui.usernameInput->text().toUtf8().constData();
-    std::string password = ui.passwordInput->text().toUtf8().constData();
+	std::string username = ui.usernameInput->text().toUtf8().constData();
+	std::string password = ui.passwordInput->text().toUtf8().constData();
+	if (!ValidateCredentials(username, password)) return;
 
-    if (!ValidateCredentials(username, password)) return;
+	auto res = cpr::Put(
+		cpr::Url{"http://localhost:18080/signup"},
+		cpr::Body{"username=" + username + "&password=" + password}
+	);
 
-    cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/signup" }, cpr::Parameters{ {"username", username}, {"password", password} });
+	qDebug() << res.text.c_str() << "\n";
+	if (res.status_code == 200)
+	{
+		close();
+		MainMenu* mainMenu = new MainMenu;
+		mainMenu->hiMessage(username);
+		mainMenu->showMaximized();
+	}
 
-    if (res.status_code == 200)
-    {
-        close();
-        MainMenu* mainMenu = new MainMenu;
-        mainMenu->hiMessage(username);
-        mainMenu->showMaximized();
-    }
-    
-    qDebug() << "Sign up button clicked";
+	qDebug() << "Sign up button clicked";
 }
 
 bool Registration::IsValidUsername(const std::string& username) const
 {
-    return username.length() >= 3 && username.length() <= 10;
+	return username.length() >= 3 && username.length() <= 20;
 }
 
 bool Registration::IsValidPassword(const std::string& password) const
 {
-    std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$");
-    return std::regex_match(password, passwordRegex);
+	std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$");
+	return std::regex_match(password, passwordRegex);
 }
 
 bool Registration::ValidateCredentials(const std::string& username, const std::string& password) const
 {
-    bool isValidUsername = IsValidUsername(username);
-    bool isValidPassword = IsValidPassword(password);
-    
-    if (isValidUsername)
-    {
-        ui.usernameInput->setStyleSheet("border: 2px solid #FCF321");
-    }
-    else {
-        ui.usernameInput->setStyleSheet("border: 2px solid #9B1212");
-    }
+	bool isValidUsername = IsValidUsername(username);
+	bool isValidPassword = IsValidPassword(password);
 
-    if (isValidPassword)
-    {
-        ui.passwordInput->setStyleSheet("border: 2px solid #FCF321");
-    }
-    else {
-        ui.passwordInput->setStyleSheet("border: 2px solid #9B1212");
-    }
+	if (isValidUsername)
+	{
+		ui.usernameInput->setStyleSheet("border: 2px solid #FCF321");
+	}
+	else {
+		ui.usernameInput->setStyleSheet("border: 2px solid #9B1212");
+	}
 
-    return isValidUsername && isValidPassword;
+	if (isValidPassword)
+	{
+		ui.passwordInput->setStyleSheet("border: 2px solid #FCF321");
+	}
+	else {
+		ui.passwordInput->setStyleSheet("border: 2px solid #9B1212");
+	}
+
+	return isValidUsername && isValidPassword;
 }

@@ -1,7 +1,7 @@
 #include "User.h"
 
 User::User(const std::string& username, const std::string& password) :
-	m_username(username), 
+	m_username(username),
 	m_password(password)
 {
 	m_level = 0;
