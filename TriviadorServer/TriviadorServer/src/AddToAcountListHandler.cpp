@@ -21,7 +21,7 @@ crow::response AddAccountHandler::operator()(const crow::request& req) const
 		{
 			return crow::response(403, "Parola nu a putut fi validata, va rugam sa aveti cel putin o litera mare, un caracter special si cel putin o cifra.");
 		}
-		return crow::response(200, "V-ati inregistrat cu succes");
+		return crow::response(201, "V-ati inregistrat cu succes");
 	}
 	else
 	{

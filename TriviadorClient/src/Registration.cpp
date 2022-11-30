@@ -47,7 +47,7 @@ void Registration::on_signUpButton_clicked()
 	);
 
 	qDebug() << res.text.c_str() << "\n";
-	if (res.status_code == 200)
+	if (res.status_code == 201)
 	{
 		close();
 		MainMenu* mainMenu = new MainMenu;
