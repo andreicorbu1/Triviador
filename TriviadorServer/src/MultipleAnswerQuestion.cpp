@@ -1,14 +1,14 @@
 ﻿#include "MultipleAnswerQuestion.h"
 
 MultipleAnswerQuestion::MultipleAnswerQuestion() {
-    m_answers = std::vector<std::string>(4);
+    m_answers = std::vector<std::string>(kNumberOfAnswers);
 }
 
 MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
     const std::vector<std::string>& answers) :
     Question(question, rightAnswer), m_answers(answers)
 {
-    m_answers.resize(4);
+    m_answers.resize(kNumberOfAnswers);
 }
 
 void MultipleAnswerQuestion::SetId(const int& id)
@@ -26,26 +26,6 @@ void MultipleAnswerQuestion::SetRightAnswer(const std::string& rightAnswer)
     Question<std::string>::SetRightAnswer(rightAnswer);
 }
 
-void MultipleAnswerQuestion::SetAnswer1(const std::string& answer)
-{
-    m_answers[0] = answer;
-}
-
-void MultipleAnswerQuestion::SetAnswer2(const std::string& answer)
-{
-    m_answers[1] = answer;
-}
-
-void MultipleAnswerQuestion::SetAnswer3(const std::string& answer)
-{
-    m_answers[2] = answer;
-}
-
-void MultipleAnswerQuestion::SetAnswer4(const std::string& answer)
-{
-    m_answers[3] = answer;
-}
-
 const int& MultipleAnswerQuestion::GetId() const
 {
     return Question::GetId();
@@ -61,26 +41,6 @@ const std::string& MultipleAnswerQuestion::GetRightAnswer() const
     return Question<std::string>::GetRightAnswer();
 }
 
-const std::string& MultipleAnswerQuestion::GetAnswer1() const
-{
-    return m_answers[0];
-}
-
-const std::string& MultipleAnswerQuestion::GetAnswer2() const
-{
-    return m_answers[1];
-}
-
-const std::string& MultipleAnswerQuestion::GetAnswer3() const
-{
-    return m_answers[2];
-}
-
-const std::string& MultipleAnswerQuestion::GetAnswer4() const
-{
-    return m_answers[3];
-}
-
 size_t MultipleAnswerQuestion::GetNumberOfAnswers() const
 {
     return m_answers.size();
@@ -88,17 +48,28 @@ size_t MultipleAnswerQuestion::GetNumberOfAnswers() const
 
 std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion)
 {
-	std::getline(is, multipleAnswerQuestion.m_question);
-	std::getline(is, multipleAnswerQuestion.m_rightAnswer);
-	multipleAnswerQuestion.m_answers.resize(multipleAnswerQuestion.GetNumberOfAnswers());
-	is.ignore(1024, '\n');
-	is.ignore(1024, '\n');
+    std::string question;
+    std::string rightAnswer;
+    std::vector<std::string> answers(MultipleAnswerQuestion::kNumberOfAnswers);
+
+    std::getline(is, question);
+    std::getline(is, rightAnswer);
+
+    for (size_t i = 0; i < answers.size(); i++)
+    {
+        std::getline(is, answers[i]);
+    }
+
+    multipleAnswerQuestion.SetQuestion(question);
+    multipleAnswerQuestion.SetRightAnswer(rightAnswer);
+    multipleAnswerQuestion.m_answers = answers;
+    
 	return is;
 }
 
 std::ostream& operator<<(std::ostream& os, const MultipleAnswerQuestion& multipleAnswerQuestion)
 {
-	os << "Intrebarea este: " << multipleAnswerQuestion.m_question << "\n";
+    os << "Intrebarea este: " << multipleAnswerQuestion.GetQuestion() << "\n";
 	os << "Variantele de raspuns sunt:\n";
 	for (size_t i = 0; i < multipleAnswerQuestion.GetNumberOfAnswers(); i++)
 	{
@@ -109,11 +80,8 @@ std::ostream& operator<<(std::ostream& os, const MultipleAnswerQuestion& multipl
 
 bool operator==(const MultipleAnswerQuestion& maq1, const MultipleAnswerQuestion& maq2)
 {
-	if (maq1.m_rightAnswer == maq2.m_rightAnswer && maq1.m_question == maq2.m_question &&
-		maq1.m_answers == maq2.m_answers)
-	{
-		return true;
-	}
-	return false;
+    return maq1.GetQuestion() == maq2.GetQuestion() &&
+        maq1.GetRightAnswer() == maq2.GetRightAnswer() &&
+        maq1.m_answers == maq2.m_answers;
 }
 

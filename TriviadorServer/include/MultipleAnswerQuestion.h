@@ -17,19 +17,15 @@ public:
     void SetId(const int& id);
     void SetQuestion(const std::string& question);
     void SetRightAnswer(const std::string& rightAnswer);
-    void SetAnswer1(const std::string& answer);
-    void SetAnswer2(const std::string& answer);
-    void SetAnswer3(const std::string& answer);
-    void SetAnswer4(const std::string& answer);
+    template <size_t index>
+    void SetAnswer(const std::string& answer);
 
     //Getters
     const int& GetId() const;
     const std::string& GetQuestion() const;
     const std::string& GetRightAnswer() const;
-    const std::string& GetAnswer1() const;
-    const std::string& GetAnswer2() const;
-    const std::string& GetAnswer3() const;
-    const std::string& GetAnswer4() const;
+    template <size_t index>
+    const std::string& GetAnswer() const;
     size_t GetNumberOfAnswers() const;
 
     // Operators
@@ -38,5 +34,20 @@ public:
     friend bool operator==(const MultipleAnswerQuestion& maq1, const MultipleAnswerQuestion& maq2);
 
 private:
+    // Constants
+    static const size_t kNumberOfAnswers = 4;
+    
     std::vector<std::string> m_answers;
 };
+
+template<size_t index>
+inline void MultipleAnswerQuestion::SetAnswer(const std::string& answer)
+{
+    m_answers[index] = answer;
+}
+
+template<size_t index>
+inline const std::string& MultipleAnswerQuestion::GetAnswer() const
+{
+    return m_answers[index];
+}

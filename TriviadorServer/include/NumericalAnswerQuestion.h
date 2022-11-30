@@ -13,11 +13,7 @@ public:
 public:
 	friend std::istream& operator>>(std::istream& is, NumericalAnswerQuestion& numericalAnswerQuestion);
 	friend std::ostream& operator<<(std::ostream& os, const NumericalAnswerQuestion& numericalAnswerQuestion);
-	friend bool operator==(const NumericalAnswerQuestion& naq1, const NumericalAnswerQuestion& naq2)
-	{
-		return naq1.m_rightAnswer == naq2.m_rightAnswer && naq1.m_question == naq2.m_question;
-	}
-
+	friend bool operator==(const NumericalAnswerQuestion& naq1, const NumericalAnswerQuestion& naq2);
 };
 
 

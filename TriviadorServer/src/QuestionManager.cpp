@@ -6,7 +6,7 @@ QuestionManager::QuestionManager(const std::string& path)
     m_storage.sync_schema();
 }
 
-void QuestionManager::AddQuestion(MultipleAnswerQuestion& s)
+void QuestionManager::AddQuestion(const MultipleAnswerQuestion& question)
 {
-    m_storage.insert(s);
+    m_storage.insert(question);
 }

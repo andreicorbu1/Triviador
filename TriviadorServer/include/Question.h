@@ -22,7 +22,7 @@ public:
     // Operators
     friend std::istream& operator>>(std::istream& is, Question<T>& question);
 
-protected:
+private:
     int m_id;
     std::string m_question;
     T m_rightAnswer;
