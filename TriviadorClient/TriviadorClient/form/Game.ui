@@ -11,16 +11,26 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Game</string>
+   <string>Triviador</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource/Triviador.qrc">
+    <normaloff>:/Icon/Triviador.ico</normaloff>:/Icon/Triviador.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #534232;</string>
   </property>
   <widget class="QPushButton" name="exitButton">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>141</width>
-     <height>51</height>
+     <width>101</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #801212;</string>
    </property>
    <property name="text">
     <string>EXIT</string>
@@ -28,6 +38,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../resource/Triviador.qrc"/>
+ </resources>
  <connections/>
 </ui>

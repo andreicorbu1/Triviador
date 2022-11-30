@@ -39,7 +39,7 @@ void MainMenu::on_playButton_clicked()
     game->showMaximized();
 }
 
-void MainMenu::ShowMenu()
+void MainMenu::Show()
 {
     showMaximized();
 }
