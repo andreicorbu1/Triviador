@@ -1,10 +1,11 @@
 #include "AccountsManager.h"
-AccountManager::AccountManager()
+AccountManager::AccountManager(const std::string& databaseFileName) : m_database(CreateStorage(databaseFileName))
 {
-	auto initUsersCount = db.count<User>();
+	m_database.sync_schema();
+	auto initUsersCount = m_database.count<User>();
 	if (initUsersCount > 0)
 	{
-		auto allUsers = db.get_all<User>();
+		auto allUsers = m_database.get_all<User>();
 		for (auto& user : allUsers)
 		{
 			m_accounts.emplace(user.GetUsername(), user);
@@ -16,7 +17,7 @@ void AccountManager::AddUser(User& user)
 {
 	if (ValidateCredentials(user))
 	{
-		auto id = db.insert(user);
+		auto id = m_database.insert(user);
 		user.SetID(id);
 		m_accounts[user.GetUsername()] = user;
 	}
@@ -26,7 +27,7 @@ void AccountManager::DeleteUser(const std::string& username)
 {
 	if (SearchUser(username))
 	{
-		db.remove<User>(m_accounts[username].m_ID);
+		m_database.remove<User>(m_accounts[username].m_ID);
 		m_accounts.erase(username);
 	}
 }

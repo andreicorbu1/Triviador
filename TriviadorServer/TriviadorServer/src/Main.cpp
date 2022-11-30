@@ -4,7 +4,7 @@
 
 int main()
 {
-	AccountManager userList;
+	AccountManager userList("resource/Accounts.sqlite");
 	crow::SimpleApp app;
 
 	//register route
