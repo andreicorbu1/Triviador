@@ -24,10 +24,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="logOutButton">
    <property name="geometry">
     <rect>
-     <x>1240</x>
-     <y>10</y>
-     <width>241</width>
-     <height>101</height>
+     <x>1370</x>
+     <y>50</y>
+     <width>120</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="font">
@@ -43,21 +43,31 @@ color: rgb(255, 255, 255);</string>
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(128, 18, 18);
-border: none;
+    <string notr="true">background: rgb(128, 18, 18);
+border-radius: 30px;
 </string>
    </property>
    <property name="text">
-    <string>LOG OUT</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="../resource/Triviador.qrc">
+     <normaloff>:/Icon/Logout.png</normaloff>:/Icon/Logout.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>64</width>
+     <height>32</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="mainButton">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>60</x>
      <y>130</y>
-     <width>471</width>
-     <height>101</height>
+     <width>470</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -86,10 +96,10 @@ border: none;</string>
   <widget class="QPushButton" name="myProfileButton">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>540</x>
      <y>130</y>
-     <width>471</width>
-     <height>101</height>
+     <width>470</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -118,10 +128,10 @@ border: none;</string>
   <widget class="QPushButton" name="creditsButton">
    <property name="geometry">
     <rect>
-     <x>1010</x>
+     <x>1020</x>
      <y>130</y>
-     <width>471</width>
-     <height>101</height>
+     <width>470</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -150,10 +160,10 @@ border: none;</string>
   <widget class="QLabel" name="hiMessage">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>40</y>
-     <width>241</width>
-     <height>31</height>
+     <x>140</x>
+     <y>70</y>
+     <width>240</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">
@@ -169,9 +179,9 @@ border: none;</string>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>50</x>
      <y>250</y>
-     <width>1441</width>
+     <width>1431</width>
      <height>451</height>
     </rect>
    </property>
@@ -182,10 +192,10 @@ border: none;</string>
     <widget class="QPushButton" name="playButton">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>490</x>
        <y>200</y>
-       <width>471</width>
-       <height>101</height>
+       <width>470</width>
+       <height>100</height>
       </rect>
      </property>
      <property name="font">
@@ -236,6 +246,22 @@ Din punct de vedere botanic roșia este un fruct.[1] În anul 1893 Curtea Suprem
     </widget>
    </widget>
    <widget class="QWidget" name="credits"/>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>40</y>
+     <width>64</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="../resource/Triviador.qrc">:/Icon/Triviador-castle.png</pixmap>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
