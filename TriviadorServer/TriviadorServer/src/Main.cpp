@@ -8,9 +8,7 @@
 int main()
 {
 	MultipleAnswerQuestion maq;
-    std::cin >> maq;
 	QuestionManager q("resource/Questions.sqlite");
-	q.AddQuestion(maq);
 
 	AccountManager userList("resource/Accounts.sqlite");
 	crow::SimpleApp app;

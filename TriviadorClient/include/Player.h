@@ -4,31 +4,31 @@
 class Player
 {
 public:
-	enum class Color
-	{
-		Blue,
-		Red,
-		Green,
-		Yellow
-	};
+    enum class Color
+    {
+        Blue,
+        Red,
+        Green,
+        Yellow
+    };
 
 public:
-	Player() = default;
-	Player(const std::string& playerName, const Color& color);
-	Player(const Player& other);
-	~Player() = default;
+    Player() = default;
+    Player(const std::string& playerName, const Color& color);
+    Player(const Player& other);
+    ~Player() = default;
 
-	// Getters:
-	const std::string& GetName() const;
+    // Getters:
+    const std::string& GetName() const;
 
-	// Operators:
-	Player& operator =(const Player& other);
-	Player& operator+=(int score);
+    // Operators:
+    Player& operator =(const Player& other);
+    Player& operator+=(int score);
 
 private:
-	std::string m_playerName;
-	Color m_color;
-	size_t m_score;
-	int m_territoriesCount;
+    std::string m_playerName;
+    Color m_color;
+    size_t m_score;
+    int m_territoriesCount;
 };
 

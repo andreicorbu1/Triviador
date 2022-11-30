@@ -12,9 +12,9 @@ class Registration : public QWidget
     Q_OBJECT
 
 public:
-    Registration(QWidget *parent = nullptr);
+    Registration(QWidget* parent = nullptr);
     ~Registration();
-    
+
 private slots:
     void on_logInButton_clicked();
     void on_signUpButton_clicked();

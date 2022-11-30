@@ -52,7 +52,6 @@ void AccountManager::UpdateUser(const User& user)
 	m_accounts[user.GetUsername()] = user;
 }
 
-
 bool AccountManager::ValidateCredentials(const User& user) const
 {
 	if (std::regex_match(user.GetPassword(), std::regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$")))
