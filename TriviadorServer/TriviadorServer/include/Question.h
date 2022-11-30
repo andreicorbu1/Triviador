@@ -12,7 +12,7 @@ public:
     // Setters
     void SetId(const int& id);
     void SetQuestion(const std::string& question);
-    void SetRightAnswer(const std::string& rightAnswer);
+    void SetRightAnswer(const T& rightAnswer);
 
     // Getters
     const int& GetId() const;
@@ -56,7 +56,7 @@ inline void Question<T>::SetQuestion(const std::string& question)
 }
 
 template <class T>
-inline void Question<T>::SetRightAnswer(const std::string& rightAnswer)
+inline void Question<T>::SetRightAnswer(const T& rightAnswer)
 {
     m_rightAnswer = rightAnswer;
 }

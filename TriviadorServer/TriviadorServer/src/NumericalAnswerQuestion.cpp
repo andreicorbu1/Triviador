@@ -6,6 +6,36 @@ NumericalAnswerQuestion::NumericalAnswerQuestion(const std::string& question, in
     // empty
 }
 
+void NumericalAnswerQuestion::SetId(const int& id)
+{
+    Question::SetId(id);
+}
+
+void NumericalAnswerQuestion::SetQuestion(const std::string& question)
+{
+    Question::SetQuestion(question);
+}
+
+void NumericalAnswerQuestion::SetRightAnswer(const int& rightAnswer)
+{
+    Question::SetRightAnswer(rightAnswer);
+}
+
+const int& NumericalAnswerQuestion::GetId() const
+{
+    return Question::GetId();
+}
+
+const std::string& NumericalAnswerQuestion::GetQuestion() const
+{
+    return Question::GetQuestion();
+}
+
+const int& NumericalAnswerQuestion::GetRightAnswer() const
+{
+    return Question::GetRightAnswer();
+}
+
 std::istream& operator>>(std::istream& is, NumericalAnswerQuestion& numericalAnswerQuestion)
 {
     std::string question;
