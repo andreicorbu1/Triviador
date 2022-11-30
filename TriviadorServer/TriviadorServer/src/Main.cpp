@@ -1,9 +1,17 @@
 #include "AddToAcountListHandler.h"
 #include "LoginHandler.h"
+#include "MultipleAnswerQuestion.h"
+#include "QuestionManager.h"
+
 #include <crow.h>
 
 int main()
 {
+	MultipleAnswerQuestion maq;
+    std::cin >> maq;
+	QuestionManager q("resource/Questions.sqlite");
+	q.AddQuestion(maq);
+
 	AccountManager userList("resource/Accounts.sqlite");
 	crow::SimpleApp app;
 
