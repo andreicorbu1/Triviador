@@ -8,7 +8,7 @@ MainMenu::MainMenu(QWidget* parent)
 
 MainMenu::~MainMenu()
 {
-    // empty	
+    // empty
 }
 
 void MainMenu::hiMessage(const std::string& playerName)

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{892e5729-d865-479d-b6d0-549953f272e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Map">
+      <UniqueIdentifier>{7c59a070-d279-4f05-a8c1-eb094c82fbb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Others">
+      <UniqueIdentifier>{e731faa5-4593-4866-b083-1e637a5f9977}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Registration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\Registration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Game.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\MainMenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="form\Registration.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="form\Game.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="form\MainMenu.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\map\1.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\2.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\3.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\4.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\5.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\6.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\7.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\8.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\map\9.png">
+      <Filter>Resource Files\Map</Filter>
+    </Image>
+    <Image Include="resource\Banner.png">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+    <Image Include="resource\Logout.png">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+    <Image Include="resource\testMap.png">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+    <Image Include="resource\Triviador.ico">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+    <Image Include="resource\Triviador.png">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+    <Image Include="resource\Triviador-castle.png">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+    <Image Include="resource\Triviador-castle-original.png">
+      <Filter>Resource Files\Others</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="resource\Triviador.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\font\KiwiMaru-Light.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="resource\font\KiwiMaru-Medium.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="resource\font\KiwiMaru-Regular.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="resource\font\LuckiestGuy-Regular.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+</Project>
