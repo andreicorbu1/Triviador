@@ -24,7 +24,7 @@ private slots:
     void on_playButton_clicked();
 
 public slots:
-    void ShowMenu();
+    void Show();
 
 
 private:
