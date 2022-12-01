@@ -43,7 +43,7 @@ std::istream& operator>>(std::istream& is, NumericalAnswerQuestion& numericalAns
 
     std::getline(is, question);
     is >> rightAnswer;
-
+    is.ignore(1024, '\n');
     numericalAnswerQuestion = NumericalAnswerQuestion(question, rightAnswer);
 
     return is;

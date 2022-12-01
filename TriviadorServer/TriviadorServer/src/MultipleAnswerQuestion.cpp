@@ -1,14 +1,14 @@
 ﻿#include "MultipleAnswerQuestion.h"
 
 MultipleAnswerQuestion::MultipleAnswerQuestion() {
-    m_answers = std::vector<std::string>(kNumberOfAnswers);
+    m_answers = std::vector<std::string>(kNumberOfAnswers-1);
 }
 
 MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
     const std::vector<std::string>& answers) :
     Question(question, rightAnswer), m_answers(answers)
 {
-    m_answers.resize(kNumberOfAnswers);
+    m_answers.resize(kNumberOfAnswers-1);
 }
 
 void MultipleAnswerQuestion::SetId(const int& id)
@@ -50,7 +50,7 @@ std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswe
 {
     std::string question;
     std::string rightAnswer;
-    std::vector<std::string> answers(MultipleAnswerQuestion::kNumberOfAnswers);
+    std::vector<std::string> answers(MultipleAnswerQuestion::kNumberOfAnswers-1);
 
     std::getline(is, question);
     std::getline(is, rightAnswer);

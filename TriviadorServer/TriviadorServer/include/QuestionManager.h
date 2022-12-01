@@ -1,6 +1,7 @@
 #pragma once
 #include "MultipleAnswerQuestion.h"
 #include "NumericalAnswerQuestion.h"
+#include <fstream>
 #include <sqlite_orm/sqlite_orm.h>
 
 namespace sql = sqlite_orm;
@@ -14,8 +15,7 @@ inline auto CreateStorageForQuestions(const std::string& path)
             sql::make_column("rightAnswer", &MultipleAnswerQuestion::SetRightAnswer, &MultipleAnswerQuestion::GetRightAnswer),
             sql::make_column("answer1", &MultipleAnswerQuestion::SetAnswer<0>, &MultipleAnswerQuestion::GetAnswer<0>),
             sql::make_column("answer2", &MultipleAnswerQuestion::SetAnswer<1>, &MultipleAnswerQuestion::GetAnswer<1>),
-            sql::make_column("answer3", &MultipleAnswerQuestion::SetAnswer<2>, &MultipleAnswerQuestion::GetAnswer<2>),
-            sql::make_column("answer4", &MultipleAnswerQuestion::SetAnswer<3>, &MultipleAnswerQuestion::GetAnswer<3>)
+            sql::make_column("answer3", &MultipleAnswerQuestion::SetAnswer<2>, &MultipleAnswerQuestion::GetAnswer<2>)
         ),
         sql::make_table("NumericalAnswerQuestion",
             sql::make_column("id", &NumericalAnswerQuestion::SetId, &NumericalAnswerQuestion::GetId, sql::primary_key()),
@@ -33,6 +33,8 @@ public:
     QuestionManager() = default;
     explicit QuestionManager(const std::string& path);
     void AddQuestion(const MultipleAnswerQuestion& question);
+    void AddQuestion(const NumericalAnswerQuestion& question);
+    void PopulateStorage();
 
 private:
     StorageForQM m_storage;
