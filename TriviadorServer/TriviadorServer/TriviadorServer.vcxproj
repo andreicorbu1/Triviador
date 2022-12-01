@@ -159,6 +159,10 @@
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="resource\multipleAnswerQuestions.txt" />
+    <Text Include="resource\numericalAnswerQuestions.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
