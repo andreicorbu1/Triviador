@@ -12,6 +12,8 @@ public:
     MultipleAnswerQuestion();
     MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
         const std::vector<std::string>& answers);
+    MultipleAnswerQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion);
+    MultipleAnswerQuestion(const MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept;
 
     //Setters
     void SetId(const int& id);
@@ -32,6 +34,8 @@ public:
     friend std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion);
     friend std::ostream& operator<<(std::ostream& os, const MultipleAnswerQuestion& multipleAnswerQuestion);
     friend bool operator==(const MultipleAnswerQuestion& maq1, const MultipleAnswerQuestion& maq2);
+    MultipleAnswerQuestion& operator=(const MultipleAnswerQuestion& multipleAnswerQuestion);
+    MultipleAnswerQuestion& operator=(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept;
 
 private:
     // Constants

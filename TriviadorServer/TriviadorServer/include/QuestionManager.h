@@ -34,6 +34,12 @@ public:
     explicit QuestionManager(const std::string& path);
     void AddQuestion(const MultipleAnswerQuestion& question);
     void AddQuestion(const NumericalAnswerQuestion& question);
+    void RemoveMultipleAnswerQuestion(int id);
+    void RemoveNumericalAnswerQuestion(int id);
+    void UpdateQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion);
+    void UpdateQuestion(const NumericalAnswerQuestion& numericalAnswerQuestion);
+    const MultipleAnswerQuestion& GetMultipleAnswerQuestion(int id);
+    const NumericalAnswerQuestion& GetNumericalAnswerQuestion(int id);
     void PopulateStorage();
 
 private:
