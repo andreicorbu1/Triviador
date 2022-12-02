@@ -16,7 +16,7 @@ MultipleAnswerQuestion::MultipleAnswerQuestion(const MultipleAnswerQuestion& mul
     *this = multipleAnswerQuestion;
 }
 
-MultipleAnswerQuestion::MultipleAnswerQuestion(const MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept
+MultipleAnswerQuestion::MultipleAnswerQuestion(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept
 {
     *this = std::move(multipleAnswerQuestion);
 }

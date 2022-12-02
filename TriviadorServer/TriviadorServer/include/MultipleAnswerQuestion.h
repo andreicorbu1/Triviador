@@ -13,7 +13,7 @@ public:
     MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
         const std::vector<std::string>& answers);
     MultipleAnswerQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion);
-    MultipleAnswerQuestion(const MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept;
+    MultipleAnswerQuestion(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept;
 
     //Setters
     void SetId(const int& id);

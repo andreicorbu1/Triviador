@@ -36,8 +36,8 @@ template <class T>
 inline Question<T>::Question()
 {
     m_id = -1;
-    m_question = "";
-    m_rightAnswer = T();
+    m_question = {};
+    m_rightAnswer = {};
 }
 
 template <class T>
@@ -56,10 +56,7 @@ inline Question<T>::Question(const Question& question)
 template<class T>
 inline Question<T>::Question(Question&& question) noexcept
 {
-    *this = question;
-    question.m_id=-1;
-    question.m_question = nullptr;
-    question.m_rightAnswer = {};
+    *this = std::move(question);
 }
 
 template <class T>
