@@ -17,11 +17,12 @@ public:
 
 
 private slots:
-    void on_mainButton_clicked() const;
     void on_myProfileButton_clicked() const;
     void on_creditsButton_clicked() const;
     void on_logOutButton_clicked();
     void on_playButton_clicked();
+    void on_createGameButton_clicked();
+    void on_backButton_clicked();
 
 public slots:
     void Show();

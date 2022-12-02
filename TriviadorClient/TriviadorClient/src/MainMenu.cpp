@@ -18,11 +18,6 @@ void MainMenu::hiMessage(const std::string& playerName)
     ui.hiMessage->setText(message);
 }
 
-void MainMenu::on_mainButton_clicked() const
-{
-    this->ui.stackedWidget->setCurrentWidget(ui.main);
-}
-
 void MainMenu::on_myProfileButton_clicked() const
 {
     this->ui.stackedWidget->setCurrentWidget(ui.myProfile);
@@ -35,9 +30,22 @@ void MainMenu::on_creditsButton_clicked() const
 
 void MainMenu::on_playButton_clicked()
 {
-    Game* game = new Game(this);
-    game->showMaximized();
+    this->ui.stackedWidget->setCurrentWidget(ui.play);
+ /*   Game* game = new Game(this);
+    game->showMaximized();*/
 }
+
+void MainMenu::on_createGameButton_clicked()
+{
+    this->ui.stackedWidget->setCurrentWidget(ui.createGame);
+}
+
+void MainMenu::on_backButton_clicked()
+{
+    this->ui.stackedWidget->setCurrentWidget(ui.play);
+}
+
+
 
 void MainMenu::Show()
 {

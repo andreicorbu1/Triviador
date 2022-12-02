@@ -26,7 +26,7 @@ private:
     QWidget* m_mainMenu;
     Question* m_question;
 
-    //Board m_board;
-    //std::vector<Player> m_players;
-    //int m_gameRounds;
+    Board m_board;
+    std::vector<Player> m_players;
+    int m_gameRounds;
 };
