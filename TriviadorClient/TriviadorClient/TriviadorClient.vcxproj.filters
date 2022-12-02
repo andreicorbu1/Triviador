@@ -50,6 +50,12 @@
     <ClCompile Include="src\Question.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Territory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Registration.h">
@@ -81,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Territory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
