@@ -3,6 +3,8 @@
 Territory::Territory()
     : m_score(kBaseScore)
 {
+    m_shape.setWidth(rectangularSize);
+    m_shape.setHeight(rectangularSize);
     // empty
 }
 
@@ -28,6 +30,17 @@ Territory::Territory(const Territory& territory)
 Territory::Territory(Territory&& territory) noexcept
 {
     *this = std::move(territory);
+}
+
+void Territory::SetTerritoryCoordinates(int x, int y)
+{
+    m_shape.setX(x);
+    m_shape.setY(y);
+}
+
+const QRect Territory::GetShape() const
+{
+    return m_shape;
 }
 
 Territory& Territory::operator=(const Territory& territory)

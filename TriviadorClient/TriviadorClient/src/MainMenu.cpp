@@ -28,21 +28,29 @@ void MainMenu::on_creditsButton_clicked() const
     this->ui.stackedWidget->setCurrentWidget(ui.credits);
 }
 
-void MainMenu::on_playButton_clicked()
+void MainMenu::on_playButton_clicked() const
 {
     this->ui.stackedWidget->setCurrentWidget(ui.play);
  /*   Game* game = new Game(this);
     game->showMaximized();*/
 }
 
-void MainMenu::on_createGameButton_clicked()
+void MainMenu::on_createGameButton_clicked() const
 {
     this->ui.stackedWidget->setCurrentWidget(ui.createGame);
 }
 
-void MainMenu::on_backButton_clicked()
+void MainMenu::on_backButton_clicked() 
 {
     this->ui.stackedWidget->setCurrentWidget(ui.play);
+}
+
+void MainMenu::on_twoPlayersButton_clicked()
+{
+    Player a("cristian", Player::Color::Blue);
+    Player b("tibi", Player::Color::Red);
+    Game* game = new Game(a, b, this);
+    game->showMaximized();
 }
 
 

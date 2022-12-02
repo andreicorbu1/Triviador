@@ -17,9 +17,15 @@ public:
     Game(const Player& player1, const Player& player2, const Player& player3, QWidget* mainMenu = nullptr);
     Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4, QWidget* mainMenu = nullptr);
     ~Game();
+
+    void paintEvent(QPaintEvent* paintEvent);
     
 private slots:
     void on_exitButton_clicked();
+
+
+private:
+    
 
 private:
     Ui::GameClass ui;

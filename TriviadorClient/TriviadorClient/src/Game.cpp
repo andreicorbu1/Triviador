@@ -49,9 +49,16 @@ Game::~Game()
     // empty
 }
 
+void Game::paintEvent(QPaintEvent* paintEvent)
+{
+    m_board.PrintBoard(this);
+
+}
+
+
 void Game::on_exitButton_clicked()
 {
     close();
     m_mainMenu->showMaximized();
-    m_question->hide();
+    //m_question->hide();
 }
