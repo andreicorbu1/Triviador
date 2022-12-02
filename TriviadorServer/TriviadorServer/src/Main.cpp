@@ -21,9 +21,12 @@ int main()
 	auto& loginToAccount = CROW_ROUTE(app, "/login").methods(crow::HTTPMethod::POST);
 	loginToAccount(LoginHandler(userList));
 
+	//MultipleAnswerQuestion s = questionManager.GetMultipleAnswerQuestion(1);
+
 	CROW_ROUTE(app, "/multipleAnswerQuestion")([&questionManager]()
-	{
-			MultipleAnswerQuestion multipleAnswerQuestion = questionManager.GetRandomMultipleAnswerQuestion();
+		{
+			int id = questionManager.GetRandomMultipleAnswerQuestionsID();
+			MultipleAnswerQuestion multipleAnswerQuestion(questionManager.GetMultipleAnswerQuestion(1));
 			std::vector<std::string>answers = multipleAnswerQuestion.GetAnswers();
 			std::random_device rd;
 			std::mt19937 g(rd());

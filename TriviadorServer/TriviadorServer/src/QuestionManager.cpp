@@ -90,7 +90,7 @@ int QuestionManager::GetRandomMultipleAnswerQuestionsID()
 	std::mt19937 eng(rd());
 	std::uniform_int_distribution<> distr(1, m_storage.count<MultipleAnswerQuestion>());
 	int id = distr(eng);
-	while(!alreadyChoosedMultipleAnswerQuestionsID.contains(id))
+	while(alreadyChoosedMultipleAnswerQuestionsID.contains(id))
 	{
 		id = distr(eng);
 	}
