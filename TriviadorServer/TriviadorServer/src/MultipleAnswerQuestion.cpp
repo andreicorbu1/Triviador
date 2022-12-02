@@ -1,14 +1,14 @@
 ﻿#include "MultipleAnswerQuestion.h"
 
 MultipleAnswerQuestion::MultipleAnswerQuestion() {
-    m_answers = std::vector<std::string>(kNumberOfAnswers-1);
+    m_answers = std::vector<std::string>(kNumberOfAnswers);
 }
 
 MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
     const std::vector<std::string>& answers) :
     Question(question, rightAnswer), m_answers(answers)
 {
-    m_answers.resize(kNumberOfAnswers-1);
+    m_answers.resize(kNumberOfAnswers);
 }
 
 MultipleAnswerQuestion::MultipleAnswerQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion)
@@ -36,19 +36,24 @@ void MultipleAnswerQuestion::SetRightAnswer(const std::string& rightAnswer)
     Question<std::string>::SetRightAnswer(rightAnswer);
 }
 
-const int& MultipleAnswerQuestion::GetId() const
+int MultipleAnswerQuestion::GetId() const
 {
     return Question::GetId();
 }
 
-const std::string& MultipleAnswerQuestion::GetQuestion() const
+std::string MultipleAnswerQuestion::GetQuestion() const
 {
     return Question::GetQuestion();
 }
 
-const std::string& MultipleAnswerQuestion::GetRightAnswer() const
+std::string MultipleAnswerQuestion::GetRightAnswer() const
 {
     return Question<std::string>::GetRightAnswer();
+}
+
+std::vector<std::string> MultipleAnswerQuestion::GetAnswers() const
+{
+    return m_answers;
 }
 
 size_t MultipleAnswerQuestion::GetNumberOfAnswers() const
@@ -65,6 +70,7 @@ MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(const MultipleAnswerQu
     Question::SetId(multipleAnswerQuestion.GetId());
     Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
     Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+    m_answers = multipleAnswerQuestion.m_answers;
     return *this;
 }
 
@@ -77,6 +83,7 @@ MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(MultipleAnswerQuestion
     Question::SetId(multipleAnswerQuestion.GetId());
     Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
     Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+    m_answers = std::move(multipleAnswerQuestion.m_answers);
     new(&multipleAnswerQuestion)MultipleAnswerQuestion;
     return *this;
 }
@@ -85,7 +92,7 @@ std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswe
 {
     std::string question;
     std::string rightAnswer;
-    std::vector<std::string> answers(MultipleAnswerQuestion::kNumberOfAnswers-1);
+    std::vector<std::string> answers(MultipleAnswerQuestion::kNumberOfAnswers);
 
     std::getline(is, question);
     std::getline(is, rightAnswer);

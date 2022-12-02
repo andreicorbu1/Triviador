@@ -7,9 +7,9 @@
 
 int main()
 {
-	QuestionManager q("resource/Questions.sqlite");
-	q.PopulateStorage();
-	
+	QuestionManager questionManager("resource/Questions.sqlite");
+	questionManager.PopulateStorage();
+
 	AccountManager userList("resource/Accounts.sqlite");
 	crow::SimpleApp app;
 
@@ -20,6 +20,40 @@ int main()
 	//login route
 	auto& loginToAccount = CROW_ROUTE(app, "/login").methods(crow::HTTPMethod::POST);
 	loginToAccount(LoginHandler(userList));
+
+	//MultipleAnswerQuestion s = questionManager.GetMultipleAnswerQuestion(1);
+
+	CROW_ROUTE(app, "/MultipleAnswerQuestion")([&questionManager]()
+		{
+			int id = questionManager.GetRandomMultipleAnswerQuestionsID();
+			MultipleAnswerQuestion multipleAnswerQuestion(questionManager.GetMultipleAnswerQuestion(id));
+			std::vector<std::string>answers = multipleAnswerQuestion.GetAnswers();
+			std::random_device rd;
+			std::mt19937 g(rd());
+			std::shuffle(answers.begin(), answers.end(), g);
+			crow::json::wvalue question
+			{
+				{"question", multipleAnswerQuestion.GetQuestion()},
+				{"right_answer", multipleAnswerQuestion.GetRightAnswer()},
+				{"answer1", answers[0]},
+				{"answer2", answers[1]},
+				{"answer3", answers[2]},
+				{"answer4", answers[3]}
+			};
+			return crow::json::wvalue(question);
+	});
+
+	CROW_ROUTE(app, "/NumericalAnswerQuestion")([&questionManager]()
+	{
+			int id = questionManager.GetRandomNumericalAnswerQuestionsID();
+			NumericalAnswerQuestion numericalAnswerQuestion(questionManager.GetNumericalAnswerQuestion(id));
+			crow::json::wvalue question
+			{
+				{"question", numericalAnswerQuestion.GetQuestion()},
+				{"right_answer", numericalAnswerQuestion.GetRightAnswer()}
+			};
+		return crow::json::wvalue(question);
+	});
 
 	app.port(18080).multithreaded().run();
 	return 0;

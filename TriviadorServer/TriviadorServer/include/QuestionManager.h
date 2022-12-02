@@ -2,7 +2,11 @@
 #include "MultipleAnswerQuestion.h"
 #include "NumericalAnswerQuestion.h"
 #include <fstream>
+#include <random>
+#include <unordered_set>
 #include <sqlite_orm/sqlite_orm.h>
+#include "utils.h"
+#include <crow.h>
 
 namespace sql = sqlite_orm;
 
@@ -15,7 +19,8 @@ inline auto CreateStorageForQuestions(const std::string& path)
             sql::make_column("rightAnswer", &MultipleAnswerQuestion::SetRightAnswer, &MultipleAnswerQuestion::GetRightAnswer),
             sql::make_column("answer1", &MultipleAnswerQuestion::SetAnswer<0>, &MultipleAnswerQuestion::GetAnswer<0>),
             sql::make_column("answer2", &MultipleAnswerQuestion::SetAnswer<1>, &MultipleAnswerQuestion::GetAnswer<1>),
-            sql::make_column("answer3", &MultipleAnswerQuestion::SetAnswer<2>, &MultipleAnswerQuestion::GetAnswer<2>)
+            sql::make_column("answer3", &MultipleAnswerQuestion::SetAnswer<2>, &MultipleAnswerQuestion::GetAnswer<2>),
+            sql::make_column("answer4", &MultipleAnswerQuestion::SetAnswer<3>, &MultipleAnswerQuestion::GetAnswer<3>)
         ),
         sql::make_table("NumericalAnswerQuestion",
             sql::make_column("id", &NumericalAnswerQuestion::SetId, &NumericalAnswerQuestion::GetId, sql::primary_key()),
@@ -38,10 +43,13 @@ public:
     void RemoveNumericalAnswerQuestion(int id);
     void UpdateQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion);
     void UpdateQuestion(const NumericalAnswerQuestion& numericalAnswerQuestion);
-    const MultipleAnswerQuestion& GetMultipleAnswerQuestion(int id);
-    const NumericalAnswerQuestion& GetNumericalAnswerQuestion(int id);
+    MultipleAnswerQuestion GetMultipleAnswerQuestion(int id);
+    NumericalAnswerQuestion GetNumericalAnswerQuestion(int id);
+    int GetRandomMultipleAnswerQuestionsID();
+    int GetRandomNumericalAnswerQuestionsID();
     void PopulateStorage();
-
 private:
     StorageForQM m_storage;
+    std::unordered_set<int>alreadyChoosedMultipleAnswerQuestionsID;
+    std::unordered_set<int>alreadyChoosedNumericalAnswerQuestionsID;
 };

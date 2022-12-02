@@ -23,11 +23,12 @@ public:
     void SetAnswer(const std::string& answer);
 
     //Getters
-    const int& GetId() const;
-    const std::string& GetQuestion() const;
-    const std::string& GetRightAnswer() const;
+    int GetId() const;
+    std::string GetQuestion() const;
+    std::string GetRightAnswer() const;
     template <size_t index>
-    const std::string& GetAnswer() const;
+    std::string GetAnswer() const;
+    std::vector<std::string> GetAnswers() const;
     size_t GetNumberOfAnswers() const;
 
     // Operators
@@ -51,7 +52,7 @@ inline void MultipleAnswerQuestion::SetAnswer(const std::string& answer)
 }
 
 template<size_t index>
-inline const std::string& MultipleAnswerQuestion::GetAnswer() const
+inline std::string MultipleAnswerQuestion::GetAnswer() const
 {
     return m_answers[index];
 }

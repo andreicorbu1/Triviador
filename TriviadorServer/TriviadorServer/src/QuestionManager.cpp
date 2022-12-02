@@ -52,30 +52,54 @@ void QuestionManager::UpdateQuestion(const NumericalAnswerQuestion& numericalAns
 	}
 }
 
-const MultipleAnswerQuestion& QuestionManager::GetMultipleAnswerQuestion(int id)
+MultipleAnswerQuestion QuestionManager::GetMultipleAnswerQuestion(int id)
 {
 	try
 	{
-		return m_storage.get<MultipleAnswerQuestion>(id);
+		return m_storage.get<MultipleAnswerQuestion>(id);	
 	}
 	catch (std::system_error e)
 	{
-		std::cout <<"ID: " <<id<<" "<< e.what() << "\n";
-		return MultipleAnswerQuestion();
+		std::cout << "ID: " << id << " " << e.what() << "\n";
 	}
 }
 
-const NumericalAnswerQuestion& QuestionManager::GetNumericalAnswerQuestion(int id)
+NumericalAnswerQuestion QuestionManager::GetNumericalAnswerQuestion(int id)
 {
-	try
+	try 
 	{
 		return m_storage.get<NumericalAnswerQuestion>(id);
 	}
 	catch (std::system_error e)
 	{
 		std::cout << "ID: " << id << " " << e.what() << "\n";
-		return NumericalAnswerQuestion();
 	}
+}
+
+int QuestionManager::GetRandomMultipleAnswerQuestionsID()
+{
+	std::random_device rd;
+	std::mt19937 eng(rd());
+	std::uniform_int_distribution<> distr(1, m_storage.count<MultipleAnswerQuestion>());
+	int id = distr(eng);
+	while(alreadyChoosedMultipleAnswerQuestionsID.contains(id))
+	{
+		id = distr(eng);
+	}
+	return id;
+}
+
+int QuestionManager::GetRandomNumericalAnswerQuestionsID()
+{
+	std::random_device rd;
+	std::mt19937 eng(rd());
+	std::uniform_int_distribution<> distr(1, m_storage.count<NumericalAnswerQuestion>());
+	int id = distr(eng);
+	while (alreadyChoosedNumericalAnswerQuestionsID.contains(id))
+	{
+		id = distr(eng);
+	}
+	return id;
 }
 
 void QuestionManager::PopulateStorage()
@@ -102,4 +126,3 @@ void QuestionManager::PopulateStorage()
 		fin.close();
 	}
 }
-
