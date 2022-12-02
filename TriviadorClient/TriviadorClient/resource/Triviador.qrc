@@ -4,6 +4,9 @@
     <file>Logout.png</file>
     <file>Triviador.ico</file>
   </qresource>
+  <qresource prefix="Others">
+    <file>Plank.svg</file>
+  </qresource>
   <qresource prefix="/Fonts">
     <file>font/KiwiMaru-Light.ttf</file>
     <file>font/KiwiMaru-Medium.ttf</file>
@@ -11,6 +14,8 @@
     <file>font/LuckiestGuy-Regular.ttf</file>
   </qresource>
   <qresource prefix="/Banner">
+    <file>PlayArrow.svg</file>
+    <file>EmptyBanner.svg</file>
     <file>Banner.png</file>
   </qresource>
 </RCC>

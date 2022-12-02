@@ -153,4 +153,15 @@
       <Filter>Resource Files\Fonts</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\EmptyBanner.svg">
+      <Filter>Resource Files\Others</Filter>
+    </None>
+    <None Include="resource\Plank.svg">
+      <Filter>Resource Files\Others</Filter>
+    </None>
+    <None Include="resource\PlayArrow.svg">
+      <Filter>Resource Files\Others</Filter>
+    </None>
+  </ItemGroup>
 </Project>

@@ -170,6 +170,11 @@
     <Font Include="resource\font\KiwiMaru-Regular.ttf" />
     <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\EmptyBanner.svg" />
+    <None Include="resource\Plank.svg" />
+    <None Include="resource\PlayArrow.svg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
