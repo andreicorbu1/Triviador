@@ -17,9 +17,9 @@ public:
     void SetRightAnswer(const T& rightAnswer);
 
     // Getters
-    const int& GetId() const;
-    const std::string& GetQuestion() const;
-    const T& GetRightAnswer() const;
+    int GetId() const;
+    std::string GetQuestion() const;
+    T GetRightAnswer() const;
 
     // Operators
     friend std::istream& operator>>(std::istream& is, Question<T>& question);
@@ -78,19 +78,19 @@ inline void Question<T>::SetRightAnswer(const T& rightAnswer)
 }
 
 template <class T>
-inline const int& Question<T>::GetId() const
+inline int Question<T>::GetId() const
 {
     return m_id;
 }
 
 template <class T>
-inline const std::string& Question<T>::GetQuestion() const
+inline std::string Question<T>::GetQuestion() const
 {
     return m_question;
 }
 
 template <class T>
-inline const T& Question<T>::GetRightAnswer() const
+inline T Question<T>::GetRightAnswer() const
 {
     return m_rightAnswer;
 }

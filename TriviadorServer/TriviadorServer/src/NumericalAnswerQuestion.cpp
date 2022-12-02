@@ -31,17 +31,17 @@ void NumericalAnswerQuestion::SetRightAnswer(const int& rightAnswer)
     Question::SetRightAnswer(rightAnswer);
 }
 
-const int& NumericalAnswerQuestion::GetId() const
+int NumericalAnswerQuestion::GetId() const
 {
     return Question::GetId();
 }
 
-const std::string& NumericalAnswerQuestion::GetQuestion() const
+std::string NumericalAnswerQuestion::GetQuestion() const
 {
     return Question::GetQuestion();
 }
 
-const int& NumericalAnswerQuestion::GetRightAnswer() const
+int NumericalAnswerQuestion::GetRightAnswer() const
 {
     return Question::GetRightAnswer();
 }

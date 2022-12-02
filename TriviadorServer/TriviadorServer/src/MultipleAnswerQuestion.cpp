@@ -36,22 +36,22 @@ void MultipleAnswerQuestion::SetRightAnswer(const std::string& rightAnswer)
     Question<std::string>::SetRightAnswer(rightAnswer);
 }
 
-const int& MultipleAnswerQuestion::GetId() const
+int MultipleAnswerQuestion::GetId() const
 {
     return Question::GetId();
 }
 
-const std::string& MultipleAnswerQuestion::GetQuestion() const
+std::string MultipleAnswerQuestion::GetQuestion() const
 {
     return Question::GetQuestion();
 }
 
-const std::string& MultipleAnswerQuestion::GetRightAnswer() const
+std::string MultipleAnswerQuestion::GetRightAnswer() const
 {
     return Question<std::string>::GetRightAnswer();
 }
 
-const std::vector<std::string>& MultipleAnswerQuestion::GetAnswers() const
+std::vector<std::string> MultipleAnswerQuestion::GetAnswers() const
 {
     return m_answers;
 }

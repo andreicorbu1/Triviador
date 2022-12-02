@@ -43,10 +43,8 @@ public:
     void RemoveNumericalAnswerQuestion(int id);
     void UpdateQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion);
     void UpdateQuestion(const NumericalAnswerQuestion& numericalAnswerQuestion);
-    const MultipleAnswerQuestion& GetMultipleAnswerQuestion(int id);
-    const NumericalAnswerQuestion& GetNumericalAnswerQuestion(int id);
-    const MultipleAnswerQuestion& GetRandomMultipleAnswerQuestion();
-    const NumericalAnswerQuestion& GetRandomNumericalAnswerQuestion();
+    MultipleAnswerQuestion GetMultipleAnswerQuestion(int id);
+    NumericalAnswerQuestion GetNumericalAnswerQuestion(int id);
     int GetRandomMultipleAnswerQuestionsID();
     int GetRandomNumericalAnswerQuestionsID();
     void PopulateStorage();

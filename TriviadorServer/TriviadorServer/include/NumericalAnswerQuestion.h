@@ -19,9 +19,9 @@ public:
 	void SetRightAnswer(const int& rightAnswer);
 
 	//Getters
-	const int& GetId() const;
-	const std::string& GetQuestion() const;
-	const int& GetRightAnswer() const;
+	int GetId() const;
+	std::string GetQuestion() const;
+	int GetRightAnswer() const;
 
 public:
 	friend std::istream& operator>>(std::istream& is, NumericalAnswerQuestion& numericalAnswerQuestion);
