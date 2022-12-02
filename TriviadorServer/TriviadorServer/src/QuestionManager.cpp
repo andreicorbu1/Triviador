@@ -78,6 +78,38 @@ const NumericalAnswerQuestion& QuestionManager::GetNumericalAnswerQuestion(int i
 	}
 }
 
+const MultipleAnswerQuestion& QuestionManager::GetRandomMultipleAnswerQuestion()
+{
+	auto multipleAnswerQuestion = m_storage.get<MultipleAnswerQuestion>(GetRandomMultipleAnswerQuestionsID());
+	return multipleAnswerQuestion;
+}
+
+int QuestionManager::GetRandomMultipleAnswerQuestionsID()
+{
+	std::random_device rd;
+	std::mt19937 eng(rd());
+	std::uniform_int_distribution<> distr(1, m_storage.count<MultipleAnswerQuestion>());
+	int id = distr(eng);
+	while(!alreadyChoosedMultipleAnswerQuestionsID.contains(id))
+	{
+		id = distr(eng);
+	}
+	return id;
+}
+
+int QuestionManager::GetRandomNumericalAnswerQuestionsID()
+{
+	std::random_device rd;
+	std::mt19937 eng(rd());
+	std::uniform_int_distribution<> distr(1, m_storage.count<NumericalAnswerQuestion>());
+	int id = distr(eng);
+	while (!alreadyChoosedNumericalAnswerQuestionsID.contains(id))
+	{
+		id = distr(eng);
+	}
+	return id;
+}
+
 void QuestionManager::PopulateStorage()
 {
 	if (m_storage.count<MultipleAnswerQuestion>() == 0 && m_storage.count<NumericalAnswerQuestion>() == 0)
@@ -102,4 +134,3 @@ void QuestionManager::PopulateStorage()
 		fin.close();
 	}
 }
-

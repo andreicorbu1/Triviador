@@ -28,6 +28,7 @@ public:
     const std::string& GetRightAnswer() const;
     template <size_t index>
     const std::string& GetAnswer() const;
+    const std::vector<std::string>& GetAnswers() const;
     size_t GetNumberOfAnswers() const;
 
     // Operators
