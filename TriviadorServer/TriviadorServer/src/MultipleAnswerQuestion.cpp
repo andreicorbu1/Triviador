@@ -65,6 +65,7 @@ MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(const MultipleAnswerQu
     Question::SetId(multipleAnswerQuestion.GetId());
     Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
     Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+    m_answers = multipleAnswerQuestion.m_answers;
     return *this;
 }
 
@@ -77,6 +78,7 @@ MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(MultipleAnswerQuestion
     Question::SetId(multipleAnswerQuestion.GetId());
     Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
     Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+    m_answers = std::move(multipleAnswerQuestion.m_answers);
     new(&multipleAnswerQuestion)MultipleAnswerQuestion;
     return *this;
 }
