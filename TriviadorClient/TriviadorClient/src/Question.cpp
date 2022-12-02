@@ -6,21 +6,42 @@ Question::Question(QWidget *parent)
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     // Make it WindowModal later
     ui.setupUi(this);
-    ui.question->setText("What is the capital of Romania?");
-    ui.answer1->setText("Bucharest");
-    ui.answer2->setText("Paris");
-    ui.answer3->setText("London");
-    ui.answer4->setText("Berlin");
+    SetShadowEffect();
+    SetTimer();
     
-    m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(updateProgressBar()));
-    m_timer->start(100);
 }
 
 Question::~Question()
 {}
 
-void Question::updateProgressBar()
+
+void Question::SetShadowEffect()
+{
+    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect();
+    shadow->setBlurRadius(4);
+    shadow->setOffset(0, 4);
+    shadow->setColor(QColor(0, 0, 0, 25));
+
+    ui.answer1->setGraphicsEffect(shadow);
+    ui.answer2->setGraphicsEffect(shadow);
+    ui.answer3->setGraphicsEffect(shadow);
+    ui.answer4->setGraphicsEffect(shadow);
+    ui.plank->setGraphicsEffect(shadow);
+}
+
+void Question::SetTimer()
+{
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(UpdateProgressBar()));
+    m_timer->start(100);
+}
+
+void Question::FetchQuestion() {
+    cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/question" });
+    std::cout << r.text << std::endl;
+}
+
+void Question::UpdateProgressBar()
 {
     if (ui.timeProgressBar->value() == 0)
     {

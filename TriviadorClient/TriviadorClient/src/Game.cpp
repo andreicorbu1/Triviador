@@ -3,6 +3,7 @@
 Game::Game(QWidget* mainMenu)
     : m_mainMenu(mainMenu)
 {
+    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
     ui.setupUi(this);
     m_mainMenu->hide();
 

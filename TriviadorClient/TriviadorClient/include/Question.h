@@ -2,7 +2,11 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QGraphicsDropShadowEffect>
 #include "ui_Question.h"
+
+#include <cpr/cpr.h>
+#include <crow.h>
 
 class Question : public QWidget
 {
@@ -13,9 +17,13 @@ public:
     ~Question();
 
 private slots:
-    void updateProgressBar();
+    void UpdateProgressBar();
 
 private:
     Ui::QuestionClass ui;
     QTimer* m_timer;
+    
+    void SetShadowEffect();
+    void SetTimer();
+    void FetchQuestion();
 };

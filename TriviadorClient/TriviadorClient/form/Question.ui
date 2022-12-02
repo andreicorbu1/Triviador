@@ -70,7 +70,7 @@ QWidget {
 background: transparent;</string>
    </property>
    <property name="text">
-    <string>Cate picioare are un gorun? Care este capitata spaniei?</string>
+    <string>Care este capitala României?</string>
    </property>
    <property name="textFormat">
     <enum>Qt::PlainText</enum>
@@ -162,7 +162,7 @@ color: #ffffff;
 </string>
      </property>
      <property name="text">
-      <string>40 zeci de mili</string>
+      <string>București</string>
      </property>
     </widget>
     <widget class="QPushButton" name="answer2">
@@ -189,7 +189,7 @@ color: #ffffff;
 </string>
      </property>
      <property name="text">
-      <string>Gorun e copac</string>
+      <string>Paris</string>
      </property>
     </widget>
     <widget class="QPushButton" name="answer3">
@@ -216,7 +216,7 @@ color: #ffffff;
 </string>
      </property>
      <property name="text">
-      <string>Tu esti copac</string>
+      <string>Londra</string>
      </property>
     </widget>
     <widget class="QPushButton" name="answer4">
@@ -243,7 +243,7 @@ color: #ffffff;
 </string>
      </property>
      <property name="text">
-      <string>Eu sunt copac</string>
+      <string>Dubai</string>
      </property>
     </widget>
    </widget>
