@@ -3,7 +3,7 @@
 #include <QWidget>
 #include "ui_Game.h"
 
-#include "Question.h"
+#include "QuestionManager.h"
 
 class Game : public QWidget
 {
@@ -19,5 +19,5 @@ private slots:
 private:
     Ui::GameClass ui;
     QWidget* m_mainMenu;
-    Question* m_question;
+    QuestionManager m_questionManager;
 };

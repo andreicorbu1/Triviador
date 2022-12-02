@@ -3,7 +3,7 @@
  <class>QuestionClass</class>
  <widget class="QWidget" name="QuestionClass">
   <property name="windowModality">
-   <enum>Qt::NonModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -125,7 +125,7 @@ QProgressBar::chunk {
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QStackedWidget" name="stackedWidget">
+  <widget class="QStackedWidget" name="questionTypes">
    <property name="geometry">
     <rect>
      <x>200</x>
@@ -135,7 +135,7 @@ QProgressBar::chunk {
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="multiple">
     <widget class="QPushButton" name="answer1">
@@ -247,7 +247,7 @@ color: #ffffff;
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="numeric">
+   <widget class="QWidget" name="numerical">
     <widget class="QLabel" name="plank">
      <property name="geometry">
       <rect>
@@ -269,14 +269,27 @@ color: #ffffff;
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>261</width>
-       <height>41</height>
+       <width>260</width>
+       <height>40</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 background-color: #725C48;
-color: #ffffff;</string>
+color: #ffffff;
+padding: 5px;</string>
+     </property>
+     <property name="maxLength">
+      <number>20</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="submit">

@@ -1,14 +1,15 @@
 #include "Question.h"
 
-Question::Question(QWidget *parent)
+Question::Question(QWidget* parent, QuestionType type)
     : QWidget(parent)
 {
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    // Make it WindowModal later
     ui.setupUi(this);
+    ui.answerInput->setValidator(new QDoubleValidator(0, 100, 10, this));
     SetShadowEffect();
     SetTimer();
-    
+    SetQuestionType(type);
+    //FetchQuestion();
 }
 
 Question::~Question()
@@ -33,6 +34,25 @@ void Question::SetTimer()
 {
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(UpdateProgressBar()));
+}
+
+void Question::SetQuestionType(QuestionType type)
+{
+    switch (type)
+    {
+    case QuestionType::MultipleAnswer:
+        this->ui.questionTypes->setCurrentWidget(ui.multiple);
+        break;
+    case QuestionType::NumericalAnswer:
+        this->ui.questionTypes->setCurrentWidget(ui.numerical);
+        break;
+    default:
+        break;
+    }
+}
+
+void Question::StartTimer()
+{
     m_timer->start(100);
 }
 
