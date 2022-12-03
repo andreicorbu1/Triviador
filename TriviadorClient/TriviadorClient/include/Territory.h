@@ -27,7 +27,6 @@ public:
 private:
     const uint16_t kBaseScore = 300;
     const uint16_t kTerritoryScore = 100;
-    const uint16_t rectangularSize = 50;
     
 private:
     std::optional<Player> m_owner;

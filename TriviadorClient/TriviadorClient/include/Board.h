@@ -1,6 +1,6 @@
 #pragma once
 #include "Territory.h"
-#include "qpainter.h"
+#include <qpainter.h>
 #include <vector>
 #include <optional>
 
@@ -23,7 +23,6 @@ public:
 
 
     void PrintBoard(QPaintDevice* device);
-    std::vector<std::optional<Territory>> GetTerritoies() const;
 private:
     void SetCoordinates();
 

@@ -41,15 +41,12 @@ void Board::SetCoordinates()
 void Board::PrintBoard(QPaintDevice* device)
 {
 	QPainter painter(device);
-	painter.setBrush(QColor(0, 255, 0));
+	painter.setPen(QColor(0, 255, 0));
 	for (size_t i = 0; i < kSize; i++)
 	{
 		painter.drawRect(m_board[i]->GetRectangular());
 	}
 }
-
-std::vector<std::optional<Territory>> Board::GetTerritoies() const
-{ return m_board; }
 
 std::optional<Territory>& Board::operator[](Position pos)
 {

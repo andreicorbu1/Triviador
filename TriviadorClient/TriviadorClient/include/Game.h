@@ -25,12 +25,12 @@ private slots:
 
 
 private:
-    
 
 private:
     Ui::GameClass ui;
     QWidget* m_mainMenu;
     Question* m_question;
+    QPixmap m_pixmap;
 
     Board m_board;
     std::vector<Player> m_players;

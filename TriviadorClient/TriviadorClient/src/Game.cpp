@@ -20,6 +20,8 @@ Game::Game(const Player& player1, const Player& player2, QWidget* mainMenu)
 
 {
     ui.setupUi(this);
+    m_pixmap.load("../TriviadorClient/resource/testMap.png");
+    m_pixmap = m_pixmap.scaled(600, 600);
     m_mainMenu->hide();
 }
 
@@ -51,13 +53,8 @@ Game::~Game()
 
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
-    QRect a(200, 200, 50, 50);
-    QPainter p(this);
-    /*p.setBrush(QColor(0, 12, 255));
-    Territory t;
-    t.m_rect.setRect(50, 50, 50, 50);
-    p.drawRect(t.m_rect);
-    p.drawRect(a);*/
+    QPainter painter(this);
+    painter.drawPixmap(325, 100, m_pixmap);
     m_board.PrintBoard(this);
 }
 
