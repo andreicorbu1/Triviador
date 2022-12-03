@@ -23,17 +23,13 @@ public:
 
 
     void PrintBoard(QPaintDevice* device);
-private:
-    void SetCoordinates();
+    void SetCoordinatesAndSize(uint16_t xPosition, uint16_t yPosition, uint16_t rectangularSize);
 
 private:
     // Constants:
     const std::size_t kWidth;
     const std::size_t kHeight;
     const std::size_t kSize = kWidth * kHeight;
-    const int m_xPos = 325;
-    const int m_yPos = 100;
-    const int rectangularSize = 200;
 
 private:
     std::vector<std::optional<Territory>> m_board{ kSize };

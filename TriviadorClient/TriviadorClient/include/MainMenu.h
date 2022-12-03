@@ -25,6 +25,8 @@ private slots:
     void on_createGameButton_clicked() const;
     void on_backButton_clicked();
     void on_twoPlayersButton_clicked();
+    void on_threePlayersButton_clicked();
+    void on_fourPlayersButton_clicked();
 
 public slots:
     void Show();

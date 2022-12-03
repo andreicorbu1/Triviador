@@ -25,6 +25,9 @@ private slots:
 
 
 private:
+    const uint16_t rectangularSize = 175;
+    const uint16_t xPosition = 150;
+    const uint16_t yPosition = 25;
 
 private:
     Ui::GameClass ui;

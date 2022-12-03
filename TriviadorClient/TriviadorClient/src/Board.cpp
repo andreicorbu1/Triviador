@@ -5,7 +5,6 @@ Board::Board(const std::size_t& width, const std::size_t& height)
 	: kWidth(width)
 	, kHeight(height)
 {
-	SetCoordinates();
 }
 
 const std::optional<Territory>& Board::operator[](Position pos) const
@@ -20,28 +19,27 @@ const std::optional<Territory>& Board::operator[](Position pos) const
 }
 
 
-void Board::SetCoordinates()
+void Board::SetCoordinatesAndSize(uint16_t xPosition, uint16_t yPosition, uint16_t rectangularSize)
 {
-	int xPos = m_xPos;
-	int yPos;
-	for (int line = 0; line < kHeight; line++)
+	uint16_t xPos;
+	for (size_t line = 0; line < kHeight; line++)
 	{
-		yPos = m_yPos;
-		for (int column = 0; column < kWidth; column++)
+		xPos = xPosition;
+		for (size_t column = 0; column < kWidth; column++)
 		{
-			m_board[line * kHeight + column]->SetRectangularCoordinates(xPos, yPos);
-			m_board[line * kHeight + column]->SetRectangularSize(rectangularSize, rectangularSize);
+			m_board[line * kWidth + column]->SetRectangularCoordinates(xPos, yPosition);
+			m_board[line * kWidth + column]->SetRectangularSize(rectangularSize, rectangularSize);
 
-			yPos += rectangularSize;
+			xPos += rectangularSize;
 		}
-		xPos += rectangularSize;
+		yPosition += rectangularSize;
 	}
 }
 
 void Board::PrintBoard(QPaintDevice* device)
 {
 	QPainter painter(device);
-	painter.setPen(QColor(0, 255, 0));
+	painter.setPen(QColor(0, 0, 0));
 	for (size_t i = 0; i < kSize; i++)
 	{
 		painter.drawRect(m_board[i]->GetRectangular());
