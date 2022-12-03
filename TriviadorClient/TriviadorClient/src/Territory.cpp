@@ -3,9 +3,7 @@
 Territory::Territory()
     : m_score(kBaseScore)
 {
-    m_shape.setWidth(rectangularSize);
-    m_shape.setHeight(rectangularSize);
-    // empty
+    //empty
 }
 
 Territory::Territory(const Player& owner)
@@ -32,16 +30,6 @@ Territory::Territory(Territory&& territory) noexcept
     *this = std::move(territory);
 }
 
-void Territory::SetTerritoryCoordinates(int x, int y)
-{
-    m_shape.setX(x);
-    m_shape.setY(y);
-}
-
-const QRect Territory::GetShape() const
-{
-    return m_shape;
-}
 
 Territory& Territory::operator=(const Territory& territory)
 {
@@ -56,6 +44,23 @@ Territory& Territory::operator=(Territory&& territory) noexcept
     m_score = territory.m_score;
     new(&territory)Territory;
     return *this;
+}
+
+void Territory::SetRectangularCoordinates(int x, int y)
+{
+    m_rect.setX(x);
+    m_rect.setY(y);
+}
+
+void Territory::SetRectangularSize(int height, int width)
+{
+    m_rect.setWidth(width);
+    m_rect.setHeight(height);
+}
+
+QRect Territory::GetRectangular()
+{
+    return m_rect;
 }
 
 std::ostream& operator<< (std::ostream& out, const Territory& t)

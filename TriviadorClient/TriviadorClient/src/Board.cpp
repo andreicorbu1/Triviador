@@ -23,28 +23,29 @@ const std::optional<Territory>& Board::operator[](Position pos) const
 void Board::SetCoordinates()
 {
 	int xPos = m_xPos;
-	int yPos = m_yPos;
+	int yPos;
 	for (int line = 0; line < kHeight; line++)
 	{
 		yPos = m_yPos;
 		for (int column = 0; column < kWidth; column++)
 		{
-			m_board[line * kHeight + kWidth]->SetTerritoryCoordinates(xPos, yPos);
-			yPos += 50;
+			m_board[line * kHeight + column]->SetRectangularCoordinates(xPos, yPos);
+			m_board[line * kHeight + column]->SetRectangularSize(rectangularSize, rectangularSize);
+
+			yPos += rectangularSize;
 		}
-		xPos += 50;
+		xPos += rectangularSize;
 	}
 }
 
 void Board::PrintBoard(QPaintDevice* device)
 {
 	QPainter painter(device);
-	painter.setBrush(QColor(15, 211, 31));
+	painter.setBrush(QColor(0, 255, 0));
 	for (size_t i = 0; i < kSize; i++)
 	{
-		painter.drawRect(m_board[i]->GetShape());
+		painter.drawRect(m_board[i]->GetRectangular());
 	}
-	painter.drawRect((QRect(100, 100, 100, 100)));
 }
 
 std::vector<std::optional<Territory>> Board::GetTerritoies() const

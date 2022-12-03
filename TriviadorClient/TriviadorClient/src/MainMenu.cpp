@@ -31,8 +31,6 @@ void MainMenu::on_creditsButton_clicked() const
 void MainMenu::on_playButton_clicked() const
 {
     this->ui.stackedWidget->setCurrentWidget(ui.play);
- /*   Game* game = new Game(this);
-    game->showMaximized();*/
 }
 
 void MainMenu::on_createGameButton_clicked() const

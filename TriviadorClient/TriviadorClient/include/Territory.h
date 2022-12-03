@@ -4,7 +4,7 @@
 #include <iostream>
 #include <optional>
 
-class Territory : public QRect
+class Territory
 {
 public:
     Territory();
@@ -14,23 +14,24 @@ public:
     Territory(Territory&& territory) noexcept;
     ~Territory() = default;
     
-    void SetTerritoryCoordinates(int x, int y);
-    const QRect GetShape() const;
-    
     // Operators:
     Territory& operator=(const Territory& territory);
     Territory& operator=(Territory&& territory) noexcept;
 
     friend std::ostream& operator<< (std::ostream& out, const Territory& t);
 
+    void SetRectangularCoordinates(int x, int y);
+    void SetRectangularSize(int height, int width);
+    QRect GetRectangular();
+
 private:
     const uint16_t kBaseScore = 300;
     const uint16_t kTerritoryScore = 100;
-    const uint16_t rectangularSize = 100;
+    const uint16_t rectangularSize = 50;
     
 private:
     std::optional<Player> m_owner;
     uint16_t m_score;
-    QRect m_shape;
+    QRect m_rect;
 };
 

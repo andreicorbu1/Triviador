@@ -51,8 +51,14 @@ Game::~Game()
 
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
+    QRect a(200, 200, 50, 50);
+    QPainter p(this);
+    /*p.setBrush(QColor(0, 12, 255));
+    Territory t;
+    t.m_rect.setRect(50, 50, 50, 50);
+    p.drawRect(t.m_rect);
+    p.drawRect(a);*/
     m_board.PrintBoard(this);
-
 }
 
 

@@ -32,8 +32,9 @@ private:
     const std::size_t kWidth;
     const std::size_t kHeight;
     const std::size_t kSize = kWidth * kHeight;
-    const int m_xPos = 300;
-    const int m_yPos = 350;
+    const int m_xPos = 325;
+    const int m_yPos = 100;
+    const int rectangularSize = 200;
 
 private:
     std::vector<std::optional<Territory>> m_board{ kSize };
