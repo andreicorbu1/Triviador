@@ -117,12 +117,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Question.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Registration.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Territory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Registration.h" />
@@ -140,7 +142,9 @@
     <QtMoc Include="include\MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Territory.h" />
     <QtMoc Include="include\Question.h" />
+    <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <ItemGroup>

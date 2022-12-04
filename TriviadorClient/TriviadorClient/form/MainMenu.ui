@@ -61,7 +61,7 @@ border-radius: 30px;
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="mainButton">
+  <widget class="QPushButton" name="playButton">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -90,7 +90,7 @@ border-radius: 30px;
 border: none;</string>
    </property>
    <property name="text">
-    <string>MAIN</string>
+    <string>PLAY</string>
    </property>
   </widget>
   <widget class="QPushButton" name="myProfileButton">
@@ -188,12 +188,12 @@ border: none;</string>
    <property name="currentIndex">
     <number>0</number>
    </property>
-   <widget class="QWidget" name="main">
-    <widget class="QPushButton" name="playButton">
+   <widget class="QWidget" name="play">
+    <widget class="QPushButton" name="joinGameButton">
      <property name="geometry">
       <rect>
        <x>480</x>
-       <y>220</y>
+       <y>120</y>
        <width>470</width>
        <height>100</height>
       </rect>
@@ -216,7 +216,245 @@ border: none;
 </string>
      </property>
      <property name="text">
-      <string>PLAY</string>
+      <string>JOIN GAME</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="createGameButton">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>270</y>
+       <width>470</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>44</pointsize>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(128, 18, 18);
+border: none;
+</string>
+     </property>
+     <property name="text">
+      <string>CREATE GAME</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="createGame">
+    <widget class="QPushButton" name="backButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>20</y>
+       <width>120</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>44</pointsize>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgb(128, 18, 18);
+border-radius: 30px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/Triviador.qrc">
+       <normaloff>:/Icon/back_arrow.png</normaloff>:/Icon/back_arrow.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>64</width>
+       <height>32</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="modeLabel">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>100</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>25</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>MODE:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="twoPlayersButton">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>100</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>25</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgb(128, 18, 18);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>2 PLAYERS</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="threePlayersButton">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>100</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>25</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgb(128, 18, 18);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>3 PLAYERS</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="fourPlayersButton">
+     <property name="geometry">
+      <rect>
+       <x>830</x>
+       <y>100</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>25</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgb(128, 18, 18);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>4 PLAYERS</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="modeLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>20</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>25</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>CREATE GAME</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="createButton">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>380</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Franklin Gothic Heavy</family>
+       <pointsize>29</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgb(128, 18, 18);
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>CREATE</string>
      </property>
     </widget>
    </widget>
