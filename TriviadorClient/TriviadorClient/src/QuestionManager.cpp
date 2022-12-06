@@ -1,8 +1,9 @@
 #include "QuestionManager.h"
 
-QuestionManager::QuestionManager()
+QuestionManager::QuestionManager(QWidget* parent)
+    : m_questionWindow(new QuestionWindow(parent))
 {
-    // empty
+    // empty   
 }
 
 QuestionManager::~QuestionManager()
@@ -10,20 +11,16 @@ QuestionManager::~QuestionManager()
     // empty
 }
 
-void QuestionManager::SetParentWidget(QWidget* parent)
-{
-    m_parent = parent;
-}
 void QuestionManager::ShowMultipleAnswerQuestion()
 {
-    Question* question = new Question(m_parent, QuestionType::MultipleAnswer);
-    question->show();
-    question->StartTimer();
+    m_questionWindow->SetQuestionType(QuestionType::MultipleAnswer);
+    m_questionWindow->show();
+    m_questionWindow->StartTimer();
 }
 
 void QuestionManager::ShowNumericalAnswerQuestion()
 {
-    Question* question = new Question(m_parent, QuestionType::NumericalAnswer);
-    question->show();
-    question->StartTimer();
+    m_questionWindow->SetQuestionType(QuestionType::NumericalAnswer);
+    m_questionWindow->show();
+    m_questionWindow->StartTimer();
 }

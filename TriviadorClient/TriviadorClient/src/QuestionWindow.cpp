@@ -1,6 +1,6 @@
-#include "Question.h"
+#include "QuestionWindow.h"
 
-Question::Question(QWidget* parent, QuestionType type)
+QuestionWindow::QuestionWindow(QWidget* parent)
     : QWidget(parent)
 {
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -8,15 +8,13 @@ Question::Question(QWidget* parent, QuestionType type)
     ui.answerInput->setValidator(new QDoubleValidator(0, 100, 10, this));
     SetShadowEffect();
     SetTimer();
-    SetQuestionType(type);
-    //FetchQuestion();
 }
 
-Question::~Question()
+QuestionWindow::~QuestionWindow()
 {}
 
 
-void Question::SetShadowEffect()
+void QuestionWindow::SetShadowEffect()
 {
     QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect();
     shadow->setBlurRadius(4);
@@ -30,13 +28,13 @@ void Question::SetShadowEffect()
     ui.plank->setGraphicsEffect(shadow);
 }
 
-void Question::SetTimer()
+void QuestionWindow::SetTimer()
 {
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(UpdateProgressBar()));
 }
 
-void Question::SetQuestionType(QuestionType type)
+void QuestionWindow::SetQuestionType(QuestionType type)
 {
     switch (type)
     {
@@ -51,17 +49,46 @@ void Question::SetQuestionType(QuestionType type)
     }
 }
 
-void Question::StartTimer()
+void QuestionWindow::StartTimer()
 {
     m_timer->start(100);
 }
 
-void Question::FetchQuestion() {
-    cpr::Response r = cpr::Get(cpr::Url{ "http://localhost:18080/question" });
-    std::cout << r.text << std::endl;
+void QuestionWindow::on_hammerButton_clicked()
+{
+    for (int i = 0; i < 2; i++)
+    {
+        int random = QRandomGenerator::global()->bounded(4);
+        
+        switch (random)
+        {
+        case 0:
+            ui.answer1->hide();
+            break;
+        case 1:
+            ui.answer2->hide();
+            break;
+        case 2:
+            ui.answer3->hide();
+            break;
+        case 3:
+            ui.answer4->hide();
+            break;  
+        default:
+            break;
+        }
+    }
 }
 
-void Question::UpdateProgressBar()
+void QuestionWindow::on_telescopeButton_clicked()
+{
+}
+
+void QuestionWindow::on_parrotButton_clicked()
+{
+}
+
+void QuestionWindow::UpdateProgressBar()
 {
     if (ui.timeProgressBar->value() == 0)
     {

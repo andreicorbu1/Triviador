@@ -2,9 +2,10 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QRandomGenerator>
 #include <QDoubleValidator>
 #include <QGraphicsDropShadowEffect>
-#include "ui_Question.h"
+#include "ui_QuestionWindow.h"
 
 #include <cpr/cpr.h>
 #include <crow.h>
@@ -15,26 +16,29 @@ enum class QuestionType
     NumericalAnswer
 };
 
-class Question : public QWidget
+class QuestionWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    Question(QWidget* parent = nullptr, QuestionType type = QuestionType::MultipleAnswer);
-    ~Question();
+    QuestionWindow(QWidget* parent = nullptr);
+    ~QuestionWindow();
 
     void StartTimer();
+    void SetQuestionType(QuestionType type);
 
 private slots:
+    void on_hammerButton_clicked();
+    void on_telescopeButton_clicked();
+    void on_parrotButton_clicked();
+
     void UpdateProgressBar();
 
 private:
     void SetShadowEffect();
     void SetTimer();
-    void SetQuestionType(QuestionType type);
-    void FetchQuestion();
     
 private:
-    Ui::QuestionClass ui;
+    Ui::QuestionWindowClass ui;
     QTimer* m_timer;
 };

@@ -5,7 +5,11 @@
     <file>Triviador.ico</file>
   </qresource>
   <qresource prefix="Others">
-    <file>Plank.svg</file>
+    <file>question/Hammer.svg</file>
+    <file>question/Parrot.svg</file>
+    <file>question/Telescope.svg</file>
+    <file>question/Plank.svg</file>
+    <file>question/PlayArrow.svg</file>
   </qresource>
   <qresource prefix="/Fonts">
     <file>font/KiwiMaru-Light.ttf</file>
@@ -14,8 +18,7 @@
     <file>font/LuckiestGuy-Regular.ttf</file>
   </qresource>
   <qresource prefix="/Banner">
-    <file>PlayArrow.svg</file>
-    <file>EmptyBanner.svg</file>
+    <file>question/EmptyBanner.svg</file>
     <file>Banner.png</file>
   </qresource>
 </RCC>

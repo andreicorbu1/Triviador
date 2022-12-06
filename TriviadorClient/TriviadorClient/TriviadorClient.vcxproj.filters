@@ -47,7 +47,7 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Question.cpp">
+    <ClCompile Include="src\QuestionWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\QuestionManager.cpp">
@@ -64,7 +64,7 @@
     <QtMoc Include="include\MainMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Question.h">
+    <QtMoc Include="include\QuestionWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -78,7 +78,7 @@
     <QtUic Include="form\MainMenu.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="form\Question.ui">
+    <QtUic Include="form\QuestionWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -160,13 +160,22 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\EmptyBanner.svg">
+    <None Include="resource\question\EmptyBanner.svg">
       <Filter>Resource Files\Others</Filter>
     </None>
-    <None Include="resource\Plank.svg">
+    <None Include="resource\question\Plank.svg">
       <Filter>Resource Files\Others</Filter>
     </None>
-    <None Include="resource\PlayArrow.svg">
+    <None Include="resource\question\PlayArrow.svg">
+      <Filter>Resource Files\Others</Filter>
+    </None>
+    <None Include="resource\question\Hammer.svg">
+      <Filter>Resource Files\Others</Filter>
+    </None>
+    <None Include="resource\question\Parrot.svg">
+      <Filter>Resource Files\Others</Filter>
+    </None>
+    <None Include="resource\question\Telescope.svg">
       <Filter>Resource Files\Others</Filter>
     </None>
   </ItemGroup>

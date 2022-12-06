@@ -19,5 +19,5 @@ private slots:
 private:
     Ui::GameClass ui;
     QWidget* m_mainMenu;
-    QuestionManager m_questionManager;
+    QuestionManager* m_questionManager;
 };
