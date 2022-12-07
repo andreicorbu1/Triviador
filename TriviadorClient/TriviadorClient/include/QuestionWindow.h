@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QDoubleValidator>
+#include <QEventLoop>
 #include <QGraphicsDropShadowEffect>
 #include "ui_QuestionWindow.h"
 

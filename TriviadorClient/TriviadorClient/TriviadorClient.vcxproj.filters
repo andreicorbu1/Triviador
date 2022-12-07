@@ -50,9 +50,6 @@
     <ClCompile Include="src\QuestionWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\QuestionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Registration.h">
@@ -84,9 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\QuestionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

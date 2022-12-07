@@ -3,7 +3,7 @@
 #include <QWidget>
 #include "ui_Game.h"
 
-#include "QuestionManager.h"
+#include "QuestionWindow.h"
 
 class Game : public QWidget
 {
@@ -13,11 +13,14 @@ public:
     Game(QWidget* mainMenu = nullptr);
     ~Game();
     
+private:
+    void ShowQuestion(QuestionType type);
+
 private slots:
     void on_exitButton_clicked();
 
 private:
     Ui::GameClass ui;
     QWidget* m_mainMenu;
-    QuestionManager* m_questionManager;
+    QuestionWindow m_questionWindow;
 };

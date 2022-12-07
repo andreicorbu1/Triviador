@@ -11,7 +11,9 @@ QuestionWindow::QuestionWindow(QWidget* parent)
 }
 
 QuestionWindow::~QuestionWindow()
-{}
+{
+    delete m_timer;
+}
 
 
 void QuestionWindow::SetShadowEffect()
@@ -51,6 +53,7 @@ void QuestionWindow::SetQuestionType(QuestionType type)
 
 void QuestionWindow::StartTimer()
 {
+    ui.timeProgressBar->setValue(100);
     m_timer->start(100);
 }
 
@@ -82,10 +85,12 @@ void QuestionWindow::on_hammerButton_clicked()
 
 void QuestionWindow::on_telescopeButton_clicked()
 {
+    // TODO: Implement telescope
 }
 
 void QuestionWindow::on_parrotButton_clicked()
 {
+    // TODO: Implement parrot
 }
 
 void QuestionWindow::UpdateProgressBar()
