@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QuestionClass</class>
- <widget class="QWidget" name="QuestionClass">
+ <class>QuestionWindowClass</class>
+ <widget class="QWidget" name="QuestionWindowClass">
   <property name="windowModality">
-   <enum>Qt::NonModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -46,7 +46,7 @@ QWidget {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="../resource/Triviador.qrc">:/Banner/EmptyBanner.svg</pixmap>
+    <pixmap resource="../resource/Triviador.qrc">:/Banner/question/EmptyBanner.svg</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="question">
@@ -125,23 +125,23 @@ QProgressBar::chunk {
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QStackedWidget" name="stackedWidget">
+  <widget class="QStackedWidget" name="questionTypes">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>69</x>
      <y>130</y>
-     <width>400</width>
+     <width>661</width>
      <height>350</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="multiple">
     <widget class="QPushButton" name="answer1">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>130</x>
        <y>0</y>
        <width>400</width>
        <height>80</height>
@@ -156,7 +156,7 @@ QProgressBar::chunk {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/Plank.svg);
+      <string notr="true">background-image: url(:/Others/question/Plank.svg);
 border: none;
 color: #ffffff;
 </string>
@@ -168,7 +168,7 @@ color: #ffffff;
     <widget class="QPushButton" name="answer2">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>130</x>
        <y>90</y>
        <width>400</width>
        <height>80</height>
@@ -183,7 +183,7 @@ color: #ffffff;
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/Plank.svg);
+      <string notr="true">background-image: url(:/Others/question/Plank.svg);
 border: none;
 color: #ffffff;
 </string>
@@ -195,7 +195,7 @@ color: #ffffff;
     <widget class="QPushButton" name="answer3">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>130</x>
        <y>180</y>
        <width>400</width>
        <height>80</height>
@@ -210,7 +210,7 @@ color: #ffffff;
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/Plank.svg);
+      <string notr="true">background-image: url(:/Others/question/Plank.svg);
 border: none;
 color: #ffffff;
 </string>
@@ -222,7 +222,7 @@ color: #ffffff;
     <widget class="QPushButton" name="answer4">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>130</x>
        <y>270</y>
        <width>400</width>
        <height>80</height>
@@ -237,7 +237,7 @@ color: #ffffff;
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/Plank.svg);
+      <string notr="true">background-image: url(:/Others/question/Plank.svg);
 border: none;
 color: #ffffff;
 </string>
@@ -246,12 +246,38 @@ color: #ffffff;
       <string>Dubai</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="hammerButton">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>270</y>
+       <width>50</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #906B48;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/Triviador.qrc">
+       <normaloff>:/Others/question/Hammer.svg</normaloff>:/Others/question/Hammer.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="numeric">
+   <widget class="QWidget" name="numerical">
     <widget class="QLabel" name="plank">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>130</x>
        <y>0</y>
        <width>400</width>
        <height>80</height>
@@ -261,28 +287,41 @@ color: #ffffff;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../resource/Triviador.qrc">:/Others/Plank.svg</pixmap>
+      <pixmap resource="../resource/Triviador.qrc">:/Others/question/Plank.svg</pixmap>
      </property>
     </widget>
     <widget class="QLineEdit" name="answerInput">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>150</x>
        <y>20</y>
-       <width>261</width>
-       <height>41</height>
+       <width>260</width>
+       <height>40</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">border: none;
 background-color: #725C48;
-color: #ffffff;</string>
+color: #ffffff;
+padding: 5px;</string>
+     </property>
+     <property name="maxLength">
+      <number>20</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="submit">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>430</x>
        <y>20</y>
        <width>80</width>
        <height>40</height>
@@ -300,7 +339,7 @@ border-radius: 20px;</string>
      </property>
      <property name="icon">
       <iconset resource="../resource/Triviador.qrc">
-       <normaloff>:/Banner/PlayArrow.svg</normaloff>:/Banner/PlayArrow.svg</iconset>
+       <normaloff>:/Others/question/PlayArrow.svg</normaloff>:/Others/question/PlayArrow.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -310,6 +349,58 @@ border-radius: 20px;</string>
      </property>
      <property name="shortcut">
       <string>Return</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="telescopeButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>270</y>
+       <width>50</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #906B48;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/Triviador.qrc">
+       <normaloff>:/Others/question/Telescope.svg</normaloff>:/Others/question/Telescope.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="parrotButton">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>270</y>
+       <width>50</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #906B48;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/Triviador.qrc">
+       <normaloff>:/Others/question/Parrot.svg</normaloff>:/Others/question/Parrot.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
      </property>
     </widget>
    </widget>

@@ -3,9 +3,9 @@
 #include <QWidget>
 #include "ui_Game.h"
 
+#include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
-#include "Question.h"
 
 class Game : public QWidget
 {
@@ -20,6 +20,9 @@ public:
 
     void paintEvent(QPaintEvent* paintEvent);
     
+private:
+    void ShowQuestion(QuestionType type);
+
 private slots:
     void on_exitButton_clicked();
 
@@ -32,7 +35,7 @@ private:
 private:
     Ui::GameClass ui;
     QWidget* m_mainMenu;
-    Question* m_question;
+    QuestionWindow m_questionWindow;
     QPixmap m_pixmap;
 
     Board m_board;

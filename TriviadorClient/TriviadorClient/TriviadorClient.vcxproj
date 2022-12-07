@@ -117,8 +117,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\QuestionWindow.cpp" />
     <ClCompile Include="src\Board.cpp" />
-    <ClCompile Include="src\Question.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -132,7 +132,7 @@
   <ItemGroup>
     <QtUic Include="form\Game.ui" />
     <QtUic Include="form\MainMenu.ui" />
-    <QtUic Include="form\Question.ui" />
+    <QtUic Include="form\QuestionWindow.ui" />
     <QtUic Include="form\Registration.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -142,8 +142,8 @@
     <QtMoc Include="include\MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="include\QuestionWindow.h" />
     <ClInclude Include="include\Territory.h" />
-    <QtMoc Include="include\Question.h" />
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\Player.h" />
   </ItemGroup>
@@ -175,9 +175,12 @@
     <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\EmptyBanner.svg" />
-    <None Include="resource\Plank.svg" />
-    <None Include="resource\PlayArrow.svg" />
+    <None Include="resource\question\EmptyBanner.svg" />
+    <None Include="resource\question\Hammer.svg" />
+    <None Include="resource\question\Parrot.svg" />
+    <None Include="resource\question\Plank.svg" />
+    <None Include="resource\question\PlayArrow.svg" />
+    <None Include="resource\question\Telescope.svg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
