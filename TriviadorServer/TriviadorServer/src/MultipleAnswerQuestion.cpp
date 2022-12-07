@@ -11,6 +11,16 @@ MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, cons
     m_answers.resize(kNumberOfAnswers);
 }
 
+MultipleAnswerQuestion::MultipleAnswerQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion)
+{
+    *this = multipleAnswerQuestion;
+}
+
+MultipleAnswerQuestion::MultipleAnswerQuestion(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept
+{
+    *this = std::move(multipleAnswerQuestion);
+}
+
 void MultipleAnswerQuestion::SetId(const int& id)
 {
     Question::SetId(id);
@@ -26,24 +36,56 @@ void MultipleAnswerQuestion::SetRightAnswer(const std::string& rightAnswer)
     Question<std::string>::SetRightAnswer(rightAnswer);
 }
 
-const int& MultipleAnswerQuestion::GetId() const
+int MultipleAnswerQuestion::GetId() const
 {
     return Question::GetId();
 }
 
-const std::string& MultipleAnswerQuestion::GetQuestion() const
+std::string MultipleAnswerQuestion::GetQuestion() const
 {
     return Question::GetQuestion();
 }
 
-const std::string& MultipleAnswerQuestion::GetRightAnswer() const
+std::string MultipleAnswerQuestion::GetRightAnswer() const
 {
     return Question<std::string>::GetRightAnswer();
+}
+
+std::vector<std::string> MultipleAnswerQuestion::GetAnswers() const
+{
+    return m_answers;
 }
 
 size_t MultipleAnswerQuestion::GetNumberOfAnswers() const
 {
     return m_answers.size();
+}
+
+MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(const MultipleAnswerQuestion& multipleAnswerQuestion)
+{
+    if (this == &multipleAnswerQuestion)
+    {
+        return *this;
+    }
+    Question::SetId(multipleAnswerQuestion.GetId());
+    Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
+    Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+    m_answers = multipleAnswerQuestion.m_answers;
+    return *this;
+}
+
+MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept
+{
+    if (this == &multipleAnswerQuestion)
+    {
+        return *this;
+    }
+    Question::SetId(multipleAnswerQuestion.GetId());
+    Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
+    Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+    m_answers = std::move(multipleAnswerQuestion.m_answers);
+    new(&multipleAnswerQuestion)MultipleAnswerQuestion;
+    return *this;
 }
 
 std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion)

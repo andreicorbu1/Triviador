@@ -12,6 +12,8 @@ public:
     MultipleAnswerQuestion();
     MultipleAnswerQuestion(const std::string& question, const std::string& rightAnswer,
         const std::vector<std::string>& answers);
+    MultipleAnswerQuestion(const MultipleAnswerQuestion& multipleAnswerQuestion);
+    MultipleAnswerQuestion(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept;
 
     //Setters
     void SetId(const int& id);
@@ -21,17 +23,20 @@ public:
     void SetAnswer(const std::string& answer);
 
     //Getters
-    const int& GetId() const;
-    const std::string& GetQuestion() const;
-    const std::string& GetRightAnswer() const;
+    int GetId() const;
+    std::string GetQuestion() const;
+    std::string GetRightAnswer() const;
     template <size_t index>
-    const std::string& GetAnswer() const;
+    std::string GetAnswer() const;
+    std::vector<std::string> GetAnswers() const;
     size_t GetNumberOfAnswers() const;
 
     // Operators
     friend std::istream& operator>>(std::istream& is, MultipleAnswerQuestion& multipleAnswerQuestion);
     friend std::ostream& operator<<(std::ostream& os, const MultipleAnswerQuestion& multipleAnswerQuestion);
     friend bool operator==(const MultipleAnswerQuestion& maq1, const MultipleAnswerQuestion& maq2);
+    MultipleAnswerQuestion& operator=(const MultipleAnswerQuestion& multipleAnswerQuestion);
+    MultipleAnswerQuestion& operator=(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept;
 
 private:
     // Constants
@@ -47,7 +52,7 @@ inline void MultipleAnswerQuestion::SetAnswer(const std::string& answer)
 }
 
 template<size_t index>
-inline const std::string& MultipleAnswerQuestion::GetAnswer() const
+inline std::string MultipleAnswerQuestion::GetAnswer() const
 {
     return m_answers[index];
 }

@@ -47,9 +47,13 @@ User AccountManager::GetUser(const std::string& username) const
 	return {};
 }
 
-void AccountManager::UpdateUser(const User& user)
+void AccountManager::UpdateUser(const std::string& username, int matchPoints)
 {
-	m_accounts[user.GetUsername()] = user;
+	if (SearchUser(username) == true)
+	{
+		m_accounts[username].UpdateLevel(matchPoints);
+		m_database.update(m_accounts[username]);
+	}
 }
 
 bool AccountManager::ValidateCredentials(const User& user) const

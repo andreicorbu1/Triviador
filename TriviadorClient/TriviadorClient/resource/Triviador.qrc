@@ -3,6 +3,7 @@
     <file>Triviador-castle.png</file>
     <file>Logout.png</file>
     <file>Triviador.ico</file>
+    <file>back_arrow.png</file>
   </qresource>
   <qresource prefix="Others">
     <file>question/Hammer.svg</file>

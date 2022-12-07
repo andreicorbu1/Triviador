@@ -64,7 +64,8 @@ User& User::operator=(User&& user)
 void User::UpdateLevel(int matchPoints)
 {
 	AddPoints(matchPoints);
-	m_level = m_points / 1000;
+	m_level = m_level + static_cast<int>(m_points / 1000);
+	m_points = m_points % 1000;
 }
 
 const std::string User::GetUsername() const
