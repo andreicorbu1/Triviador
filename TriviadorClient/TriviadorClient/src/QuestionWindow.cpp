@@ -51,6 +51,12 @@ void QuestionWindow::SetQuestionType(QuestionType type)
     }
 }
 
+
+void QuestionWindow::SetQuestion(const std::string& question)
+{
+    this->ui.question->setText(QString::fromUtf8(question));
+}
+
 void QuestionWindow::StartTimer()
 {
     ui.timeProgressBar->setValue(100);

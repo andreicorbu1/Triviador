@@ -25,6 +25,8 @@ public:
     QuestionWindow(QWidget* parent = nullptr);
     ~QuestionWindow();
 
+
+    void SetQuestion(const std::string& question);
     void StartTimer();
     void SetQuestionType(QuestionType type);
 

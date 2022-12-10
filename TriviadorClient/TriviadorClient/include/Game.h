@@ -6,6 +6,7 @@
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
+#include "NumericalAnswerQuestion.h"
 
 class Game : public QWidget
 {
