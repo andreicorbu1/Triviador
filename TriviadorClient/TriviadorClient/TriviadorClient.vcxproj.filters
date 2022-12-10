@@ -35,19 +35,13 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Registration.cpp">
+    <ClCompile Include="src\Question.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
+    <ClCompile Include="src\NumericalAnswerQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MainMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\QuestionWindow.cpp">
+    <ClCompile Include="src\MultipleAnswerQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Board.cpp">
@@ -56,13 +50,19 @@
     <ClCompile Include="src\Territory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Question.cpp">
+    <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NumericalAnswerQuestion.cpp">
+    <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultipleAnswerQuestion.cpp">
+    <ClCompile Include="src\MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QuestionWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,13 +104,13 @@
     <ClInclude Include="include\Territory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Question.h">
+    <ClInclude Include="include\Question.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NumericalAnswerQuestion.h">
+    <ClInclude Include="include\NumericalAnswerQuestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MultipleAnswerQuestion.h">
+    <ClInclude Include="include\MultipleAnswerQuestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

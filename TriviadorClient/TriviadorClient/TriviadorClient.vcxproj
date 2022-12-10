@@ -117,19 +117,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MultipleAnswerQuestion.cpp" />
-    <ClCompile Include="NumericalAnswerQuestion.cpp" />
-    <ClCompile Include="Question.cpp" />
-    <ClCompile Include="src\QuestionWindow.cpp" />
-    <ClCompile Include="src\Board.cpp" />
-    <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\MainMenu.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\Registration.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Question.cpp" />
+    <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
+    <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
+    <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Territory.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\MainMenu.cpp" />
+    <ClCompile Include="src\QuestionWindow.cpp" />
+    <ClCompile Include="src\Registration.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="include\Game.h" />
+    <QtMoc Include="include\MainMenu.h" />
+    <QtMoc Include="include\QuestionWindow.h" />
     <QtMoc Include="include\Registration.h" />
   </ItemGroup>
   <ItemGroup>
@@ -139,18 +142,11 @@
     <QtUic Include="form\Registration.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="include\Game.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="include\MainMenu.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MultipleAnswerQuestion.h" />
-    <ClInclude Include="NumericalAnswerQuestion.h" />
-    <ClInclude Include="Question.h" />
-    <QtMoc Include="include\QuestionWindow.h" />
-    <ClInclude Include="include\Territory.h" />
+    <ClInclude Include="include\Question.h" />
+    <ClInclude Include="include\MultipleAnswerQuestion.h" />
+    <ClInclude Include="include\NumericalAnswerQuestion.h" />
     <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <ItemGroup>
