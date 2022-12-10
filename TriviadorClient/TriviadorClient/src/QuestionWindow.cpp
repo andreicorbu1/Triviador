@@ -51,6 +51,32 @@ void QuestionWindow::SetQuestionType(QuestionType type)
     }
 }
 
+
+void QuestionWindow::SetQuestion(const std::string& question)
+{
+    this->ui.question->setText(QString::fromUtf8(question));
+}
+
+void QuestionWindow::SetAnswer1(const std::string& answer1)
+{
+    this->ui.answer1->setText(QString::fromUtf8(answer1));
+}
+
+void QuestionWindow::SetAnswer2(const std::string& answer2)
+{
+    this->ui.answer2->setText(QString::fromUtf8(answer2));
+}
+
+void QuestionWindow::SetAnswer3(const std::string& answer3)
+{
+    this->ui.answer3->setText(QString::fromUtf8(answer3));
+}
+
+void QuestionWindow::SetAnswer4(const std::string& answer4)
+{
+    this->ui.answer4->setText(QString::fromUtf8(answer4));
+}
+
 void QuestionWindow::StartTimer()
 {
     ui.timeProgressBar->setValue(100);
