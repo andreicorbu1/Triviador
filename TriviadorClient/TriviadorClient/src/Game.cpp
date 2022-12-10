@@ -23,9 +23,6 @@ Game::Game(const Player& player1, const Player& player2, QWidget* mainMenu)
 	m_pixmap.load("../TriviadorClient/resource/testMap.png");
 	m_pixmap = m_pixmap.scaled(rectangularSize * 3, rectangularSize * 3);
 	m_mainMenu->hide();
-
-	//NumericalAnswerQuestion naq;
-	//m_questionWindow.SetQuestion(naq.GetQuestion());	
 	ShowQuestion(QuestionType::MultipleAnswer);
 }
 
