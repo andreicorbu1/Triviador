@@ -2,7 +2,7 @@
 
 MultipleAnswerQuestion::MultipleAnswerQuestion()
 {
-    m_answers.resize(kNumberOfAnswers);
+    ParseFromJson();
 }
 
 bool MultipleAnswerQuestion::CheckIfAnswerIsCorect(const std::string& answer)
@@ -10,11 +10,16 @@ bool MultipleAnswerQuestion::CheckIfAnswerIsCorect(const std::string& answer)
     return false;
 }
 
-std::string MultipleAnswerQuestion::GetQuestion()
+std::string MultipleAnswerQuestion::GetQuestion() const
 {
-    ParseFromJson();
     return Question::GetQuestion();
 }
+
+std::string MultipleAnswerQuestion::GetAnswer(int index) const
+{
+    return m_answers[index];
+}
+
 
 void MultipleAnswerQuestion::ParseFromJson()
 {
