@@ -25,13 +25,7 @@ Game::Game(const Player& player1, const Player& player2, QWidget* mainMenu)
 	m_mainMenu->hide();
 
 	//NumericalAnswerQuestion naq;
-	//m_questionWindow.SetQuestion(naq.GetQuestion());
-	MultipleAnswerQuestion maq;
-	m_questionWindow.SetQuestion(maq.GetQuestion());
-	m_questionWindow.SetAnswer1(maq.GetAnswer<0>());
-	m_questionWindow.SetAnswer2(maq.GetAnswer<1>());
-	m_questionWindow.SetAnswer3(maq.GetAnswer<2>());
-	m_questionWindow.SetAnswer4(maq.GetAnswer<3>());
+	//m_questionWindow.SetQuestion(naq.GetQuestion());	
 	ShowQuestion(QuestionType::MultipleAnswer);
 }
 
@@ -47,7 +41,7 @@ Game::Game(const Player& player1, const Player& player2, const Player& player3, 
 	m_pixmap.load("../TriviadorClient/resource/testMap.png");
 	m_pixmap = m_pixmap.scaled(rectangularSize * 5, rectangularSize * 3);
 	m_mainMenu->hide();
-  ShowQuestion(QuestionType::MultipleAnswer);
+	ShowQuestion(QuestionType::MultipleAnswer);
 }
 
 Game::Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4, QWidget* mainMenu)
@@ -62,7 +56,7 @@ Game::Game(const Player& player1, const Player& player2, const Player& player3, 
 	m_pixmap.load("../TriviadorClient/resource/testMap.png");
 	m_pixmap = m_pixmap.scaled((rectangularSize-25) * 6, (rectangularSize-25) * 4);
 	m_mainMenu->hide();
-  ShowQuestion(QuestionType::MultipleAnswer);
+	ShowQuestion(QuestionType::NumericalAnswer);
 }
 
 Game::~Game()
@@ -73,8 +67,8 @@ Game::~Game()
 void Game::ShowQuestion(QuestionType type)
 {
     m_questionWindow.SetQuestionType(type);
-    m_questionWindow.show();
-    m_questionWindow.StartTimer();
+    m_questionWindow.FetchQuestion();
+    m_questionWindow.Show();
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)

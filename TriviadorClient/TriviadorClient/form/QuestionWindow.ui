@@ -360,6 +360,9 @@ border-radius: 20px;</string>
        <height>50</height>
       </rect>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="styleSheet">
       <string notr="true">background-color: #906B48;</string>
      </property>
@@ -385,6 +388,9 @@ border-radius: 20px;</string>
        <width>50</width>
        <height>50</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: #906B48;</string>

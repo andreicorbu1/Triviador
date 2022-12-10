@@ -11,7 +11,7 @@ public:
 	bool CheckIfAnswerIsCorect(const int& answer);
 	
 	//Getters
-	std::string GetQuestion();
+	std::string GetQuestion() const;
 
 private:
 	void ParseFromJson();

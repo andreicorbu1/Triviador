@@ -8,6 +8,8 @@ QuestionWindow::QuestionWindow(QWidget* parent)
     ui.answerInput->setValidator(new QDoubleValidator(0, 100, 10, this));
     SetShadowEffect();
     SetTimer();
+
+    ui_answers = { ui.answer1, ui.answer2, ui.answer3, ui.answer4 };
 }
 
 QuestionWindow::~QuestionWindow()
@@ -36,19 +38,9 @@ void QuestionWindow::SetTimer()
     connect(m_timer, SIGNAL(timeout()), this, SLOT(UpdateProgressBar()));
 }
 
-void QuestionWindow::SetQuestionType(QuestionType type)
+void QuestionWindow::SetQuestionType(const QuestionType& type)
 {
-    switch (type)
-    {
-    case QuestionType::MultipleAnswer:
-        this->ui.questionTypes->setCurrentWidget(ui.multiple);
-        break;
-    case QuestionType::NumericalAnswer:
-        this->ui.questionTypes->setCurrentWidget(ui.numerical);
-        break;
-    default:
-        break;
-    }
+    m_type = type;
 }
 
 
@@ -57,24 +49,43 @@ void QuestionWindow::SetQuestion(const std::string& question)
     this->ui.question->setText(QString::fromUtf8(question));
 }
 
-void QuestionWindow::SetAnswer1(const std::string& answer1)
+void QuestionWindow::SetAnswer(int index, const std::string& answer)
 {
-    this->ui.answer1->setText(QString::fromUtf8(answer1));
+    ui_answers[index]->setText(QString::fromUtf8(answer));
 }
 
-void QuestionWindow::SetAnswer2(const std::string& answer2)
+void QuestionWindow::FetchQuestion()
 {
-    this->ui.answer2->setText(QString::fromUtf8(answer2));
+    if (m_type == QuestionType::MultipleAnswer)
+    {
+        this->ui.questionTypes->setCurrentWidget(ui.multiple);
+        FetchMultipleAnswerQuestion();
+    }
+    else if (m_type == QuestionType::NumericalAnswer)
+    {
+        this->ui.questionTypes->setCurrentWidget(ui.numerical);
+        FetchNumericalAnswerQuestion();
+    }
 }
 
-void QuestionWindow::SetAnswer3(const std::string& answer3)
+void QuestionWindow::FetchMultipleAnswerQuestion()
 {
-    this->ui.answer3->setText(QString::fromUtf8(answer3));
+    MultipleAnswerQuestion question;
+    SetQuestion(question.GetQuestion());
+    for (int i = 0; i < kAnswerCount; i++)
+        SetAnswer(i, question.GetAnswer(i));
 }
 
-void QuestionWindow::SetAnswer4(const std::string& answer4)
+void QuestionWindow::FetchNumericalAnswerQuestion()
 {
-    this->ui.answer4->setText(QString::fromUtf8(answer4));
+    NumericalAnswerQuestion question;
+    SetQuestion(question.GetQuestion());
+}
+
+void QuestionWindow::Show()
+{
+    this->show();
+    StartTimer();
 }
 
 void QuestionWindow::StartTimer()
@@ -107,16 +118,18 @@ void QuestionWindow::on_hammerButton_clicked()
             break;
         }
     }
+
+    ui.hammerButton->close();
 }
 
 void QuestionWindow::on_telescopeButton_clicked()
 {
-    // TODO: Implement telescope
+    ui.telescopeButton->close();
 }
 
 void QuestionWindow::on_parrotButton_clicked()
 {
-    // TODO: Implement parrot
+    ui.parrotButton->close();
 }
 
 void QuestionWindow::UpdateProgressBar()

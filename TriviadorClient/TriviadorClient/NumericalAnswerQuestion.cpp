@@ -2,13 +2,8 @@
 
 NumericalAnswerQuestion::NumericalAnswerQuestion()
 {
+    ParseFromJson();
 }
-
-cpr::Response NumericalAnswerQuestion::GetQuestionFromServer() 
-{
-    return cpr::Get(cpr::Url("localhost:18080/NumericalAnswerQuestion"));
-}
-
 
 bool NumericalAnswerQuestion::CheckIfAnswerIsCorect(const int& answer) 
 {
@@ -23,9 +18,12 @@ void NumericalAnswerQuestion::ParseFromJson()
     Question::SetQuestion(value["question"].s());
 }
 
-std::string NumericalAnswerQuestion::GetQuestion()
+std::string NumericalAnswerQuestion::GetQuestion() const
 {
-    ParseFromJson();
     return Question::GetQuestion();
 }
 
+cpr::Response NumericalAnswerQuestion::GetQuestionFromServer()
+{
+    return cpr::Get(cpr::Url("localhost:18080/NumericalAnswerQuestion"));
+}

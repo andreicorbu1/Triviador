@@ -7,20 +7,18 @@ class MultipleAnswerQuestion:
 {
 public:
 	MultipleAnswerQuestion();
+	
 	bool CheckIfAnswerIsCorect(const std::string& answer);
-	std::string GetQuestion();
-	template <size_t index>
-	std::string GetAnswer() const;
-
+	
+	// Getters
+	std::string GetQuestion() const;
+	std::string GetAnswer(int index) const;
+	
 private:
+	static const size_t kAnswerCount = 4;
+	
+	std::array<std::string, kAnswerCount> m_answers;
+	
 	void ParseFromJson();
-	std::vector<std::string>m_answers;
-	static const size_t kNumberOfAnswers = 4;
 	cpr::Response GetQuestionFromServer();
 };
-
-template<size_t index>
-inline std::string MultipleAnswerQuestion::GetAnswer() const
-{
-	return m_answers[index];
-}
