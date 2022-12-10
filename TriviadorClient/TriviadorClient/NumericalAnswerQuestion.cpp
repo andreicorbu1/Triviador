@@ -10,24 +10,22 @@ cpr::Response NumericalAnswerQuestion::GetQuestionFromServer()
 }
 
 
-void NumericalAnswerQuestion::CheckIfAnswerIsCorect(int answer) 
+bool NumericalAnswerQuestion::CheckIfAnswerIsCorect(const int& answer) 
 {
     //TODO
+    return false;
 }
 
 void NumericalAnswerQuestion::ParseFromJson()
 {
     cpr::Response response = GetQuestionFromServer();
     auto value = crow::json::load(response.text);
-    m_question = value["question"].s();
+    Question::SetQuestion(value["question"].s());
 }
 
-const std::string& NumericalAnswerQuestion::GetQuestion()
+std::string NumericalAnswerQuestion::GetQuestion()
 {
-    if (m_question.size() == 0)
-    {
-        ParseFromJson();
-    }
-    return m_question;
+    ParseFromJson();
+    return Question::GetQuestion();
 }
 

@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MultipleAnswerQuestion.cpp" />
     <ClCompile Include="NumericalAnswerQuestion.cpp" />
     <ClCompile Include="Question.cpp" />
     <ClCompile Include="src\QuestionWindow.cpp" />
@@ -144,6 +145,7 @@
     <QtMoc Include="include\MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MultipleAnswerQuestion.h" />
     <ClInclude Include="NumericalAnswerQuestion.h" />
     <ClInclude Include="Question.h" />
     <QtMoc Include="include\QuestionWindow.h" />

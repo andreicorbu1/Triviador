@@ -5,14 +5,16 @@
 class NumericalAnswerQuestion:
 	public Question<int>
 {
-private:
-	std::string m_question;
 public:
 	NumericalAnswerQuestion();
-	void CheckIfAnswerIsCorect(int answer);
-	void ParseFromJson();
-	const std::string& GetQuestion();
+
+	bool CheckIfAnswerIsCorect(const int& answer);
+	
+	//Getters
+	std::string GetQuestion();
+
 private:
+	void ParseFromJson();
 	cpr::Response GetQuestionFromServer();
 };
 

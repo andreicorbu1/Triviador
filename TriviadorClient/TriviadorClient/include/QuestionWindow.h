@@ -27,6 +27,11 @@ public:
 
 
     void SetQuestion(const std::string& question);
+    void SetAnswer1(const std::string& answer1);
+    void SetAnswer2(const std::string& answer2);
+    void SetAnswer3(const std::string& answer3);
+    void SetAnswer4(const std::string& answer4);
+
     void StartTimer();
     void SetQuestionType(QuestionType type);
 
