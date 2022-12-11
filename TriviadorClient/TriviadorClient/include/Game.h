@@ -2,7 +2,7 @@
 
 #include <QWidget>
 #include "ui_Game.h"
-
+#include "qscreen.h"
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
@@ -22,6 +22,7 @@ public:
     
 private:
     void ShowQuestion(QuestionType type);
+    void SetBackground();
 
 private slots:
     void on_exitButton_clicked();
@@ -36,7 +37,7 @@ private:
     Ui::GameClass ui;
     QWidget* m_mainMenu;
     QuestionWindow m_questionWindow;
-    QPixmap m_pixmap;
+    QPixmap m_background;
 
     Board m_board;
     std::vector<Player> m_players;

@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>1491</width>
+    <height>807</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Triviador</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resource/Triviador.qrc">
+   <iconset>
     <normaloff>:/Icon/Triviador.ico</normaloff>:/Icon/Triviador.ico</iconset>
   </property>
   <property name="styleSheet">
