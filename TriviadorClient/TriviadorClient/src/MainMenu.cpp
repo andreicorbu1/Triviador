@@ -48,7 +48,7 @@ void MainMenu::on_twoPlayersButton_clicked()
 	Player a("cristian", Player::Color::Blue);
 	Player b("tibi", Player::Color::Red);
 	Game* game = new Game(a, b, this);
-	game->showMaximized();
+	game->showFullScreen();
 }
 
 void MainMenu::on_threePlayersButton_clicked()
@@ -57,7 +57,7 @@ void MainMenu::on_threePlayersButton_clicked()
 	Player b("tibi", Player::Color::Red);
 	Player c("adi", Player::Color::Yellow);
 	Game* game = new Game(a, b, c, this);
-	game->showMaximized();
+	game->showFullScreen();
 }
 
 void MainMenu::on_fourPlayersButton_clicked()
@@ -67,7 +67,7 @@ void MainMenu::on_fourPlayersButton_clicked()
 	Player c("adi", Player::Color::Yellow);
 	Player d("andrei", Player::Color::Green);
 	Game* game = new Game(a, b, c, d, this);
-	game->showMaximized();
+	game->showFullScreen();
 }
 
 
