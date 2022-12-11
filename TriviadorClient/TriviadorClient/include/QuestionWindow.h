@@ -9,6 +9,7 @@
 
 #include <variant>
 #include <string>
+#include <algorithm>
 #include <cpr/cpr.h>
 #include <crow.h>
 
@@ -23,14 +24,11 @@ class QuestionWindow : public QWidget
     Q_OBJECT
 
 public:
+    // Constructors
     QuestionWindow(QWidget* parent = nullptr);
     ~QuestionWindow();
 
     // Setters
-    void SetQuestion(const std::string& question);
-    void SetAnswer(int position, const std::string& answer);
-    void SetRightAnswer(const std::string& answer);
-    void SetRightAnswer(const int& answer);
     void SetQuestionType(const QuestionType& type);
     
     // Getters
@@ -53,15 +51,20 @@ private:
     // Setters
     void SetShadowEffect();
     void SetTimer();
+    void SetQuestion(const std::string& question);
+    void SetAnswer(int position, const std::string& answer);
+    void SetRightAnswer(const std::string& answer);
+    void SetRightAnswer(const int& answer);
     
 private:
     // Constants
     static const int kAnswerCount = 4;
     
-    // UI
+    // UI elements
     Ui::QuestionWindowClass ui;
     std::array<QPushButton*, kAnswerCount> ui_answers;
     
+    // Members
     QTimer* m_timer;
     QuestionType m_type;
     std::variant<std::string, int> m_rightAnswer;

@@ -140,8 +140,8 @@
   <ItemGroup>
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GetMultipleChoiceQuestionHandler.cpp" />
-    <ClCompile Include="src\GetPrecisionQuestionHandler.cpp" />
+    <ClCompile Include="src\MultipleAnswerQuestionHandler.cpp" />
+    <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\QuestionManager.cpp" />
     <ClCompile Include="src\AccountsManager.cpp" />
@@ -160,8 +160,8 @@
     <ClInclude Include="include\AddToAcountListHandler.h" />
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\Game.h" />
-    <ClInclude Include="include\GetMultipleChoiceQuestionHandler.h" />
-    <ClInclude Include="include\GetPrecisionQuestionHandler.h" />
+    <ClInclude Include="include\MultipleAnswerQuestionHandler.h" />
+    <ClInclude Include="include\NumericalAnswerQuestionHandler.h" />
     <ClInclude Include="include\LoginHandler.h" />
     <ClInclude Include="include\MultipleAnswerQuestion.h" />
     <ClInclude Include="include\NumericalAnswerQuestion.h" />
@@ -176,6 +176,10 @@
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt" />
     <Text Include="resource\numericalAnswerQuestions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\Accounts.sqlite" />
+    <None Include="resource\Questions.sqlite" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
