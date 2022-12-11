@@ -1,15 +1,14 @@
 #pragma once
-#include "MultipleAnswerQuestion.h"
-#include "NumericalAnswerQuestion.h"
-#include "ui_QuestionWindow.h"
-
 #include <QWidget>
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QDoubleValidator>
 #include <QEventLoop>
 #include <QGraphicsDropShadowEffect>
+#include "ui_QuestionWindow.h"
 
+#include <variant>
+#include <string>
 #include <cpr/cpr.h>
 #include <crow.h>
 
@@ -30,6 +29,8 @@ public:
     // Setters
     void SetQuestion(const std::string& question);
     void SetAnswer(int position, const std::string& answer);
+    void SetRightAnswer(const std::string& answer);
+    void SetRightAnswer(const int& answer);
     void SetQuestionType(const QuestionType& type);
     
     // Getters
@@ -63,4 +64,5 @@ private:
     
     QTimer* m_timer;
     QuestionType m_type;
+    std::variant<std::string, int> m_rightAnswer;
 };
