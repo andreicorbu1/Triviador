@@ -14,15 +14,17 @@ public:
     Board(const std::size_t& width, const std::size_t& height);
 
     // Setters:
-    std::optional<Territory>& operator[] (Position pos);
+    Territory& operator[] (Position pos);
     
     // Getters:
-    const std::optional<Territory>& operator[] (Position pos) const;
+    const Territory& operator[] (Position pos) const;
 
     // Operators:
-    friend std::ostream& operator<< (std::ostream& out, const Board& b);
+    //friend std::ostream& operator<< (std::ostream& out, const Board& b);
 
     void SetMasksForFourPlayersGame();
+    void SetCoordinatesForFourPlayersGame();
+    void ShowButtons();
 private:
     // Constants:
     const std::size_t kWidth;
@@ -30,6 +32,6 @@ private:
     const std::size_t kSize = kWidth * kHeight;
 
 private:
-    std::vector<std::optional<Territory>> m_board{ kSize };
+    std::vector<Territory> m_board{ kSize };
 };
 

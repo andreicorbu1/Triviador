@@ -23,9 +23,10 @@ public:
 private:
     const uint16_t kBaseScore = 300;
     const uint16_t kTerritoryScore = 100;
-    
+
 private:
     std::optional<Player> m_owner;
     uint16_t m_score;
+
 };
 
