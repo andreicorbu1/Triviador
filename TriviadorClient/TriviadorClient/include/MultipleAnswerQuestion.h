@@ -12,6 +12,7 @@ public:
 	
 	// Getters
 	std::string GetQuestion() const;
+	std::string GetRightAnswer() const;
 	std::string GetAnswer(int index) const;
 	
 private:

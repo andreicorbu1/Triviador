@@ -7,13 +7,16 @@ class Question
 {
 private:
 	std::string m_question;
+	T m_rightAnswer;
 public:
-	//Getters
-	const std::string& GetQuestion() const;
-	virtual cpr::Response GetQuestionFromServer() = 0;
-
 	//Setters
 	void SetQuestion(const std::string& question);
+	void SetRightAnswer(const T& answer);
+
+	//Getters
+	const std::string& GetQuestion() const;
+	const T& GetRightAnswer() const;
+	virtual cpr::Response GetQuestionFromServer() = 0;
 
 	virtual bool CheckIfAnswerIsCorect(const T& answer) = 0;
 };
@@ -25,7 +28,19 @@ inline const std::string& Question<T>::GetQuestion() const
 }
 
 template<class T>
+inline const T& Question<T>::GetRightAnswer() const
+{
+	return m_rightAnswer;
+}
+
+template<class T>
 inline void Question<T>::SetQuestion(const std::string& question)
 {
 	m_question=question;
+}
+
+template<class T>
+inline void Question<T>::SetRightAnswer(const T& rightAnswer)
+{
+	m_rightAnswer = rightAnswer;
 }

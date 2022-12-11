@@ -11,6 +11,7 @@ public:
 	bool CheckIfAnswerIsCorect(const int& answer);
 	
 	//Getters
+	int GetRightAnswer();
 	std::string GetQuestion() const;
 
 private:
