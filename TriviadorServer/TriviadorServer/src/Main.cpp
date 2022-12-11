@@ -2,7 +2,8 @@
 #include "LoginHandler.h"
 #include "MultipleAnswerQuestion.h"
 #include "QuestionManager.h"
-
+#include "CreateGameHandler.h"
+#include "Game.h"
 #include <crow.h>
 
 int main()
@@ -12,6 +13,9 @@ int main()
 
 	AccountManager userList("resource/Accounts.sqlite");
 	crow::SimpleApp app;
+	std::unordered_map<int32_t, Game> ongoingGames;
+	auto& createNewGame = CROW_ROUTE(app, "/newgame/<int>").methods(crow::HTTPMethod::PUT);
+	createNewGame(CreateGameHandler(ongoingGames));
 
 	//register route
 	auto& addUserToAccountList = CROW_ROUTE(app, "/signup").methods(crow::HTTPMethod::PUT);
