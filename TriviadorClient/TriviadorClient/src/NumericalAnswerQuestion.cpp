@@ -16,6 +16,12 @@ void NumericalAnswerQuestion::ParseFromJson()
     cpr::Response response = GetQuestionFromServer();
     auto value = crow::json::load(response.text);
     Question::SetQuestion(value["question"].s());
+    Question::SetRightAnswer(value["right_answer"].i());
+}
+
+int NumericalAnswerQuestion::GetRightAnswer()
+{
+    return 0;
 }
 
 std::string NumericalAnswerQuestion::GetQuestion() const

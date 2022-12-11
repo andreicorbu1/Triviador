@@ -15,6 +15,11 @@ std::string MultipleAnswerQuestion::GetQuestion() const
     return Question::GetQuestion();
 }
 
+std::string MultipleAnswerQuestion::GetRightAnswer() const
+{
+    return Question::GetRightAnswer();
+}
+
 std::string MultipleAnswerQuestion::GetAnswer(int index) const
 {
     return m_answers[index];
@@ -26,6 +31,7 @@ void MultipleAnswerQuestion::ParseFromJson()
     cpr::Response response = GetQuestionFromServer();
     auto value = crow::json::load(response.text);
     Question::SetQuestion(value["question"].s());
+    Question::SetRightAnswer(value["right_answer"].s());
     m_answers[0] = value["answer1"].s();
     m_answers[1] = value["answer2"].s();
     m_answers[2] = value["answer3"].s();
