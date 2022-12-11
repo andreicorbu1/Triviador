@@ -39,13 +39,14 @@ Game::Game(const Player& player1, const Player& player2, const Player& player3, 
 
 Game::Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4, QWidget* mainMenu)
 	: m_mainMenu(mainMenu)
-	, m_board(6, 4)
+	, m_board(4, 6)
 	, m_players{ player1, player2, player3, player4 }
 	, m_gameRounds(4)
   , m_questionWindow(QuestionWindow(this))
 {
 	ui.setupUi(this);
 	SetBackground();
+	m_board.SetMasksForFourPlayersGame();
 	m_mainMenu->hide();
 	//ShowQuestion(QuestionType::NumericalAnswer);
 }
@@ -77,7 +78,7 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, m_background);
-	m_board.PrintBoard(this);
+	//m_board.PrintBoard(this);
 }
 
 void Game::on_exitButton_clicked()

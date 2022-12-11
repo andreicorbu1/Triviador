@@ -3,6 +3,7 @@
 #include <qpainter.h>
 #include <vector>
 #include <optional>
+#include <algorithm>
 
 class Board
 {
@@ -21,10 +22,7 @@ public:
     // Operators:
     friend std::ostream& operator<< (std::ostream& out, const Board& b);
 
-
-    void PrintBoard(QPaintDevice* device);
-    void SetCoordinatesAndSize(uint16_t xPosition, uint16_t yPosition, uint16_t rectangularSize);
-
+    void SetMasksForFourPlayersGame();
 private:
     // Constants:
     const std::size_t kWidth;

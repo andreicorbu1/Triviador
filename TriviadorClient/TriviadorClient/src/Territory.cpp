@@ -30,7 +30,6 @@ Territory::Territory(Territory&& territory) noexcept
     *this = std::move(territory);
 }
 
-
 Territory& Territory::operator=(const Territory& territory)
 {
     m_owner = territory.m_owner;
@@ -44,23 +43,6 @@ Territory& Territory::operator=(Territory&& territory) noexcept
     m_score = territory.m_score;
     new(&territory)Territory;
     return *this;
-}
-
-void Territory::SetRectangularCoordinates(int x, int y)
-{
-    m_rect.setX(x);
-    m_rect.setY(y);
-}
-
-void Territory::SetRectangularSize(int height, int width)
-{
-    m_rect.setWidth(width);
-    m_rect.setHeight(height);
-}
-
-QRect Territory::GetRectangular()
-{
-    return m_rect;
 }
 
 std::ostream& operator<< (std::ostream& out, const Territory& t)

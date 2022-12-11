@@ -1,10 +1,10 @@
 #pragma once
 #include "Player.h"
-#include "qrect.h"
 #include <iostream>
 #include <optional>
+#include <QPushButton>
 
-class Territory
+class Territory : public QPushButton
 {
 public:
     Territory();
@@ -20,10 +20,6 @@ public:
 
     friend std::ostream& operator<< (std::ostream& out, const Territory& t);
 
-    void SetRectangularCoordinates(int x, int y);
-    void SetRectangularSize(int height, int width);
-    QRect GetRectangular();
-
 private:
     const uint16_t kBaseScore = 300;
     const uint16_t kTerritoryScore = 100;
@@ -31,6 +27,5 @@ private:
 private:
     std::optional<Player> m_owner;
     uint16_t m_score;
-    QRect m_rect;
 };
 
