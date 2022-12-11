@@ -4,16 +4,9 @@ Board::Board(const std::size_t& width, const std::size_t& height)
     : kWidth(width)
     , kHeight(height)
 {
-    // empty
+    m_board.resize(kWidth * kHeight);
 }
 
-Board::Board(const Board& other)
-{
-    this->m_board = other.m_board;
-    this->kHeight = other.kHeight;
-    this->kSize = other.kSize;
-    this->kWidth = other.kWidth;
-}
 
 const std::optional<Territory>& Board::operator[](Position pos) const
 {

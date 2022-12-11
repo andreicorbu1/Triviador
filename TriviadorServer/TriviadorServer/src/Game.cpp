@@ -27,6 +27,12 @@ Game::Game(const Player& player1, const Player& player2, const Player& player3, 
 	//empty
 }
 
+//Game::Game(const Game& other)
+//{
+//	m_board = other.m_board;
+//
+//}
+
 Board Game::GetBoard() const
 {
 	return m_board;

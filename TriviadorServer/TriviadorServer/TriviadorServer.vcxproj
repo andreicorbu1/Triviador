@@ -138,6 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GetMultipleChoiceQuestionHandler.cpp" />
+    <ClCompile Include="src\GetPrecisionQuestionHandler.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\QuestionManager.cpp" />
     <ClCompile Include="src\AccountsManager.cpp" />
     <ClCompile Include="src\AddToAcountListHandler.cpp" />
@@ -145,16 +150,25 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
+    <ClCompile Include="src\CreateGameHandler.cpp" />
+    <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h" />
     <ClInclude Include="include\AddToAcountListHandler.h" />
+    <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GetMultipleChoiceQuestionHandler.h" />
+    <ClInclude Include="include\GetPrecisionQuestionHandler.h" />
     <ClInclude Include="include\LoginHandler.h" />
     <ClInclude Include="include\MultipleAnswerQuestion.h" />
     <ClInclude Include="include\NumericalAnswerQuestion.h" />
+    <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Question.h" />
+    <ClInclude Include="include\CreateGameHandler.h" />
+    <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />

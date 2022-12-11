@@ -17,18 +17,20 @@ crow::response CreateGameHandler::operator()(const crow::request& req) const
 			case 2:
 			{
 				Game newGame(Player("Player1", Player::Color::Blue), Player("Player2", Player::Color::Green));
-
+				m_gamesOngoing.emplace(std::stoi(gameIdIter->second), newGame);
 				break;
 			}
 			case 3:
 			{
 				Game newGame(Player("Player1", Player::Color::Blue), Player("Player2", Player::Color::Green), Player("Player3", Player::Color::Red));
+				m_gamesOngoing.emplace(std::stoi(gameIdIter->second), newGame);
 				break;
 			}
 			case 4:
 			{
 				Game newGame(Player("Player1", Player::Color::Blue), Player("Player2", Player::Color::Green),
-					Player("Player3", Player::Color::Red), Player("Player4", Player::Color::Yellow));
+				Player("Player3", Player::Color::Red), Player("Player4", Player::Color::Yellow)); 
+				m_gamesOngoing.emplace(std::stoi(gameIdIter->second), newGame);
 				break;
 			}
 			default:
@@ -37,4 +39,5 @@ crow::response CreateGameHandler::operator()(const crow::request& req) const
 			}
 		}
 	}
+	return crow::response(400);
 }

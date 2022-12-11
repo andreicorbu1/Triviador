@@ -28,6 +28,6 @@ private:
     const std::size_t kSize = kWidth * kHeight;
 
 private:
-    std::vector<std::optional<Territory>> m_board{ kSize };
+    std::vector<std::optional<Territory>> m_board;
 };
 
