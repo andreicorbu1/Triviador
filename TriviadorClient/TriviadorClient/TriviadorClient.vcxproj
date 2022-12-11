@@ -118,9 +118,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Question.cpp" />
-    <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
-    <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -142,9 +139,6 @@
     <QtUic Include="form\Registration.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Question.h" />
-    <ClInclude Include="include\MultipleAnswerQuestion.h" />
-    <ClInclude Include="include\NumericalAnswerQuestion.h" />
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\Player.h" />

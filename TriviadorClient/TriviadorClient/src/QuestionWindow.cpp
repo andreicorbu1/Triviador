@@ -54,6 +54,16 @@ void QuestionWindow::SetAnswer(int index, const std::string& answer)
     ui_answers[index]->setText(QString::fromUtf8(answer));
 }
 
+void QuestionWindow::SetRightAnswer(const std::string& answer)
+{
+    m_rightAnswer = answer;
+}
+
+void QuestionWindow::SetRightAnswer(const int& answer)
+{
+    m_rightAnswer = answer;
+}
+
 void QuestionWindow::FetchQuestion()
 {
     if (m_type == QuestionType::MultipleAnswer)
@@ -70,16 +80,28 @@ void QuestionWindow::FetchQuestion()
 
 void QuestionWindow::FetchMultipleAnswerQuestion()
 {
-    MultipleAnswerQuestion question;
-    SetQuestion(question.GetQuestion());
-    for (int i = 0; i < kAnswerCount; i++)
-        SetAnswer(i, question.GetAnswer(i));
+    cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/MultipleAnswerQuestion" });
+    if (res.status_code == 200)
+    {
+        auto question = crow::json::load(res.text);
+        SetQuestion(question["question"].s());
+        SetAnswer(0, question["answer1"].s());
+        SetAnswer(1, question["answer2"].s());
+        SetAnswer(2, question["answer3"].s());
+        SetAnswer(3, question["answer4"].s());
+        SetRightAnswer(question["right_answer"].s());
+    }
 }
 
 void QuestionWindow::FetchNumericalAnswerQuestion()
 {
-    NumericalAnswerQuestion question;
-    SetQuestion(question.GetQuestion());
+    cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/NumericalAnswerQuestion" });
+    if (res.status_code == 200)
+    {
+        auto question = crow::json::load(res.text);
+        SetQuestion(question["question"].s());
+        SetRightAnswer(question["right_answer"].i());
+    }
 }
 
 void QuestionWindow::Show()
