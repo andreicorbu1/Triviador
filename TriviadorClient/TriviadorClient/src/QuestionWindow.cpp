@@ -98,6 +98,34 @@ void QuestionWindow::on_hammerButton_clicked()
 
 void QuestionWindow::on_telescopeButton_clicked()
 {
+    int rightAnswer = std::get<int>(m_rightAnswer);
+    int bound = rightAnswer * 0.1 + 2;
+    std::unordered_set<int> approximations;
+    
+    while (approximations.size() != kAnswerCount)
+    {
+        int approximation = rightAnswer + QRandomGenerator::global()->bounded(-bound, bound);
+        approximations.insert(approximation);
+    }
+    
+    int i = 0;
+    std::array<QPushButton*, kAnswerCount> answers{};
+    for (auto& approximation : approximations)
+    {
+        answers[i] = new QPushButton(QString::number(approximation), this);
+        answers[i]->setGeometry(200, 180 + 60 * (i + 1), 400, 50);
+        answers[i]->setStyleSheet("background-image: url(:/Others/question/Plank.svg);\nborder: none;\ncolor: #ffffff;\n");
+        answers[i]->setCursor(Qt::PointingHandCursor);
+        answers[i]->setText(QString::number(approximation));
+        answers[i]->show();
+        
+        connect(answers[i], &QPushButton::clicked, this, [this, approximation]() {
+            this->ui.answerInput->setText(QString::number(approximation));
+        });
+        
+        i++;
+    }
+
     ui.telescopeButton->close();
 }
 
@@ -105,8 +133,8 @@ void QuestionWindow::on_parrotButton_clicked()
 {
     int rightAnswer = std::get<int>(m_rightAnswer);
     int bound = rightAnswer * 0.1 + 1;
-    int aproximation = rightAnswer + QRandomGenerator::global()->bounded(-bound, bound);
-    ui.answerInput->setText(QString::number(aproximation));
+    int approximation = rightAnswer + QRandomGenerator::global()->bounded(-bound, bound);
+    ui.answerInput->setText(QString::number(approximation));
     ui.parrotButton->close();
 }
 

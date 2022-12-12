@@ -10,6 +10,7 @@
 #include <variant>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include <cpr/cpr.h>
 #include <crow.h>
 
