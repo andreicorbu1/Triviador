@@ -44,7 +44,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
         SetQuestion(question["question"].s());
         SetRightAnswer(question["right_answer"].s());
         
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < kAnswerCount; i++)
         {
             SetAnswer(i, question["answers"][i].s());
         }
@@ -103,6 +103,10 @@ void QuestionWindow::on_telescopeButton_clicked()
 
 void QuestionWindow::on_parrotButton_clicked()
 {
+    int rightAnswer = std::get<int>(m_rightAnswer);
+    int bound = rightAnswer * 0.1 + 1;
+    int aproximation = rightAnswer + QRandomGenerator::global()->bounded(-bound, bound);
+    ui.answerInput->setText(QString::number(aproximation));
     ui.parrotButton->close();
 }
 
