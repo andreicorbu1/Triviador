@@ -3,7 +3,7 @@
  <class>QuestionWindowClass</class>
  <widget class="QWidget" name="QuestionWindowClass">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -135,10 +135,13 @@ QProgressBar::chunk {
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="multiple">
     <widget class="QPushButton" name="answer1">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -254,6 +257,9 @@ color: #ffffff;
        <width>50</width>
        <height>50</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: #906B48;</string>

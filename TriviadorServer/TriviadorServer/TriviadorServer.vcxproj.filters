@@ -57,10 +57,10 @@
     <ClCompile Include="src\CreateGameHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GetMultipleChoiceQuestionHandler.cpp">
+    <ClCompile Include="src\MultipleAnswerQuestionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GetPrecisionQuestionHandler.cpp">
+    <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,15 +107,27 @@
     <ClInclude Include="include\CreateGameHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GetMultipleChoiceQuestionHandler.h">
+    <ClInclude Include="include\MultipleAnswerQuestionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GetPrecisionQuestionHandler.h">
+    <ClInclude Include="include\NumericalAnswerQuestionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resource\multipleAnswerQuestions.txt" />
-    <Text Include="resource\numericalAnswerQuestions.txt" />
+    <Text Include="resource\multipleAnswerQuestions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="resource\numericalAnswerQuestions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\Accounts.sqlite">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\Questions.sqlite">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
