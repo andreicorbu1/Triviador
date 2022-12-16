@@ -10,8 +10,11 @@ public:
     using Position = std::pair<uint8_t, uint8_t>;
 
 public:
+    Board() = default;
     Board(const std::size_t& width, const std::size_t& height);
-
+    //Board(const Board& other);
+    //Board(Board&& other) noexcept;
+    ~Board() = default;
     // Setters:
     std::optional<Territory>& operator[] (Position pos);
     
@@ -20,6 +23,8 @@ public:
 
     // Operators:
     friend std::ostream& operator<< (std::ostream& out, const Board& b);
+   /* Board& operator=(const Board& other);
+    Board& operator=(Board&& other) noexcept;*/
 
 private:
     // Constants:

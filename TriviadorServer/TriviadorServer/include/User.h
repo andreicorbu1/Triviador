@@ -8,7 +8,7 @@ public:
 	User() = default;
 	User(const std::string& username, const std::string& password);
 	User(const User& user) = default;
-	User(User&& user);
+	User(User&& user) noexcept;
 	~User() = default;
 
 	//Setters:
@@ -28,7 +28,7 @@ public:
 
 	//Operators:
 	User& operator=(const User& user) = default;
-	User& operator=(User&& user);
+	User& operator=(User&& user) noexcept;
 
 	friend auto CreateStorage(const std::string& databaseFileName);
 	friend class AccountManager;

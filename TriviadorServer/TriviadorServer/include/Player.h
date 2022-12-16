@@ -16,15 +16,28 @@ public:
 	Player() = default;
 	Player(const std::string& playerName, const Color& color);
 	Player(const Player& other);
+	Player(Player&& other) noexcept;
 	~Player() = default;
 
     // Getters:
 	const std::string& GetName() const;
+	Player::Color GetColor() const;
+	size_t GetScore() const;
+	int GetTerritoriesCount() const;
     
+	// Setters:
+	void SetName(const std::string& name);
+	void SetColor(const Player::Color& color);
+	void SetScore(const size_t& score);
+	void SetTerritoriesCount(const int& territoriesCount);
+
+	//Other:
+	void AddScore(size_t score);
+
     // Operators:
 	Player& operator =(const Player& other);
-	Player& operator+=(int score);
-
+	Player& operator =(Player&& other) noexcept;
+	
 private:
 	std::string m_playerName;
 	Color m_color;

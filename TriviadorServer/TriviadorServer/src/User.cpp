@@ -10,7 +10,7 @@ User::User(const std::string& username, const std::string& password) :
 	m_ID = -1;
 }
 
-User::User(User&& user)
+User::User(User&& user) noexcept
 {
 	*this = std::move(user);
 }
@@ -46,7 +46,7 @@ void User::AddPoints(int points)
 	m_points += points;
 }
 
-User& User::operator=(User&& user)
+User& User::operator=(User&& user) noexcept
 {
 	if (this != &user)
 	{

@@ -38,6 +38,41 @@ Board Game::GetBoard() const
 	return m_board;
 }
 
+std::vector<Player> Game::GetPlayers() const
+{
+	return m_players;
+}
+
+int Game::GetRounds() const
+{
+	return m_gameRounds;
+}
+
+int32_t Game::GetGameID()
+{
+	return m_ID;
+}
+
+void Game::SetBoard(const Board& board)
+{
+	//this->m_board = std::move(board);
+}
+
+void Game::SetPlayers(const std::vector<Player> players)
+{
+	this->m_players = std::move(players);
+}
+
+void Game::SetRounds(const int& rounds)
+{
+	this->m_gameRounds = rounds;
+}
+
+void Game::SetGameID(const int32_t& gameID)
+{
+	this->m_ID = gameID;
+}
+
 void Game::Start()
 {
 	ChooseBaseTerritories();
