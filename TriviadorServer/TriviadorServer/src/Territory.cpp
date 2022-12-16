@@ -30,6 +30,26 @@ Territory::Territory(Territory&& territory) noexcept
     *this = std::move(territory);
 }
 
+std::optional<Player> Territory::GetOwner() const
+{
+    return m_owner;
+}
+
+uint16_t Territory::GetScore() const
+{
+    return m_score;
+}
+
+void Territory::SetOwner(const std::optional<Player>& owner)
+{
+    m_owner = owner;
+}
+
+void Territory::SetScore(const uint16_t& score)
+{
+    m_score = score;
+}
+
 Territory& Territory::operator=(const Territory& territory)
 {
     m_owner = territory.m_owner;
