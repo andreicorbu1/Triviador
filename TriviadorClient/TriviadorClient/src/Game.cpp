@@ -1,58 +1,39 @@
 #include "Game.h"
 
 Game::Game(QWidget* mainMenu)
-	: m_mainMenu(mainMenu)
-	, m_board(1, 1)
-  , m_questionWindow(QuestionWindow(this))
+	: m_questionWindow(QuestionWindow(this))
+	, m_board(Board(1, 1))
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
-	m_mainMenu->hide();
-	ShowQuestion(QuestionType::MultipleAnswer);
+	SetBackground();
 }
 
-Game::Game(const Player& player1, const Player& player2, QWidget* mainMenu)
-	: m_mainMenu(mainMenu)
-	, m_board(3, 3)
-	, m_players{ player1, player2 }
-	, m_gameRounds(5)
-  , m_questionWindow(QuestionWindow(this))
+Game::Game(std::vector<Player>& players, QWidget* parent)
+	: m_questionWindow(QuestionWindow(this))
+	, m_players(players)
 {
-	ui.setupUi(this);
-	m_mainMenu->hide();
-	SetBackground();
-	//ShowQuestion(QuestionType::MultipleAnswer);
-}
-
-Game::Game(const Player& player1, const Player& player2, const Player& player3, QWidget* mainMenu)
-	: m_mainMenu(mainMenu)
-	, m_board(5, 3)
-	, m_players{ player1, player2, player3 }
-	, m_gameRounds(4)
-  , m_questionWindow(QuestionWindow(this))
-{
+	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
-	m_mainMenu->hide();
-	//ShowQuestion(QuestionType::MultipleAnswer);
-}
-
-Game::Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4, QWidget* mainMenu)
-	: m_mainMenu(mainMenu)
-	, m_board(4, 6)
-	, m_players{ player1, player2, player3, player4 }
-	, m_gameRounds(4)
-  , m_questionWindow(QuestionWindow(this))
-{
-	ui.setupUi(this);
-	SetBackground();
-	m_board.SetCoordinatesForFourPlayersGame();
-	m_board.SetMasksForFourPlayersGame();
-	m_board.ShowButtons();
-	/*QPixmap mask("../TriviadorClient/resource/map4players/00.png");
-	ui.pushButton->setMask(mask.mask());*/
-	m_mainMenu->hide();
-	//ShowQuestion(QuestionType::NumericalAnswer);
+	
+	switch (m_players.size())
+	{
+	case 2:
+		m_board = Board(3, 3);
+		m_rounds = 5;
+		break;
+	case 3:
+		m_board = Board(5, 3);
+		m_rounds = 4;
+		break;
+	case 4:
+		m_board = Board(4, 6);
+		m_rounds = 3;
+		break;
+	default:
+		break;
+	}
 }
 
 Game::~Game()
@@ -77,7 +58,6 @@ void Game::SetBackground()
 	m_background = m_background.scaled(screenSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
-
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
@@ -87,6 +67,5 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 
 void Game::on_exitButton_clicked()
 {
-	close();
-	m_mainMenu->showMaximized();
+	emit finished();
 }
