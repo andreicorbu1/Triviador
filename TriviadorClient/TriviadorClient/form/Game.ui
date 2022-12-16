@@ -14,8 +14,8 @@
    <string>Triviador</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/Icon/Triviador.ico</normaloff>:/Icon/Triviador.ico</iconset>
+   <iconset resource="../resource/Triviador.qrc">
+    <normaloff>:/icon/Triviador.ico</normaloff>:/icon/Triviador.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #534232;</string>

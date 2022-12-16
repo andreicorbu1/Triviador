@@ -12,13 +12,14 @@ class Game : public QWidget
     Q_OBJECT
 
 public:
-    Game(QWidget* mainMenu = nullptr);
-    Game(const Player& player1, const Player& player2, QWidget* mainMenu = nullptr);
-    Game(const Player& player1, const Player& player2, const Player& player3, QWidget* mainMenu = nullptr);
-    Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4, QWidget* mainMenu = nullptr);
+    Game(QWidget* parent = nullptr);
+	Game(std::vector<Player>& players, QWidget* parent = nullptr);
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
+    
+signals:
+	void finished();
     
 private:
     void ShowQuestion(QuestionType type);
@@ -27,7 +28,6 @@ private:
 private slots:
     void on_exitButton_clicked();
 
-
 private:
     const uint16_t rectangularSize = 175;
     const uint16_t xPosition = 150;
@@ -35,11 +35,10 @@ private:
 
 private:
     Ui::GameClass ui;
-    QWidget* m_mainMenu;
     QuestionWindow m_questionWindow;
     QPixmap m_background;
 
     Board m_board;
     std::vector<Player> m_players;
-    int m_gameRounds;
+    int m_rounds;
 };

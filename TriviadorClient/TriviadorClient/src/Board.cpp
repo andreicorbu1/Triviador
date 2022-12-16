@@ -1,10 +1,41 @@
 #include "Board.h"
 
-
+Board::Board()
+	: kWidth(0)
+	, kHeight(0)
+	, kSize(0)
+	, m_board(kSize)
+{
+	// empty
+}
+	
 Board::Board(const std::size_t& width, const std::size_t& height)
 	: kWidth(width)
 	, kHeight(height)
 {
+	// empty
+}
+
+Board::Board(const Board& other)
+	: kWidth(other.kWidth)
+	, kHeight(other.kHeight)
+	, kSize(other.kSize)
+	, m_board(other.m_board)
+{
+	// empty
+}
+
+Board::Board(Board&& other) noexcept
+	: kWidth(other.kWidth)
+	, kHeight(other.kHeight)
+	, kSize(other.kSize)
+	, m_board(std::move(other.m_board))
+{
+	// empty
+}
+
+Board::~Board() {
+	// empty
 }
 
 const Territory& Board::operator[](Position pos) const
@@ -16,6 +47,24 @@ const Territory& Board::operator[](Position pos) const
 	}
 
 	return m_board[line * kWidth + column];
+}
+
+Board& Board::operator=(const Board& other)
+{
+	if (this != &other) {
+		m_board = other.m_board;
+	}
+
+	return *this;
+}
+
+Board& Board::operator=(Board&& other) noexcept
+{
+	if (this != &other) {
+		m_board = std::move(other.m_board);
+	}
+
+	return *this;
 }
 
 void Board::SetMasksForFourPlayersGame()

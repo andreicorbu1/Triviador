@@ -18,6 +18,19 @@ void MainMenu::hiMessage(const std::string& playerName)
 	ui.hiMessage->setText(message);
 }
 
+void MainMenu::StartGame(std::vector<Player>& players)
+{
+	m_game = new Game(players, this);
+	m_game->showFullScreen();
+	hide();
+	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
+}
+
+void MainMenu::Show()
+{
+	showMaximized();
+}
+
 void MainMenu::on_myProfileButton_clicked() const
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.myProfile);
@@ -43,12 +56,21 @@ void MainMenu::on_backButton_clicked()
 	this->ui.stackedWidget->setCurrentWidget(ui.play);
 }
 
+void MainMenu::on_logOutButton_clicked()
+{
+	close();
+	Registration* registration = new Registration;
+	registration->show();
+
+	qDebug() << "Log Out button clicked";
+}
+
 void MainMenu::on_twoPlayersButton_clicked()
 {
 	Player a("cristian", Player::Color::Blue);
 	Player b("tibi", Player::Color::Red);
-	Game* game = new Game(a, b, this);
-	game->showFullScreen();
+	std::vector<Player> players = { a, b };
+	StartGame(players);
 }
 
 void MainMenu::on_threePlayersButton_clicked()
@@ -56,8 +78,8 @@ void MainMenu::on_threePlayersButton_clicked()
 	Player a("cristian", Player::Color::Blue);
 	Player b("tibi", Player::Color::Red);
 	Player c("adi", Player::Color::Yellow);
-	Game* game = new Game(a, b, c, this);
-	game->showFullScreen();
+	std::vector<Player> players = { a, b, c };
+	StartGame(players);
 }
 
 void MainMenu::on_fourPlayersButton_clicked()
@@ -66,22 +88,13 @@ void MainMenu::on_fourPlayersButton_clicked()
 	Player b("tibi", Player::Color::Red);
 	Player c("adi", Player::Color::Yellow);
 	Player d("andrei", Player::Color::Green);
-	Game* game = new Game(a, b, c, d, this);
-	game->showFullScreen();
+	std::vector<Player> players = { a, b, c, d };
+	StartGame(players);
 }
 
-
-
-void MainMenu::Show()
+void MainMenu::on_gameFinished()
 {
-	showMaximized();
-}
-
-void MainMenu::on_logOutButton_clicked()
-{
-	close();
-	Registration* registration = new Registration;
-	registration->show();
-
-	qDebug() << "Log Out button clicked";
+	Show();
+	m_game->close();
+	delete m_game;
 }
