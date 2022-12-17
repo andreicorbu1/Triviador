@@ -3,7 +3,7 @@
 NumericalAnswerQuestionHandler::NumericalAnswerQuestionHandler(QuestionManager& questionManager) : m_questionManager(questionManager)
 {}
 
-crow::json::wvalue NumericalAnswerQuestionHandler::operator()(const crow::request & req) const
+crow::json::wvalue NumericalAnswerQuestionHandler::operator()(const crow::request& req) const
 {
 	int id = m_questionManager.GetRandomNumericalAnswerQuestionsID();
 	NumericalAnswerQuestion numericalAnswerQuestion(m_questionManager.GetNumericalAnswerQuestion(id));

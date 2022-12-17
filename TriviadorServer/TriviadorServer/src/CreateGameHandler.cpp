@@ -29,7 +29,7 @@ crow::response CreateGameHandler::operator()(const crow::request& req) const
 			case 4:
 			{
 				Game newGame(Player("Player1", Player::Color::Blue), Player("Player2", Player::Color::Green),
-				Player("Player3", Player::Color::Red), Player("Player4", Player::Color::Yellow)); 
+					Player("Player3", Player::Color::Red), Player("Player4", Player::Color::Yellow));
 				m_gamesOngoing.emplace(std::stoi(gameIdIter->second), newGame);
 				break;
 			}

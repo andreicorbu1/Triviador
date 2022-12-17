@@ -22,7 +22,19 @@ const Territory& Board::operator[](Position pos) const
 {
 	const auto& [line, column] = pos;
 
-	if (line >= m_width || column >= m_height)
+	if (line >= m_height || column >= m_width)
+	{
+		throw std::out_of_range("Position is out of range!");
+	}
+
+	return m_board[line * m_width + column];
+}
+
+Territory& Board::operator[](Position pos)
+{
+	const auto& [line, column] = pos;
+
+	if (line >= m_height || column >= m_width)
 	{
 		throw std::out_of_range("Position is out of range!");
 	}
@@ -47,17 +59,6 @@ Board& Board::operator=(Board&& other) noexcept
 	return *this;
 }
 
-Territory& Board::operator[](Position pos)
-{
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width)
-	{
-		throw std::out_of_range("Position is out of range!");
-	}
-
-	return m_board[line * m_width + column];
-}
 
 std::ostream& operator<<(std::ostream& out, const Board& b)
 {

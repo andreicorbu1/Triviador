@@ -33,7 +33,7 @@ void QuestionManager::UpdateQuestion(const MultipleAnswerQuestion& multipleAnswe
 		m_storage.get<MultipleAnswerQuestion>(multipleAnswerQuestion.GetId());
 		m_storage.replace(multipleAnswerQuestion);
 	}
-	catch(std::system_error e)
+	catch (std::system_error e)
 	{
 		std::cout << "ID: " << multipleAnswerQuestion.GetId() << " " << e.what() << "\n";
 	}
@@ -48,7 +48,7 @@ void QuestionManager::UpdateQuestion(const NumericalAnswerQuestion& numericalAns
 	}
 	catch (std::system_error e)
 	{
-		std::cout << "ID: " << numericalAnswerQuestion.GetId() << " " << e.what()<<"\n";
+		std::cout << "ID: " << numericalAnswerQuestion.GetId() << " " << e.what() << "\n";
 	}
 }
 
@@ -56,7 +56,7 @@ MultipleAnswerQuestion QuestionManager::GetMultipleAnswerQuestion(int id)
 {
 	try
 	{
-		return m_storage.get<MultipleAnswerQuestion>(id);	
+		return m_storage.get<MultipleAnswerQuestion>(id);
 	}
 	catch (std::system_error e)
 	{
@@ -66,7 +66,7 @@ MultipleAnswerQuestion QuestionManager::GetMultipleAnswerQuestion(int id)
 
 NumericalAnswerQuestion QuestionManager::GetNumericalAnswerQuestion(int id)
 {
-	try 
+	try
 	{
 		return m_storage.get<NumericalAnswerQuestion>(id);
 	}
@@ -82,7 +82,7 @@ int QuestionManager::GetRandomMultipleAnswerQuestionsID()
 	std::mt19937 eng(rd());
 	std::uniform_int_distribution<> distr(1, m_storage.count<MultipleAnswerQuestion>());
 	int id = distr(eng);
-	while(alreadyChoosedMultipleAnswerQuestionsID.contains(id))
+	while (alreadyChoosedMultipleAnswerQuestionsID.contains(id))
 	{
 		id = distr(eng);
 	}
@@ -113,7 +113,7 @@ void QuestionManager::PopulateStorage()
 			MultipleAnswerQuestion multipelAnswerQuestion;
 			fin >> multipelAnswerQuestion;
 			AddQuestion(multipelAnswerQuestion);
-			
+
 		}
 		fin.close();
 		fin.open("resource/numericalAnswerQuestions.txt");
