@@ -3,7 +3,7 @@
 Game::Game(const Player& player1, const Player& player2)
 	: m_board(3, 3)
 	, m_players{player1, player2}
-	, m_gameRounds(4)
+	, m_gameRounds(5)
 	, m_ID(-1)
 {
 	// empty
@@ -12,7 +12,7 @@ Game::Game(const Player& player1, const Player& player2)
 Game::Game(const Player& player1, const Player& player2, const Player& player3)
 	: m_board(5, 3)
 	, m_players{player1, player2, player3}
-	, m_gameRounds(5)
+	, m_gameRounds(4)
 	, m_ID(-1)
 {
 	// empty
@@ -27,11 +27,10 @@ Game::Game(const Player& player1, const Player& player2, const Player& player3, 
 	//empty
 }
 
-//Game::Game(const Game& other)
-//{
-//	m_board = other.m_board;
-//
-//}
+Game::Game(const Game& other)
+{
+	*this = other;
+}
 
 Board Game::GetBoard() const
 {
@@ -53,14 +52,21 @@ int32_t Game::GetGameID()
 	return m_ID;
 }
 
-void Game::SetBoard(const Board& board)
+Player Game::GetWinner() const
 {
-	//this->m_board = std::move(board);
+	auto copyOfPlayers(m_players);
+	std::ranges::sort(copyOfPlayers, std::less());
+	return copyOfPlayers.back();
 }
 
-void Game::SetPlayers(const std::vector<Player> players)
+void Game::SetBoard(const Board& board)
 {
-	this->m_players = std::move(players);
+	this->m_board = board;
+}
+
+void Game::SetPlayers(const std::vector<Player>& players)
+{
+	this->m_players = players;
 }
 
 void Game::SetRounds(const int& rounds)
@@ -71,6 +77,15 @@ void Game::SetRounds(const int& rounds)
 void Game::SetGameID(const int32_t& gameID)
 {
 	this->m_ID = gameID;
+}
+
+Game& Game::operator=(const Game& other)
+{
+	m_board = other.m_board;
+	m_gameRounds = other.m_gameRounds;
+	m_ID = other.m_ID;
+	m_players = other.m_players;
+	return *this;
 }
 
 void Game::Start()
@@ -94,7 +109,7 @@ void Game::ChooseBaseTerritories()
 			try
 			{
 				Board::Position pos = {line, column};
-				if (m_board[pos])
+				if (m_board[pos].GetOwner().has_value())
 				{
 					std::cerr << "This territory is already taken!\n";
 				}

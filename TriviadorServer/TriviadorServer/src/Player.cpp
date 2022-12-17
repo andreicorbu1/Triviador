@@ -67,7 +67,7 @@ void Player::AddScore(size_t score)
 
 Player& Player::operator=(const Player& other)
 {
-	if(this == &other)
+	if (this == &other)
 	{
 		return *this;
 	}
@@ -87,4 +87,9 @@ Player& Player::operator=(Player&& other) noexcept
 
 	new(&other) Player;
 	return *this;
+}
+
+bool Player::operator<(const Player& other)
+{
+	return this->m_score < other.m_score;
 }

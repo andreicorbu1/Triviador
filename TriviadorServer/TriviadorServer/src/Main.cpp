@@ -15,7 +15,7 @@ int main()
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
 	questionManager.PopulateStorage();
-	
+
 	crow::SimpleApp app;
 	std::unordered_map<int32_t, Game> ongoingGames;
 	//auto& createNewGame = CROW_ROUTE(app, "/newgame/<int>").methods(crow::HTTPMethod::PUT);
@@ -26,7 +26,7 @@ int main()
 
 	auto& loginToAccount = CROW_ROUTE(app, "/login").methods(crow::HTTPMethod::POST);
 	loginToAccount(LoginHandler(userList));
-	
+
 	auto& getMultipleAnswerQuestion = CROW_ROUTE(app, "/MultipleAnswerQuestion");
 	getMultipleAnswerQuestion(MultipleAnswerQuestionHandler(questionManager));
 
