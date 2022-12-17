@@ -4,7 +4,7 @@ Board::Board()
 	: m_width(0)
 	, m_height(0)
 	, m_size(0)
-	, m_board(m_size)
+	, m_board(m_size, Territory())
 {
 	// empty
 }
@@ -12,6 +12,8 @@ Board::Board()
 Board::Board(const std::size_t& width, const std::size_t& height)
 	: m_width(width)
 	, m_height(height)
+	, m_size(m_width * m_height)
+	, m_board(m_size, Territory())
 {
 	// empty
 }

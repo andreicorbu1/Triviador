@@ -34,9 +34,9 @@ public:
 private:
     std::size_t m_width;
     std::size_t m_height;
-    std::size_t m_size = m_width * m_height;
+    std::size_t m_size;
 
 private:
-    std::vector<Territory> m_board{ m_size };
+    std::vector<Territory> m_board;
 };
 
