@@ -3,8 +3,9 @@
 Board::Board(const std::size_t& width, const std::size_t& height)
 	: m_width(width)
 	, m_height(height)
+	, m_board(m_width * m_height, Territory())
 {
-	m_board.resize(m_width * m_height, Territory());
+	// empty
 }
 
 Board::Board(const Board& other)
