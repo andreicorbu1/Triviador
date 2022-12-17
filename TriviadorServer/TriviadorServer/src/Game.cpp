@@ -3,7 +3,7 @@
 Game::Game(const Player& player1, const Player& player2)
 	: m_board(3, 3)
 	, m_players{player1, player2}
-	, m_gameRounds(4)
+	, m_gameRounds(5)
 	, m_ID(-1)
 {
 	// empty
@@ -12,7 +12,7 @@ Game::Game(const Player& player1, const Player& player2)
 Game::Game(const Player& player1, const Player& player2, const Player& player3)
 	: m_board(5, 3)
 	, m_players{player1, player2, player3}
-	, m_gameRounds(5)
+	, m_gameRounds(4)
 	, m_ID(-1)
 {
 	// empty

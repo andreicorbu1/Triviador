@@ -3,9 +3,11 @@
 #include "NumericalAnswerQuestionHandler.h"
 #include "MultipleAnswerQuestionHandler.h"
 #include "CreateGameHandler.h"
+
 #include "MultipleAnswerQuestion.h"
 #include "QuestionManager.h"
 #include "Game.h"
+
 #include <crow.h>
 
 int main()
