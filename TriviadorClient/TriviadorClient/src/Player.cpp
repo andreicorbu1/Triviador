@@ -1,5 +1,10 @@
 #include "Player.h"
 
+Player::Player()
+    : m_color(Color::None)
+{
+}
+
 Player::Player(const std::string& playerName, const Color& color) :
     m_playerName(playerName), m_color(color)
 {

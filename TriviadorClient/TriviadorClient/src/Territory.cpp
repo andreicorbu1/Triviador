@@ -1,24 +1,39 @@
 #include "Territory.h"
 
-Territory::Territory()
-    : m_score(kBaseScore)
+
+Territory::Territory(QWidget* parent)
+	:m_owner(Player()),
+	m_score(kTerritoryScore)
 {
-    //empty
+	m_button = new QPushButton(parent);
+	m_button->setCursor(QCursor(Qt::PointingHandCursor));
 }
 
-Territory::Territory(const Player& owner)
-    : m_owner(owner)
-    , m_score(kTerritoryScore)
+void Territory::setGeometry(int x, int y, int width, int height)
 {
-    // empty
+	m_button->setGeometry(x, y, width, height);
 }
 
-Territory::Territory(const Player& owner, const bool& isBase)
-    : m_owner(owner)
-    , m_score(kBaseScore)
-{
-    // empty
-}
+//Territory::Territory(QWidget* parent)
+//    : m_score(kBaseScore)
+//{
+//    //empty
+//    m_bu
+//}
+//
+//Territory::Territory(const Player& owner)
+//    : m_owner(owner)
+//    , m_score(kTerritoryScore)
+//{
+//    // empty
+//}
+//
+//Territory::Territory(const Player& owner, const bool& isBase)
+//    : m_owner(owner)
+//    , m_score(kBaseScore)
+//{
+//    // empty
+//}
 
 Territory::Territory(const Territory& territory)
 {
@@ -30,10 +45,16 @@ Territory::Territory(Territory&& territory) noexcept
     *this = std::move(territory);
 }
 
+Territory::~Territory()
+{
+    delete m_button;
+}
+
 Territory& Territory::operator=(const Territory& territory)
 {
     m_owner = territory.m_owner;
     m_score = territory.m_score;
+    m_button = new QPushButton(territory.m_button->parentWidget());
     return *this;
 }
 
@@ -41,13 +62,14 @@ Territory& Territory::operator=(Territory&& territory) noexcept
 {
     m_owner = territory.m_owner;
     m_score = territory.m_score;
+    m_button = territory.m_button;
     new(&territory)Territory;
     return *this;
 }
 
-std::ostream& operator<< (std::ostream& out, const Territory& t)
-{
-    out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");
-    out << "[" << t.m_score << "]";
-    return out;
-}
+//std::ostream& operator<< (std::ostream& out, const Territory& t)
+//{
+//    out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");
+//    out << "[" << t.m_score << "]";
+//    return out;
+//}

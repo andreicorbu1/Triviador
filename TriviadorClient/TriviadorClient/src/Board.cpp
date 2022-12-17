@@ -4,16 +4,17 @@ Board::Board()
 	: m_width(0)
 	, m_height(0)
 	, m_size(0)
-	, m_board(m_size, Territory())
+	//, m_board(m_size, Territory())
 {
 	// empty
+
 }
 	
-Board::Board(const std::size_t& width, const std::size_t& height)
+Board::Board(const std::size_t& width, const std::size_t& height, QWidget* parent)
 	: m_width(width)
 	, m_height(height)
 	, m_size(m_width * m_height)
-	, m_board(m_size, Territory())
+	, m_board(m_size, Territory(parent))
 {
 	// empty
 }
@@ -72,7 +73,7 @@ void Board::SetMasksForFourPlayersGame()
 			m_board[line * kWidth + column]->setMask((imageLocation).mask());
 		}
 	}*/
-	m_board[0].setMask(QPixmap("../TriviadorClient/resource/map4players/00.png").mask());
+	/*m_board[0].setMask(QPixmap("../TriviadorClient/resource/map4players/00.png").mask());
 	m_board[1].setMask(QPixmap("../TriviadorClient/resource/map4players/01.png").mask());
 	m_board[2].setMask(QPixmap("../TriviadorClient/resource/map4players/02.png").mask());
 	m_board[3].setMask(QPixmap("../TriviadorClient/resource/map4players/03.png").mask());
@@ -95,12 +96,11 @@ void Board::SetMasksForFourPlayersGame()
 	m_board[20].setMask(QPixmap("../TriviadorClient/resource/map4players/50.png").mask());
 	m_board[21].setMask(QPixmap("../TriviadorClient/resource/map4players/51.png").mask());
 	m_board[22].setMask(QPixmap("../TriviadorClient/resource/map4players/52.png").mask());
-	m_board[23].setMask(QPixmap("../TriviadorClient/resource/map4players/53.png").mask());
+	m_board[23].setMask(QPixmap("../TriviadorClient/resource/map4players/53.png").mask());*/
 }
 
 void Board::SetCoordinatesForFourPlayersGame()
 {
-	m_board[0].setStyleSheet("background-color: #801212;");
 	m_board[0].setGeometry(25, 25, 25, 25);
 	m_board[1].setGeometry(50, 25, 25, 25);
 	m_board[2].setGeometry(75, 25, 25, 25);
@@ -127,24 +127,16 @@ void Board::SetCoordinatesForFourPlayersGame()
 	m_board[23].setGeometry(100, 150, 25, 25);
 }
 
-void Board::ShowButtons()
-{
-	for (size_t i = 0; i < m_board.size(); i++)
-	{
-		m_board[i].show();
-	}
-}
-
-Territory& Board::operator[](Position pos)
-{
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width) {
-		throw std::out_of_range("Position is out of range!");
-	}
-
-	return m_board[line * m_width + column];
-}
+//Territory& Board::operator[](Position pos)
+//{
+//	const auto& [line, column] = pos;
+//
+//	if (line >= m_height || column >= m_width) {
+//		throw std::out_of_range("Position is out of range!");
+//	}
+//
+//	return m_board[line * m_width + column];
+//}
 
 //std::ostream& operator<<(std::ostream& out, const Board& board)
 //{
