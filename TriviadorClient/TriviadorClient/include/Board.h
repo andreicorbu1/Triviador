@@ -26,17 +26,17 @@ public:
     // Operators:
 	Board& operator= (const Board& other);
 	Board& operator= (Board&& other) noexcept;
+	// friend std::ostream& operator<< (std::ostream& out, const Board& board);
 
     void SetMasksForFourPlayersGame();
     void SetCoordinatesForFourPlayersGame();
     void ShowButtons();
 private:
-    // Constants:
-    const std::size_t kWidth;
-    const std::size_t kHeight;
-    const std::size_t kSize = kWidth * kHeight;
+    std::size_t m_width;
+    std::size_t m_height;
+    std::size_t m_size = m_width * m_height;
 
 private:
-    std::vector<Territory> m_board{ kSize };
+    std::vector<Territory> m_board{ m_size };
 };
 

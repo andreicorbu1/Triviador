@@ -1,37 +1,29 @@
 #include "Board.h"
 
 Board::Board()
-	: kWidth(0)
-	, kHeight(0)
-	, kSize(0)
-	, m_board(kSize)
+	: m_width(0)
+	, m_height(0)
+	, m_size(0)
+	, m_board(m_size)
 {
 	// empty
 }
 	
 Board::Board(const std::size_t& width, const std::size_t& height)
-	: kWidth(width)
-	, kHeight(height)
+	: m_width(width)
+	, m_height(height)
 {
 	// empty
 }
 
 Board::Board(const Board& other)
-	: kWidth(other.kWidth)
-	, kHeight(other.kHeight)
-	, kSize(other.kSize)
-	, m_board(other.m_board)
 {
-	// empty
+	*this = other;
 }
 
 Board::Board(Board&& other) noexcept
-	: kWidth(other.kWidth)
-	, kHeight(other.kHeight)
-	, kSize(other.kSize)
-	, m_board(std::move(other.m_board))
 {
-	// empty
+	*this = std::move(other);
 }
 
 Board::~Board() {
@@ -42,28 +34,27 @@ const Territory& Board::operator[](Position pos) const
 {
 	const auto& [line, column] = pos;
 
-	if (line >= kHeight || column >= kWidth) {
+	if (line >= m_height || column >= m_width) {
 		throw std::out_of_range("Position is out of range!");
 	}
 
-	return m_board[line * kWidth + column];
+	return m_board[line * m_width + column];
 }
 
 Board& Board::operator=(const Board& other)
 {
-	if (this != &other) {
-		m_board = other.m_board;
-	}
-
+	this->m_board = other.m_board;
+	this->m_height = other.m_height;
+	this->m_width = other.m_width;
 	return *this;
 }
 
 Board& Board::operator=(Board&& other) noexcept
 {
-	if (this != &other) {
-		m_board = std::move(other.m_board);
-	}
-
+	this->m_board = std::move(other.m_board);
+	this->m_height = std::move(other.m_height);
+	this->m_width = std::move(other.m_width);
+	new(&other) Board;
 	return *this;
 }
 
@@ -146,23 +137,20 @@ Territory& Board::operator[](Position pos)
 {
 	const auto& [line, column] = pos;
 
-	if (line >= kHeight || column >= kWidth) {
+	if (line >= m_height || column >= m_width) {
 		throw std::out_of_range("Position is out of range!");
 	}
 
-	return m_board[line * kWidth + column];
+	return m_board[line * m_width + column];
 }
 
-//std::ostream& operator<<(std::ostream& out, const Board& b)
+//std::ostream& operator<<(std::ostream& out, const Board& board)
 //{
 //	Board::Position pos;
 //	auto& [line, column] = pos;
-//	for (line = 0; line < b.kHeight; line++) {
-//		for (column = 0; column < b.kWidth; column++) {
-//			if (b[pos])
-//				out << *b[pos];
-//			else
-//				out << "[____]";
+//	for (line = 0; line < board.m_height; line++) {
+//		for (column = 0; column < board.m_width; column++) {
+//			out << board[pos];
 //			out << "  ";
 //		}
 //		out << "\n\n";
