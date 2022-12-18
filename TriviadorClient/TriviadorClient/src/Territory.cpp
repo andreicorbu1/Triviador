@@ -6,12 +6,22 @@ Territory::Territory(QWidget* parent)
 	m_score(kTerritoryScore)
 {
 	m_button = new QPushButton(parent);
-	m_button->setCursor(QCursor(Qt::PointingHandCursor));
 }
 
 void Territory::setGeometry(int x, int y, int width, int height)
 {
 	m_button->setGeometry(x, y, width, height);
+}
+
+void Territory::setMask(const QPixmap& mask)
+{
+    m_button->setMask(mask.scaled(m_button->size()).mask());
+}
+
+void Territory::SetButtonProperties()
+{
+    m_button->setCursor(QCursor(Qt::PointingHandCursor));
+    m_button->setStyleSheet("background-color: blue;");
 }
 
 //Territory::Territory(QWidget* parent)

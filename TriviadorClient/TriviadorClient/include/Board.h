@@ -29,8 +29,12 @@ public:
 	// friend std::ostream& operator<< (std::ostream& out, const Board& board);
 
 
-    void SetMasksForFourPlayersGame();
-    void SetCoordinatesForFourPlayersGame();
+
+    void Set4PGame();
+private:
+    void SetMasks4PGame();
+    void SetGeometry4PGame();
+
 private:
     std::size_t m_width;
     std::size_t m_height;

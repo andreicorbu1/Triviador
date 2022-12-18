@@ -30,7 +30,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	case 4:
 		m_board = Board(4, 6, this);
 		m_rounds = 3;
-		m_board.SetCoordinatesForFourPlayersGame();
+		m_board.Set4PGame();
 		break;
 	default:
 		break;

@@ -22,6 +22,8 @@ public:
     //friend std::ostream& operator<< (std::ostream& out, const Territory& t);
 
     void setGeometry(int x, int y, int width, int height);
+    void setMask(const QPixmap& mask);
+    void SetButtonProperties();
 
 private:
     const uint16_t kBaseScore = 300;
