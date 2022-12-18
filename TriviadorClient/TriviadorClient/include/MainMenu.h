@@ -4,7 +4,6 @@
 #include "ui_MainMenu.h"
 #include "Game.h"
 #include "Registration.h"
-#include "Player.h"
 
 class MainMenu : public QWidget
 {

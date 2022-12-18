@@ -70,6 +70,7 @@ void MainMenu::on_twoPlayersButton_clicked()
 	Player a("cristian", Player::Color::Blue);
 	Player b("tibi", Player::Color::Red);
 	std::vector<Player> players = { a, b };
+	
 	StartGame(players);
 }
 
