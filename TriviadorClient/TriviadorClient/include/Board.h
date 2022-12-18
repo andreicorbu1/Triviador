@@ -4,6 +4,7 @@
 #include <vector>
 #include <optional>
 #include <algorithm>
+#include "qscreen.h"
 
 class Board
 {
@@ -12,7 +13,7 @@ public:
 
 public:
 	Board();
-    Board(const std::size_t& width, const std::size_t& height);
+    Board(const std::size_t& width, const std::size_t& height, QWidget* parent = nullptr);
 	Board(const Board& other);
 	Board(Board&& other) noexcept;
 	~Board();
@@ -28,9 +29,16 @@ public:
 	Board& operator= (Board&& other) noexcept;
 	// friend std::ostream& operator<< (std::ostream& out, const Board& board);
 
-    void SetMasksForFourPlayersGame();
-    void SetCoordinatesForFourPlayersGame();
-    void ShowButtons();
+
+    void Set2PGame();
+    void Set3PGame();
+    void Set4PGame();
+
+private:
+    void SetMasks(int playersNumber);
+    void SetGeometry2PGame();
+    void SetGeometry4PGame();
+
 private:
     std::size_t m_width;
     std::size_t m_height;

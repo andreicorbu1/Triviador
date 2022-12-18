@@ -16,20 +16,23 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
-	
+
 	switch (m_players.size())
 	{
 	case 2:
-		m_board = Board(3, 3);
+		m_board = Board(3, 3, this);
 		m_rounds = 5;
+		m_board.Set2PGame();
 		break;
 	case 3:
-		m_board = Board(5, 3);
+		m_board = Board(5, 3, this);
 		m_rounds = 4;
+		m_board.Set3PGame();
 		break;
 	case 4:
-		m_board = Board(4, 6);
+		m_board = Board(4, 6, this);
 		m_rounds = 3;
+		m_board.Set4PGame();
 		break;
 	default:
 		break;
@@ -62,7 +65,6 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, m_background);
-	//m_board.PrintBoard(this);
 }
 
 void Game::on_exitButton_clicked()

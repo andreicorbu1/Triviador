@@ -6,6 +6,7 @@ class Player
 public:
     enum class Color
     {
+        None,
         Blue,
         Red,
         Green,
@@ -13,7 +14,7 @@ public:
     };
 
 public:
-    Player() = default;
+    Player();
     Player(const std::string& playerName, const Color& color);
     Player(const Player& other);
     ~Player() = default;

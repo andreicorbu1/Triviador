@@ -2,7 +2,6 @@
 
 #include <QWidget>
 #include "ui_Game.h"
-#include "qscreen.h"
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
