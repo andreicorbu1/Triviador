@@ -63,7 +63,8 @@ Board& Board::operator=(Board&& other) noexcept
 
 void Board::Set2PGame()
 {
-
+	SetGeometry2PGame();
+	SetMasks(2);
 }
 
 void Board::Set3PGame()
@@ -105,6 +106,20 @@ void Board::SetMasks(int playersNumber)
 			m_board[line * m_width + column].SetButtonProperties();
 		}
 	}
+}
+
+void Board::SetGeometry2PGame()
+{
+	m_board[0].setGeometry(367, 165, 351, 250);
+	m_board[1].setGeometry(627, 182, 228, 235);
+	m_board[2].setGeometry(825, 143, 255, 270);
+	m_board[3].setGeometry(235, 357, 390, 229);
+	m_board[4].setGeometry(593, 389, 264, 203);
+	m_board[5].setGeometry(817, 376, 263, 213);
+	m_board[6].setGeometry(293, 535, 460, 300);
+	m_board[7].setGeometry(602, 559, 310, 280);
+	m_board[8].setGeometry(830, 553, 406, 275);
+
 }
 
 void Board::SetGeometry4PGame()

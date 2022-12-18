@@ -36,6 +36,7 @@ public:
 
 private:
     void SetMasks(int playersNumber);
+    void SetGeometry2PGame();
     void SetGeometry4PGame();
 
 private:
