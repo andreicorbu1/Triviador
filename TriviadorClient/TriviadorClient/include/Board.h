@@ -4,6 +4,7 @@
 #include <vector>
 #include <optional>
 #include <algorithm>
+#include "qscreen.h"
 
 class Board
 {
@@ -29,10 +30,12 @@ public:
 	// friend std::ostream& operator<< (std::ostream& out, const Board& board);
 
 
-
+    void Set2PGame();
+    void Set3PGame();
     void Set4PGame();
+
 private:
-    void SetMasks4PGame();
+    void SetMasks(int playersNumber);
     void SetGeometry4PGame();
 
 private:

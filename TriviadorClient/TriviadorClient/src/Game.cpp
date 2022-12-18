@@ -26,6 +26,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	case 3:
 		m_board = Board(5, 3, this);
 		m_rounds = 4;
+		m_board.Set3PGame();
 		break;
 	case 4:
 		m_board = Board(4, 6, this);
@@ -63,7 +64,6 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, m_background);
-	//m_board.PrintBoard(this);
 }
 
 void Game::on_exitButton_clicked()

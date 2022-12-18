@@ -25,6 +25,9 @@ public:
     void setMask(const QPixmap& mask);
     void SetButtonProperties();
 
+private slots:
+    void m_buttonClicked();
+
 private:
     const uint16_t kBaseScore = 300;
     const uint16_t kTerritoryScore = 100;

@@ -61,21 +61,47 @@ Board& Board::operator=(Board&& other) noexcept
 	return *this;
 }
 
+void Board::Set2PGame()
+{
+
+}
+
+void Board::Set3PGame()
+{
+	SetMasks(3);
+}
+
 void Board::Set4PGame()
 {
 	SetGeometry4PGame();
-	SetMasks4PGame();
+	SetMasks(4);
 }
 
-void Board::SetMasks4PGame()
+void Board::SetMasks(int playersNumber)
 {
+	QString imageLocation = "../TriviadorClient/resource/map";
+	switch (playersNumber)
+	{
+	case 2:
+		imageLocation += QString::number(2);
+		break;
+	case 3:
+		imageLocation += QString::number(3);
+		break;
+	case 4:
+		imageLocation += QString::number(4);
+		break;
+	default:
+		break;
+	}
+	imageLocation += "players/";
 	for (size_t line = 0; line < m_height; line++)
 	{
 		for (size_t column = 0; column < m_width; column++)
 		{
-			QString imageLocation = "../TriviadorClient/resource/map4players/";
-			imageLocation += QString::number(line) + QString::number(column) + ".png";
-			m_board[line * m_width + column].setMask(QPixmap(imageLocation));
+			QString auxLocation = imageLocation;
+			auxLocation += QString::number(line) + QString::number(column) + ".png";
+			m_board[line * m_width + column].setMask(QPixmap(auxLocation));
 			m_board[line * m_width + column].SetButtonProperties();
 		}
 	}

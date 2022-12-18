@@ -6,6 +6,7 @@ Territory::Territory(QWidget* parent)
 	m_score(kTerritoryScore)
 {
 	m_button = new QPushButton(parent);
+
 }
 
 void Territory::setGeometry(int x, int y, int width, int height)

@@ -51,4 +51,15 @@
         <file>map4players/52.png</file>
         <file>map4players/53.png</file>
     </qresource>
+    <qresource prefix="/map2players">
+        <file>map2players/00.png</file>
+        <file>map2players/01.png</file>
+        <file>map2players/02.png</file>
+        <file>map2players/10.png</file>
+        <file>map2players/11.png</file>
+        <file>map2players/12.png</file>
+        <file>map2players/20.png</file>
+        <file>map2players/21.png</file>
+        <file>map2players/22.png</file>
+    </qresource>
 </RCC>
