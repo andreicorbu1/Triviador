@@ -138,6 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CreateLobbyHandler.cpp" />
+    <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestionHandler.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CreateLobbyHandler.h" />
     <ClInclude Include="include\AccountsManager.h" />
     <ClInclude Include="include\AddToAcountListHandler.h" />
     <ClInclude Include="include\Board.h" />
@@ -172,6 +175,7 @@
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
+    <ClInclude Include="Lobby.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt" />

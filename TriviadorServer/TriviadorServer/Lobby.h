@@ -8,6 +8,7 @@ class Lobby
 public:
 	Lobby();
 	void AddPlayer();
+	int GetNumberOfPlayers();
 	uint32_t GetLobbyID();
 
 private:

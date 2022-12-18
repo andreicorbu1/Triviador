@@ -2,12 +2,17 @@
 
 Lobby::Lobby()
 {
-	m_lobbyId = GetLobbyID();
+	m_lobbyId = GenerateRandomLobbyID();
 }
 
 void Lobby::AddPlayer()
 {
 	m_players.push_back(1);
+}
+
+int Lobby::GetNumberOfPlayers()
+{
+	return m_players.size();
 }
 
 uint32_t Lobby::GenerateRandomLobbyID()

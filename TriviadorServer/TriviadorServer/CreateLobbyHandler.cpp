@@ -7,7 +7,10 @@ CreateLobbyHandler::CreateLobbyHandler(std::unordered_map<uint32_t, Lobby> onGoi
 
 crow::response CreateLobbyHandler::operator()(const crow::request& req) const
 {
-	Lobby lobby;
-	m_onGoingLobbies[lobby.GetLobbyID()] = lobby;
-	return crow::response(200);
+	//Lobby lobby;
+	//m_onGoingLobbies[lobby.GetLobbyID()] = lobby;
+	
+	//Problema e ca nu putem modifica m_onGoingLobbies chiar daca e referinta 
+
+	return crow::response(200, "Good one");
 }
