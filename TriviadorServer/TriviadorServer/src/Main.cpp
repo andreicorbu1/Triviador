@@ -19,20 +19,8 @@ int main()
 	crow::SimpleApp app;
 
 	std::unordered_map<uint32_t, Lobby> onGoingLobbies;
-	//auto& createNewLobby = CROW_ROUTE(app, "/newLobby");
-	//(CreateLobbyHandler(onGoingLobbies));
-
-	CROW_ROUTE(app, "/newLobby")([&onGoingLobbies]()
-		{
-			Lobby lobby;
-			lobby.AddPlayer();
-			onGoingLobbies[lobby.GetLobbyID()] = lobby;
-			crow::json::wvalue lobbyID
-			{
-				{"lobby id: ", lobby.GetLobbyID()}
-			};
-			return crow::json::wvalue(lobbyID);
-		});
+	auto& createNewLobby = CROW_ROUTE(app, "/newLobby");
+	createNewLobby(CreateLobbyHandler(onGoingLobbies));
 
 	CROW_ROUTE(app, "/addToLobby/<int>")([&onGoingLobbies](int lobbyID)
 		{
@@ -45,7 +33,7 @@ int main()
 				}
 				return crow::response(401, "Full lobby");
 			}
-			return crow::response(400, "Lobby not found");
+	return crow::response(400, "Lobby not found");
 		});
 
 	//for testing route
@@ -65,7 +53,7 @@ int main()
 			{
 				crow::json::wvalue numberOfPlayersFromLobby
 				{
-					{"number of lobbies", onGoingLobbies[lobbyID].GetNumberOfPlayers()}
+					{"number of players in current lobby", onGoingLobbies[lobbyID].GetNumberOfPlayers()}
 				};
 				return crow::json::wvalue(numberOfPlayersFromLobby);
 			}
