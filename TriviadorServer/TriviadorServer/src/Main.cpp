@@ -48,6 +48,34 @@ int main()
 			return crow::response(400, "Lobby not found");
 		});
 
+	//for testing route
+	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()
+		{
+			crow::json::wvalue numberOfLobbies
+		{
+			{"number of lobbies", onGoingLobbies.size()}
+		};
+	return crow::json::wvalue(numberOfLobbies);
+		});
+
+	//for testing route
+	CROW_ROUTE(app, "/numberOfPlayersFromLobby/<int>")([&onGoingLobbies](int lobbyID)
+		{
+			if (onGoingLobbies.contains(lobbyID))
+			{
+				crow::json::wvalue numberOfPlayersFromLobby
+				{
+					{"number of lobbies", onGoingLobbies[lobbyID].GetNumberOfPlayers()}
+				};
+				return crow::json::wvalue(numberOfPlayersFromLobby);
+			}
+	crow::json::wvalue lobbyNotFound
+	{
+		{"lobby not found",""}
+	};
+	return lobbyNotFound;
+		});
+
 	std::unordered_map<int32_t, Game> ongoingGames;
 	//auto& createNewGame = CROW_ROUTE(app, "/newgame/<int>").methods(crow::HTTPMethod::PUT);
 	//createNewGame(CreateGameHandler(ongoingGames));
