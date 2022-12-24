@@ -6,6 +6,7 @@
 #include "Registration.h"
 #include "Player.h"
 
+
 class MainMenu : public QWidget
 {
     Q_OBJECT

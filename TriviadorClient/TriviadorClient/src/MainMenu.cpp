@@ -21,7 +21,7 @@ void MainMenu::hiMessage(const std::string& playerName)
 void MainMenu::StartGame(std::vector<Player>& players)
 {
 	m_game = new Game(players, this);
-	m_game->showFullScreen();
+	m_game->show();
 	hide();
 	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
 }
