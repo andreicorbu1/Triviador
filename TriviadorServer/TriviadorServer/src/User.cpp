@@ -50,13 +50,13 @@ User& User::operator=(User&& user) noexcept
 {
 	if (this != &user)
 	{
-		m_username = user.m_username;
-		m_password = user.m_password;
-		m_level = user.m_level;
-		m_gamesPlayed = user.m_gamesPlayed;
-		m_points = user.m_points;
-		m_ID = user.m_ID;
-		new(&user)User;
+		
+		m_username = std::exchange(user.m_username, std::string());
+		m_password = std::exchange(user.m_password, std::string());
+		m_level = std::exchange(user.m_level, 0);
+		m_gamesPlayed = std::exchange(user.m_gamesPlayed, 0);
+		m_points = std::exchange(user.m_points, 0);
+		m_ID = std::exchange(user.m_ID, 0);
 	}
 	return *this;
 }

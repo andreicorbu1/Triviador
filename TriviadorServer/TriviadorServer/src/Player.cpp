@@ -80,12 +80,10 @@ Player& Player::operator=(const Player& other)
 
 Player& Player::operator=(Player&& other) noexcept
 {
-	m_playerName = other.GetName();
-	m_color = other.GetColor();
-	m_score = other.GetScore();
-	m_territoriesCount = other.GetScore();
-
-	new(&other) Player;
+	m_playerName = std::exchange(other.m_playerName, std::string());
+	m_color = std::exchange(other.m_color, Player::Color::NaN);
+	m_score = std::exchange(other.m_score, 0);
+	m_territoriesCount = std::exchange(other.m_territoriesCount, 0);
 	return *this;
 }
 
