@@ -5,6 +5,7 @@
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
+#include <QSignalMapper>
 
 class Game : public QWidget
 {
@@ -26,6 +27,7 @@ private:
 
 private slots:
     void on_exitButton_clicked();
+    void on_m_button_clicked();
 
 private:
     const uint16_t rectangularSize = 175;
@@ -36,6 +38,7 @@ private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
     QPixmap m_background;
+    QSignalMapper* mapper;
 
     Board m_board;
     std::vector<Player> m_players;

@@ -23,6 +23,7 @@ public:
     
     // Getters:
     const Territory& operator[] (Position pos) const;
+    Territory operator[] (int pos) const;
 
     // Operators:
 	Board& operator= (const Board& other);

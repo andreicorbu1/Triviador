@@ -24,6 +24,10 @@ public:
     void setGeometry(int x, int y, int width, int height);
     void setMask(const QPixmap& mask);
     void SetButtonProperties();
+    QPushButton* getButton()
+    {
+        return m_button;
+    }
 
 private slots:
     void m_buttonClicked();
