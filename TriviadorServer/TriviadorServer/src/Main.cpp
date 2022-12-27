@@ -5,6 +5,7 @@
 #include "CreateLobbyHandler.h"
 #include "CreateGameHandler.h"
 #include "MultipleAnswerQuestion.h"
+#include "AddToLobbyHandler.h"
 #include "QuestionManager.h"
 #include "Game.h"
 #include "Lobby.h"
@@ -19,22 +20,25 @@ int main()
 	crow::SimpleApp app;
 
 	std::unordered_map<uint32_t, Lobby> onGoingLobbies;
-	auto& createNewLobby = CROW_ROUTE(app, "/newLobby");
+	auto& createNewLobby = CROW_ROUTE(app, "/newlobby");
 	createNewLobby(CreateLobbyHandler(onGoingLobbies));
 
-	CROW_ROUTE(app, "/addToLobby/<int>")([&onGoingLobbies](int lobbyID)
-		{
-			if (onGoingLobbies.contains(lobbyID))
-			{
-				if (onGoingLobbies[lobbyID].GetNumberOfPlayers() < 4)
-				{
-					onGoingLobbies[lobbyID].AddPlayer();
-					return crow::response(200, "Successfully Added Player to Lobby");
-				}
-				return crow::response(401, "Full lobby");
-			}
-	return crow::response(400, "Lobby not found");
-		});
+	auto& addToLobby = CROW_ROUTE(app, "/addplayertolobby").methods(crow::HTTPMethod::PUT);
+	addToLobby(AddToLobbyHandler(onGoingLobbies));
+
+	//CROW_ROUTE(app, "/addToLobby/<int>")([&onGoingLobbies](int lobbyID)
+	//	{
+	//		if (onGoingLobbies.contains(lobbyID))
+	//		{
+	//			if (onGoingLobbies[lobbyID].GetNumberOfPlayers() < 4)
+	//			{
+	//				onGoingLobbies[lobbyID].AddPlayer();
+	//				return crow::response(200, "Successfully Added Player to Lobby");
+	//			}
+	//			return crow::response(401, "Full lobby");
+	//		}
+	//return crow::response(400, "Lobby not found");
+	//	});
 
 	//for testing route
 	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()

@@ -59,7 +59,7 @@ Territory& Territory::operator=(const Territory& territory)
 
 Territory& Territory::operator=(Territory&& territory) noexcept
 {
-	m_owner = std::exchange(territory.m_owner, std::string());
+	m_owner = std::exchange(territory.m_owner, {});
 	m_score = std::exchange(territory.m_score, 0);
 	return *this;
 }

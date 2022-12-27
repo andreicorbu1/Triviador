@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddToLobbyHandler.cpp" />
     <ClCompile Include="CreateLobbyHandler.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="src\Board.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddToLobbyHandler.h" />
     <ClInclude Include="CreateLobbyHandler.h" />
     <ClInclude Include="include\AccountsManager.h" />
     <ClInclude Include="include\AddToAcountListHandler.h" />
