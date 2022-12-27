@@ -12,7 +12,7 @@ public:
 	explicit Territory(const Player& owner);
 	Territory(const Player& owner, const bool& isBase);
 	Territory(const Territory& territory);
-	//Territory(Territory&& territory) noexcept;
+	Territory(Territory&& territory) noexcept;
 	~Territory() = default;
 
 	//Getters:
@@ -25,7 +25,7 @@ public:
 
 	// Operators:
 	Territory& operator=(const Territory& territory);
-	//Territory& operator=(Territory&& territory) noexcept;
+	Territory& operator=(Territory&& territory) noexcept;
 
 	friend std::ostream& operator<< (std::ostream& out, const Territory& t);
 

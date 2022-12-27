@@ -25,10 +25,10 @@ Territory::Territory(const Territory& territory)
 	*this = territory;
 }
 
-//Territory::Territory(Territory&& territory) noexcept
-//{
-//	*this = std::move(territory);
-//}
+Territory::Territory(Territory&& territory) noexcept
+{
+	*this = std::move(territory);
+}
 
 std::optional<Player> Territory::GetOwner() const
 {
@@ -57,12 +57,12 @@ Territory& Territory::operator=(const Territory& territory)
 	return *this;
 }
 
-//Territory& Territory::operator=(Territory&& territory) noexcept
-//{
-//	m_owner = std::exchange(territory.m_owner, std::string());
-//	m_score = std::exchange(territory.m_score, 0);
-//	return *this;
-//}
+Territory& Territory::operator=(Territory&& territory) noexcept
+{
+	m_owner = std::exchange(territory.m_owner, {});
+	m_score = std::exchange(territory.m_score, 0);
+	return *this;
+}
 
 std::ostream& operator<< (std::ostream& out, const Territory& t)
 {
