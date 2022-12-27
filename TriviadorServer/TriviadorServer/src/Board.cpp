@@ -53,10 +53,9 @@ Board& Board::operator=(const Board& other)
 
 Board& Board::operator=(Board&& other) noexcept
 {
-	this->m_board = other.m_board;
-	this->m_height = other.m_height;
-	this->m_width = other.m_width;
-	new(&other) Board;
+	m_board = std::exchange(other.m_board, std::vector<Territory>());
+	m_height = std::exchange(other.m_height, 0);
+	m_width = std::exchange(other.m_width, 0);
 	return *this;
 }
 
