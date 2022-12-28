@@ -63,13 +63,13 @@
     <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lobby.cpp">
+    <ClCompile Include="src\AddToLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CreateLobbyHandler.cpp">
+    <ClCompile Include="src\CreateLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddToLobbyHandler.cpp">
+    <ClCompile Include="src\Lobby.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,13 +122,13 @@
     <ClInclude Include="include\NumericalAnswerQuestionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lobby.h">
+    <ClInclude Include="include\CreateLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CreateLobbyHandler.h">
+    <ClInclude Include="include\Lobby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AddToLobbyHandler.h">
+    <ClInclude Include="include\AddToLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
