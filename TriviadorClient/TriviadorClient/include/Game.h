@@ -16,7 +16,7 @@ public:
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
-    void resizeEvent(QResizeEvent * event);
+    //void resizeEvent(QResizeEvent * event);
     
 signals:
 	void finished();
@@ -39,6 +39,7 @@ private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
     QPixmap m_background;
+    QPixmap background;
     Board m_board;
     std::vector<Player> m_players;
     int m_rounds;

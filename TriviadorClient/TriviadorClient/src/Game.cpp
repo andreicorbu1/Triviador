@@ -14,6 +14,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
+	LoadBackgroundImage();
 
 	switch (m_players.size())
 	{
@@ -74,15 +75,14 @@ void Game::action()
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
-	painter.drawPixmap(0, 0, m_background);
+	QPixmap background = m_background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	painter.drawPixmap(0, 0, background);
 }
 
-void Game::resizeEvent(QResizeEvent* event)
-{
-	this->QWidget::resizeEvent(event);
-	LoadBackgroundImage();
-	m_background = m_background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-}
+//void Game::resizeEvent(QResizeEvent* event)
+//{
+//	this->QWidget::resizeEvent(event);
+//}
 
 void Game::on_exitButton_clicked()
 {
