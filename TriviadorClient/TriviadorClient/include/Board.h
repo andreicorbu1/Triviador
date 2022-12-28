@@ -20,10 +20,11 @@ public:
     
     // Setters:
     Territory& operator[] (Position pos);
+    Territory& operator[] (int pos);
     
     // Getters:
-    const Territory& operator[] (Position pos) const;
-    const Territory& operator[] (int pos) const;
+    Territory operator[] (Position pos) const;
+    Territory operator[] (int pos) const;
 
     // Operators:
 	Board& operator= (const Board& other);
