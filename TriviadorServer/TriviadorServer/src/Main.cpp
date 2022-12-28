@@ -4,8 +4,9 @@
 #include "MultipleAnswerQuestionHandler.h"
 #include "CreateLobbyHandler.h"
 #include "CreateGameHandler.h"
-#include "MultipleAnswerQuestion.h"
 #include "AddToLobbyHandler.h"
+#include "WaitingInLobbyHandler.h"
+#include "MultipleAnswerQuestion.h"
 #include "QuestionManager.h"
 #include "Game.h"
 #include "Lobby.h"
@@ -26,19 +27,8 @@ int main()
 	auto& addToLobby = CROW_ROUTE(app, "/addplayertolobby").methods(crow::HTTPMethod::PUT);
 	addToLobby(AddToLobbyHandler(onGoingLobbies));
 
-	//CROW_ROUTE(app, "/addToLobby/<int>")([&onGoingLobbies](int lobbyID)
-	//	{
-	//		if (onGoingLobbies.contains(lobbyID))
-	//		{
-	//			if (onGoingLobbies[lobbyID].GetNumberOfPlayers() < 4)
-	//			{
-	//				onGoingLobbies[lobbyID].AddPlayer();
-	//				return crow::response(200, "Successfully Added Player to Lobby");
-	//			}
-	//			return crow::response(401, "Full lobby");
-	//		}
-	//return crow::response(400, "Lobby not found");
-	//	});
+	auto& waitInLobby = CROW_ROUTE(app, "/waitinglobby");
+	waitInLobby(WaitingInLobbyHandler(onGoingLobbies));
 
 	//for testing route
 	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()

@@ -62,6 +62,7 @@ void MainMenu::on_joinLobbyButton_clicked() const
 
 	if (res.status_code == 200)
 	{
+		this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
 		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
 	}
 	else if (res.status_code == 401)

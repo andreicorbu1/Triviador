@@ -63,13 +63,16 @@
     <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lobby.cpp">
+    <ClCompile Include="src\AddToLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CreateLobbyHandler.cpp">
+    <ClCompile Include="src\CreateLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AddToLobbyHandler.cpp">
+    <ClCompile Include="src\Lobby.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitingInLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,6 +132,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AddToLobbyHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitingInLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

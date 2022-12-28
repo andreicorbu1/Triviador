@@ -138,11 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AddToLobbyHandler.cpp" />
-    <ClCompile Include="CreateLobbyHandler.cpp" />
-    <ClCompile Include="Lobby.cpp" />
+    <ClCompile Include="src\AddToLobbyHandler.cpp" />
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Lobby.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestionHandler.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -157,6 +157,7 @@
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="WaitingInLobbyHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddToLobbyHandler.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
     <ClInclude Include="Lobby.h" />
+    <ClInclude Include="WaitingInLobbyHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt" />
