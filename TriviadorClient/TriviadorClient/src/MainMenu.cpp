@@ -46,6 +46,11 @@ void MainMenu::on_playButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.play);
 }
 
+void MainMenu::on_joinGameButton_clicked() const
+{
+	this->ui.stackedWidget->setCurrentWidget(ui.joinGame);
+}
+
 void MainMenu::on_createGameButton_clicked() const
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.createGame);
