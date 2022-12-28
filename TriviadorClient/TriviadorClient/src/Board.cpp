@@ -44,6 +44,15 @@ const Territory& Board::operator[](Position pos) const
 	return m_board[line * m_width + column];
 }
 
+const Territory& Board::operator[](int pos) const
+{
+	if (pos < 0 || pos >= m_board.size())
+	{
+		throw std::out_of_range("Position is out of range!");
+	}
+	return m_board[pos];
+}
+
 Board& Board::operator=(const Board& other)
 {
 	this->m_board = other.m_board;
@@ -76,6 +85,11 @@ void Board::Set4PGame()
 {
 	SetGeometry4PGame();
 	SetMasks(4);
+}
+
+int Board::Size()
+{
+	return m_board.size();
 }
 
 void Board::SetMasks(int playersNumber)

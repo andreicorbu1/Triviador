@@ -23,9 +23,11 @@ signals:
 private:
     void ShowQuestion(QuestionType type);
     void SetBackground();
+    void ConnectButtons();
 
 private slots:
     void on_exitButton_clicked();
+    void action();
 
 private:
     const uint16_t rectangularSize = 175;
@@ -36,7 +38,6 @@ private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
     QPixmap m_background;
-
     Board m_board;
     std::vector<Player> m_players;
     int m_rounds;

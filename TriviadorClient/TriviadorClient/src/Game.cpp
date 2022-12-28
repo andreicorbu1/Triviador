@@ -37,6 +37,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	default:
 		break;
 	}
+	ConnectButtons();
 }
 
 Game::~Game()
@@ -46,9 +47,9 @@ Game::~Game()
 
 void Game::ShowQuestion(QuestionType type)
 {
-    m_questionWindow.SetQuestionType(type);
-    m_questionWindow.FetchQuestion();
-    m_questionWindow.Show();
+	m_questionWindow.SetQuestionType(type);
+	m_questionWindow.FetchQuestion();
+	m_questionWindow.Show();
 }
 
 void Game::SetBackground()
@@ -59,6 +60,19 @@ void Game::SetBackground()
 	}
 	QSize screenSize = qApp->screens()[0]->size();
 	m_background = m_background.scaled(screenSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+}
+
+void Game::ConnectButtons()
+{
+	for (int i = 0; i < m_board.Size(); i++)
+	{
+		connect(m_board[i].getButton(), SIGNAL(clicked()), this, SLOT(action()));
+	}
+}
+
+void Game::action()
+{
+	qDebug() << "Button clicked!";
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
