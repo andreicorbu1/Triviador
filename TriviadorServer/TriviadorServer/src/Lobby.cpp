@@ -3,7 +3,7 @@
 Lobby::Lobby()
 {
 	m_lobbyId = GenerateRandomLobbyID();
-	std::chrono::duration<int, std::ratio<1*60>>threeMinutes(1);
+	std::chrono::duration<int, std::ratio<3*60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
 

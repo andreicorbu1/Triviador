@@ -64,7 +64,7 @@ void MainMenu::on_joinLobbyButton_clicked() const
 	{
 		this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
 		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
-		//WaitingInLobby(lobbyId);
+		WaitingInLobby(lobbyId);
 	}
 	else if (res.status_code == 401)
 	{
@@ -136,17 +136,20 @@ void MainMenu::on_gameFinished()
 
 void MainMenu::WaitingInLobby(std::string lobbyID) const
 {
-	auto res = cpr::Get
-	(
-		cpr::Url{ "http://localhost:18080/waitinginlobby" },
-		cpr::Body{ "id=" + lobbyID }
-	);
-	while(res.status_code!=600)
+	while(true)
 	{
+		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		cpr::Response res;
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
 		res = cpr::Get
 		(
 			cpr::Url{ "http://localhost:18080/waitinginlobby" },
 			cpr::Body{ "id=" + lobbyID }
 		);
+		if (res.status_code != 100)
+		{
+			break;
+		}
 	}
 }

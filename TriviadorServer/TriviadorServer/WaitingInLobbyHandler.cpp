@@ -17,19 +17,19 @@ crow::response WaitingInLobbyHandler::operator()(const crow::request& req) const
 			if (std::chrono::system_clock::to_time_t(m_onGoingLobbies.at(id).GetExpirationTime()) 
 				> std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()))
 			{
-				return crow::response(600, "Waiting");
+				return crow::response(100, "Waiting");
 			}
 			else
 			{
 				m_onGoingLobbies.erase(id);
-				return crow::response(601, "Lobby waiting time has expired");
+				return crow::response(410, "Lobby waiting time has expired");
 			}
 		}
 		else
 		{
-			return crow::response(400, "Lobby not found");
+			return crow::response(404, "Lobby not found");
 		}
 
 	}
-	return crow::response(700, "NO ID");
+	return crow::response(416, "NO ID");
 }
