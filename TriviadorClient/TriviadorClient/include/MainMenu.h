@@ -27,6 +27,7 @@ private slots:
     void on_logOutButton_clicked();
     void on_playButton_clicked() const;
     void on_joinGameButton_clicked() const;
+    void on_joinLobbyButton_clicked() const;
     void on_createGameButton_clicked() const;
     void on_backButton_clicked();
     void on_twoPlayersButton_clicked();

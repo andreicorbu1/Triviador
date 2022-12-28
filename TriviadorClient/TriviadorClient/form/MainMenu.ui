@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>662</height>
+    <width>725</width>
+    <height>598</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -407,7 +407,33 @@ border: none;
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="3" column="0">
+         <item row="0" column="0">
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="1">
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="4" column="1">
           <spacer name="verticalSpacer_5">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -420,14 +446,14 @@ border: none;
            </property>
           </spacer>
          </item>
-         <item row="2" column="0">
+         <item row="2" column="1">
           <widget class="QLineEdit" name="lineEdit">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="1" column="1">
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
@@ -440,8 +466,75 @@ border: none;
            </property>
           </widget>
          </item>
+         <item row="3" column="1">
+          <widget class="QPushButton" name="joinLobbyButton">
+           <property name="font">
+            <font>
+             <family>Franklin Gothic Heavy</family>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background: rgb(128, 18, 18);
+</string>
+           </property>
+           <property name="text">
+            <string>JOIN</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_11">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="lobby">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
-          <spacer name="verticalSpacer_6">
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <family>Franklin Gothic Heavy</family>
+             <pointsize>26</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>LOBBY</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <spacer name="verticalSpacer_7">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -449,6 +542,19 @@ border: none;
             <size>
              <width>20</width>
              <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
             </size>
            </property>
           </spacer>
