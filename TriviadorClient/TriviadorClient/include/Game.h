@@ -16,13 +16,14 @@ public:
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
+    void resizeEvent(QResizeEvent * event);
     
 signals:
 	void finished();
     
 private:
     void ShowQuestion(QuestionType type);
-    void SetBackground();
+    void LoadBackgroundImage();
     void ConnectButtons();
 
 private slots:

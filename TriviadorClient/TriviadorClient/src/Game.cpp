@@ -6,7 +6,6 @@ Game::Game(QWidget* mainMenu)
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
-	SetBackground();
 }
 
 Game::Game(std::vector<Player>& players, QWidget* parent)
@@ -15,7 +14,6 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
-	SetBackground();
 
 	switch (m_players.size())
 	{
@@ -52,14 +50,12 @@ void Game::ShowQuestion(QuestionType type)
 	m_questionWindow.Show();
 }
 
-void Game::SetBackground()
+void Game::LoadBackgroundImage()
 {
 	if (!m_background.load("../TriviadorClient/resource/Background.png"))
 	{
 		throw "The background couldn't load!";
 	}
-	QSize screenSize = qApp->screens()[0]->size();
-	m_background = m_background.scaled(screenSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 void Game::ConnectButtons()
@@ -79,6 +75,13 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, m_background);
+}
+
+void Game::resizeEvent(QResizeEvent* event)
+{
+	this->QWidget::resizeEvent(event);
+	LoadBackgroundImage();
+	m_background = m_background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 }
 
 void Game::on_exitButton_clicked()
