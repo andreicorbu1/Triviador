@@ -27,7 +27,7 @@ int main()
 	auto& addToLobby = CROW_ROUTE(app, "/addplayertolobby").methods(crow::HTTPMethod::PUT);
 	addToLobby(AddToLobbyHandler(onGoingLobbies));
 
-	auto& waitInLobby = CROW_ROUTE(app, "/waitinglobby");
+	auto& waitInLobby = CROW_ROUTE(app, "/waitinginlobby");
 	waitInLobby(WaitingInLobbyHandler(onGoingLobbies));
 
 	//for testing route

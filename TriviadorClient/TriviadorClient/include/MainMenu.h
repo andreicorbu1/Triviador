@@ -37,6 +37,9 @@ private slots:
     void on_gameFinished();
 
 private:
+    void WaitingInLobby(std::string lobbyID) const;
+
+private:
     Ui::MainMenuClass ui;
     Game* m_game;
 };

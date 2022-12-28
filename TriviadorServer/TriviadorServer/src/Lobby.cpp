@@ -3,14 +3,14 @@
 Lobby::Lobby()
 {
 	m_lobbyId = GenerateRandomLobbyID();
-	std::chrono::duration<int, std::ratio<60 * 3>>threeMinutes;
+	std::chrono::duration<int, std::ratio<1*60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
 
 void Lobby::AddPlayer()
 {
 	m_players.push_back(1);
-	std::chrono::duration<int, std::ratio<60>>oneMinute;
+	std::chrono::duration<int, std::ratio<60>>oneMinute(1);
 	m_expirationTime += oneMinute;
 }
 

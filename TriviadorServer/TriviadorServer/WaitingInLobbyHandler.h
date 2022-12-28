@@ -7,7 +7,7 @@ class WaitingInLobbyHandler
 {
 public:
 	WaitingInLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies);
-	crow::response operator()(const crow::response& req) const;
+	crow::response operator()(const crow::request& req) const;
 private:
 	std::unordered_map<uint32_t, Lobby>& m_onGoingLobbies;
 };
