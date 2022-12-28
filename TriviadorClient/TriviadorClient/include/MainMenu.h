@@ -4,6 +4,7 @@
 #include "ui_MainMenu.h"
 #include "Game.h"
 #include "Registration.h"
+#include <QMessageBox>
 
 
 class MainMenu : public QWidget

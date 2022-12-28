@@ -5,13 +5,14 @@ CreateLobbyHandler::CreateLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGo
 {
 }
 
-crow::response CreateLobbyHandler::operator()(const crow::request& req) const
+crow::json::wvalue CreateLobbyHandler::operator()(const crow::request& req) const
 {
 	Lobby lobby;
 	m_onGoingLobbies[lobby.GetLobbyID()] = lobby;
-	std::cout << lobby.GetLobbyID() << '\n';
+	crow::json::wvalue jsonWithLobbyID
+	{
+		{"lobby_id", lobby.GetLobbyID()}
+	};
 	
-//	Problema e ca nu putem modifica m_onGoingLobbies chiar daca e referinta 
-
-	return crow::response(200, "Good one");
+	return crow::json::wvalue(jsonWithLobbyID);
 }

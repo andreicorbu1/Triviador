@@ -53,7 +53,29 @@ void MainMenu::on_joinGameButton_clicked() const
 
 void MainMenu::on_joinLobbyButton_clicked() const
 {
-	this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+	std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
+	auto res = cpr::Put
+	(
+		cpr::Url{ "http://localhost:18080/addplayertolobby" },
+		cpr::Body{ "id=" + lobbyId}
+	);
+
+	if (res.status_code == 200)
+	{
+		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+	}
+	else if (res.status_code == 401)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Lobby is full");
+		msgBox.exec();
+	}
+	else if (res.status_code == 400)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Lobby not found");
+		msgBox.exec();
+	}
 }
 
 void MainMenu::on_createGameButton_clicked() const
