@@ -4,7 +4,7 @@
 #include <optional>
 #include <QPushButton>
 
-class Territory 
+class Territory
 {
 public:
     Territory() = default;
@@ -24,13 +24,7 @@ public:
     void setGeometry(int x, int y, int width, int height);
     void setMask(const QPixmap& mask);
     void SetButtonProperties();
-    QPushButton* getButton()
-    {
-        return m_button;
-    }
-
-private slots:
-    void m_buttonClicked();
+    const QPushButton* getButton() const;
 
 private:
     const uint16_t kBaseScore = 300;

@@ -23,7 +23,7 @@ public:
     
     // Getters:
     const Territory& operator[] (Position pos) const;
-    Territory operator[] (int pos) const;
+    const Territory& operator[] (int pos) const;
 
     // Operators:
 	Board& operator= (const Board& other);
@@ -34,11 +34,15 @@ public:
     void Set2PGame();
     void Set3PGame();
     void Set4PGame();
+    int Size();
 
 private:
     void SetMasks(int playersNumber);
     void SetGeometry2PGame();
     void SetGeometry4PGame();
+
+private slots:
+    void on_territoryButton_clicked();
 
 private:
     std::size_t m_width;
