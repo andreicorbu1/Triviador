@@ -179,7 +179,6 @@
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
-    <ClInclude Include="include\Lobby.h" />
     <ClInclude Include="include\WaitingInLobbyHandler.h" />
   </ItemGroup>
   <ItemGroup>
