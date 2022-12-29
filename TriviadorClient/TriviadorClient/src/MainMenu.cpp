@@ -142,6 +142,7 @@ void MainMenu::WaitingInLobby(std::string lobbyID) const
 		cpr::Response res;
 		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		this->ui.stackedWidget->update();
 		res = cpr::Get
 		(
 			cpr::Url{ "http://localhost:18080/waitinginlobby" },
