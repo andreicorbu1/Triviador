@@ -109,7 +109,7 @@ int Game::GetRounds() const
 	return m_gameRounds;
 }
 
-int32_t Game::GetGameID()
+int32_t Game::GetGameID() const
 {
 	return m_ID;
 }

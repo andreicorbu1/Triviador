@@ -17,7 +17,7 @@ public:
 	Board GetBoard() const;
 	std::vector<Player> GetPlayers() const;
 	int GetRounds() const;
-	int32_t GetGameID();
+	int32_t GetGameID() const;
 	Player GetWinner();
 	NumericalAnswerQuestion GetNumericalAnswerQuestion();
 	MultipleAnswerQuestion GetMultipleAnswerQuestion();
