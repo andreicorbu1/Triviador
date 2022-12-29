@@ -72,7 +72,7 @@
     <ClCompile Include="src\Lobby.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WaitingInLobbyHandler.cpp">
+    <ClCompile Include="src\WaitingInLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,16 +125,16 @@
     <ClInclude Include="include\NumericalAnswerQuestionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lobby.h">
+    <ClInclude Include="include\CreateLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CreateLobbyHandler.h">
+    <ClInclude Include="include\Lobby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AddToLobbyHandler.h">
+    <ClInclude Include="include\AddToLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WaitingInLobbyHandler.h">
+    <ClInclude Include="src\WaitingInLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

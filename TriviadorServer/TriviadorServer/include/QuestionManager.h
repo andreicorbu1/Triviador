@@ -47,9 +47,10 @@ public:
 	NumericalAnswerQuestion GetNumericalAnswerQuestion(int id);
 	int GetRandomMultipleAnswerQuestionsID();
 	int GetRandomNumericalAnswerQuestionsID();
+	void Clear();
 	void PopulateStorage();
 private:
 	StorageForQM m_storage;
-	std::unordered_set<int>alreadyChoosedMultipleAnswerQuestionsID;
-	std::unordered_set<int>alreadyChoosedNumericalAnswerQuestionsID;
+	std::unordered_set<int>m_alreadyChoosedMultipleAnswerQuestionsID;
+	std::unordered_set<int>m_alreadyChoosedNumericalAnswerQuestionsID;
 };

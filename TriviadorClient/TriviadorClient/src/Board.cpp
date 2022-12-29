@@ -33,7 +33,7 @@ Board::~Board() {
 	// empty
 }
 
-const Territory& Board::operator[](Position pos) const
+Territory Board::operator[](Position pos) const
 {
 	const auto& [line, column] = pos;
 
@@ -44,7 +44,16 @@ const Territory& Board::operator[](Position pos) const
 	return m_board[line * m_width + column];
 }
 
-const Territory& Board::operator[](int pos) const
+Territory Board::operator[](int pos) const
+{
+	if (pos < 0 || pos >= m_board.size())
+	{
+		throw std::out_of_range("Position is out of range!");
+	}
+	return m_board[pos];
+}
+
+Territory& Board::operator[](int pos)
 {
 	if (pos < 0 || pos >= m_board.size())
 	{
@@ -164,16 +173,16 @@ void Board::SetGeometry4PGame()
 	m_board[23].setGeometry(898, 636, 335, 189);
 }
 
-//Territory& Board::operator[](Position pos)
-//{
-//	const auto& [line, column] = pos;
-//
-//	if (line >= m_height || column >= m_width) {
-//		throw std::out_of_range("Position is out of range!");
-//	}
-//
-//	return m_board[line * m_width + column];
-//}
+Territory& Board::operator[](Position pos)
+{
+	const auto& [line, column] = pos;
+
+	if (line >= m_height || column >= m_width) {
+		throw std::out_of_range("Position is out of range!");
+	}
+
+	return m_board[line * m_width + column];
+}
 
 //std::ostream& operator<<(std::ostream& out, const Board& board)
 //{
