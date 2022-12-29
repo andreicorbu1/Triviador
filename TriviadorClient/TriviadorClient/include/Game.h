@@ -5,6 +5,8 @@
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
+#include <QPaintEvent>
+#include <QResizeEvent>
 
 class Game : public QWidget
 {
@@ -16,8 +18,7 @@ public:
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
-    //void resizeEvent(QResizeEvent * event);
-    
+    void resizeEvent(QResizeEvent* resizeEvent);
 signals:
 	void finished();
     

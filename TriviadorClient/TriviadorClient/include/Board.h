@@ -35,22 +35,25 @@ public:
     void Set2PGame();
     void Set3PGame();
     void Set4PGame();
+
+    void ResizeBoard(QSize oldWindowSize, QSize newWindowSize);
     int Size();
 
 private:
-    void SetMasks(int playersNumber);
+    void GetMasks(int playersNumber);
+    void SetMasks();
     void SetGeometry2PGame();
     void SetGeometry4PGame();
-
-private slots:
-    void on_territoryButton_clicked();
+    float RuleOfThree(float oldValue, float oldSize, float newSize);
 
 private:
     std::size_t m_width;
     std::size_t m_height;
     std::size_t m_size;
+    const QSize m_originalWindowSize = QSize(1491, 807);
 
 private:
     std::vector<Territory> m_board;
+    std::vector<QPixmap> m_masks;
 };
 

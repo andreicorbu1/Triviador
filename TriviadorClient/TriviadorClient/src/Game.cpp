@@ -79,10 +79,36 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 	painter.drawPixmap(0, 0, background);
 }
 
-//void Game::resizeEvent(QResizeEvent* event)
+void Game::resizeEvent(QResizeEvent* resizeEvent)
+{
+	this->QWidget::resizeEvent(resizeEvent);
+	m_board.ResizeBoard(resizeEvent->oldSize(), resizeEvent->size());
+	/*switch (m_players.size())
+	{
+	case 2:
+		m_board.SetGeometry2PGame(this->size());
+		break;
+	case 3:
+		
+		break;
+	case 4:
+		
+		break;
+	default:
+		break;
+	}*/
+
+}
+
+//void Game::mousePressEvent(QMouseEvent* ev)
 //{
-//	this->QWidget::resizeEvent(event);
+//	if (ev->button() == Qt::LeftButton)
+//	{
+//		qDebug() << ev->pos();
+//	}
 //}
+
+
 
 void Game::on_exitButton_clicked()
 {
