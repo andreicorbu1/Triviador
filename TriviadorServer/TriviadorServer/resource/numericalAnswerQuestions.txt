@@ -1,8 +1,8 @@
-Cat de lung este un moment? in secunde
+Cat de lung este un moment? In secunde
 90
-Ce dimensiune are un bazin olimpic? in metri
+Ce dimensiune are un bazin olimpic? In metri
 50
-in jur de cate papile gustative are limba umana medie?
+In jur de cate papile gustative are limba umana medie?
 10.000
 Cate minute dureaza un meci de rugby?
 80
@@ -16,7 +16,7 @@ Care este diametrul unui cos de baschet in inch?
 18
 Cate aterizari pe Luna cu echipaj au fost?
 6
-in ce an a fost semnata Declaratia de independenta a Statelor Unite?
+In ce an a fost semnata Declaratia de independenta a Statelor Unite?
 1776
 Cand a cazut Zidul Berlinului?
 1989
@@ -28,3 +28,89 @@ Cate oase au rechinii?
 0
 Cate coarne are un Triceratop?
 3
+Cati copii a avut Alexander Hamilton?
+8
+Cati copii are celebrul bucatar Gordon Ramsey?
+5
+Cate lingurite sunt intr-o cana?
+48
+Cati yarzi sunt intr-o mila?
+1760
+Cate bai sunt la Casa Alba?
+35
+Cate camere are Palatul Versailles?
+2300
+Care este durata de rulare a Vrajitorului din Oz in minute?
+112
+Cati ani are apreciata actrita Dame Maggie Smith?
+87
+Cati ani are influentul rapper american Jay-Z?
+53
+In ce an s-a nascut monarhul englez, regina Elisabeta a II-a?
+1926
+In ce an s-a nascut legendarul dramaturg englez William Shakespeare?
+1564
+In ce an s-a nascut al 14-lea Dalai Lama?
+1935
+In ce an a murit al treilea faraon egiptean, Ramses? I.Hr.
+1213
+In ce an a murit renumita pictora baroc italiana Artemisia Gentileschi?
+1653
+Cati metri lungime are Podul Brooklyn?
+1834
+Cati metri lungime are Podul Huey P. Long din Louisiana?
+7009
+Cati ani avea George HW Bush cand a depus juramantul ca presedinte al Statelor Unite?
+64
+Cati ani avea Franklin D. Roosevelt cand a depus juramantul in functia prezidentiala?
+51
+Cati ani a fost James Monroe in functie ca presedinte al Statelor Unite?
+8
+Cati ani a fost Herbert Hoover in functia prezidentiala?
+4
+In ce an a fost incoronata Regina Victoria a Regatului Unit?
+1838
+In ce an a fost incoronat Ludovic al XIV-lea rege al Frantei?
+1654
+In ce pozitie in Billboard Hot 100 Chart a atins apogeul hitul lui Beyonce "Love On Top"?
+20
+In topul Billboard de la sfarsitul anului 2019, care a fost clasamentul "7 Rings" al Ariana Grande?
+7
+Cate sotii a avut regele Henric al VIII-lea?
+6
+Starleta americana Zsa Zsa Gabor, cati soti a avut de-a lungul vietii?
+9
+Care este adancimea maxima a Marii Moarte? In metri
+306
+Cat de adanca este cea mai adanca parte a Lacului Erie? In metri
+64
+Care este speranta medie de viata a unui ghepard? In ani
+12
+In Biblie, cate plagi ale Egiptului au fost?
+10
+Ce numar a avut misiunea Apollo, zborul spatial unde au aterizat primii doi oameni pe Luna?
+11
+Cati lei sculptati de Sir Edwin Landseer stau la baza Trafalgar Square?
+4
+Care numar din Pennsylvania Avenue este adresa oficiala a Casei Albe?
+1600
+Daca un utilizator de internet urmareste o legatura intrerupta sau inactiva, va gasi de obicei o pagina de eroare, care este numarul mesajului de eroare?
+404
+Cate tari fara iesire la mare sunt in America de Sud?
+2
+Pe majoritatea telefoanelor cu butoane, ce tasta numerica are si literele M, N si O?
+6
+In inch, cat de inalta este o plasa de tenis de masa?
+6
+Cati yarzi sunt intr-o mila?
+1760
+Al catelea presedinte ale Statelor Unite ale Americii era Barack Obama?
+44
+De cate ori a fost casatorit Del Boy Trotter in sitcomul BBC Only Fools and Horses?
+0
+Steagul UE este format dintr-un cerc de cate stele aurii?
+12
+Cati jucatori sunt intr-o echipa de hochei pe gheata?
+6
+Ce varsta trebuie sa ai implinita pentru a fi eligibil de a deveni presedinte al Statelor Unite?
+35

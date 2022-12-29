@@ -157,6 +157,7 @@
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\WaitingInLobbyHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h" />
@@ -178,6 +179,8 @@
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
+    <ClInclude Include="include\Lobby.h" />
+    <ClInclude Include="include\WaitingInLobbyHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt" />

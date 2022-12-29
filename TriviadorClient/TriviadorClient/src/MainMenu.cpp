@@ -53,7 +53,31 @@ void MainMenu::on_joinGameButton_clicked() const
 
 void MainMenu::on_joinLobbyButton_clicked() const
 {
-	this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+	std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
+	auto res = cpr::Put
+	(
+		cpr::Url{ "http://localhost:18080/addplayertolobby" },
+		cpr::Body{ "id=" + lobbyId}
+	);
+
+	if (res.status_code == 200)
+	{
+		this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
+		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		WaitingInLobby(lobbyId);
+	}
+	else if (res.status_code == 401)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Lobby is full");
+		msgBox.exec();
+	}
+	else if (res.status_code == 400)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Lobby not found");
+		msgBox.exec();
+	}
 }
 
 void MainMenu::on_createGameButton_clicked() const
@@ -108,4 +132,25 @@ void MainMenu::on_gameFinished()
 	Show();
 	m_game->close();
 	delete m_game;
+}
+
+void MainMenu::WaitingInLobby(std::string lobbyID) const
+{
+	while(true)
+	{
+		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		cpr::Response res;
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		this->ui.stackedWidget->update();
+		res = cpr::Get
+		(
+			cpr::Url{ "http://localhost:18080/waitinginlobby" },
+			cpr::Body{ "id=" + lobbyID }
+		);
+		if (res.status_code != 100)
+		{
+			break;
+		}
+	}
 }

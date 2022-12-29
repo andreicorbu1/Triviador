@@ -4,6 +4,7 @@
 #include "ui_MainMenu.h"
 #include "Game.h"
 #include "Registration.h"
+#include <QMessageBox>
 
 
 class MainMenu : public QWidget
@@ -15,11 +16,11 @@ public:
     ~MainMenu();
 
     void hiMessage(const std::string& playerName);
-	void StartGame(std::vector<Player>& players);
+    void StartGame(std::vector<Player>& players);
 
 public slots:
     void Show();
-    
+
 private slots:
     void on_myProfileButton_clicked() const;
     void on_creditsButton_clicked() const;
@@ -33,7 +34,10 @@ private slots:
     void on_threePlayersButton_clicked();
     void on_fourPlayersButton_clicked();
 
-	void on_gameFinished();
+    void on_gameFinished();
+
+private:
+    void WaitingInLobby(std::string lobbyID) const;
 
 private:
     Ui::MainMenuClass ui;

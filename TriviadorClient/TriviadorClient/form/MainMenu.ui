@@ -281,7 +281,7 @@ border: none;</string>
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="play">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -507,8 +507,34 @@ border: none;
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <layout class="QGridLayout" name="gridLayout_4">
+         <item row="3" column="1">
+          <spacer name="verticalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
          <item row="0" column="0">
           <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_13">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -533,31 +559,18 @@ border: none;
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <spacer name="verticalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lobbyID">
+           <property name="font">
+            <font>
+             <family>Franklin Gothic Heavy</family>
+             <pointsize>26</pointsize>
+            </font>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
+           <property name="text">
+            <string>Lobby ID:</string>
            </property>
-          </spacer>
-         </item>
-         <item row="0" column="2">
-          <spacer name="horizontalSpacer_13">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
         </layout>
        </item>
@@ -820,6 +833,7 @@ Din punct de vedere botanic roșia este un fruct.[1] În anul 1893 Curtea Suprem
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="../resource/Triviador.qrc"/>
+  <include location="../../../../../../../../.designer/resource/Triviador.qrc"/>
  </resources>
  <connections/>
 </ui>
