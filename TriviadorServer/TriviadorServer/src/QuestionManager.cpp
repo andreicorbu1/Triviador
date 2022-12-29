@@ -1,6 +1,6 @@
 #include "QuestionManager.h"
 
-QuestionManager::QuestionManager(const std::string& path)
+QuestionManager::QuestionManager(const std::string& path = "resource/Questions.sqlite")
 	: m_storage(CreateStorageForQuestions(path))
 {
 	m_storage.sync_schema();
@@ -82,7 +82,7 @@ int QuestionManager::GetRandomMultipleAnswerQuestionsID()
 	std::mt19937 eng(rd());
 	std::uniform_int_distribution<> distr(1, m_storage.count<MultipleAnswerQuestion>());
 	int id = distr(eng);
-	while (alreadyChoosedMultipleAnswerQuestionsID.contains(id))
+	while (m_alreadyChoosedMultipleAnswerQuestionsID.contains(id))
 	{
 		id = distr(eng);
 	}
@@ -95,11 +95,17 @@ int QuestionManager::GetRandomNumericalAnswerQuestionsID()
 	std::mt19937 eng(rd());
 	std::uniform_int_distribution<> distr(1, m_storage.count<NumericalAnswerQuestion>());
 	int id = distr(eng);
-	while (alreadyChoosedNumericalAnswerQuestionsID.contains(id))
+	while (m_alreadyChoosedNumericalAnswerQuestionsID.contains(id))
 	{
 		id = distr(eng);
 	}
 	return id;
+}
+
+void QuestionManager::Clear()
+{
+	m_alreadyChoosedMultipleAnswerQuestionsID.clear();
+	m_alreadyChoosedNumericalAnswerQuestionsID.clear();
 }
 
 void QuestionManager::PopulateStorage()
