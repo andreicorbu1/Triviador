@@ -57,6 +57,8 @@ void Game::LoadBackgroundImage()
 	{
 		throw "The background couldn't load!";
 	}
+	m_background = m_background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
 }
 
 void Game::ConnectButtons()
@@ -75,40 +77,8 @@ void Game::action()
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
-	QPixmap background = m_background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-	painter.drawPixmap(0, 0, background);
+	painter.drawPixmap(0, 0, m_background);
 }
-
-void Game::resizeEvent(QResizeEvent* resizeEvent)
-{
-	this->QWidget::resizeEvent(resizeEvent);
-	m_board.ResizeBoard(resizeEvent->oldSize(), resizeEvent->size());
-	/*switch (m_players.size())
-	{
-	case 2:
-		m_board.SetGeometry2PGame(this->size());
-		break;
-	case 3:
-		
-		break;
-	case 4:
-		
-		break;
-	default:
-		break;
-	}*/
-
-}
-
-//void Game::mousePressEvent(QMouseEvent* ev)
-//{
-//	if (ev->button() == Qt::LeftButton)
-//	{
-//		qDebug() << ev->pos();
-//	}
-//}
-
-
 
 void Game::on_exitButton_clicked()
 {

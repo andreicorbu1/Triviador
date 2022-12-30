@@ -503,66 +503,6 @@ border: none;
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="lobby">
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="0">
-          <spacer name="horizontalSpacer_12">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="label_2">
-           <property name="font">
-            <font>
-             <family>Franklin Gothic Heavy</family>
-             <pointsize>26</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>LOBBY</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <spacer name="verticalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="2">
-          <spacer name="horizontalSpacer_13">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="createGame">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>

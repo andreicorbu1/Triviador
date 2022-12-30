@@ -6,7 +6,6 @@
 #include "Board.h"
 #include "Player.h"
 #include <QPaintEvent>
-#include <QResizeEvent>
 
 class Game : public QWidget
 {
@@ -18,7 +17,6 @@ public:
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
-    void resizeEvent(QResizeEvent* resizeEvent);
 signals:
 	void finished();
     
@@ -40,7 +38,6 @@ private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
     QPixmap m_background;
-    QPixmap background;
     Board m_board;
     std::vector<Player> m_players;
     int m_rounds;

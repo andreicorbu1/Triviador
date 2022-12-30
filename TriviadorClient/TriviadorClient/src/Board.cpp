@@ -82,47 +82,18 @@ Board& Board::operator=(Board&& other) noexcept
 void Board::Set2PGame()
 {
 	SetGeometry2PGame();
-	GetMasks(2);
-	SetMasks();
+	SetMasks(2);
 }
 
 void Board::Set3PGame()
 {
-	GetMasks(3);
-	SetMasks();
+	SetMasks(3);
 }
 
 void Board::Set4PGame()
 {
 	SetGeometry4PGame();
-	GetMasks(4);
-	SetMasks();
-}
-
-void Board::ResizeBoard(QSize oldWindowSize, QSize newWindowSize)
-{
-	if (oldWindowSize == QSize(-1, -1))
-		return;
-	QRect auxRect;
-	int x, y;
-	if (oldWindowSize.width() > newWindowSize.width()) x = 1;
-	else if (oldWindowSize.width() < newWindowSize.width())  x = -1;
-	else x = 0;
-	if (oldWindowSize.height() > newWindowSize.height()) y = 1;
-	else if (oldWindowSize.height() < newWindowSize.height()) y = -1;
-	else y = 0;
-	SetMasks();
-	for (size_t i = 0; i < m_board.size(); i++)
-	{
-		auxRect = m_board[i].getButton()->geometry();
-		float newWidth = RuleOfThree(auxRect.width(), oldWindowSize.width(), newWindowSize.width()) ;
-		float newHeight = RuleOfThree(auxRect.height(), oldWindowSize.height(), newWindowSize.height());
-		float newX = RuleOfThree(auxRect.x(), oldWindowSize.width(), newWindowSize.width());
-		float newY = RuleOfThree(auxRect.y(), oldWindowSize.height(), newWindowSize.height());
-		
-
-		m_board[i].setGeometry(newX, newY, newWidth, newHeight);
-	}
+	SetMasks(4);
 }
 
 int Board::Size()
@@ -130,7 +101,7 @@ int Board::Size()
 	return m_board.size();
 }
 
-void Board::GetMasks(int playersNumber)
+void Board::SetMasks(int playersNumber)
 {
 	QString imageLocation = "../TriviadorClient/resource/map";
 	switch (playersNumber)
@@ -154,18 +125,9 @@ void Board::GetMasks(int playersNumber)
 		{
 			QString auxLocation = imageLocation;
 			auxLocation += QString::number(line) + QString::number(column) + ".png";
-			m_masks.push_back(QPixmap(auxLocation));
-			//m_board[line * m_width + column].setMask(QPixmap(auxLocation));
+			m_board[line * m_width + column].setMask(QPixmap(auxLocation));
 			m_board[line * m_width + column].SetButtonProperties();
 		}
-	}
-}
-
-void Board::SetMasks()
-{
-	for (size_t i = 0; i < m_board.size(); i++)
-	{
-		m_board[i].setMask(m_masks[i]);
 	}
 }
 
@@ -208,11 +170,6 @@ void Board::SetGeometry4PGame()
 	m_board[21].setGeometry(563, 676, 193, 159);
 	m_board[22].setGeometry(719, 676, 195, 165);
 	m_board[23].setGeometry(898, 636, 335, 189);
-}
-
-float Board::RuleOfThree(float oldValue, float oldSize, float newSize)
-{
-	return (oldValue * newSize) / oldSize;
 }
 
 Territory& Board::operator[](Position pos)

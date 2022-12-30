@@ -26,6 +26,12 @@ void MainMenu::StartGame(std::vector<Player>& players)
 	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
 }
 
+void MainMenu::StartLobby()
+{
+	m_lobby = new Lobby(this);
+	m_lobby->show();
+}
+
 void MainMenu::Show()
 {
 	showMaximized();
@@ -51,9 +57,9 @@ void MainMenu::on_joinGameButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.joinGame);
 }
 
-void MainMenu::on_joinLobbyButton_clicked() const
+void MainMenu::on_joinLobbyButton_clicked()
 {
-	this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+	StartLobby();
 }
 
 void MainMenu::on_createGameButton_clicked() const
