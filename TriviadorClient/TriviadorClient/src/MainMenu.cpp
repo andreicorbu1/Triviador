@@ -26,6 +26,12 @@ void MainMenu::StartGame(std::vector<Player>& players)
 	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
 }
 
+void MainMenu::StartLobby()
+{
+	m_lobby = new Lobby();
+	m_lobby->show();
+}
+
 void MainMenu::Show()
 {
 	showMaximized();
@@ -51,7 +57,7 @@ void MainMenu::on_joinGameButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.joinGame);
 }
 
-void MainMenu::on_joinLobbyButton_clicked() const
+void MainMenu::on_joinLobbyButton_clicked()
 {
 	std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
 	auto res = cpr::Put
@@ -62,8 +68,9 @@ void MainMenu::on_joinLobbyButton_clicked() const
 
 	if (res.status_code == 200)
 	{
-		this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
-		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		//this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
+		/*this->ui.stackedWidget->setCurrentWidget(ui.lobby);*/
+		StartLobby();
 		WaitingInLobby(lobbyId);
 	}
 	else if (res.status_code == 401)
@@ -138,10 +145,10 @@ void MainMenu::WaitingInLobby(std::string lobbyID) const
 {
 	while(true)
 	{
-		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		//this->ui.stackedWidget->setCurrentWidget(ui.lobby);
 		cpr::Response res;
 		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-		this->ui.stackedWidget->setCurrentWidget(ui.lobby);
+		//this->ui.stackedWidget->setCurrentWidget(ui.lobby);
 		this->ui.stackedWidget->update();
 		res = cpr::Get
 		(
