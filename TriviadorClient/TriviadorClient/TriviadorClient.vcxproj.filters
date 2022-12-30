@@ -56,6 +56,9 @@
     <ClCompile Include="src\Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lobby.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Registration.h">
@@ -70,6 +73,9 @@
     <QtMoc Include="include\QuestionWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\Lobby.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="form\Registration.ui">
@@ -82,6 +88,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="form\QuestionWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="form\Lobby.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
