@@ -133,16 +133,15 @@ void Board::SetMasks(int playersNumber)
 
 void Board::SetGeometry2PGame()
 {
-	m_board[0].setGeometry(367, 165, 351, 250);
-	m_board[1].setGeometry(627, 182, 228, 235);
-	m_board[2].setGeometry(825, 143, 255, 270);
-	m_board[3].setGeometry(235, 357, 390, 229);
-	m_board[4].setGeometry(593, 389, 264, 203);
-	m_board[5].setGeometry(817, 376, 263, 213);
-	m_board[6].setGeometry(293, 535, 460, 300);
-	m_board[7].setGeometry(602, 559, 310, 280);
-	m_board[8].setGeometry(830, 553, 406, 275);
-
+	m_board[0].setGeometry(357, 155, 341, 232);
+	m_board[1].setGeometry(610, 172, 218, 220);
+	m_board[2].setGeometry(802, 133, 245, 255);
+	m_board[3].setGeometry(228, 332, 377, 214);
+	m_board[4].setGeometry(576, 364, 254, 193);
+	m_board[5].setGeometry(794, 352, 253, 203);
+	m_board[6].setGeometry(283, 502, 450, 276);
+	m_board[7].setGeometry(586, 522, 300, 264);
+	m_board[8].setGeometry(805, 517, 396, 255);
 }
 
 void Board::SetGeometry4PGame()

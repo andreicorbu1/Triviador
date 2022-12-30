@@ -58,8 +58,7 @@ void Game::SetBackground()
 	{
 		throw "The background couldn't load!";
 	}
-	QSize screenSize = qApp->screens()[0]->size();
-	m_background = m_background.scaled(screenSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	m_background = m_background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 }
 
 void Game::ConnectButtons()
