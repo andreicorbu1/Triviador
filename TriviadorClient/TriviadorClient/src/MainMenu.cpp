@@ -26,10 +26,12 @@ void MainMenu::StartGame(std::vector<Player>& players)
 	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
 }
 
-void MainMenu::StartLobby()
+void MainMenu::StartLobby(std::string lobbyID)
 {
-	m_lobby = new Lobby();
+	m_lobby = new Lobby(lobbyID);
 	m_lobby->show();
+	hide();
+	connect(m_lobby, SIGNAL(finished()), this, SLOT(on_lobbyFinished()));
 }
 
 void MainMenu::Show()
@@ -70,8 +72,8 @@ void MainMenu::on_joinLobbyButton_clicked()
 	{
 		//this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
 		/*this->ui.stackedWidget->setCurrentWidget(ui.lobby);*/
-		StartLobby();
-		WaitingInLobby(lobbyId);
+		StartLobby(lobbyId);
+		//WaitingInLobby(lobbyId);
 	}
 	else if (res.status_code == 401)
 	{
@@ -134,30 +136,16 @@ void MainMenu::on_fourPlayersButton_clicked()
 	StartGame(players);
 }
 
+void MainMenu::on_lobbyFinished()
+{
+	Show();
+	m_lobby->close();
+	delete m_lobby;
+}
+
 void MainMenu::on_gameFinished()
 {
 	Show();
 	m_game->close();
 	delete m_game;
-}
-
-void MainMenu::WaitingInLobby(std::string lobbyID) const
-{
-	while(true)
-	{
-		//this->ui.stackedWidget->setCurrentWidget(ui.lobby);
-		cpr::Response res;
-		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-		//this->ui.stackedWidget->setCurrentWidget(ui.lobby);
-		this->ui.stackedWidget->update();
-		res = cpr::Get
-		(
-			cpr::Url{ "http://localhost:18080/waitinginlobby" },
-			cpr::Body{ "id=" + lobbyID }
-		);
-		if (res.status_code != 100)
-		{
-			break;
-		}
-	}
 }
