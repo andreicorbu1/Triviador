@@ -10,10 +10,10 @@ Board::Board()
 
 }
 
-Board::Board(const std::size_t& width, const std::size_t& height, QWidget* parent)
-	: m_width(width)
-	, m_height(height)
-	, m_size(m_width* m_height)
+Board::Board(const std::size_t& height, const std::size_t& width, QWidget* parent)
+	: m_height(height)
+	, m_width(width)
+	, m_size(m_width * m_height)
 	, m_board(m_size, Territory(parent))
 {
 	// empty
