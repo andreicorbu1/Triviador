@@ -87,6 +87,7 @@ void Board::Set2PGame()
 
 void Board::Set3PGame()
 {
+	SetGeometry3PGame();
 	SetMasks(3);
 }
 
@@ -108,7 +109,7 @@ void Board::SetMasks(int playersNumber)
 	{
 	case 2:
 		imageLocation += QString::number(2);
-		break;
+		break; 
 	case 3:
 		imageLocation += QString::number(3);
 		break;
@@ -141,7 +142,26 @@ void Board::SetGeometry2PGame()
 	m_board[5].setGeometry(794, 352, 253, 203);
 	m_board[6].setGeometry(283, 502, 450, 276);
 	m_board[7].setGeometry(586, 522, 300, 264);
-	m_board[8].setGeometry(805, 517, 396, 255);
+	m_board[8].setGeometry(805, 518, 396, 254);
+}
+
+void Board::SetGeometry3PGame()
+{
+	m_board[0].setGeometry(357, 155, 341, 232);
+	m_board[1].setGeometry(610, 172, 218, 220);
+	m_board[2].setGeometry(802, 133, 245, 255);
+	m_board[3].setGeometry(316, 333, 290, 128);
+	m_board[4].setGeometry(598, 362, 236, 107);
+	m_board[5].setGeometry(800, 352, 251, 95);
+	m_board[6].setGeometry(228, 422, 371, 123);
+	m_board[7].setGeometry(577, 433, 243, 119);
+	m_board[8].setGeometry(791, 425, 251, 124);
+	m_board[9].setGeometry(285, 504, 407, 164);
+	m_board[10].setGeometry(586, 523, 280, 121);
+	m_board[11].setGeometry(808, 518, 393, 116);
+	m_board[12].setGeometry(463, 635, 270, 143);
+	m_board[13].setGeometry(700, 633, 187, 152);
+	m_board[14].setGeometry(874, 593, 325, 179);
 }
 
 void Board::SetGeometry4PGame()
@@ -168,7 +188,7 @@ void Board::SetGeometry4PGame()
 	m_board[19].setGeometry(808, 518, 393, 116);
 	m_board[20].setGeometry(463, 635, 122, 129);
 	m_board[21].setGeometry(549, 633, 185, 147);
-	m_board[22].setGeometry(700, 633, 187, 151);
+	m_board[22].setGeometry(700, 633, 187, 152);
 	m_board[23].setGeometry(874, 593, 325, 179);
 }
 

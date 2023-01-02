@@ -25,7 +25,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 		m_board.Set2PGame();
 		break;
 	case 3:
-		m_board = Board(5, 3, this);
+		m_board = Board(3, 5, this);
 		m_rounds = 4;
 		m_board.Set3PGame();
 		break;
