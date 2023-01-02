@@ -25,7 +25,7 @@ void Territory::SetButtonProperties()
     m_button->setStyleSheet("background-color: blue;");
 }
 
-const QPushButton* Territory::getButton() const
+QPushButton* Territory::getButton() const
 {
     return m_button;
 }

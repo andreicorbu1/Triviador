@@ -24,7 +24,7 @@ public:
     void setGeometry(int x, int y, int width, int height);
     void setMask(const QPixmap& mask);
     void SetButtonProperties();
-    const QPushButton* getButton() const;
+    QPushButton* getButton() const;
 
 private:
     const uint16_t kBaseScore = 300;

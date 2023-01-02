@@ -16,6 +16,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
+	m_signalMapper = new QSignalMapper(this);
 
 	switch (m_players.size())
 	{
@@ -30,7 +31,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 		m_board.Set3PGame();
 		break;
 	case 4:
-		m_board = Board(4, 6, this);
+		m_board = Board(6, 4, this);
 		m_rounds = 3;
 		m_board.Set4PGame();
 		break;
@@ -63,15 +64,18 @@ void Game::SetBackground()
 
 void Game::ConnectButtons()
 {
+	QObject::connect(m_signalMapper, SIGNAL(mappedInt(int)), this, SLOT(action(int)));
 	for (int i = 0; i < m_board.Size(); i++)
 	{
-		connect(m_board[i].getButton(), SIGNAL(clicked()), this, SLOT(action()));
+		//QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), this, SLOT(action(int)));
+		QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), m_signalMapper, SLOT(map()));
+		m_signalMapper->setMapping(m_board[i].getButton(), i);
 	}
 }
 
-void Game::action()
+void Game::action(int position)
 {
-	qDebug() << "Button clicked!";
+	qDebug() << "The Button " << position << " was clicked!";
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
