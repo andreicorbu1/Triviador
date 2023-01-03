@@ -14,7 +14,15 @@ Lobby::~Lobby()
 
 void Lobby::on_leaveLobbyButton_clicked()
 {
-	emit finished();
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/removeplayerfromlobby" },
+		cpr::Body{ "id=" + m_lobbyID }
+	);
+	if (res.status_code == 200)
+	{
+		emit finished();
+	}
 }
 
 void Lobby::paintEvent(QPaintEvent * paintEvent)

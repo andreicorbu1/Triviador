@@ -9,9 +9,11 @@ class Lobby
 public:
 	Lobby();
 	void AddPlayer();
+	void RemovePlayer();
 	int GetNumberOfPlayers();
 	uint32_t GetLobbyID();
 	const std::chrono::system_clock::time_point& GetExpirationTime() const;
+
 private:
 	std::vector<int> m_players;
 	uint32_t m_lobbyId;

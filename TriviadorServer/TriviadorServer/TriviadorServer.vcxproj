@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RemoveFromLobbyHandler.cpp" />
     <ClCompile Include="src\AddToLobbyHandler.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
     <ClInclude Include="include\WaitingInLobbyHandler.h" />
+    <ClInclude Include="RemoveFromLobbyHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt" />

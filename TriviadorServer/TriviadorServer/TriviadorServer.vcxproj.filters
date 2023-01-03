@@ -75,6 +75,9 @@
     <ClCompile Include="src\WaitingInLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RemoveFromLobbyHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h">
@@ -134,7 +137,10 @@
     <ClInclude Include="include\AddToLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WaitingInLobbyHandler.h">
+    <ClInclude Include="include\WaitingInLobbyHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveFromLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
