@@ -7,14 +7,16 @@
 #include <QMessageBox>
 #include <string>
 #include <cpr/cpr.h>
+#include <User.h>
+#include <Player.h>
 
 class Lobby : public QWidget
 {
 	Q_OBJECT
 
 public:
-	Lobby(std::string lobbyID, QWidget *parent = nullptr);
-	~Lobby();
+	Lobby(const std::string& lobbyID, const User& user, QWidget *parent = nullptr);
+	~Lobby(); 
 
 signals:
 	void finished();
@@ -28,4 +30,5 @@ private:
 
 private:
 	Ui::LobbyClass ui;
+	Player 
 };

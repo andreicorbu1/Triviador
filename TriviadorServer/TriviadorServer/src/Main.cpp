@@ -33,10 +33,10 @@ int main()
 
 	std::unordered_map<uint32_t, Lobby> onGoingLobbies;
 	auto& createNewLobby = CROW_ROUTE(app, "/newlobby");
-	createNewLobby(CreateLobbyHandler(onGoingLobbies));
+	createNewLobby(CreateLobbyHandler(onGoingLobbies, userList));
 
 	auto& addToLobby = CROW_ROUTE(app, "/addplayertolobby").methods(crow::HTTPMethod::PUT);
-	addToLobby(AddToLobbyHandler(onGoingLobbies));
+	addToLobby(AddToLobbyHandler(onGoingLobbies, userList));
 
 	auto& waitInLobby = CROW_ROUTE(app, "/waitinginlobby");
 	waitInLobby(WaitingInLobbyHandler(onGoingLobbies));

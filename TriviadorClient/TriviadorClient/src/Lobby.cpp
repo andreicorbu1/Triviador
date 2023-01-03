@@ -1,6 +1,6 @@
 #include "Lobby.h"
 
-Lobby::Lobby(std::string lobbyID, QWidget *parent):
+Lobby::Lobby(const std::string& lobbyID, QWidget *parent):
 	m_lobbyID(lobbyID)
 {
 	ui.setupUi(this);
