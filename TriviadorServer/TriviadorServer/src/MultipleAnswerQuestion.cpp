@@ -64,28 +64,26 @@ size_t MultipleAnswerQuestion::GetNumberOfAnswers() const
 
 MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(const MultipleAnswerQuestion& multipleAnswerQuestion)
 {
-	if (this == &multipleAnswerQuestion)
+	if (this != &multipleAnswerQuestion)
 	{
-		return *this;
+		Question::SetId(multipleAnswerQuestion.GetId());
+		Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
+		Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+		m_answers = multipleAnswerQuestion.m_answers;
 	}
-	Question::SetId(multipleAnswerQuestion.GetId());
-	Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
-	Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
-	m_answers = multipleAnswerQuestion.m_answers;
 	return *this;
 }
 
 MultipleAnswerQuestion& MultipleAnswerQuestion::operator=(MultipleAnswerQuestion&& multipleAnswerQuestion) noexcept
 {
-	if (this == &multipleAnswerQuestion)
+	if (this != &multipleAnswerQuestion)
 	{
-		return *this;
+		Question::SetId(multipleAnswerQuestion.GetId());
+		Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
+		Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
+		m_answers = std::move(multipleAnswerQuestion.m_answers);
+		new(&multipleAnswerQuestion)MultipleAnswerQuestion;
 	}
-	Question::SetId(multipleAnswerQuestion.GetId());
-	Question::SetQuestion(multipleAnswerQuestion.GetQuestion());
-	Question::SetRightAnswer(multipleAnswerQuestion.GetRightAnswer());
-	m_answers = std::move(multipleAnswerQuestion.m_answers);
-	new(&multipleAnswerQuestion)MultipleAnswerQuestion;
 	return *this;
 }
 

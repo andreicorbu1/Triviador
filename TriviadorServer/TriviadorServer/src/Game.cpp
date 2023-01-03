@@ -41,7 +41,7 @@ std::vector<Player> Game::GetPlayers() const
 	return m_players;
 }
 
-int Game::GetRounds() const
+uint16_t Game::GetRounds() const
 {
 	return m_gameRounds;
 }
@@ -59,16 +59,73 @@ Player Game::GetWinner()
 	return copyOfPlayers.back();
 }
 
-NumericalAnswerQuestion Game::GetNumericalAnswerQuestion()
+std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
 {
 	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
-		return m_numericalAnswerQuestions[numericQuestionIndex++];
+	{
+		return {m_numericalAnswerQuestions[numericQuestionIndex++], numericQuestionIndex - 1};
+	}
+	else
+	{
+		throw std::out_of_range("All numerical questions have been selected");
+	}
 }
 
-MultipleAnswerQuestion Game::GetMultipleAnswerQuestion()
+NumericalAnswerQuestion Game::GetNumericalAnswerQuestion(uint16_t index) const
+{
+	if (index < m_numericalAnswerQuestions.size())
+	{
+		return m_numericalAnswerQuestions[index];
+	}
+	else
+	{
+		throw std::out_of_range("All numerical questions have been selected");
+	}
+}
+
+std::pair<MultipleAnswerQuestion, uint16_t> Game::GetMultipleAnswerQuestion()
 {
 	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
-		return m_multipleAnswerQuestions[multipleQuestionIndex++];
+	{
+		return {m_multipleAnswerQuestions[multipleQuestionIndex++], multipleQuestionIndex - 1};
+	}
+	else
+	{
+		throw std::out_of_range("All multiple questions have been selected");
+	}
+}
+
+MultipleAnswerQuestion Game::GetMultipleAnswerQuestion(uint16_t index) const
+{
+	if (index < m_multipleAnswerQuestions.size())
+	{
+		return m_multipleAnswerQuestions[index];
+	}
+	else
+	{
+		throw std::out_of_range("All multiple questions have been selected");
+	}
+}
+
+std::string Game::CurrentStage() const
+{
+	switch (m_currentStage)
+	{
+		case Stage::Stage1:
+			return "Stage 1";
+			break;
+		case Stage::Stage2:
+			return "Stage 2";
+			break;
+		case Stage::Stage3:
+			return "Stage 3";
+			break;
+		case Stage::Stage4:
+			return "Stage 4";
+			break;
+		default:
+			throw std::invalid_argument("Stage invalid");
+	}
 }
 
 void Game::SetBoard(const Board& board)
@@ -81,7 +138,7 @@ void Game::SetPlayers(const std::vector<Player>& players)
 	this->m_players = players;
 }
 
-void Game::SetRounds(const int& rounds)
+void Game::SetRounds(const uint16_t& rounds)
 {
 	this->m_gameRounds = rounds;
 }
@@ -150,19 +207,50 @@ void Game::SetQuestions(const uint16_t& numberOfPlayers)
 	std::ranges::shuffle(m_multipleAnswerQuestions, gen);
 }
 
+void Game::GoToNextStage()
+{
+	switch (m_currentStage)
+	{
+		case Stage::Stage1:
+			m_currentStage = Stage::Stage2;
+			break;
+		case Stage::Stage2:
+			m_currentStage = Stage::Stage3;
+			break;
+		case Stage::Stage3:
+			m_currentStage = Stage::Stage4;
+			break;
+		default:
+			throw std::invalid_argument("Cannot advance in other stages because you are in a final stage");
+	}
+
+}
+
 Game& Game::operator=(const Game& other)
 {
-	m_board = other.m_board;
-	m_gameRounds = other.m_gameRounds;
-	m_ID = other.m_ID;
-	m_players = other.m_players;
-	return *this;
+	if (this != &other)
+	{
+		m_board = other.m_board;
+		m_gameRounds = other.m_gameRounds;
+		m_ID = other.m_ID;
+		m_players = other.m_players;
+		return *this;
+	}
 }
 
 void Game::Start()
 {
-	ChooseBaseTerritories();
-	std::cout << m_board;
+	m_currentStage = Stage::Stage1;
+}
+
+void Game::AddToAnswered(int questionId, const Player& player)
+{
+	if (m_alreadyAnswered.size() == m_players.size())
+	{
+		throw std::range_error("All players have already answered the question");
+		return;
+	}
+	m_alreadyAnswered[questionId].push_back(player);
 }
 
 void Game::Cleanup()
@@ -173,35 +261,29 @@ void Game::Cleanup()
 	m_numericalAnswerQuestions.clear();
 }
 
-void Game::ChooseBaseTerritories()
+void Game::ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players)
 {
-	for (const auto& player : m_players)
+	for (const auto& player : players)
 	{
-		do
-		{
-			std::cout << m_board << std::endl;
-			std::cout << player.GetName() << ", choose a territory: ";
-			uint16_t line;
-			uint16_t column;
-			std::cin >> line >> column;
+		m_board[player.second] = Territory(player.first, true);
+	}
+	GoToNextStage();
+}
 
-			try
+void Game::ChooseTerritories(const std::vector<std::pair<Player, std::vector<std::pair<int, int>>>>& playersOrder)
+{
+	for (size_t idx = 0; idx < playersOrder.size(); ++idx)
+	{
+		for (size_t idx2 = 0; idx < playersOrder[idx].second.size() && (m_players.size() - idx - 1) == playersOrder[idx].second.size(); ++idx2)
+		{
+			if (m_board[playersOrder[idx].second[idx2]].GetOwner().has_value())
 			{
-				Board::Position pos = {line, column};
-				if (m_board[pos].GetOwner().has_value())
-				{
-					std::cerr << "This territory is already taken!\n";
-				}
-				else
-				{
-					m_board[pos] = Territory(player, true);
-					break;
-				}
+				throw std::invalid_argument("Territory already ocuppied");
 			}
-			catch (const std::out_of_range& e)
+			else
 			{
-				std::cerr << e.what() << "\n";
+				m_board[playersOrder[idx].second[idx2]] = Territory(playersOrder[idx].first);
 			}
-		} while (true);
+		}
 	}
 }

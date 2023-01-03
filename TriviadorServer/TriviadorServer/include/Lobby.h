@@ -11,6 +11,7 @@ public:
 	void AddPlayer();
 	void RemovePlayer();
 	int GetNumberOfPlayers();
+	std::vector<Player> GetPlayers();
 	uint32_t GetLobbyID();
 	const std::chrono::system_clock::time_point& GetExpirationTime() const;
 

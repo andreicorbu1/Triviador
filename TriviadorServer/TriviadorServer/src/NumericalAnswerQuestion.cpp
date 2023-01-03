@@ -48,26 +48,24 @@ int NumericalAnswerQuestion::GetRightAnswer() const
 
 NumericalAnswerQuestion& NumericalAnswerQuestion::operator=(const NumericalAnswerQuestion& numericalAnswerQuestion)
 {
-	if (this == &numericalAnswerQuestion)
+	if (this != &numericalAnswerQuestion)
 	{
-		return *this;
+		Question::SetId(numericalAnswerQuestion.GetId());
+		Question::SetQuestion(numericalAnswerQuestion.GetQuestion());
+		Question::SetRightAnswer(numericalAnswerQuestion.GetRightAnswer());
 	}
-	Question::SetId(numericalAnswerQuestion.GetId());
-	Question::SetQuestion(numericalAnswerQuestion.GetQuestion());
-	Question::SetRightAnswer(numericalAnswerQuestion.GetRightAnswer());
 	return *this;
 }
 
 NumericalAnswerQuestion& NumericalAnswerQuestion::operator=(NumericalAnswerQuestion&& numericalAnswerQuestion) noexcept
 {
-	if (this == &numericalAnswerQuestion)
+	if (this != &numericalAnswerQuestion)
 	{
-		return *this;
+		Question::SetId(numericalAnswerQuestion.GetId());
+		Question::SetQuestion(numericalAnswerQuestion.GetQuestion());
+		Question::SetRightAnswer(numericalAnswerQuestion.GetRightAnswer());
+		new(&numericalAnswerQuestion)NumericalAnswerQuestion;
 	}
-	Question::SetId(numericalAnswerQuestion.GetId());
-	Question::SetQuestion(numericalAnswerQuestion.GetQuestion());
-	Question::SetRightAnswer(numericalAnswerQuestion.GetRightAnswer());
-	new(&numericalAnswerQuestion)NumericalAnswerQuestion;
 	return *this;
 }
 
