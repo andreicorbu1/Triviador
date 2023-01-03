@@ -45,6 +45,7 @@ private slots:
     void on_hammerButton_clicked();
     void on_telescopeButton_clicked();
     void on_parrotButton_clicked();
+    void on_answerButton_clicked();
     
     void UpdateProgressBar();
 
@@ -56,6 +57,8 @@ private:
     void SetAnswer(int position, const std::string& answer);
     void SetRightAnswer(const std::string& answer);
     void SetRightAnswer(const int& answer);
+    void SetConnections();
+    void StopProgressBar();
     
 private:
     // Constants

@@ -76,6 +76,9 @@ void Game::ConnectButtons()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
+	m_questionWindow.FetchMultipleAnswerQuestion();
+	m_questionWindow.StartTimer();
+	m_questionWindow.show();
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
