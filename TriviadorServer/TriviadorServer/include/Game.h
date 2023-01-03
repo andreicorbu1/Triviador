@@ -7,9 +7,7 @@
 class Game
 {
 public:
-	Game(const Player& player1, const Player& player2);
-	Game(const Player& player1, const Player& player2, const Player& player3);
-	Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4);
+	Game(const std::vector<Player>& players);
 	Game(const Game& other);
 	~Game() = default;
 
@@ -27,6 +25,7 @@ public:
 	void SetPlayers(const std::vector<Player>& players);
 	void SetRounds(const int& rounds);
 	void SetGameID(const int32_t& gameID);
+	void SetQuestions(const uint16_t& numberOfPlayers);
 
 	//Operators:
 	Game& operator =(const Game& other);

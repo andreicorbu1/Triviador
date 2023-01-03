@@ -2,91 +2,28 @@
 
 QuestionManager Game::m_questionManager("resource/Questions.sqlite");
 
-Game::Game(const Player& player1, const Player& player2)
-	: m_board(3, 3)
-	, m_players{player1, player2}
-	, m_gameRounds(5)
-	, m_ID(-1)
-	, m_numericalAnswerQuestions(kTwoPlayersNumericAnswerQuestions)
-	, m_multipleAnswerQuestions(kTwoPlayersMultipleAnswerQuestions)
+Game::Game(const std::vector<Player>& players) : m_players(players)
 {
-	assert(m_numericalAnswerQuestions.size() == kTwoPlayersNumericAnswerQuestions);
-	assert(m_multipleAnswerQuestions.size() == kTwoPlayersMultipleAnswerQuestions);
-
-	std::random_device rd;
-	std::mt19937 gen{rd()};
-
-	for (size_t index = 0; index < kTwoPlayersNumericAnswerQuestions; ++index)
+	switch (players.size())
 	{
-		uint16_t questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-		m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+		case 2:
+			m_board = Board(3, 3);
+			m_gameRounds = 5;
+			break;
+		case 3:
+			m_board = Board(5, 3);
+			m_gameRounds = 4;
+			break;
+		case 4:
+			m_board = Board(6, 4);
+			m_gameRounds = 5;
+			break;
+		default:
+			throw std::out_of_range("Invalid number of players");
+			break;
 	}
-	std::ranges::shuffle(m_numericalAnswerQuestions, gen);
-
-	for (size_t index = 0; index < kTwoPlayersMultipleAnswerQuestions; ++index)
-	{
-		uint16_t questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-		m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
-	}
-	std::ranges::shuffle(m_multipleAnswerQuestions, gen);
-}
-
-Game::Game(const Player& player1, const Player& player2, const Player& player3)
-	: m_board(5, 3)
-	, m_players{player1, player2, player3}
-	, m_gameRounds(4)
-	, m_ID(-1)
-	, m_numericalAnswerQuestions(kThreePlayersNumericAnswerQuestions)
-	, m_multipleAnswerQuestions(kThreePlayersMultipleAnswerQuestions)
-{
-	assert(m_numericalAnswerQuestions.size() == kThreePlayersNumericAnswerQuestions);
-	assert(m_multipleAnswerQuestions.size() == kThreePlayersMultipleAnswerQuestions);
-
-	std::random_device rd;
-	std::mt19937 gen{rd()};
-
-	for (size_t index = 0; index < kTwoPlayersNumericAnswerQuestions; ++index)
-	{
-		uint16_t questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-		m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
-	}
-	std::ranges::shuffle(m_numericalAnswerQuestions, gen);
-
-	for (size_t index = 0; index < kTwoPlayersMultipleAnswerQuestions; ++index)
-	{
-		uint16_t questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-		m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
-	}
-	std::ranges::shuffle(m_multipleAnswerQuestions, gen);
-}
-
-Game::Game(const Player& player1, const Player& player2, const Player& player3, const Player& player4)
-	: m_board(6, 4)
-	, m_players{player1, player2, player3, player4}
-	, m_gameRounds(5)
-	, m_ID(-1)
-	, m_numericalAnswerQuestions(kFourPlayersNumericAnswerQuestions)
-	, m_multipleAnswerQuestions(kFourPlayersMultipleAnswerQuestions)
-{
-	assert(m_numericalAnswerQuestions.size() == kFourPlayersNumericAnswerQuestions);
-	assert(m_multipleAnswerQuestions.size() == kFourPlayersMultipleAnswerQuestions);
-
-	std::random_device rd;
-	std::mt19937 gen{rd()};
-
-	for (size_t index = 0; index < kTwoPlayersNumericAnswerQuestions; ++index)
-	{
-		uint16_t questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-		m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
-	}
-	std::ranges::shuffle(m_numericalAnswerQuestions, gen);
-
-	for (size_t index = 0; index < kTwoPlayersMultipleAnswerQuestions; ++index)
-	{
-		uint16_t questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-		m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
-	}
-	std::ranges::shuffle(m_multipleAnswerQuestions, gen);
+	m_ID = -1;
+	SetQuestions(players.size());
 }
 
 Game::Game(const Game& other)
@@ -130,7 +67,7 @@ NumericalAnswerQuestion Game::GetNumericalAnswerQuestion()
 
 MultipleAnswerQuestion Game::GetMultipleAnswerQuestion()
 {
-	if(multipleQuestionIndex < m_multipleAnswerQuestions.size())
+	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
 		return m_multipleAnswerQuestions[multipleQuestionIndex++];
 }
 
@@ -152,6 +89,65 @@ void Game::SetRounds(const int& rounds)
 void Game::SetGameID(const int32_t& gameID)
 {
 	this->m_ID = gameID;
+}
+
+void Game::SetQuestions(const uint16_t& numberOfPlayers)
+{
+	std::random_device rd;
+	std::mt19937 gen{rd()};
+	uint16_t questionIndex;
+	switch (numberOfPlayers)
+	{
+		case 2:
+			m_numericalAnswerQuestions.resize(kTwoPlayersNumericAnswerQuestions);
+			m_multipleAnswerQuestions.resize(kTwoPlayersMultipleAnswerQuestions);
+			for (size_t index = 0; index < kTwoPlayersNumericAnswerQuestions; ++index)
+			{
+				questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
+				m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+			}
+			for (size_t index = 0; index < kTwoPlayersMultipleAnswerQuestions; ++index)
+			{
+				questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
+				m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
+			}
+			break;
+
+		case 3:
+			m_numericalAnswerQuestions.resize(kThreePlayersNumericAnswerQuestions);
+			m_multipleAnswerQuestions.resize(kThreePlayersMultipleAnswerQuestions);
+			for (size_t index = 0; index < kThreePlayersNumericAnswerQuestions; ++index)
+			{
+				questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
+				m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+			}
+
+			for (size_t index = 0; index < kThreePlayersMultipleAnswerQuestions; ++index)
+			{
+				questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
+				m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
+			}
+			break;
+
+		case 4:
+			m_numericalAnswerQuestions.resize(kFourPlayersNumericAnswerQuestions);
+			m_multipleAnswerQuestions.resize(kFourPlayersMultipleAnswerQuestions);
+			for (size_t index = 0; index < kFourPlayersNumericAnswerQuestions; ++index)
+			{
+				questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
+				m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+			}
+			for (size_t index = 0; index < kFourPlayersMultipleAnswerQuestions; ++index)
+			{
+				questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
+				m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
+			}
+			break;
+		default:
+			throw std::out_of_range("Invalid number of players");
+	}
+	std::ranges::shuffle(m_numericalAnswerQuestions, gen);
+	std::ranges::shuffle(m_multipleAnswerQuestions, gen);
 }
 
 Game& Game::operator=(const Game& other)
