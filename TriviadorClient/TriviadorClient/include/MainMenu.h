@@ -18,7 +18,7 @@ public:
 
     void hiMessage(const std::string& playerName);
     void StartGame(std::vector<Player>& players);
-    void StartLobby();
+    void StartLobby(std::string lobbyID);
 
 public slots:
     void Show();
@@ -36,10 +36,8 @@ private slots:
     void on_threePlayersButton_clicked();
     void on_fourPlayersButton_clicked();
 
+    void on_lobbyFinished();
     void on_gameFinished();
-
-private:
-    void WaitingInLobby(std::string lobbyID) const;
 
 private:
     Ui::MainMenuClass ui;

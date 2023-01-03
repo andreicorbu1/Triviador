@@ -14,6 +14,14 @@ void Lobby::AddPlayer()
 	m_expirationTime += oneMinute;
 }
 
+void Lobby::RemovePlayer()
+{
+	if (m_players.size() != 0)
+	{
+		m_players.pop_back();
+	}
+}
+
 int Lobby::GetNumberOfPlayers()
 {
 	return m_players.size();

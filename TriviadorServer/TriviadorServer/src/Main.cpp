@@ -5,12 +5,11 @@
 #include "CreateLobbyHandler.h"
 #include "CreateGameHandler.h"
 #include "AddToLobbyHandler.h"
+#include "RemoveFromLobbyHandler.h"
 #include "WaitingInLobbyHandler.h"
 #include "MultipleAnswerQuestion.h"
 #include "QuestionManager.h"
 #include "Game.h"
-#include "Lobby.h"
-#include <crow.h>
 
 int main()
 {
@@ -41,6 +40,9 @@ int main()
 
 	auto& waitInLobby = CROW_ROUTE(app, "/waitinginlobby");
 	waitInLobby(WaitingInLobbyHandler(onGoingLobbies));
+
+	auto& removePlayerFromLobby = CROW_ROUTE(app, "/removeplayerfromlobby");
+	removePlayerFromLobby(RemoveFromLobbyHandler(onGoingLobbies));
 
 	//for testing route
 	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()
