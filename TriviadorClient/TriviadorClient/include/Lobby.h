@@ -10,6 +10,7 @@
 #include <cpr/cpr.h>
 #include <User.h>
 #include <Player.h>
+#include "Game.h"
 
 class Lobby : public QWidget
 {
@@ -24,15 +25,20 @@ signals:
 
 private slots:
 	void on_leaveLobbyButton_clicked();
+	void on_startGameButton_clicked();
 
 private:
 	void paintEvent(QPaintEvent* paintEvent);
 	void HideAllPlayersName();
 	void SetPlayersLabel();
+	void StartGame();
+
 	std::string m_lobbyID;
 
 private:
 	Ui::LobbyClass ui;
-	Player m_player;
+	Player m_currentPlayer;
+	std::vector<Player> m_players;
 	std::vector<QLabel*> m_playersLabel;
+	Game* m_game;
 };

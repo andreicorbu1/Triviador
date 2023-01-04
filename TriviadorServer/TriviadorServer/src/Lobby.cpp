@@ -87,7 +87,7 @@ int Lobby::GetNumberOfPlayers()
 
 std::vector<Player> Lobby::GetPlayers()
 {
-	return std::vector<Player>();
+	return m_players;
 }
 
 uint32_t Lobby::GenerateRandomLobbyID()

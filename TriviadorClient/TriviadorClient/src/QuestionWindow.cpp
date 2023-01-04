@@ -39,10 +39,12 @@ void QuestionWindow::FetchQuestion()
 
 void QuestionWindow::FetchMultipleAnswerQuestion()
 {
-	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/MultipleAnswerQuestion" });
+	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/getmultiplequestion" });
 	if (res.status_code == 200)
 	{
-		auto question = crow::json::load(res.text);
+		auto question = crow::json::load(res.text); 
+		std::string s = question["question"].s();
+		std::string a = question["right_answer"].s();
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
 
@@ -55,7 +57,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 
 void QuestionWindow::FetchNumericalAnswerQuestion()
 {
-	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/NumericalAnswerQuestion" });
+	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/getnumericalquestion" });
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
