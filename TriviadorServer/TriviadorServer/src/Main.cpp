@@ -8,6 +8,8 @@
 #include "RemoveFromLobbyHandler.h"
 #include "WaitingInLobbyHandler.h"
 #include "MultipleAnswerQuestion.h"
+#include "SendAnswerMultipleQuestion.h"
+#include "SendAnswerNumericalQuestion.h"
 #include "QuestionManager.h"
 #include "Game.h"
 
@@ -16,7 +18,7 @@ int main()
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
 	questionManager.PopulateStorage();
-
+	Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)});
 	crow::SimpleApp app;
 
 	auto& addUserToAccountList = CROW_ROUTE(app, "/signup").methods(crow::HTTPMethod::PUT);
@@ -25,11 +27,11 @@ int main()
 	auto& loginToAccount = CROW_ROUTE(app, "/login").methods(crow::HTTPMethod::POST);
 	loginToAccount(LoginHandler(userList));
 
-	auto& getMultipleAnswerQuestion = CROW_ROUTE(app, "/MultipleAnswerQuestion");
-	getMultipleAnswerQuestion(MultipleAnswerQuestionHandler(questionManager));
+	auto& getMultipleAnswerQuestion = CROW_ROUTE(app, "/getmultiplequestion");
+	getMultipleAnswerQuestion(MultipleAnswerQuestionHandler(currentGame));
 
-	auto& getNumericalAnswerQuestion = CROW_ROUTE(app, "/NumericalAnswerQuestion");
-	getNumericalAnswerQuestion(NumericalAnswerQuestionHandler(questionManager));
+	auto& getNumericalAnswerQuestion = CROW_ROUTE(app, "/getnumericalquestion");
+	getNumericalAnswerQuestion(NumericalAnswerQuestionHandler(currentGame));
 
 	std::unordered_map<uint32_t, Lobby> onGoingLobbies;
 	auto& createNewLobby = CROW_ROUTE(app, "/newlobby");
@@ -43,6 +45,12 @@ int main()
 
 	auto& removePlayerFromLobby = CROW_ROUTE(app, "/removeplayerfromlobby");
 	removePlayerFromLobby(RemoveFromLobbyHandler(onGoingLobbies));
+
+	auto& sendAnswerForMultipleQuestion = CROW_ROUTE(app, "/sendanswer/multiple");
+	sendAnswerForMultipleQuestion(SendAnswerMultipleQuestion(currentGame));
+
+	auto& sendAsnwerForNumericalQuestion = CROW_ROUTE(app, "/sendanswer/numerical");
+	sendAsnwerForNumericalQuestion(SendAnswerNumericalQuestion(currentGame));
 
 	//for testing route
 	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()
@@ -72,8 +80,8 @@ int main()
 	return lobbyNotFound;
 		});
 
-	//auto& createNewGame = CROW_ROUTE(app, "/newgame/<int>").methods(crow::HTTPMethod::PUT);
-	//createNewGame(CreateGameHandler(ongoingGames));
+	//auto& createNewGame = CROW_ROUTE(app, "/newgame").methods(crow::HTTPMethod::PUT);
+	//createNewGame(CreateGameHandler(game, lobby));
 
 	app.port(18080).multithreaded().run();
 	return 0;

@@ -3,7 +3,7 @@
 Board::Board(const std::size_t& width, const std::size_t& height)
 	: m_width(width)
 	, m_height(height)
-	, m_board(m_width * m_height, Territory())
+	, m_board(width * height, Territory())
 {
 	// empty
 }
@@ -45,17 +45,23 @@ Territory& Board::operator[](Position pos)
 
 Board& Board::operator=(const Board& other)
 {
-	this->m_board = other.m_board;
-	this->m_height = other.m_height;
-	this->m_width = other.m_width;
+	if (this != &other)
+	{
+		this->m_board = other.m_board;
+		this->m_height = other.m_height;
+		this->m_width = other.m_width;
+	}
 	return *this;
 }
 
 Board& Board::operator=(Board&& other) noexcept
 {
-	m_board = std::exchange(other.m_board, std::vector<Territory>());
-	m_height = std::exchange(other.m_height, 0);
-	m_width = std::exchange(other.m_width, 0);
+	if (this != &other)
+	{
+		m_board = std::exchange(other.m_board, std::vector<Territory>());
+		m_height = std::exchange(other.m_height, 0);
+		m_width = std::exchange(other.m_width, 0);
+	}
 	return *this;
 }
 

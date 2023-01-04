@@ -9,10 +9,7 @@ Player::Player(const std::string& playerName, const Color& color) :
 
 Player::Player(const Player& other)
 {
-	this->m_score = other.m_score;
-	this->m_territoriesCount = other.m_territoriesCount;
-	this->m_color = other.m_color;
-	this->m_playerName = other.m_playerName;
+	*this = other;
 }
 
 Player::Player(Player&& other) noexcept
@@ -67,23 +64,25 @@ void Player::AddScore(size_t score)
 
 Player& Player::operator=(const Player& other)
 {
-	if (this == &other)
+	if (this != &other)
 	{
-		return *this;
+		this->m_score = other.m_score;
+		this->m_territoriesCount = other.m_territoriesCount;
+		this->m_color = other.m_color;
+		this->m_playerName = other.m_playerName;
 	}
-	this->m_score = other.m_score;
-	this->m_territoriesCount = other.m_territoriesCount;
-	this->m_color = other.m_color;
-	this->m_playerName = other.m_playerName;
 	return *this;
 }
 
 Player& Player::operator=(Player&& other) noexcept
 {
-	m_playerName = std::exchange(other.m_playerName, std::string());
-	m_color = std::exchange(other.m_color, Player::Color::NaN);
-	m_score = std::exchange(other.m_score, 0);
-	m_territoriesCount = std::exchange(other.m_territoriesCount, 0);
+	if (this != &other)
+	{
+		m_playerName = std::exchange(other.m_playerName, std::string());
+		m_color = std::exchange(other.m_color, Player::Color::NaN);
+		m_score = std::exchange(other.m_score, 0);
+		m_territoriesCount = std::exchange(other.m_territoriesCount, 0);
+	}
 	return *this;
 }
 
