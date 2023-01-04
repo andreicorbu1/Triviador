@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QMessageBox>
 #include <string>
+#include <crow.h>
 #include <cpr/cpr.h>
 #include <User.h>
 #include <Player.h>
@@ -15,8 +16,8 @@ class Lobby : public QWidget
 	Q_OBJECT
 
 public:
-	Lobby(const std::string& lobbyID, const User& user, QWidget *parent = nullptr);
-	~Lobby(); 
+	Lobby(const std::string& lobbyID, const std::string& username, QWidget* parent = nullptr);
+	~Lobby();
 
 signals:
 	void finished();
@@ -26,9 +27,12 @@ private slots:
 
 private:
 	void paintEvent(QPaintEvent* paintEvent);
+	void HideAllPlayersName();
+	void SetPlayersLabel();
 	std::string m_lobbyID;
 
 private:
 	Ui::LobbyClass ui;
-	Player 
+	Player m_player;
+	std::vector<QLabel*> m_playersLabel;
 };

@@ -16,8 +16,7 @@ crow::json::wvalue CreateLobbyHandler::operator()(const crow::request& req) cons
 		std::string username=userName->second;
 		if(m_userList.SearchUser(username))
 		{
-			Player player(username, Player::Color::Red);
-			Lobby lobby(player);
+			Lobby lobby(Player(username, Player::Color::NaN));
 			m_onGoingLobbies[lobby.GetLobbyID()] = lobby;
 			crow::json::wvalue jsonWithLobbyID
 			{
@@ -37,7 +36,7 @@ crow::json::wvalue CreateLobbyHandler::operator()(const crow::request& req) cons
 
 	crow::json::wvalue jsonWithResponse
 	{
-		{"No Username", "404"}
+		{"no_username", "404"}
 	};
 	return crow::json::wvalue(jsonWithResponse);
 }

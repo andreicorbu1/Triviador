@@ -58,14 +58,96 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="leaveLobbyButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>80</y>
-     <width>151</width>
-     <height>21</height>
+     <x>310</x>
+     <y>70</y>
+     <width>181</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>22</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Leave Lobby</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player1">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>23</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player2">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>140</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>23</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player2</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>23</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player3</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player4">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>210</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>23</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player4</string>
    </property>
   </widget>
  </widget>

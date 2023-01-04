@@ -29,7 +29,6 @@ crow::response WaitingInLobbyHandler::operator()(const crow::request& req) const
 		{
 			return crow::response(404, "Lobby not found");
 		}
-
 	}
 	return crow::response(416, "NO ID");
 }

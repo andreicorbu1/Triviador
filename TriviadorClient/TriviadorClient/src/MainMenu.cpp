@@ -4,6 +4,15 @@ MainMenu::MainMenu(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
+	m_user.SetUsername("No name");
+	m_user.SetId(-1);
+}
+
+MainMenu::MainMenu(const User& user, QWidget* parent) :
+	QWidget(parent),
+	m_user(user)
+{
+	ui.setupUi(this);
 }
 
 MainMenu::~MainMenu()
@@ -28,7 +37,7 @@ void MainMenu::StartGame(std::vector<Player>& players)
 
 void MainMenu::StartLobby(std::string lobbyID)
 {
-	m_lobby = new Lobby(lobbyID);
+	m_lobby = new Lobby(lobbyID, m_user.GetUsername());
 	m_lobby->show();
 	hide();
 	connect(m_lobby, SIGNAL(finished()), this, SLOT(on_lobbyFinished()));
@@ -65,15 +74,12 @@ void MainMenu::on_joinLobbyButton_clicked()
 	auto res = cpr::Put
 	(
 		cpr::Url{ "http://localhost:18080/addplayertolobby" },
-		cpr::Body{ "id=" + lobbyId}
+		cpr::Body{ "id=" + lobbyId + "&" + "username=" + m_user.GetUsername() }
 	);
 
 	if (res.status_code == 200)
 	{
-		//this->ui.lobbyID->setText(QString::fromUtf8("Lobby ID: " + lobbyId));
-		/*this->ui.stackedWidget->setCurrentWidget(ui.lobby);*/
 		StartLobby(lobbyId);
-		//WaitingInLobby(lobbyId);
 	}
 	else if (res.status_code == 401)
 	{
@@ -113,7 +119,7 @@ void MainMenu::on_twoPlayersButton_clicked()
 	Player a("cristian", Player::Color::Blue);
 	Player b("tibi", Player::Color::Red);
 	std::vector<Player> players = { a, b };
-	
+
 	StartGame(players);
 }
 
