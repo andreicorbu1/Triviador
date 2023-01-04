@@ -1,28 +1,30 @@
 #include "MultipleAnswerQuestionHandler.h"
 
-MultipleAnswerQuestionHandler::MultipleAnswerQuestionHandler(QuestionManager& questionManager) : m_questionManager(questionManager)
+MultipleAnswerQuestionHandler::MultipleAnswerQuestionHandler(Game& game) : m_game(game)
 {}
 
 crow::json::wvalue MultipleAnswerQuestionHandler::operator()(const crow::request& req) const
 {
-	int id = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-	MultipleAnswerQuestion multipleAnswerQuestion(m_questionManager.GetMultipleAnswerQuestion(id));
-	std::vector<std::string> answers = multipleAnswerQuestion.GetAnswers();
-	std::random_device rd;
-	std::mt19937 g(rd());
-	std::shuffle(answers.begin(), answers.end(), g);
-
-	std::vector <crow::json::wvalue> answersJson;
-	for (auto& answer : answers)
+	try
 	{
-		answersJson.push_back(crow::json::wvalue(answer));
+		auto [question, id] = m_game.GetMultipleAnswerQuestion();
+		std::vector <crow::json::wvalue> answersJson;
+		for (auto& answer : question.GetAnswers())
+		{
+			answersJson.push_back(crow::json::wvalue(answer));
+		}
+
+		crow::json::wvalue questionJson
+		{
+			{"question", question.GetQuestion()},
+			{"right_answer", question.GetRightAnswer()},
+			{"answers", answersJson},
+			{"id", id}
+		};
+		return crow::json::wvalue(questionJson);
 	}
-
-	crow::json::wvalue question
+	catch (const std::exception& e)
 	{
-		{"question", multipleAnswerQuestion.GetQuestion()},
-		{"right_answer", multipleAnswerQuestion.GetRightAnswer()},
-		{"answers", answersJson}
-	};
-	return crow::json::wvalue(question);
+		return crow::json::wvalue{{"Error Code", e.what()}};
+	}
 }

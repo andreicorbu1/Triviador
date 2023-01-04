@@ -85,7 +85,12 @@ int Lobby::GetNumberOfPlayers()
 	return m_players.size();
 }
 
-uint32_t Lobby::GenerateRandomLobbyID() 
+std::vector<Player> Lobby::GetPlayers()
+{
+	return std::vector<Player>();
+}
+
+uint32_t Lobby::GenerateRandomLobbyID()
 {
 	std::random_device rd;
 	std::uniform_int_distribution<int> dist(1000, 9999);

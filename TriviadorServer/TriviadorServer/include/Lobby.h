@@ -22,6 +22,7 @@ public:
 	const Player& GetPlayerAt(int index) const;
 	int GetNumberOfPlayers();
 	int GetLobbyID() const;
+	std::vector<Player> GetPlayers();
 	const std::chrono::system_clock::time_point& GetExpirationTime() const;
 
 private:

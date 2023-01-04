@@ -52,15 +52,21 @@ void Territory::SetScore(const uint16_t& score)
 
 Territory& Territory::operator=(const Territory& territory)
 {
-	m_owner = territory.m_owner;
-	m_score = territory.m_score;
+	if(this != &territory)
+	{
+		m_owner = territory.m_owner;
+		m_score = territory.m_score;
+	}
 	return *this;
 }
 
 Territory& Territory::operator=(Territory&& territory) noexcept
 {
-	m_owner = std::exchange(territory.m_owner, {});
-	m_score = std::exchange(territory.m_score, 0);
+	if(this != &territory)
+	{
+		m_owner = std::exchange(territory.m_owner, {});
+		m_score = std::exchange(territory.m_score, 0);
+	}
 	return *this;
 }
 

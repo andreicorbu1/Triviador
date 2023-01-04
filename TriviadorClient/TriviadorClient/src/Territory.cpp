@@ -22,10 +22,11 @@ void Territory::setMask(const QPixmap& mask)
 void Territory::SetButtonProperties()
 {
     m_button->setCursor(QCursor(Qt::PointingHandCursor));
-    m_button->setStyleSheet("background-color: blue;");
+    m_button->setStyleSheet("background-color: rgb(83, 66, 50); color: white; font: 12pt \"Franklin Gothic Heavy\"; text-align:center;");
+    m_button->setText(QString::number(m_score));
 }
 
-const QPushButton* Territory::getButton() const
+QPushButton* Territory::getButton() const
 {
     return m_button;
 }

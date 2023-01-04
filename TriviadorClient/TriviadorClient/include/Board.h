@@ -13,7 +13,7 @@ public:
 
 public:
 	Board();
-    Board(const std::size_t& width, const std::size_t& height, QWidget* parent = nullptr);
+    Board(const std::size_t& height, const std::size_t& width, QWidget* parent = nullptr);
 	Board(const Board& other);
 	Board(Board&& other) noexcept;
 	~Board();
@@ -40,6 +40,7 @@ public:
 private:
     void SetMasks(int playersNumber);
     void SetGeometry2PGame();
+    void SetGeometry3PGame();
     void SetGeometry4PGame();
 
 private slots:

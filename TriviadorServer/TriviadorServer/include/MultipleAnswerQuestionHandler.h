@@ -1,11 +1,12 @@
 #pragma once
 #include "QuestionManager.h"
+#include "Game.h";
 #include <crow.h>
 struct MultipleAnswerQuestionHandler
 {
 public:
-	explicit MultipleAnswerQuestionHandler(QuestionManager& questionManager);
+	explicit MultipleAnswerQuestionHandler(Game& game);
 	crow::json::wvalue operator()(const crow::request& req) const;
 private:
-	QuestionManager& m_questionManager;
+	Game& m_game;
 };

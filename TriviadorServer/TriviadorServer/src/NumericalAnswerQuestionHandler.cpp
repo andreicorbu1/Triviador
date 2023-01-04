@@ -1,16 +1,24 @@
 #include "NumericalAnswerQuestionHandler.h"
 
-NumericalAnswerQuestionHandler::NumericalAnswerQuestionHandler(QuestionManager& questionManager) : m_questionManager(questionManager)
+NumericalAnswerQuestionHandler::NumericalAnswerQuestionHandler(Game& game) : m_game(game)
 {}
 
 crow::json::wvalue NumericalAnswerQuestionHandler::operator()(const crow::request& req) const
 {
-	int id = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-	NumericalAnswerQuestion numericalAnswerQuestion(m_questionManager.GetNumericalAnswerQuestion(id));
-	crow::json::wvalue question
+	try
 	{
-		{"question", numericalAnswerQuestion.GetQuestion()},
-		{"right_answer", numericalAnswerQuestion.GetRightAnswer()}
-	};
-	return crow::json::wvalue(question);
+		auto [question, id] = m_game.GetNumericalAnswerQuestion();
+		crow::json::wvalue questionJson
+		{
+			{"question", question.GetQuestion()},
+			{"right_answer", question.GetRightAnswer()},
+			{"id", id}
+		};
+		return questionJson;
+
+	}
+	catch (const std::exception& e)
+	{
+		return crow::json::wvalue{{"Error Code", e.what()}};
+	}
 }

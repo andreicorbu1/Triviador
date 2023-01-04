@@ -16,6 +16,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
+	m_signalMapper = new QSignalMapper(this);
 
 	switch (m_players.size())
 	{
@@ -30,7 +31,7 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 		m_board.Set3PGame();
 		break;
 	case 4:
-		m_board = Board(4, 6, this);
+		m_board = Board(6, 4, this);
 		m_rounds = 3;
 		m_board.Set4PGame();
 		break;
@@ -63,21 +64,40 @@ void Game::SetBackground()
 
 void Game::ConnectButtons()
 {
+	QObject::connect(m_signalMapper, SIGNAL(mappedInt(int)), this, SLOT(action(int)));
 	for (int i = 0; i < m_board.Size(); i++)
 	{
-		connect(m_board[i].getButton(), SIGNAL(clicked()), this, SLOT(action()));
+		//QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), this, SLOT(action(int)));
+		QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), m_signalMapper, SLOT(map()));
+		m_signalMapper->setMapping(m_board[i].getButton(), i);
 	}
 }
 
-void Game::action()
+void Game::action(int position)
 {
-	qDebug() << "Button clicked!";
+	qDebug() << "The Button " << position << " was clicked!";
+	m_questionWindow.FetchMultipleAnswerQuestion();
+	m_questionWindow.StartTimer();
+	m_questionWindow.show();
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, m_background);
+	painter.setBrush(QColor(83, 66, 50));
+	for (size_t i = 0; i < m_players.size(); i++)
+	{
+		QString color = m_players[i].GetColor().c_str();
+		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
+		painter.setPen(Qt::black);
+		painter.drawRect(playerTable);
+		QString tableText = (m_players[i].GetName() + " " + std::to_string(m_players[i].GetScore())).c_str();
+		painter.setFont(QFont("Franklin Gothic Heavy", 20));
+		painter.setPen(color);
+		painter.drawText(playerTable, Qt::AlignCenter, tableText);
+	}
+
 }
 
 void Game::on_exitButton_clicked()

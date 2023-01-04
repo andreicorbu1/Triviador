@@ -21,6 +21,8 @@ public:
 
     // Getters:
     const std::string& GetName() const;
+    const int GetScore() const;
+    const std::string GetColor() const;
 
     // Operators:
     Player& operator =(const Player& other);

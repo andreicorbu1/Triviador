@@ -10,10 +10,10 @@ Board::Board()
 
 }
 
-Board::Board(const std::size_t& width, const std::size_t& height, QWidget* parent)
-	: m_width(width)
-	, m_height(height)
-	, m_size(m_width* m_height)
+Board::Board(const std::size_t& height, const std::size_t& width, QWidget* parent)
+	: m_height(height)
+	, m_width(width)
+	, m_size(m_width * m_height)
 	, m_board(m_size, Territory(parent))
 {
 	// empty
@@ -87,6 +87,7 @@ void Board::Set2PGame()
 
 void Board::Set3PGame()
 {
+	SetGeometry3PGame();
 	SetMasks(3);
 }
 
@@ -108,7 +109,7 @@ void Board::SetMasks(int playersNumber)
 	{
 	case 2:
 		imageLocation += QString::number(2);
-		break;
+		break; 
 	case 3:
 		imageLocation += QString::number(3);
 		break;
@@ -141,35 +142,54 @@ void Board::SetGeometry2PGame()
 	m_board[5].setGeometry(794, 352, 253, 203);
 	m_board[6].setGeometry(283, 502, 450, 276);
 	m_board[7].setGeometry(586, 522, 300, 264);
-	m_board[8].setGeometry(805, 517, 396, 255);
+	m_board[8].setGeometry(805, 518, 396, 254);
+}
+
+void Board::SetGeometry3PGame()
+{
+	m_board[0].setGeometry(357, 155, 341, 232);
+	m_board[1].setGeometry(610, 172, 218, 220);
+	m_board[2].setGeometry(802, 133, 245, 255);
+	m_board[3].setGeometry(316, 333, 290, 128);
+	m_board[4].setGeometry(598, 362, 236, 107);
+	m_board[5].setGeometry(800, 352, 251, 95);
+	m_board[6].setGeometry(228, 422, 371, 123);
+	m_board[7].setGeometry(577, 433, 243, 119);
+	m_board[8].setGeometry(791, 425, 251, 124);
+	m_board[9].setGeometry(285, 504, 407, 164);
+	m_board[10].setGeometry(586, 523, 280, 121);
+	m_board[11].setGeometry(808, 518, 393, 116);
+	m_board[12].setGeometry(463, 635, 270, 143);
+	m_board[13].setGeometry(700, 633, 187, 152);
+	m_board[14].setGeometry(874, 593, 325, 179);
 }
 
 void Board::SetGeometry4PGame()
 {
-	m_board[0].setGeometry(420, 165, 190, 126);
-	m_board[1].setGeometry(603, 184, 116, 144);
-	m_board[2].setGeometry(709, 182, 148, 120);
-	m_board[3].setGeometry(842, 143, 191, 169);
-	m_board[4].setGeometry(370, 281, 219, 94);
-	m_board[5].setGeometry(475, 290, 223, 125);
-	m_board[6].setGeometry(629, 290, 209, 125);
-	m_board[7].setGeometry(824, 289, 259, 127);
-	m_board[8].setGeometry(327, 357, 134, 106);
-	m_board[9].setGeometry(431, 357, 195, 135);
-	m_board[10].setGeometry(616, 387, 241, 115);
-	m_board[11].setGeometry(823, 374, 257, 105);
-	m_board[12].setGeometry(236, 451, 223, 94);
-	m_board[13].setGeometry(430, 467, 186, 123);
-	m_board[14].setGeometry(592, 462, 253, 130);
-	m_board[15].setGeometry(816, 454, 255, 135);
-	m_board[16].setGeometry(293, 535, 265, 183);
-	m_board[17].setGeometry(451, 555, 264, 138);
-	m_board[18].setGeometry(600, 556, 295, 138);
-	m_board[19].setGeometry(830, 553, 406, 126);
-	m_board[20].setGeometry(475, 678, 130, 139);
-	m_board[21].setGeometry(563, 676, 193, 159);
-	m_board[22].setGeometry(719, 676, 195, 165);
-	m_board[23].setGeometry(898, 636, 335, 189);
+	m_board[0].setGeometry(406, 153, 188, 120);
+	m_board[1].setGeometry(586, 172, 113, 137);
+	m_board[2].setGeometry(689, 170, 144, 112);
+	m_board[3].setGeometry(818, 131, 187, 161);
+	m_board[4].setGeometry(356, 266, 215, 86);
+	m_board[5].setGeometry(458, 275, 219, 112);
+	m_board[6].setGeometry(610, 273, 203, 115);
+	m_board[7].setGeometry(802, 270, 250, 119);
+	m_board[8].setGeometry(316, 334, 130, 98);
+	m_board[9].setGeometry(417, 333, 191, 127);
+	m_board[10].setGeometry(598, 362, 236, 107);
+	m_board[11].setGeometry(800, 352, 251, 95);
+	m_board[12].setGeometry(226, 421, 219, 86);
+	m_board[13].setGeometry(421, 439, 174, 111);
+	m_board[14].setGeometry(577, 433, 243, 119);
+	m_board[15].setGeometry(791, 425, 251, 124);
+	m_board[16].setGeometry(285, 504, 256, 164);
+	m_board[17].setGeometry(439, 521, 253, 121);
+	m_board[18].setGeometry(586, 523, 280, 121);
+	m_board[19].setGeometry(808, 518, 393, 116);
+	m_board[20].setGeometry(463, 635, 122, 129);
+	m_board[21].setGeometry(549, 633, 185, 147);
+	m_board[22].setGeometry(700, 633, 187, 152);
+	m_board[23].setGeometry(874, 593, 325, 179);
 }
 
 Territory& Board::operator[](Position pos)

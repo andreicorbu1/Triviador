@@ -5,6 +5,7 @@
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
+#include <QSignalMapper>
 
 class Game : public QWidget
 {
@@ -27,17 +28,18 @@ private:
 
 private slots:
     void on_exitButton_clicked();
-    void action();
+    void action(int position);
 
 private:
-    const uint16_t rectangularSize = 175;
-    const uint16_t xPosition = 150;
-    const uint16_t yPosition = 25;
+    const std::pair<uint16_t, uint16_t> playersTableSize = { 200, 75 };
+    const std::pair<uint16_t, uint16_t> playersTableStartPoint = { 1280, 50 };
 
 private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
     QPixmap m_background;
+    QSignalMapper *m_signalMapper;
+
     Board m_board;
     std::vector<Player> m_players;
     int m_rounds;

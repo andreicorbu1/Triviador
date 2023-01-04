@@ -4,6 +4,7 @@
 #include <QRandomGenerator>
 #include <QDoubleValidator>
 #include <QEventLoop>
+#include <QButtonGroup>
 #include <QGraphicsDropShadowEffect>
 #include "ui_QuestionWindow.h"
 
@@ -45,6 +46,7 @@ private slots:
     void on_hammerButton_clicked();
     void on_telescopeButton_clicked();
     void on_parrotButton_clicked();
+    void on_answerButton_clicked();
     
     void UpdateProgressBar();
 
@@ -56,6 +58,9 @@ private:
     void SetAnswer(int position, const std::string& answer);
     void SetRightAnswer(const std::string& answer);
     void SetRightAnswer(const int& answer);
+    void SetConnections();
+    void StopProgressBar();
+    void SetButtonsProperties(int i);
     
 private:
     // Constants
@@ -64,6 +69,7 @@ private:
     // UI elements
     Ui::QuestionWindowClass ui;
     std::array<QPushButton*, kAnswerCount> ui_answers;
+    QButtonGroup m_buttonGroup;
     
     // Members
     QTimer* m_timer;
