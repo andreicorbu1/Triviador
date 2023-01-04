@@ -234,8 +234,12 @@ Game& Game::operator=(const Game& other)
 		m_gameRounds = other.m_gameRounds;
 		m_ID = other.m_ID;
 		m_players = other.m_players;
-		return *this;
+		m_multipleAnswerQuestions = other.m_multipleAnswerQuestions;
+		m_numericalAnswerQuestions = other.m_numericalAnswerQuestions;
+		numericQuestionIndex = other.numericQuestionIndex;
+		multipleQuestionIndex = other.multipleQuestionIndex;
 	}
+	return *this;
 }
 
 void Game::Start()
