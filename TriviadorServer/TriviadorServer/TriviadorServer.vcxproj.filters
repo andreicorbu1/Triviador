@@ -75,7 +75,10 @@
     <ClCompile Include="src\WaitingInLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RemoveFromLobbyHandler.cpp">
+    <ClCompile Include="src\RemoveFromLobbyHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp">
@@ -146,7 +149,10 @@
     <ClInclude Include="include\WaitingInLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RemoveFromLobbyHandler.h">
+    <ClInclude Include="include\RemoveFromLobbyHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GetAllPlayersFromLobbyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\SendAnswerMultipleQuestion.h">

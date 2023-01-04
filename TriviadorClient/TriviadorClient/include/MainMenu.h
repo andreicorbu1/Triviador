@@ -6,41 +6,43 @@
 #include "Registration.h"
 #include <QMessageBox>
 #include "Lobby.h"
-
+#include "User.h"
 
 class MainMenu : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    MainMenu(QWidget* parent = nullptr);
-    ~MainMenu();
+	MainMenu(QWidget* parent = nullptr);
+	MainMenu(const User& user, QWidget* parent = nullptr);
+	~MainMenu();
 
-    void hiMessage(const std::string& playerName);
-    void StartGame(std::vector<Player>& players);
-    void StartLobby(std::string lobbyID);
+	void hiMessage(const std::string& playerName);
+	void StartGame(std::vector<Player>& players);
+	void StartLobby(std::string lobbyID);
 
 public slots:
-    void Show();
+	void Show();
 
 private slots:
-    void on_myProfileButton_clicked() const;
-    void on_creditsButton_clicked() const;
-    void on_logOutButton_clicked();
-    void on_playButton_clicked() const;
-    void on_joinGameButton_clicked() const;
-    void on_joinLobbyButton_clicked();
-    void on_createGameButton_clicked() const;
-    void on_backButton_clicked();
-    void on_twoPlayersButton_clicked();
-    void on_threePlayersButton_clicked();
-    void on_fourPlayersButton_clicked();
+	void on_myProfileButton_clicked() const;
+	void on_creditsButton_clicked() const;
+	void on_logOutButton_clicked();
+	void on_playButton_clicked() const;
+	void on_joinGameButton_clicked() const;
+	void on_joinLobbyButton_clicked();
+	void on_createGameButton_clicked() const;
+	void on_backButton_clicked();
+	void on_twoPlayersButton_clicked();
+	void on_threePlayersButton_clicked();
+	void on_fourPlayersButton_clicked();
 
-    void on_lobbyFinished();
-    void on_gameFinished();
+	void on_lobbyFinished();
+	void on_gameFinished();
 
 private:
-    Ui::MainMenuClass ui;
-    Game* m_game;
-    Lobby* m_lobby;
+	Ui::MainMenuClass ui;
+	Game* m_game;
+	Lobby* m_lobby;
+	User m_user;
 };

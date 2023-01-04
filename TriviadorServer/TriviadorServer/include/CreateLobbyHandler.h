@@ -1,6 +1,7 @@
 #pragma once
 #include "crow.h"
 #include "Lobby.h"
+#include "AccountsManager.h"
 #include "utils.h"
 #include <random>
 
@@ -8,10 +9,11 @@ class CreateLobbyHandler
 {
 public:
 	CreateLobbyHandler() = delete;
-	CreateLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies);
+	CreateLobbyHandler(Lobby& lobby, AccountManager& userList);
 	crow::json::wvalue operator()(const crow::request& req) const;
+
 private:
-	//	std::unordered_map<uint32_t, Lobby> m_onGoingLobbies;
-	std::unordered_map<uint32_t, Lobby>& m_onGoingLobbies;
+	AccountManager& m_userList;
+	Lobby& m_lobby;
 };
 

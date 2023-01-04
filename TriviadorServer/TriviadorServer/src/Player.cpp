@@ -1,5 +1,29 @@
 #include "Player.h"
 
+std::string Player::ColorToString(Player::Color color) const
+{
+	switch (color)
+	{
+	case Player::Color::Blue:
+		return "Blue";
+		break;
+	case Player::Color::Red:
+		return "Red";
+		break;
+	case Player::Color::Green:
+		return "Green";
+		break;
+	case Player::Color::Yellow:
+		return "Yellow";
+		break;
+	case Player::Color::NaN:
+		return "Nan";
+		break;
+	default:
+		break;
+	}
+}
+
 Player::Player(const std::string& playerName, const Color& color) :
 	m_playerName(playerName), m_color(color)
 {

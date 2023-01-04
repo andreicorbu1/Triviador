@@ -138,11 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RemoveFromLobbyHandler.cpp" />
     <ClCompile Include="src\AddToLobbyHandler.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp" />
     <ClCompile Include="src\Lobby.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestionHandler.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp" />
@@ -155,6 +155,7 @@
     <ClCompile Include="src\MultipleAnswerQuestion.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
     <ClCompile Include="src\CreateGameHandler.cpp" />
+    <ClCompile Include="src\RemoveFromLobbyHandler.cpp" />
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp" />
     <ClCompile Include="src\SendAnswerNumericalQuestion.cpp" />
     <ClCompile Include="src\Territory.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GetAllPlayersFromLobbyHandler.h" />
     <ClInclude Include="include\Lobby.h" />
     <ClInclude Include="include\MultipleAnswerQuestionHandler.h" />
     <ClInclude Include="include\NumericalAnswerQuestionHandler.h" />
@@ -178,6 +180,7 @@
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Question.h" />
     <ClInclude Include="include\CreateGameHandler.h" />
+    <ClInclude Include="include\RemoveFromLobbyHandler.h" />
     <ClInclude Include="include\SendAnswerMultipleQuestion.h" />
     <ClInclude Include="include\SendAnswerNumericalQuestion.h" />
     <ClInclude Include="include\Territory.h" />
@@ -185,7 +188,6 @@
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
     <ClInclude Include="include\WaitingInLobbyHandler.h" />
-    <ClInclude Include="RemoveFromLobbyHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt" />

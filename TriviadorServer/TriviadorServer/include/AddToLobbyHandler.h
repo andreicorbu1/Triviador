@@ -1,14 +1,17 @@
 #pragma once
 #include "crow.h"
+#include "AccountsManager.h"
 #include "Lobby.h"
 #include "utils.h"
 #include <random>
 
 struct AddToLobbyHandler
 {
-	AddToLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies);
+	AddToLobbyHandler(Lobby& lobby, AccountManager& acountList);
 	crow::response operator()(const crow::request& req) const;
+
 private:
-	std::unordered_map<uint32_t, Lobby>& m_onGoingLobbies;
+	Lobby& m_lobby;
+	AccountManager& m_userList;
 };
 

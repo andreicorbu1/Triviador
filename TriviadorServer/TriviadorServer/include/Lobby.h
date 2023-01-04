@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include <vector>
+#include <array>
 #include <random>
 #include <chrono>
 
@@ -8,17 +9,30 @@ class Lobby
 {
 public:
 	Lobby();
-	void AddPlayer();
-	void RemovePlayer();
+	Lobby(const Lobby& lobby);
+	Lobby(const Player& player);
+	~Lobby();
+
+	Lobby& operator=(const Lobby& lobby);
+
+	void AddPlayer(const Player& player);
+	bool RemovePlayer(const std::string& username);
+	void ClearLobby();
+
+	const Player& GetPlayerAt(int index) const;
 	int GetNumberOfPlayers();
+	int GetLobbyID() const;
 	std::vector<Player> GetPlayers();
-	uint32_t GetLobbyID();
 	const std::chrono::system_clock::time_point& GetExpirationTime() const;
 
 private:
-	std::vector<int> m_players;
-	uint32_t m_lobbyId;
+	void SetAvailableColors();
+
+	std::vector<Player> m_players;
+	int m_lobbyId=INT_MAX;
 	uint32_t GenerateRandomLobbyID();
 	std::chrono::system_clock::time_point m_expirationTime;
+	static const size_t kNumberOfColors = 4;
+	std::vector<int>m_availableColors;
 };
 
