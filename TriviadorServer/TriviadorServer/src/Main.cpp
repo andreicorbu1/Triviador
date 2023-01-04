@@ -9,6 +9,7 @@
 #include "WaitingInLobbyHandler.h"
 #include "MultipleAnswerQuestion.h"
 #include "SendAnswerMultipleQuestion.h"
+#include "SendAnswerNumericalQuestion.h"
 #include "QuestionManager.h"
 #include "Game.h"
 
@@ -45,8 +46,12 @@ int main()
 	auto& removePlayerFromLobby = CROW_ROUTE(app, "/removeplayerfromlobby");
 	removePlayerFromLobby(RemoveFromLobbyHandler(onGoingLobbies));
 
-	auto& sendAnswerForMultipleQuestion = CROW_ROUTE(app, "/sendanswer");
+	auto& sendAnswerForMultipleQuestion = CROW_ROUTE(app, "/sendanswer/multiple");
 	sendAnswerForMultipleQuestion(SendAnswerMultipleQuestion(currentGame));
+
+	auto& sendAsnwerForNumericalQuestion = CROW_ROUTE(app, "/sendanswer/numerical");
+	sendAsnwerForNumericalQuestion(SendAnswerNumericalQuestion(currentGame));
+
 	//for testing route
 	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()
 		{

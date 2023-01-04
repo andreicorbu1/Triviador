@@ -81,6 +81,9 @@
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SendAnswerNumericalQuestion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\SendAnswerMultipleQuestion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SendAnswerNumericalQuestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

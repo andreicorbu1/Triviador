@@ -156,6 +156,7 @@
     <ClCompile Include="src\NumericalAnswerQuestion.cpp" />
     <ClCompile Include="src\CreateGameHandler.cpp" />
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp" />
+    <ClCompile Include="src\SendAnswerNumericalQuestion.cpp" />
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="include\Question.h" />
     <ClInclude Include="include\CreateGameHandler.h" />
     <ClInclude Include="include\SendAnswerMultipleQuestion.h" />
+    <ClInclude Include="include\SendAnswerNumericalQuestion.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
