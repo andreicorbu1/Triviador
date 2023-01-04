@@ -29,8 +29,13 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background-color: #801212;</string>
+    <string notr="true">background-color: #801212;
+color: rgb(255, 255, 255);
+font: 15pt &quot;Franklin Gothic Heavy&quot;;</string>
    </property>
    <property name="text">
     <string>EXIT</string>

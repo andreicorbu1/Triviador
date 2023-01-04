@@ -76,12 +76,28 @@ void Game::ConnectButtons()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
+	m_questionWindow.FetchMultipleAnswerQuestion();
+	m_questionWindow.StartTimer();
+	m_questionWindow.show();
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
 	painter.drawPixmap(0, 0, m_background);
+	painter.setBrush(QColor(83, 66, 50));
+	for (size_t i = 0; i < m_players.size(); i++)
+	{
+		QString color = m_players[i].GetColor().c_str();
+		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
+		painter.setPen(Qt::black);
+		painter.drawRect(playerTable);
+		QString tableText = (m_players[i].GetName() + " " + std::to_string(m_players[i].GetScore())).c_str();
+		painter.setFont(QFont("Franklin Gothic Heavy", 20));
+		painter.setPen(color);
+		painter.drawText(playerTable, Qt::AlignCenter, tableText);
+	}
+
 }
 
 void Game::on_exitButton_clicked()
