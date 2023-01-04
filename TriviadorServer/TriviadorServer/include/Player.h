@@ -13,6 +13,8 @@ public:
 		NaN
 	};
 
+	std::string ColorToString(Color color) const;
+
 public:
 	Player() = default;
 	Player(const std::string& playerName, const Color& color);

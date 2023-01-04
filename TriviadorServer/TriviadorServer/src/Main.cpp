@@ -7,6 +7,7 @@
 #include "AddToLobbyHandler.h"
 #include "RemoveFromLobbyHandler.h"
 #include "WaitingInLobbyHandler.h"
+#include "GetAllPlayersFromLobbyHandler.h"
 #include "MultipleAnswerQuestion.h"
 #include "QuestionManager.h"
 #include "Game.h"
@@ -42,7 +43,10 @@ int main()
 	waitInLobby(WaitingInLobbyHandler(onGoingLobbies));
 
 	auto& removePlayerFromLobby = CROW_ROUTE(app, "/removeplayerfromlobby");
-	removePlayerFromLobby(RemoveFromLobbyHandler(onGoingLobbies));
+	removePlayerFromLobby(RemoveFromLobbyHandler(onGoingLobbies, userList));
+
+	auto& getPlayersFromLobby= CROW_ROUTE(app, "/getplayersfromlobby");
+	getPlayersFromLobby(GetAllPlayersFromLobbyHandler(onGoingLobbies));
 
 	//for testing route
 	CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()
