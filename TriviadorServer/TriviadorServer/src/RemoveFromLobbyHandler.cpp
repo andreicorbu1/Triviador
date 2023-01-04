@@ -1,7 +1,7 @@
 #include "RemoveFromLobbyHandler.h"
 
-RemoveFromLobbyHandler::RemoveFromLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies, AccountManager& userList): 
-	m_onGoingLobbies(onGoingLobbies),
+RemoveFromLobbyHandler::RemoveFromLobbyHandler(Lobby& lobby, AccountManager& userList): 
+	m_lobby(lobby),
 	m_userList(userList)
 {
 }
@@ -18,9 +18,9 @@ crow::response RemoveFromLobbyHandler::operator()(const crow::request& req) cons
 		if (m_userList.SearchUser(username))
 		{
 			int id = std::stoi(lobbyID->second);
-			if (m_onGoingLobbies.contains(id))
+			if (m_lobby.GetLobbyID()==id)
 			{
-				if (m_onGoingLobbies[id].RemovePlayer(username))
+				if (m_lobby.RemovePlayer(username))
 				{
 					return crow::response(200, "Successfully Removed Player from Lobby");
 				}

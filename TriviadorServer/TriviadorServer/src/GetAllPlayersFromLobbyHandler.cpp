@@ -1,6 +1,6 @@
 #include "GetAllPlayersFromLobbyHandler.h"
 
-GetAllPlayersFromLobbyHandler::GetAllPlayersFromLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies) : m_onGoingLobbies(onGoingLobbies)
+GetAllPlayersFromLobbyHandler::GetAllPlayersFromLobbyHandler(Lobby& lobby) : m_lobby(lobby)
 {
 }
 
@@ -12,14 +12,14 @@ crow::json::wvalue GetAllPlayersFromLobbyHandler::operator()(const crow::request
 	if (lobbyID != end)
 	{
 		auto id = std::stoi(lobbyID->second);
-		if (m_onGoingLobbies.contains(id))
+		if (m_lobby.GetLobbyID()==id)
 		{
 			std::vector<Player>players;
-			int numberOfPlayersFromLobby = m_onGoingLobbies.at(id).GetNumberOfPlayers();
+			int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
 
 			for (int i = 0; i < numberOfPlayersFromLobby; i++)
 			{
-				Player player = m_onGoingLobbies.at(id).GetPlayerAt(i);
+				Player player = m_lobby.GetPlayerAt(i);
 				players.push_back(player);
 			}
 
@@ -27,7 +27,6 @@ crow::json::wvalue GetAllPlayersFromLobbyHandler::operator()(const crow::request
 			std::string jsonString = json.dump();
 
 			return crow::json::wvalue(crow::json::load(jsonString));
-
 		}
 		crow::json::wvalue invalidID
 		{

@@ -9,10 +9,10 @@ void to_json(nlohmann::json& json, const Player& player);
 class GetAllPlayersFromLobbyHandler
 {
 public:
-	GetAllPlayersFromLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies);
+	GetAllPlayersFromLobbyHandler(Lobby& lobby);
 	crow::json::wvalue operator()(const crow::request& req) const;
 
 
 private:
-	std::unordered_map<uint32_t, Lobby>& m_onGoingLobbies;
+	Lobby& m_lobby;
 };

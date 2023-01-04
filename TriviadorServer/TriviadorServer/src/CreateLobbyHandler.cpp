@@ -1,7 +1,7 @@
 #include "CreateLobbyHandler.h"
 
-CreateLobbyHandler::CreateLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies, AccountManager& userList):
-	m_onGoingLobbies(onGoingLobbies),
+CreateLobbyHandler::CreateLobbyHandler(Lobby& lobby, AccountManager& userList) :
+	m_lobby(lobby),
 	m_userList(userList)
 {
 }
@@ -13,16 +13,23 @@ crow::json::wvalue CreateLobbyHandler::operator()(const crow::request& req) cons
 	auto userName = bodyArgs.find("username");
 	if (userName != end)
 	{
-		std::string username=userName->second;
-		if(m_userList.SearchUser(username))
+		std::string username = userName->second;
+		if (m_userList.SearchUser(username))
 		{
-			Lobby lobby(Player(username, Player::Color::NaN));
-			m_onGoingLobbies[lobby.GetLobbyID()] = lobby;
-			crow::json::wvalue jsonWithLobbyID
+			if (m_lobby.GetLobbyID() == INT_MAX)
 			{
-				{"lobby_id", lobby.GetLobbyID()}
+				Lobby lobby(Player(username, Player::Color::NaN));
+				m_lobby = lobby;
+				crow::json::wvalue jsonWithLobbyID
+				{
+					{"lobby_id", lobby.GetLobbyID()}
+				};
+				return crow::json::wvalue(jsonWithLobbyID);
+			}
+			return crow::json::wvalue
+			{
+				{"lobby is already active", "400"}
 			};
-			return crow::json::wvalue(jsonWithLobbyID);
 		}
 		else
 		{

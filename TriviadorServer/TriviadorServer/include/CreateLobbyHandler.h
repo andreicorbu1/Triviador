@@ -9,11 +9,11 @@ class CreateLobbyHandler
 {
 public:
 	CreateLobbyHandler() = delete;
-	CreateLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies, AccountManager& userList);
+	CreateLobbyHandler(Lobby& lobby, AccountManager& userList);
 	crow::json::wvalue operator()(const crow::request& req) const;
 
 private:
 	AccountManager& m_userList;
-	std::unordered_map<uint32_t, Lobby>& m_onGoingLobbies;
+	Lobby& m_lobby;
 };
 

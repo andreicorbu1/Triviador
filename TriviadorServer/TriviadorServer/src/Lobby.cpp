@@ -4,9 +4,14 @@ Lobby::Lobby()
 {
 	m_availableColors.resize(kNumberOfColors);
 	SetAvailableColors();
-	m_lobbyId = GenerateRandomLobbyID();
+	//m_lobbyId = GenerateRandomLobbyID();
 	std::chrono::duration<int, std::ratio<3*60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
+}
+
+Lobby::Lobby(const Lobby& lobby)
+{
+	*this = lobby;
 }
 
 Lobby::Lobby(const Player& player)
@@ -17,6 +22,22 @@ Lobby::Lobby(const Player& player)
 	m_lobbyId = GenerateRandomLobbyID();
 	std::chrono::duration<int, std::ratio<3 * 60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
+}
+
+Lobby::~Lobby()
+{
+	ClearLobby();
+}
+
+Lobby& Lobby::operator=(const Lobby& lobby)
+{
+	if (this != &lobby) {
+		m_lobbyId = lobby.m_lobbyId;
+		m_availableColors = lobby.m_availableColors;
+		m_expirationTime = lobby.m_expirationTime;
+		m_players = lobby.m_players;
+	}
+	return *this;
 }
 
 void Lobby::AddPlayer(const Player& player)
@@ -47,6 +68,13 @@ bool Lobby::RemovePlayer(const std::string& username)
 	return false;
 }
 
+void Lobby::ClearLobby()
+{
+	m_players.clear();
+	m_availableColors.clear();
+	m_lobbyId = INT_MAX;
+}
+
 const Player& Lobby::GetPlayerAt(int index) const
 {
 	return m_players[index];
@@ -57,7 +85,7 @@ int Lobby::GetNumberOfPlayers()
 	return m_players.size();
 }
 
-uint32_t Lobby::GenerateRandomLobbyID()
+uint32_t Lobby::GenerateRandomLobbyID() 
 {
 	std::random_device rd;
 	std::uniform_int_distribution<int> dist(1000, 9999);
@@ -65,7 +93,7 @@ uint32_t Lobby::GenerateRandomLobbyID()
 	return dist(rd);
 }
 
-uint32_t Lobby::GetLobbyID()
+int Lobby::GetLobbyID() const
 {
 	return m_lobbyId;
 }

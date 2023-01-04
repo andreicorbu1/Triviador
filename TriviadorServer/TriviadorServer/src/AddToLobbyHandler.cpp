@@ -1,7 +1,7 @@
 #include "AddToLobbyHandler.h"
 
-AddToLobbyHandler::AddToLobbyHandler(std::unordered_map<uint32_t, Lobby>& onGoingLobbies, AccountManager& userList) :
-	m_onGoingLobbies(onGoingLobbies),
+AddToLobbyHandler::AddToLobbyHandler(Lobby& lobby, AccountManager& userList) :
+	m_lobby(lobby),
 	m_userList(userList)
 {}
 
@@ -17,12 +17,12 @@ crow::response AddToLobbyHandler::operator()(const crow::request& req) const
 		if (m_userList.SearchUser(username))
 		{
 			auto id = std::stoi(lobbyID->second);
-			if (m_onGoingLobbies.contains(id))
+			if (m_lobby.GetLobbyID()==id)
 			{
-				int numberOfPlayersFromLobby = m_onGoingLobbies.at(id).GetNumberOfPlayers();
+				int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
 				if (numberOfPlayersFromLobby < 4)
 				{
-					m_onGoingLobbies.at(id).AddPlayer(Player(username, Player::Color::NaN));
+					m_lobby.AddPlayer(Player(username, Player::Color::NaN));
 					return crow::response(200, "Successfully Added Player to Lobby");
 				}
 				return crow::response(401, "Full lobby");

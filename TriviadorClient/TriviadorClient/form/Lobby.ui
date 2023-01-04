@@ -90,7 +90,7 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="text">
-    <string>Player1</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="player2">
@@ -109,7 +109,7 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="text">
-    <string>Player2</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="player3">
@@ -128,7 +128,7 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="text">
-    <string>Player3</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="player4">
@@ -147,7 +147,7 @@ color: rgb(255, 255, 255);</string>
     </font>
    </property>
    <property name="text">
-    <string>Player4</string>
+    <string/>
    </property>
   </widget>
  </widget>
