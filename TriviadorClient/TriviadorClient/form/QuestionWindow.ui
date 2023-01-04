@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>500</height>
+    <width>804</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="font">
@@ -159,9 +159,11 @@ QProgressBar::chunk {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/question/Plank.svg);
-border: none;
+      <string notr="true">/*background-image: url(:/Others/question/Plank.svg);*/
+/*border: none;*/
 color: #ffffff;
+background-color: rgb(83, 66, 50);
+checked: {background-color: rgb(255, 244, 160)};
 </string>
      </property>
      <property name="text">
@@ -186,10 +188,11 @@ color: #ffffff;
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/question/Plank.svg);
-border: none;
+      <string notr="true">/*background-image: url(:/Others/question/Plank.svg);*/
+/*border: none;*/
 color: #ffffff;
-</string>
+background-color: rgb(83, 66, 50);
+checked: {background-color: rgb(255, 255, 127)}</string>
      </property>
      <property name="text">
       <string>Paris</string>
@@ -213,10 +216,11 @@ color: #ffffff;
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/question/Plank.svg);
-border: none;
+      <string notr="true">/*background-image: url(:/Others/question/Plank.svg);*/
+/*border: none;*/
 color: #ffffff;
-</string>
+background-color: rgb(83, 66, 50);
+checked: {background-color: rgb(255, 255, 127)}</string>
      </property>
      <property name="text">
       <string>Londra</string>
@@ -240,10 +244,11 @@ color: #ffffff;
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Others/question/Plank.svg);
-border: none;
+      <string notr="true">/*background-image: url(:/Others/question/Plank.svg);*/
+/*border: none;*/
 color: #ffffff;
-</string>
+background-color: rgb(83, 66, 50);
+checked: {background-color: rgb(255, 255, 127)}</string>
      </property>
      <property name="text">
       <string>Dubai</string>

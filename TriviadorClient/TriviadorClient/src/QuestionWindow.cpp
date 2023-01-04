@@ -10,6 +10,7 @@ QuestionWindow::QuestionWindow(QWidget* parent)
 	SetConnections();
 	SetShadowEffect();
 	SetTimer();
+	m_buttonGroup.setExclusive(true);
 }
 
 QuestionWindow::~QuestionWindow()
@@ -142,6 +143,7 @@ void QuestionWindow::on_parrotButton_clicked()
 void QuestionWindow::on_answerButton_clicked()
 {
 	QPushButton* button = qobject_cast<QPushButton*>(sender());
+	button->setChecked(true);
 	if (button->text() == std::get<std::string>(m_rightAnswer).c_str())
 	{
 		qDebug() << "Correct answer!";
@@ -150,7 +152,6 @@ void QuestionWindow::on_answerButton_clicked()
 	{
 		qDebug() << "Wrong answer!";
 	}
-	close();
 }
 
 void QuestionWindow::UpdateProgressBar()
@@ -208,12 +209,19 @@ void QuestionWindow::SetConnections()
 {
 	for (size_t i = 0; i < ui_answers.size(); i++)
 	{
-		QObject::connect(ui_answers[i], SIGNAL(clicked()), this, SLOT(on_answerButton_clicked()));
+		QObject::connect(ui_answers[i], SIGNAL(pressed()), this, SLOT(on_answerButton_clicked()));
+		SetButtonsProperties(i);
 	}
 }
 
 void QuestionWindow::StopProgressBar()
 {
 	m_timer->stop();
+}
+
+void QuestionWindow::SetButtonsProperties(int i)
+{
+	ui_answers[i]->setCheckable(true);
+	m_buttonGroup.addButton(ui_answers[i]);
 }
 
