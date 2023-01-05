@@ -48,6 +48,23 @@ void Lobby::on_startGameButton_clicked()
 void Lobby::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
+	auto playersFromLobby = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/getplayersfromlobby" },
+		cpr::Body{ "id=" + m_lobbyID }
+	);
+
+	m_players.clear();
+	auto players = crow::json::load(playersFromLobby.text);
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		std::string name = players[i]["name"].s();
+		std::string color = players[i]["color"].s();
+		m_playersLabel[i]->setText(QString::fromUtf8(name));
+		m_playersLabel[i]->show();
+		m_players.push_back(Player(name, Player::GetColor(color)));
+	}
+
 	auto res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/waitinginlobby" },
@@ -67,22 +84,6 @@ void Lobby::paintEvent(QPaintEvent* paintEvent)
 		StartGame();
 	}
 
-	auto playersFromLobby = cpr::Get
-	(
-		cpr::Url{ "http://localhost:18080/getplayersfromlobby" },
-		cpr::Body{ "id=" + m_lobbyID }
-	);
-
-	m_players.clear();
-	auto players = crow::json::load(playersFromLobby.text);
-	for (size_t i = 0; i < players.size(); i++)
-	{
-		std::string name = players[i]["name"].s();
-		std::string color = players[i]["color"].s();
-		m_playersLabel[i]->setText(QString::fromUtf8(name));
-		m_playersLabel[i]->show();
-		m_players.push_back(Player(name, Player::GetColor(color)));
-	}
 }
 
 void Lobby::HideAllPlayersName()
