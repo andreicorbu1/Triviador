@@ -150,7 +150,6 @@ void Game::SetGameID(const int32_t& gameID)
 
 void Game::SetQuestions(const uint16_t& numberOfPlayers)
 {
-	std::cout << "Am ajuns aici la intrebari\n";
 	std::random_device rd;
 	std::mt19937 gen{rd()};
 	uint16_t questionIndex;

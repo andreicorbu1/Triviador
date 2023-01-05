@@ -4,7 +4,6 @@ Lobby::Lobby()
 {
 	m_availableColors.resize(kNumberOfColors);
 	SetAvailableColors();
-	//m_lobbyId = GenerateRandomLobbyID();
 	std::chrono::duration<int, std::ratio<3*60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
@@ -117,6 +116,11 @@ bool Lobby::GetIsActiveGame() const
 void Lobby::SetIsActiveGame(bool activeGame)
 {
 	m_isActiveGame = activeGame;
+}
+
+void Lobby::SetPlayers(const std::vector<Player>& players)
+{
+	m_players = players;
 }
 
 void Lobby::SetAvailableColors()

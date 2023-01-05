@@ -30,6 +30,7 @@ public:
 
 	//Setters
 	void SetIsActiveGame(bool activeGame);
+	void SetPlayers(const std::vector<Player>& players);
 
 private:
 	void SetAvailableColors();

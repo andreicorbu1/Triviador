@@ -27,6 +27,15 @@ void MainMenu::hiMessage(const std::string& playerName)
 	ui.hiMessage->setText(message);
 }
 
+bool MainMenu::CheckGameCanStart()
+{
+	auto res = cpr::Put
+	(
+		cpr::Url{ "http://localhost:18080/newgame" }
+	);
+	return res.status_code == 200;
+}
+
 void MainMenu::StartGame(std::vector<Player>& players)
 {
 	m_game = new Game(players, this);
@@ -102,8 +111,6 @@ void MainMenu::on_createGameButton_clicked() const
 
 void MainMenu::on_createButton_clicked() 
 {
-	//std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
-
 	auto res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/newlobby" },
@@ -143,7 +150,10 @@ void MainMenu::on_twoPlayersButton_clicked()
 	Player b("tibi", Player::Color::Red);
 	std::vector<Player> players = { a, b };
 
-	StartGame(players);
+	if (CheckGameCanStart())
+	{
+		StartGame(players);
+	}
 }
 
 void MainMenu::on_threePlayersButton_clicked()
@@ -152,7 +162,12 @@ void MainMenu::on_threePlayersButton_clicked()
 	Player b("tibi", Player::Color::Red);
 	Player c("adi", Player::Color::Yellow);
 	std::vector<Player> players = { a, b, c };
-	StartGame(players);
+
+	if (CheckGameCanStart())
+	{
+		StartGame(players);
+	}
+
 }
 
 void MainMenu::on_fourPlayersButton_clicked()
@@ -162,7 +177,11 @@ void MainMenu::on_fourPlayersButton_clicked()
 	Player c("adi", Player::Color::Yellow);
 	Player d("andrei", Player::Color::Green);
 	std::vector<Player> players = { a, b, c, d };
-	StartGame(players);
+
+	if (CheckGameCanStart())
+	{
+		StartGame(players);
+	}
 }
 
 void MainMenu::on_lobbyFinished()

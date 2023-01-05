@@ -43,8 +43,6 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text); 
-		std::string s = question["question"].s();
-		std::string a = question["right_answer"].s();
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
 
