@@ -61,6 +61,11 @@ void Lobby::paintEvent(QPaintEvent* paintEvent)
 		msgBox.exec();
 		on_leaveLobbyButton_clicked();
 	}
+	else if (res.status_code == 300)
+	{
+		this->hide();
+		StartGame();
+	}
 
 	auto playersFromLobby = cpr::Get
 	(

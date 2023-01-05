@@ -153,11 +153,17 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="startGameButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>150</x>
      <y>260</y>
-     <width>75</width>
-     <height>24</height>
+     <width>181</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Franklin Gothic Heavy</family>
+     <pointsize>22</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Start Game</string>

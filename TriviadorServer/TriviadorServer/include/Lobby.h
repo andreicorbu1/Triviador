@@ -19,11 +19,17 @@ public:
 	bool RemovePlayer(const std::string& username);
 	void ClearLobby();
 
+
+	//Getters
 	const Player& GetPlayerAt(int index) const;
 	int GetNumberOfPlayers();
 	int GetLobbyID() const;
-	std::vector<Player> GetPlayers();
+	const std::vector<Player>& GetPlayers();
 	const std::chrono::system_clock::time_point& GetExpirationTime() const;
+	bool GetIsActiveGame() const;
+
+	//Setters
+	void SetIsActiveGame(bool activeGame);
 
 private:
 	void SetAvailableColors();
@@ -34,5 +40,6 @@ private:
 	std::chrono::system_clock::time_point m_expirationTime;
 	static const size_t kNumberOfColors = 4;
 	std::vector<int>m_availableColors;
+	bool m_isActiveGame=false;
 };
 

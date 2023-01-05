@@ -100,6 +100,29 @@ void MainMenu::on_createGameButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.createGame);
 }
 
+void MainMenu::on_createButton_clicked() 
+{
+	//std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
+
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/newlobby" },
+		cpr::Body{ "username=" + m_user.GetUsername() }
+	);
+
+	try
+	{
+		auto id = crow::json::load(res.text);
+		int lobbyId = id["lobby_id"].i();
+
+		StartLobby(std::to_string(lobbyId));
+	}
+	catch(std::exception ex)
+	{
+		qDebug() << "Can't create new lobby";
+	}
+}
+
 void MainMenu::on_backButton_clicked()
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.play);
