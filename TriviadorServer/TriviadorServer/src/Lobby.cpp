@@ -19,7 +19,7 @@ Lobby::Lobby(const Player& player)
 	m_availableColors.resize(kNumberOfColors);
 	SetAvailableColors();
 	AddPlayer(player);
-	//m_lobbyId = GenerateRandomLobbyID();
+	m_lobbyId = GenerateRandomLobbyID();
 	std::chrono::duration<int, std::ratio<3 * 60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
