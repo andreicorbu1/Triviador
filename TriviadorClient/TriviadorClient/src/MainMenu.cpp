@@ -72,7 +72,7 @@ void MainMenu::on_playButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.play);
 }
 
-void MainMenu::on_joinGameButton_clicked() const
+void MainMenu::on_joinButton_clicked() const
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.joinGame);
 }
@@ -104,11 +104,6 @@ void MainMenu::on_joinLobbyButton_clicked()
 	}
 }
 
-void MainMenu::on_createGameButton_clicked() const
-{
-	this->ui.stackedWidget->setCurrentWidget(ui.createGame);
-}
-
 void MainMenu::on_createButton_clicked() 
 {
 	auto res = cpr::Get
@@ -130,11 +125,6 @@ void MainMenu::on_createButton_clicked()
 	}
 }
 
-void MainMenu::on_backButton_clicked()
-{
-	this->ui.stackedWidget->setCurrentWidget(ui.play);
-}
-
 void MainMenu::on_logOutButton_clicked()
 {
 	close();
@@ -142,46 +132,6 @@ void MainMenu::on_logOutButton_clicked()
 	registration->show();
 
 	qDebug() << "Log Out button clicked";
-}
-
-void MainMenu::on_twoPlayersButton_clicked()
-{
-	Player a("cristian", Player::Color::Blue);
-	Player b("tibi", Player::Color::Red);
-	std::vector<Player> players = { a, b };
-
-	if (CheckGameCanStart())
-	{
-		StartGame(players);
-	}
-}
-
-void MainMenu::on_threePlayersButton_clicked()
-{
-	Player a("cristian", Player::Color::Blue);
-	Player b("tibi", Player::Color::Red);
-	Player c("adi", Player::Color::Yellow);
-	std::vector<Player> players = { a, b, c };
-
-	if (CheckGameCanStart())
-	{
-		StartGame(players);
-	}
-
-}
-
-void MainMenu::on_fourPlayersButton_clicked()
-{
-	Player a("cristian", Player::Color::Blue);
-	Player b("tibi", Player::Color::Red);
-	Player c("adi", Player::Color::Yellow);
-	Player d("andrei", Player::Color::Green);
-	std::vector<Player> players = { a, b, c, d };
-
-	if (CheckGameCanStart())
-	{
-		StartGame(players);
-	}
 }
 
 void MainMenu::on_lobbyFinished()

@@ -588,6 +588,9 @@ color: rgb(255, 255, 255);</string>
    <property name="styleSheet">
     <string notr="true">border: 2px solid rgb(252, 243, 33);</string>
    </property>
+   <property name="text">
+    <string>ParolaMeaSecreta2@</string>
+   </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
    </property>
@@ -815,6 +818,9 @@ border: none;</string>
    </property>
    <property name="text">
     <string>LOG IN</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
    </property>
   </widget>
   <widget class="QPushButton" name="signUpButton">
