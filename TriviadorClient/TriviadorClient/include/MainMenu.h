@@ -6,7 +6,7 @@
 #include "Registration.h"
 #include <QMessageBox>
 #include "Lobby.h"
-#include "User.h"
+#include "../../TriviadorCommon/User.h"
 
 class MainMenu : public QWidget
 {
