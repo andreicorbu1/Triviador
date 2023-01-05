@@ -1,5 +1,7 @@
 #include "Game.h"
 
+using namespace std::chrono_literals;
+
 Game::Game(QWidget* mainMenu)
 	: m_questionWindow(QuestionWindow(this))
 	, m_board(Board(1, 1))
@@ -22,23 +24,22 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	{
 	case 2:
 		m_board = Board(3, 3, this);
-		m_rounds = 5;
 		m_board.Set2PGame();
 		break;
 	case 3:
 		m_board = Board(5, 3, this);
-		m_rounds = 4;
 		m_board.Set3PGame();
 		break;
 	case 4:
 		m_board = Board(6, 4, this);
-		m_rounds = 3;
 		m_board.Set4PGame();
 		break;
 	default:
 		break;
 	}
 	ConnectButtons();
+
+	QTimer::singleShot(0, this, SLOT(Start()));
 }
 
 Game::~Game()
@@ -73,6 +74,86 @@ void Game::ConnectButtons()
 	}
 }
 
+void Game::Start()
+{	
+	Loop();
+}
+
+void Game::Loop()
+{
+	bool isFinished = false;
+	while (!isFinished)
+	{
+		auto res = cpr::Get(cpr::Url{ "http://localhost:18080/stage" });
+		
+		if (res.status_code == 200)
+		{
+			auto data = crow::json::load(res.text);
+			if (data["stage"] == "wait") 
+			{
+				// wait
+			}
+			if (data["stage"] == "question")
+			{
+				std::string type = data["type"].s();
+				if (type == "MultipleAnswer")
+				{
+					ShowQuestion(QuestionType::MultipleAnswer);
+				}
+				else if (type == "NumericalAnswer")
+				{
+					ShowQuestion(QuestionType::NumericalAnswer);
+				}
+			}
+			else if (data["stage"] == "choose")
+			{
+				std::string type = data["type"].s();
+				
+				if (type == "base")
+				{
+					// choose base
+				}
+				else if (type == "territory")
+				{
+					// choose territory
+				}
+			}
+			else if (data["stage"] == "attack")
+			{
+				// attack
+			}
+			else if (data["stage"] == "update")
+			{
+				// update board
+				// update score
+				// this update stage might be before choosing base, territory, attack
+			}
+			else if (data["stage"] == "result")
+			{
+				// show results	
+				// this might be inside finish stage
+			}
+			else if (data["stage"] == "finish")
+			{
+				isFinished = true;
+			}
+		}
+		else
+		{
+			// wait
+		}
+		
+		QThread::sleep(3);
+		qDebug() << "loop";
+	}
+
+	End();
+}
+
+void Game::End()
+{
+}
+
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
@@ -97,7 +178,6 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 		painter.setPen(color);
 		painter.drawText(playerTable, Qt::AlignCenter, tableText);
 	}
-
 }
 
 void Game::on_exitButton_clicked()

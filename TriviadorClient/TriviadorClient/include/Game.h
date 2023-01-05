@@ -6,6 +6,7 @@
 #include "Board.h"
 #include "Player.h"
 #include <QSignalMapper>
+#include <QThread>
 
 class Game : public QWidget
 {
@@ -21,10 +22,13 @@ public:
 signals:
 	void finished();
     
-private:
+private slots:
     void ShowQuestion(QuestionType type);
     void SetBackground();
     void ConnectButtons();
+    void Start();
+    void Loop();
+	void End();
 
 private slots:
     void on_exitButton_clicked();
@@ -42,5 +46,4 @@ private:
 
     Board m_board;
     std::vector<Player> m_players;
-    int m_rounds;
 };

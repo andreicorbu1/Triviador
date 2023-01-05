@@ -4,7 +4,7 @@ Lobby::Lobby(const std::string& lobbyID, const std::string& username, QWidget* p
 	m_lobbyID(lobbyID)
 {
 	ui.setupUi(this);
-	ui.lobbyID_label->setText(QString::fromUtf8("Lobby ID: " + lobbyID));
+	ui.lobbyID_label->setText(QString::fromUtf8("ID: " + lobbyID));
 
 	m_currentPlayer = Player(username, Player::Color::None);
 
