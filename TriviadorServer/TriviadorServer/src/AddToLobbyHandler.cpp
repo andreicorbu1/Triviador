@@ -27,9 +27,9 @@ crow::response AddToLobbyHandler::operator()(const crow::request& req) const
 				}
 				return crow::response(401, "Full lobby");
 			}
-			return crow::response(404, "No lobby which contains inserted id");
+			return crow::response(402, "No lobby which contains inserted id");
 		}
-		return crow::response(404, "User list doesn't contain inserted username");
+		return crow::response(403, "User list doesn't contain inserted username");
 	}
 	return crow::response(400, "Lobby ID or/and username isn't/aren't sent properly");
 }

@@ -4,7 +4,6 @@ Lobby::Lobby()
 {
 	m_availableColors.resize(kNumberOfColors);
 	SetAvailableColors();
-	//m_lobbyId = GenerateRandomLobbyID();
 	std::chrono::duration<int, std::ratio<3*60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
@@ -73,6 +72,7 @@ void Lobby::ClearLobby()
 	m_players.clear();
 	m_availableColors.clear();
 	m_lobbyId = INT_MAX;
+	m_isActiveGame = false;
 }
 
 const Player& Lobby::GetPlayerAt(int index) const
@@ -85,9 +85,9 @@ int Lobby::GetNumberOfPlayers()
 	return m_players.size();
 }
 
-std::vector<Player> Lobby::GetPlayers()
+const std::vector<Player>& Lobby::GetPlayers()
 {
-	return std::vector<Player>();
+	return m_players;
 }
 
 uint32_t Lobby::GenerateRandomLobbyID()
@@ -108,12 +108,29 @@ const std::chrono::system_clock::time_point& Lobby::GetExpirationTime() const
 	return m_expirationTime;
 }
 
+bool Lobby::GetIsActiveGame() const
+{
+	return m_isActiveGame;
+}
+
+void Lobby::SetIsActiveGame(bool activeGame)
+{
+	m_isActiveGame = activeGame;
+}
+
+void Lobby::SetPlayers(const std::vector<Player>& players)
+{
+	m_players = players;
+}
+
 void Lobby::SetAvailableColors()
 {
 	m_availableColors[0] = static_cast<int>(Player::Color::Red);
 	m_availableColors[1] = static_cast<int>(Player::Color::Yellow);
 	m_availableColors[2] = static_cast<int>(Player::Color::Blue);
 	m_availableColors[3] = static_cast<int>(Player::Color::Green);
-	std::shuffle(m_availableColors.begin(), m_availableColors.end(), std::default_random_engine{});
+
+	std::random_device rd;
+	std::shuffle(m_availableColors.begin(), m_availableColors.end(), rd);
 }
 

@@ -27,6 +27,15 @@ void MainMenu::hiMessage(const std::string& playerName)
 	ui.hiMessage->setText(message);
 }
 
+bool MainMenu::CheckGameCanStart()
+{
+	auto res = cpr::Put
+	(
+		cpr::Url{ "http://localhost:18080/newgame" }
+	);
+	return res.status_code == 200;
+}
+
 void MainMenu::StartGame(std::vector<Player>& players)
 {
 	m_game = new Game(players, this);
@@ -100,6 +109,27 @@ void MainMenu::on_createGameButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.createGame);
 }
 
+void MainMenu::on_createButton_clicked() 
+{
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/newlobby" },
+		cpr::Body{ "username=" + m_user.GetUsername() }
+	);
+
+	try
+	{
+		auto id = crow::json::load(res.text);
+		int lobbyId = id["lobby_id"].i();
+
+		StartLobby(std::to_string(lobbyId));
+	}
+	catch(std::exception ex)
+	{
+		qDebug() << "Can't create new lobby";
+	}
+}
+
 void MainMenu::on_backButton_clicked()
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.play);
@@ -120,7 +150,10 @@ void MainMenu::on_twoPlayersButton_clicked()
 	Player b("tibi", Player::Color::Red);
 	std::vector<Player> players = { a, b };
 
-	StartGame(players);
+	if (CheckGameCanStart())
+	{
+		StartGame(players);
+	}
 }
 
 void MainMenu::on_threePlayersButton_clicked()
@@ -129,7 +162,12 @@ void MainMenu::on_threePlayersButton_clicked()
 	Player b("tibi", Player::Color::Red);
 	Player c("adi", Player::Color::Yellow);
 	std::vector<Player> players = { a, b, c };
-	StartGame(players);
+
+	if (CheckGameCanStart())
+	{
+		StartGame(players);
+	}
+
 }
 
 void MainMenu::on_fourPlayersButton_clicked()
@@ -139,7 +177,11 @@ void MainMenu::on_fourPlayersButton_clicked()
 	Player c("adi", Player::Color::Yellow);
 	Player d("andrei", Player::Color::Green);
 	std::vector<Player> players = { a, b, c, d };
-	StartGame(players);
+
+	if (CheckGameCanStart())
+	{
+		StartGame(players);
+	}
 }
 
 void MainMenu::on_lobbyFinished()

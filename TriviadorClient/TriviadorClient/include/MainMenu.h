@@ -18,6 +18,7 @@ public:
 	~MainMenu();
 
 	void hiMessage(const std::string& playerName);
+	bool CheckGameCanStart();
 	void StartGame(std::vector<Player>& players);
 	void StartLobby(std::string lobbyID);
 
@@ -32,6 +33,7 @@ private slots:
 	void on_joinGameButton_clicked() const;
 	void on_joinLobbyButton_clicked();
 	void on_createGameButton_clicked() const;
+	void on_createButton_clicked();
 	void on_backButton_clicked();
 	void on_twoPlayersButton_clicked();
 	void on_threePlayersButton_clicked();
