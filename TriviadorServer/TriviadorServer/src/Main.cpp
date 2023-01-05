@@ -19,7 +19,7 @@ int main()
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
 	questionManager.PopulateStorage();
-	Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)});
+	Game currentGame;
 	crow::SimpleApp app;
 
 	auto& addUserToAccountList = CROW_ROUTE(app, "/signup").methods(crow::HTTPMethod::PUT);
@@ -56,36 +56,8 @@ int main()
 	auto& sendAsnwerForNumericalQuestion = CROW_ROUTE(app, "/sendanswer/numerical");
 	sendAsnwerForNumericalQuestion(SendAnswerNumericalQuestion(currentGame));
 
-	//for testing route
-	//CROW_ROUTE(app, "/numberOfLobbies")([&onGoingLobbies]()
-	//	{
-	//		crow::json::wvalue numberOfLobbies
-	//	{
-	//		{"number of lobbies", onGoingLobbies.size()}
-	//	};
-	//return crow::json::wvalue(numberOfLobbies);
-	//	});
-
-	////for testing route
-	//CROW_ROUTE(app, "/numberOfPlayersFromLobby/<int>")([&onGoingLobbies](int lobbyID)
-	//	{
-	//		if (onGoingLobbies.contains(lobbyID))
-	//		{
-	//			crow::json::wvalue numberOfPlayersFromLobby
-	//			{
-	//				{"number of players in current lobby", onGoingLobbies[lobbyID].GetNumberOfPlayers()}
-	//			};
-	//			return crow::json::wvalue(numberOfPlayersFromLobby);
-	//		}
-	//crow::json::wvalue lobbyNotFound
-	//{
-	//	{"lobby not found",""}
-	//};
-	//return lobbyNotFound;
-	//	});
-
-	//auto& createNewGame = CROW_ROUTE(app, "/newgame").methods(crow::HTTPMethod::PUT);
-	//createNewGame(CreateGameHandler(game, lobby));
+	auto& createNewGame = CROW_ROUTE(app, "/newgame").methods(crow::HTTPMethod::PUT);
+	createNewGame(CreateGameHandler(currentGame, lobby));
 
 	app.port(18080).multithreaded().run();
 	return 0;

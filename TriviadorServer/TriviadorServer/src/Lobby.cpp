@@ -5,7 +5,7 @@ Lobby::Lobby()
 	m_availableColors.resize(kNumberOfColors);
 	SetAvailableColors();
 	//m_lobbyId = GenerateRandomLobbyID();
-	std::chrono::duration<int, std::ratio<3*60>>threeMinutes(1);
+	std::chrono::duration<int, std::ratio<3 * 60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
 
@@ -19,7 +19,7 @@ Lobby::Lobby(const Player& player)
 	m_availableColors.resize(kNumberOfColors);
 	SetAvailableColors();
 	AddPlayer(player);
-	m_lobbyId = GenerateRandomLobbyID();
+	//m_lobbyId = GenerateRandomLobbyID();
 	std::chrono::duration<int, std::ratio<3 * 60>>threeMinutes(1);
 	m_expirationTime = std::chrono::system_clock::now() + threeMinutes;
 }
@@ -94,7 +94,6 @@ uint32_t Lobby::GenerateRandomLobbyID()
 {
 	std::random_device rd;
 	std::uniform_int_distribution<int> dist(1000, 9999);
-
 	return dist(rd);
 }
 

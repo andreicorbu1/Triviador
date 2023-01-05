@@ -6,5 +6,9 @@ CreateGameHandler::CreateGameHandler(Game& game, Lobby& lobby) : m_game(game), m
 crow::response CreateGameHandler::operator()(const crow::request& req) const
 {
 	m_game = Game(m_lobby.GetPlayers());
-	return crow::response(200, "Game created successfully");
+	if (m_game.GetPlayers() != m_lobby.GetPlayers())
+	{
+		return crow::response(200, "Game created successfully");
+	}
+	return crow::response(400, "Game wasn't created succesfully");
 }

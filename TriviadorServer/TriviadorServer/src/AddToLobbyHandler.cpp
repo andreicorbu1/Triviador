@@ -22,7 +22,7 @@ crow::response AddToLobbyHandler::operator()(const crow::request& req) const
 				int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
 				if (numberOfPlayersFromLobby < 4)
 				{
-					m_lobby.AddPlayer(Player(username, Player::Color::NaN));
+					m_lobby.AddPlayer(Player(username, Player::Color::None));
 					return crow::response(200, "Successfully Added Player to Lobby");
 				}
 				return crow::response(401, "Full lobby");
