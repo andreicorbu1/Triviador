@@ -9,11 +9,8 @@ Lobby::Lobby(const std::string& lobbyID, const std::string& username, QWidget* p
 	m_currentPlayer = Player(username, Player::Color::None);
 
 	HideAllPlayersName();
-
+	
 	SetPlayersLabel();
-
-	setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
-	this->setWindowState(Qt::WindowMaximized);
 }
 
 Lobby::~Lobby()
@@ -105,7 +102,7 @@ void Lobby::SetPlayersLabel()
 void Lobby::StartGame()
 {
 	m_game = new Game(m_players, this);
-	m_game->show();
+	m_game->showMaximized();
 	hide();
-	connect(m_game, SIGNAL(finished()), this, SLOT(on_lobbyFinished()()));
+	connect(m_game, SIGNAL(finished()), this, SLOT(on_lobbyFinished()));
 }
