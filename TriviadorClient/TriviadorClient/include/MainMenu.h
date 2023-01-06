@@ -19,7 +19,6 @@ public:
 
 	void hiMessage(const std::string& playerName);
 	bool CheckGameCanStart();
-	void StartGame(std::vector<Player>& players);
 	void StartLobby(std::string lobbyID);
 
 public slots:

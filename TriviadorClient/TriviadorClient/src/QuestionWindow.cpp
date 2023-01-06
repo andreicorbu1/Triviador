@@ -24,8 +24,14 @@ void QuestionWindow::SetQuestionType(const QuestionType& type)
 	m_type = type;
 }
 
+void QuestionWindow::SetCurrentPlayer(const Player& player)
+{
+	m_currentPlayer = player;
+}
+
 void QuestionWindow::FetchQuestion()
 {
+	ResetButtons();
 	if (m_type == QuestionType::MultipleAnswer)
 	{
 		this->ui.questionTypes->setCurrentWidget(ui.multiple);
@@ -36,6 +42,12 @@ void QuestionWindow::FetchQuestion()
 		this->ui.questionTypes->setCurrentWidget(ui.numerical);
 		FetchNumericalAnswerQuestion();
 	}
+	
+	// TEST
+	std::vector<Player> players = { m_currentPlayer, Player("Player2", Player::Color::Red), Player("Player3", Player::Color::Blue), Player("Player4", Player::Color::Yellow) };
+	SetFlags(players);
+	// TEST
+	SetEnabledState();
 }
 
 void QuestionWindow::FetchMultipleAnswerQuestion()
@@ -64,15 +76,11 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 		SetRightAnswer(question["right_answer"].i());
 		//SetFlags(question["players"]);
 	}
-	
-	// TEST
-	std::vector<Player> players = { Player("Player1", Player::Color::Green), Player("Player2", Player::Color::Red), Player("Player3", Player::Color::Blue), Player("Player4", Player::Color::Yellow) };
-	SetFlags(players);
-	// TEST
 }
 
 void QuestionWindow::Show()
 {
+	m_answer = "";
 	this->show();
 	StartTimer();
 }
@@ -160,14 +168,13 @@ void QuestionWindow::on_answerButton_clicked()
 {
 	QPushButton* button = qobject_cast<QPushButton*>(sender());
 	button->setChecked(true);
-	if (button->text() == std::get<std::string>(m_rightAnswer).c_str())
-	{
-		qDebug() << "Correct answer!";
-	}
-	else
-	{
-		qDebug() << "Wrong answer!";
-	}
+	m_answer = button->text().toUtf8().constData();
+	setEnabled(false);
+}
+
+void QuestionWindow::on_submitButton_clicked()
+{
+	setEnabled(false);
 }
 
 void QuestionWindow::UpdateProgressBar()
@@ -175,7 +182,7 @@ void QuestionWindow::UpdateProgressBar()
 	if (ui.timeProgressBar->value() == 0)
 	{
 		m_timer->stop();
-		close();
+		ShowResults();
 		return;
 	}
 
@@ -245,13 +252,27 @@ void QuestionWindow::SetFlags(std::vector<Player>& players)
 {
 	HideAllFlags();
 	
-	QString baseStyle = "color: #ffffff;\npadding: 15px;\nbackground-size: cover;\nbackground-repeat: no-repeat;\nbackground-position: center;\n";
+	QString baseStyle = "color: #ffffff;\npadding: 15px;\nbackground-repeat: no-repeat;\nbackground-position: center;\n";
 	for (int i = 0; i < players.size(); i++)
 	{
 		QString color = players[i].GetColor().c_str();
 		ui_flags[i]->setText(QString::fromUtf8(players[i].GetName()));
 		ui_flags[i]->setStyleSheet(baseStyle + "background-image: url(:/Flags/question/" + color + "Flag.svg);");
 		ui_flags[i]->show();
+	}
+}
+
+void QuestionWindow::SetEnabledState()
+{
+	// Disables all buttons if the current player should not answer to the current question
+	setEnabled(false);
+	for (const auto* flag : ui_flags)
+	{
+		if (flag->text() == m_currentPlayer.GetName().c_str())
+		{
+			setEnabled(true);
+			break;
+		}
 	}
 }
 
@@ -263,3 +284,38 @@ void QuestionWindow::HideAllFlags() const
 	}
 }
 
+void QuestionWindow::ResetButtons() const
+{
+	for (auto* button : ui_answers)
+	{
+		button->setStyleSheet("color: #ffffff;\nbackground-color: rgb(83, 66, 50);\nchecked: {background-color: rgb(255, 244, 160)}; ");
+		button->setChecked(false);
+	}
+	
+	ui.answerInput->setText("");
+	ui.answerInput->setStyleSheet("border: none;\nbackground-color: #725C48;\ncolor: #ffffff;\npadding: 5px;");
+}
+
+void QuestionWindow::ShowResults() {
+	QTimer::singleShot(3000, this, SLOT(close()));
+
+	if (m_type == QuestionType::MultipleAnswer)
+	{
+		for (auto& answer : ui_answers)
+		{
+			if (answer->text() == std::get<std::string>(m_rightAnswer).c_str())
+			{
+				answer->setStyleSheet("background: #4D8620;\nborder: none;\ncolor: #ffffff;\n");
+			}
+			else if (answer->isChecked())
+			{
+				answer->setStyleSheet("background: #B52828;\nborder: none;\ncolor: #ffffff;\n");
+			}
+		}
+	}
+	else if (m_type == QuestionType::NumericalAnswer)
+	{
+		ui.answerInput->setText("Right answer: " + QString::number(std::get<int>(m_rightAnswer)));
+		ui.answerInput->setStyleSheet("background: #4D8620;\nborder: none;\ncolor: #ffffff;\n");
+	}
+}

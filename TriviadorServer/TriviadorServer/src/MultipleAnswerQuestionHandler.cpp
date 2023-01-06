@@ -3,7 +3,7 @@
 MultipleAnswerQuestionHandler::MultipleAnswerQuestionHandler(Game& game) : m_game(game)
 {}
 
-crow::json::wvalue MultipleAnswerQuestionHandler::operator()(const crow::request& req) const
+crow::response MultipleAnswerQuestionHandler::operator()(const crow::request& req) const
 {
 	try
 	{
@@ -25,6 +25,6 @@ crow::json::wvalue MultipleAnswerQuestionHandler::operator()(const crow::request
 	}
 	catch (const std::exception& e)
 	{
-		return crow::json::wvalue{{"Error Code", e.what()}};
+		return crow::response(400);
 	}
 }

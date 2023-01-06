@@ -8,6 +8,7 @@
 #include <QSignalMapper>
 #include <QThread>
 #include <string>
+#include "User.h"
 
 class Game : public QWidget
 {
@@ -15,7 +16,7 @@ class Game : public QWidget
 
 public:
     Game(QWidget* parent = nullptr);
-	Game(std::vector<Player>& players, QWidget* parent = nullptr);
+	Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent = nullptr);
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
@@ -47,4 +48,5 @@ private:
 
     Board m_board;
     std::vector<Player> m_players;
+	Player m_currentPlayer;
 };

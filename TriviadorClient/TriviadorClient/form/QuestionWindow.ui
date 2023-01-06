@@ -159,9 +159,7 @@ QProgressBar::chunk {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">/*background-image: url(:/Others/question/Plank.svg);*/
-/*border: none;*/
-color: #ffffff;
+      <string notr="true">color: #ffffff;
 background-color: rgb(83, 66, 50);
 checked: {background-color: rgb(255, 244, 160)};
 </string>
@@ -329,7 +327,7 @@ padding: 5px;</string>
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="submit">
+    <widget class="QPushButton" name="submitButton">
      <property name="geometry">
       <rect>
        <x>430</x>
@@ -441,7 +439,6 @@ border-radius: 20px;</string>
    <property name="styleSheet">
     <string notr="true">color: #ffffff;
 padding: 10px;
-background-size: cover;
 background-repeat: no-repeat;
 background-position: center;</string>
    </property>
@@ -468,7 +465,6 @@ background-position: center;</string>
    <property name="styleSheet">
     <string notr="true">color: #ffffff;
 padding: 10px;
-background-size: cover;
 background-repeat: no-repeat;
 background-position: center;</string>
    </property>
@@ -495,7 +491,6 @@ background-position: center;</string>
    <property name="styleSheet">
     <string notr="true">color: #ffffff;
 padding: 10px;
-background-size: cover;
 background-repeat: no-repeat;
 background-position: center;</string>
    </property>
@@ -525,7 +520,6 @@ background-position: center;</string>
    <property name="styleSheet">
     <string notr="true">color: #ffffff;
 padding: 10px;
-background-size: cover;
 background-repeat: no-repeat;
 background-position: center;</string>
    </property>

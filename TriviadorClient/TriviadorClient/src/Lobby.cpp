@@ -101,7 +101,7 @@ void Lobby::SetPlayersLabel()
 
 void Lobby::StartGame()
 {
-	m_game = new Game(m_players, this);
+	m_game = new Game(m_players, m_currentPlayer, this);
 	m_game->showMaximized();
 	hide();
 	connect(m_game, SIGNAL(finished()), this, SLOT(on_lobbyFinished()));

@@ -6,7 +6,7 @@ struct NumericalAnswerQuestionHandler
 {
 public:
 	explicit NumericalAnswerQuestionHandler(Game& game);
-	crow::json::wvalue operator()(const crow::request& req) const;
+	crow::response operator()(const crow::request& req) const;
 private:
 	Game& m_game;
 };

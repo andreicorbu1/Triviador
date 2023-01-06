@@ -11,14 +11,16 @@ Game::Game(QWidget* mainMenu)
 	SetBackground();
 }
 
-Game::Game(std::vector<Player>& players, QWidget* parent)
+Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	: m_questionWindow(QuestionWindow(this))
 	, m_players(players)
+	, m_currentPlayer(currentPlayer)
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
 	m_signalMapper = new QSignalMapper(this);
+	m_questionWindow.SetCurrentPlayer(m_currentPlayer);
 
 	switch (m_players.size())
 	{
@@ -151,9 +153,7 @@ void Game::End()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	m_questionWindow.FetchMultipleAnswerQuestion();
-	m_questionWindow.StartTimer();
-	m_questionWindow.show();
+	ShowQuestion(QuestionType::MultipleAnswer);
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)

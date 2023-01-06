@@ -34,6 +34,7 @@ public:
 
     // Setters
     void SetQuestionType(const QuestionType& type);
+	void SetCurrentPlayer(const Player& player);
     
     // Getters
     void FetchQuestion();
@@ -51,7 +52,11 @@ private slots:
     void on_parrotButton_clicked();
     void on_answerButton_clicked();
     
+    // numerical
+	void on_submitButton_clicked();
+    
     void UpdateProgressBar();
+    void ShowResults();
 
 private:
     // Setters
@@ -65,9 +70,11 @@ private:
     void StopProgressBar();
     void SetButtonsProperties(int i);
 	void SetFlags(std::vector<Player>& players);
+    void SetEnabledState();
 
 private:
     void HideAllFlags() const;
+	void ResetButtons() const;
     
 private:
     // Constants
@@ -83,4 +90,6 @@ private:
     QTimer* m_timer;
     QuestionType m_type;
     std::variant<std::string, int> m_rightAnswer;
+	std::variant<std::string, int> m_answer;
+    Player m_currentPlayer;
 };
