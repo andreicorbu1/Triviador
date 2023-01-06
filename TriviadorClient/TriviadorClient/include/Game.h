@@ -37,7 +37,7 @@ private:
     void ConnectButtons();
 
     void UpdateBoard();
-    void UpdateScores();
+    void UpdatePlayerScores();
     
 private:
     const std::pair<uint16_t, uint16_t> playersTableSize = { 200, 75 };

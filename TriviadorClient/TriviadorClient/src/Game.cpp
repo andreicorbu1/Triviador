@@ -50,7 +50,7 @@ Game::~Game()
 void Game::ShowQuestion(QuestionType type)
 {
 	m_questionWindow.SetQuestionType(type);
-	m_questionWindow.FetchQuestion();
+	m_questionWindow.FetchQuestion(m_players);
 	m_questionWindow.Show();
 }
 
@@ -84,13 +84,25 @@ void Game::UpdateBoard()
 	}
 }
 
-void Game::UpdateScores()
+void Game::UpdatePlayerScores()
 {
-	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/playerscores" });
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getplayersfromgame" });
 	
 	if (res.status_code == 200)
 	{
-		// parse and update players or their scores
+		auto players = crow::json::load(res.text);
+		for (auto& player : players)
+		{
+			auto name = player["name"].s();
+			auto score = player["score"].i();
+			for (auto& p : m_players)
+			{
+				if (p.GetName() == name)
+				{
+					p.SetScore(score);
+				}
+			}
+		}
 	}
 }
 
@@ -132,7 +144,7 @@ void Game::GameLoop()
 		else if (data["stage"] == "update")
 		{
 			UpdateBoard();
-			UpdateScores();
+			UpdatePlayerScores();
 		}
 		else if (data["stage"] == "result")
 		{

@@ -29,7 +29,7 @@ void QuestionWindow::SetCurrentPlayer(const Player& player)
 	m_currentPlayer = player;
 }
 
-void QuestionWindow::FetchQuestion()
+void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 {
 	ResetButtons();
 	if (m_type == QuestionType::MultipleAnswer)
@@ -44,9 +44,10 @@ void QuestionWindow::FetchQuestion()
 	}
 	
 	// TEST
-	std::vector<Player> players = { m_currentPlayer, Player("Player2", Player::Color::Red), Player("Player3", Player::Color::Blue), Player("Player4", Player::Color::Yellow) };
-	SetFlags(players);
+	// std::vector<Player> players = { m_currentPlayer, Player("Player2", Player::Color::Red), Player("Player3", Player::Color::Blue), Player("Player4", Player::Color::Yellow) };
 	// TEST
+	m_players = players;
+	SetFlags(m_players);
 	SetEnabledState();
 }
 
