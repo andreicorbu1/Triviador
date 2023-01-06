@@ -8,6 +8,7 @@
 #include "RemoveFromLobbyHandler.h"
 #include "WaitingInLobbyHandler.h"
 #include "GetAllPlayersFromLobbyHandler.h"
+#include "GetAllPlayersFromGameHandler.h"
 #include "MultipleAnswerQuestion.h"
 #include "SendAnswerMultipleQuestion.h"
 #include "SendAnswerNumericalQuestion.h"
@@ -19,8 +20,8 @@ int main()
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
 	questionManager.PopulateStorage();
-	Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
-	//Game currentGame;
+	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
+	Game currentGame;
 	Lobby lobby;
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
@@ -61,6 +62,9 @@ int main()
 
 	auto& createNewGame = CROW_ROUTE(app, "/newgame").methods(crow::HTTPMethod::PUT);
 	createNewGame(CreateGameHandler(currentGame, lobby));
+
+	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
+	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
 
 	app.port(18080).multithreaded().run();
 	return 0;
