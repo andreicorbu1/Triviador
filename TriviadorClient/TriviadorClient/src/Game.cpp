@@ -1,7 +1,5 @@
 #include "Game.h"
 
-using namespace std::chrono_literals;
-
 Game::Game(QWidget* mainMenu)
 	: m_questionWindow(QuestionWindow(this))
 	, m_board(Board(1, 1))
@@ -41,8 +39,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	ShowQuestion(QuestionType::NumericalAnswer);
-	//QTimer::singleShot(0, this, SLOT(Start()));
+	QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 
 Game::~Game()
@@ -77,77 +74,78 @@ void Game::ConnectButtons()
 	}
 }
 
-void Game::Start()
-{	
-	Loop();
+void Game::UpdateBoard()
+{
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/board" });
+
+	if (res.status_code == 200)
+	{
+		// parse and update board
+	}
 }
 
-void Game::Loop()
+void Game::UpdateScores()
 {
-	bool isFinished = false;
-	while (!isFinished)
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/playerscores" });
+	
+	if (res.status_code == 200)
 	{
-		auto res = cpr::Get(cpr::Url{ "http://localhost:18080/stage" });
+		// parse and update players or their scores
+	}
+}
+
+void Game::GameLoop()
+{
+	int waitingTime = 0;
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/stage" });
 		
-		if (res.status_code == 200)
+	if (res.status_code == 200)
+	{
+		auto data = crow::json::load(res.text);
+		if (data["stage"] == "wait") 
 		{
-			auto data = crow::json::load(res.text);
-			if (data["stage"] == "wait") 
-			{
-				// wait
-			}
-			if (data["stage"] == "question")
-			{
-				std::string type = data["type"].s();
-				ShowQuestion(QuestionWindow::GetQuestionType(type));
-			}
-			else if (data["stage"] == "choose")
-			{
-				std::string type = data["type"].s();
+			waitingTime = 2000;
+		}
+		if (data["stage"] == "question")
+		{
+			std::string type = data["type"].s();
+			ShowQuestion(QuestionWindow::GetQuestionType(type));
+			waitingTime = 14000;
+		}
+		else if (data["stage"] == "choose")
+		{
+			std::string type = data["type"].s();
 				
-				if (type == "base")
-				{
-					// choose base
-				}
-				else if (type == "territory")
-				{
-					// choose territory
-				}
-			}
-			else if (data["stage"] == "attack")
+			if (type == "base")
 			{
-				// attack
+				// choose base
 			}
-			else if (data["stage"] == "update")
+			else if (type == "territory")
 			{
-				// update board
-				// update score
-				// this update stage might be before choosing base, territory, attack
-			}
-			else if (data["stage"] == "result")
-			{
-				// show results	
-				// this might be inside finish stage
-			}
-			else if (data["stage"] == "finish")
-			{
-				isFinished = true;
+				// choose territory
 			}
 		}
-		else
+		else if (data["stage"] == "attack")
 		{
-			// wait
+			// attack
 		}
-		
-		QThread::sleep(3);
-		qDebug() << "loop";
+		else if (data["stage"] == "update")
+		{
+			UpdateBoard();
+			UpdateScores();
+		}
+		else if (data["stage"] == "result")
+		{
+			// window to show who won and who lost
+			return;
+		}
+	}
+	else
+	{
+		waitingTime = 3000;
 	}
 
-	End();
-}
-
-void Game::End()
-{
+	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 }
 
 void Game::action(int position)

@@ -25,17 +25,20 @@ signals:
 	void finished();
     
 private slots:
-    void ShowQuestion(QuestionType type);
-    void SetBackground();
-    void ConnectButtons();
-    void Start();
-    void Loop();
-	void End();
+    void GameLoop();
 
 private slots:
     void on_exitButton_clicked();
     void action(int position);
 
+private:
+    void ShowQuestion(QuestionType type);
+    void SetBackground();
+    void ConnectButtons();
+
+    void UpdateBoard();
+    void UpdateScores();
+    
 private:
     const std::pair<uint16_t, uint16_t> playersTableSize = { 200, 75 };
     const std::pair<uint16_t, uint16_t> playersTableStartPoint = { 1280, 50 };
