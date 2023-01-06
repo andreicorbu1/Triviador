@@ -7,6 +7,7 @@
 #include "Player.h"
 #include <QSignalMapper>
 #include <QThread>
+#include <string>
 
 class Game : public QWidget
 {

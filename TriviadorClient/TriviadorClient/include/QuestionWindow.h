@@ -15,6 +15,8 @@
 #include <cpr/cpr.h>
 #include <crow.h>
 
+#include "Player.h"
+
 enum class QuestionType
 {
     MultipleAnswer,
@@ -41,6 +43,7 @@ public:
     // Other
     void Show();
     void StartTimer();
+    static QuestionType GetQuestionType(const std::string& type);
 
 private slots:
     void on_hammerButton_clicked();
@@ -61,6 +64,10 @@ private:
     void SetConnections();
     void StopProgressBar();
     void SetButtonsProperties(int i);
+	void SetFlags(std::vector<Player>& players);
+
+private:
+    void HideAllFlags() const;
     
 private:
     // Constants
@@ -69,6 +76,7 @@ private:
     // UI elements
     Ui::QuestionWindowClass ui;
     std::array<QPushButton*, kAnswerCount> ui_answers;
+	std::array<QLabel*, 4> ui_flags;
     QButtonGroup m_buttonGroup;
     
     // Members

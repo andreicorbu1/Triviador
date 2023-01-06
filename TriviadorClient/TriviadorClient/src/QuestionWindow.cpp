@@ -6,6 +6,7 @@ QuestionWindow::QuestionWindow(QWidget* parent)
 	this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	ui.setupUi(this);
 	ui_answers = { ui.answer1, ui.answer2, ui.answer3, ui.answer4 };
+	ui_flags = { ui.flag1, ui.flag2, ui.flag3, ui.flag4 };
 	ui.answerInput->setValidator(new QDoubleValidator(0, 100, 10, this));
 	SetConnections();
 	SetShadowEffect();
@@ -61,7 +62,13 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 		auto question = crow::json::load(res.text);
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].i());
+		//SetFlags(question["players"]);
 	}
+	
+	// TEST
+	std::vector<Player> players = { Player("Player1", Player::Color::Green), Player("Player2", Player::Color::Red), Player("Player3", Player::Color::Blue), Player("Player4", Player::Color::Yellow) };
+	SetFlags(players);
+	// TEST
 }
 
 void QuestionWindow::Show()
@@ -74,6 +81,15 @@ void QuestionWindow::StartTimer()
 {
 	ui.timeProgressBar->setValue(100);
 	m_timer->start(100);
+}
+
+QuestionType QuestionWindow::GetQuestionType(const std::string& type)
+{
+	if (type == "MultipleAnswer")
+		return QuestionType::MultipleAnswer;
+	else if (type == "NumericalAnswer")
+		return QuestionType::NumericalAnswer;
+	throw std::runtime_error("Unknown question type");
 }
 
 void QuestionWindow::on_hammerButton_clicked()
@@ -223,5 +239,27 @@ void QuestionWindow::SetButtonsProperties(int i)
 {
 	ui_answers[i]->setCheckable(true);
 	m_buttonGroup.addButton(ui_answers[i]);
+}
+
+void QuestionWindow::SetFlags(std::vector<Player>& players)
+{
+	HideAllFlags();
+	
+	QString baseStyle = "color: #ffffff;\npadding: 15px;\nbackground-size: cover;\nbackground-repeat: no-repeat;\nbackground-position: center;\n";
+	for (int i = 0; i < players.size(); i++)
+	{
+		QString color = players[i].GetColor().c_str();
+		ui_flags[i]->setText(QString::fromUtf8(players[i].GetName()));
+		ui_flags[i]->setStyleSheet(baseStyle + "background-image: url(:/Flags/question/" + color + "Flag.svg);");
+		ui_flags[i]->show();
+	}
+}
+
+void QuestionWindow::HideAllFlags() const
+{
+	for (QLabel* flag : ui_flags)
+	{
+		flag->hide();
+	}
 }
 

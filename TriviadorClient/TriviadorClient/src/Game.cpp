@@ -39,7 +39,8 @@ Game::Game(std::vector<Player>& players, QWidget* parent)
 	}
 	ConnectButtons();
 
-	QTimer::singleShot(0, this, SLOT(Start()));
+	ShowQuestion(QuestionType::NumericalAnswer);
+	//QTimer::singleShot(0, this, SLOT(Start()));
 }
 
 Game::~Game()
@@ -96,14 +97,7 @@ void Game::Loop()
 			if (data["stage"] == "question")
 			{
 				std::string type = data["type"].s();
-				if (type == "MultipleAnswer")
-				{
-					ShowQuestion(QuestionType::MultipleAnswer);
-				}
-				else if (type == "NumericalAnswer")
-				{
-					ShowQuestion(QuestionType::NumericalAnswer);
-				}
+				ShowQuestion(QuestionWindow::GetQuestionType(type));
 			}
 			else if (data["stage"] == "choose")
 			{
