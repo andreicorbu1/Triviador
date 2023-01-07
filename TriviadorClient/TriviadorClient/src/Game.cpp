@@ -163,7 +163,7 @@ void Game::GameLoop()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	ShowQuestion(QuestionType::MultipleAnswer);
+	ShowQuestion(QuestionType::NumericalAnswer);
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)

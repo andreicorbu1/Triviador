@@ -74,7 +74,7 @@ private:
 
 private:
     void HideAllFlags() const;
-	void ResetButtons() const;
+	void ResetButtons();
     
 private:
     // Constants
@@ -84,7 +84,7 @@ private:
     Ui::QuestionWindowClass ui;
     std::array<QPushButton*, kAnswerCount> ui_answers;
 	std::array<QLabel*, 4> ui_flags;
-    QButtonGroup m_buttonGroup;
+    std::vector<QPushButton*> ui_telescopeAnswers;
     
     // Members
     QTimer* m_timer;

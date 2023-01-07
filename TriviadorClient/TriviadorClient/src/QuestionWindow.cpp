@@ -11,7 +11,6 @@ QuestionWindow::QuestionWindow(QWidget* parent)
 	SetConnections();
 	SetShadowEffect();
 	SetTimer();
-	m_buttonGroup.setExclusive(true);
 }
 
 QuestionWindow::~QuestionWindow()
@@ -136,20 +135,20 @@ void QuestionWindow::on_telescopeButton_clicked()
 	}
 
 	int i = 0;
-	std::array<QPushButton*, kAnswerCount> answers{};
 	for (auto& approximation : approximations)
 	{
-		answers[i] = new QPushButton(QString::number(approximation), this);
-		answers[i]->setGeometry(200, 180 + 60 * (i + 1), 400, 50);
-		answers[i]->setStyleSheet("background-image: url(:/Others/question/Plank.svg);\nborder: none;\ncolor: #ffffff;\n");
-		answers[i]->setCursor(Qt::PointingHandCursor);
-		answers[i]->setText(QString::number(approximation));
-		answers[i]->show();
+		auto telescopeAnswer = new QPushButton(QString::number(approximation), this);
+		telescopeAnswer->setGeometry(200, 180 + 60 * (i + 1), 400, 50);
+		telescopeAnswer->setStyleSheet("background-image: url(:/Others/question/Plank.svg);\nborder: none;\ncolor: #ffffff;\n");
+		telescopeAnswer->setCursor(Qt::PointingHandCursor);
+		telescopeAnswer->setText(QString::number(approximation));
+		telescopeAnswer->show();
 
-		connect(answers[i], &QPushButton::clicked, this, [this, approximation]() {
+		connect(telescopeAnswer, &QPushButton::clicked, this, [this, approximation]() {
 			this->ui.answerInput->setText(QString::number(approximation));
 			});
 
+		ui_telescopeAnswers.push_back(telescopeAnswer);
 		i++;
 	}
 
@@ -246,7 +245,6 @@ void QuestionWindow::StopProgressBar()
 void QuestionWindow::SetButtonsProperties(int i)
 {
 	ui_answers[i]->setCheckable(true);
-	m_buttonGroup.addButton(ui_answers[i]);
 }
 
 void QuestionWindow::SetFlags(std::vector<Player>& players)
@@ -285,16 +283,22 @@ void QuestionWindow::HideAllFlags() const
 	}
 }
 
-void QuestionWindow::ResetButtons() const
+void QuestionWindow::ResetButtons()
 {
 	for (auto* button : ui_answers)
 	{
 		button->setStyleSheet("color: #ffffff;\nbackground-color: rgb(83, 66, 50);\nchecked: {background-color: rgb(255, 244, 160)}; ");
 		button->setChecked(false);
+		button->show();
 	}
 	
 	ui.answerInput->setText("");
 	ui.answerInput->setStyleSheet("border: none;\nbackground-color: #725C48;\ncolor: #ffffff;\npadding: 5px;");
+	for (auto* button : ui_telescopeAnswers)
+	{
+		button->close();
+	}
+	ui_telescopeAnswers.clear();
 }
 
 void QuestionWindow::ShowResults() {

@@ -20,8 +20,8 @@ int main()
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
 	questionManager.PopulateStorage();
-	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
-	Game currentGame;
+	Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
+	//Game currentGame;
 	Lobby lobby;
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
