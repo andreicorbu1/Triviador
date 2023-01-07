@@ -39,11 +39,6 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	// TEST
-	m_resultWindow = new ResultWindow(m_players, this);
-	m_resultWindow->show();
-	connect(m_resultWindow, SIGNAL(backToMenu()), this, SLOT(on_gameFinished()));
-	// TEST
 	QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 

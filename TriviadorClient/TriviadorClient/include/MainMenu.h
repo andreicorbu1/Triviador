@@ -34,11 +34,9 @@ private slots:
 	void on_createButton_clicked();
 
 	void on_lobbyFinished();
-	void on_gameFinished();
 
 private:
 	Ui::MainMenuClass ui;
-	Game* m_game;
 	Lobby* m_lobby;
 	User m_user;
 };

@@ -42,9 +42,6 @@ void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 		FetchNumericalAnswerQuestion();
 	}
 	
-	// TEST
-	// std::vector<Player> players = { m_currentPlayer, Player("Player2", Player::Color::Red), Player("Player3", Player::Color::Blue), Player("Player4", Player::Color::Yellow) };
-	// TEST
 	m_players = players;
 	SetFlags(m_players);
 	SetEnabledState();

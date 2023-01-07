@@ -30,6 +30,9 @@
     <Filter Include="Resource Files\Others">
       <UniqueIdentifier>{e731faa5-4593-4866-b083-1e637a5f9977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Flags">
+      <UniqueIdentifier>{d8b1c4cc-69bf-4145-89ea-1d8dd3e1fade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -207,6 +210,18 @@
     </None>
     <None Include="resource\question\Telescope.svg">
       <Filter>Resource Files\Others</Filter>
+    </None>
+    <None Include="resource\question\BlueFlag.svg">
+      <Filter>Resource Files\Flags</Filter>
+    </None>
+    <None Include="resource\question\GreenFlag.svg">
+      <Filter>Resource Files\Flags</Filter>
+    </None>
+    <None Include="resource\question\RedFlag.svg">
+      <Filter>Resource Files\Flags</Filter>
+    </None>
+    <None Include="resource\question\YellowFlag.svg">
+      <Filter>Resource Files\Flags</Filter>
     </None>
   </ItemGroup>
 </Project>

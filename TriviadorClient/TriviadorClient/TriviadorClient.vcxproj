@@ -179,12 +179,16 @@
     <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resource\question\BlueFlag.svg" />
     <None Include="resource\question\EmptyBanner.svg" />
+    <None Include="resource\question\GreenFlag.svg" />
     <None Include="resource\question\Hammer.svg" />
     <None Include="resource\question\Parrot.svg" />
     <None Include="resource\question\Plank.svg" />
     <None Include="resource\question\PlayArrow.svg" />
+    <None Include="resource\question\RedFlag.svg" />
     <None Include="resource\question\Telescope.svg" />
+    <None Include="resource\question\YellowFlag.svg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

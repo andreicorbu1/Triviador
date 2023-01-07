@@ -132,10 +132,3 @@ void MainMenu::on_lobbyFinished()
 	m_lobby->close();
 	delete m_lobby;
 }
-
-void MainMenu::on_gameFinished()
-{
-	Show();
-	m_game->close();
-	delete m_game;
-}
