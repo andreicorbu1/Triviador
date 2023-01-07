@@ -129,6 +129,12 @@ std::string Game::CurrentStage() const
 	}
 }
 
+int Game::GetNumberOfPlayers()
+{
+	return m_players.size();
+}
+
+
 void Game::SetBoard(const Board& board)
 {
 	this->m_board = board;
@@ -225,6 +231,11 @@ void Game::GoToNextStage()
 			throw std::invalid_argument("Cannot advance in other stages because you are in a final stage");
 	}
 
+}
+
+void Game::AddNullPlayer()
+{
+	m_players.push_back(Player("", Player::Color::NaN));
 }
 
 Game& Game::operator=(const Game& other)

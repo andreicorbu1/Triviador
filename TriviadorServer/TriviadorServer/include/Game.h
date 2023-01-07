@@ -36,6 +36,7 @@ public:
 	std::pair < MultipleAnswerQuestion, uint16_t> GetMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetMultipleAnswerQuestion(uint16_t index) const;
 	std::string CurrentStage() const;
+	int GetNumberOfPlayers();
 	
 
 	//Setters:
@@ -49,6 +50,7 @@ public:
 	void SetPlayerName(std::string playerName);
 	template<size_t index>
 	void SetPlayerScore(int playerScore);
+	void AddNullPlayer();
 
 	//Operators:
 	Game& operator =(const Game& other);
@@ -96,7 +98,7 @@ inline void Game::SetPlayerName(std::string playerName)
 template<size_t index>
 inline int Game::GetPlayerPoints() const
 {
-	return m_players[index].GetScore;
+	return m_players[index].GetScore();
 }
 
 template<size_t index>

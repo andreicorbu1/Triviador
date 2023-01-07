@@ -31,6 +31,8 @@ class GameManager
 public:
 	GameManager() = default;
 	GameManager(const std::string& databaseFileName);
+
+	void AddGame(Game& game);
 private:
 	StorageForGM m_database;
 };

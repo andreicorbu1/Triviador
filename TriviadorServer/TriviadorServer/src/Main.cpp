@@ -22,6 +22,7 @@ int main()
 	QuestionManager questionManager("resource/Questions.sqlite");
 	GameManager gameManager("resource/Games.sqlite");
 	questionManager.PopulateStorage();
+
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
 	Game currentGame;
 	Lobby lobby;
@@ -67,6 +68,15 @@ int main()
 
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
+
+	Player a("adelin", Player::Color::Blue);
+	Player b("clementin", Player::Color::Red);
+	std::vector<Player> players;
+	players.push_back(a);
+	players.push_back(b);
+	Game game(players);
+	gameManager.AddGame(game);
+
 
 	app.port(18080).multithreaded().run();
 	return 0;
