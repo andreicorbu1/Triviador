@@ -142,6 +142,7 @@
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp" />
     <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp" />
     <ClCompile Include="src\Lobby.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameManager.h" />
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h" />
     <ClInclude Include="include\GetAllPlayersFromLobbyHandler.h" />
     <ClInclude Include="include\Lobby.h" />

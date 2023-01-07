@@ -13,12 +13,14 @@
 #include "SendAnswerMultipleQuestion.h"
 #include "SendAnswerNumericalQuestion.h"
 #include "QuestionManager.h"
+#include "GameManager.h"
 #include "Game.h"
 
 int main()
 {
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
+	GameManager gameManager("resource/Games.sqlite");
 	questionManager.PopulateStorage();
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
 	Game currentGame;

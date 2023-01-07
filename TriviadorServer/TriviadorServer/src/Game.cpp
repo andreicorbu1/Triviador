@@ -59,6 +59,7 @@ Player Game::GetWinner()
 	return copyOfPlayers.back();
 }
 
+
 std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
 {
 	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
