@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(QWidget* mainMenu)
+Game::Game(QWidget* parent)
 	: m_questionWindow(QuestionWindow(this))
 	, m_board(Board(1, 1))
 {
@@ -9,36 +9,37 @@ Game::Game(QWidget* mainMenu)
 	SetBackground();
 }
 
-Game::Game(std::vector<Player>& players, QWidget* parent)
+Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	: m_questionWindow(QuestionWindow(this))
 	, m_players(players)
+	, m_currentPlayer(currentPlayer)
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
 	m_signalMapper = new QSignalMapper(this);
+	m_questionWindow.SetCurrentPlayer(m_currentPlayer);
 
 	switch (m_players.size())
 	{
 	case 2:
 		m_board = Board(3, 3, this);
-		m_rounds = 5;
 		m_board.Set2PGame();
 		break;
 	case 3:
 		m_board = Board(5, 3, this);
-		m_rounds = 4;
 		m_board.Set3PGame();
 		break;
 	case 4:
 		m_board = Board(6, 4, this);
-		m_rounds = 3;
 		m_board.Set4PGame();
 		break;
 	default:
 		break;
 	}
 	ConnectButtons();
+
+	QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 
 Game::~Game()
@@ -49,7 +50,7 @@ Game::~Game()
 void Game::ShowQuestion(QuestionType type)
 {
 	m_questionWindow.SetQuestionType(type);
-	m_questionWindow.FetchQuestion();
+	m_questionWindow.FetchQuestion(m_players);
 	m_questionWindow.Show();
 }
 
@@ -73,12 +74,103 @@ void Game::ConnectButtons()
 	}
 }
 
+void Game::UpdateBoard()
+{
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/board" });
+
+	if (res.status_code == 200)
+	{
+		// parse and update board
+	}
+}
+
+void Game::UpdatePlayerScores()
+{
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getplayersfromgame" });
+	
+	if (res.status_code == 200)
+	{
+		auto players = crow::json::load(res.text);
+		for (auto& player : players)
+		{
+			auto name = player["name"].s();
+			auto score = player["score"].i();
+			for (auto& p : m_players)
+			{
+				if (p.GetName() == name)
+				{
+					p.SetScore(score);
+				}
+			}
+		}
+	}
+}
+
+void Game::GameLoop()
+{
+	int waitingTime = 0;
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/stage" });
+		
+	if (res.status_code == 200)
+	{
+		auto data = crow::json::load(res.text);
+		if (data["stage"] == "wait") 
+		{
+			waitingTime = 2000;
+		}
+		if (data["stage"] == "question")
+		{
+			std::string type = data["type"].s();
+			ShowQuestion(QuestionWindow::GetQuestionType(type));
+			waitingTime = 14000;
+		}
+		else if (data["stage"] == "choose")
+		{
+			std::string type = data["type"].s();
+				
+			if (type == "base")
+			{
+				// choose base
+			}
+			else if (type == "territory")
+			{
+				// choose territory
+			}
+		}
+		else if (data["stage"] == "attack")
+		{
+			// attack
+		}
+		else if (data["stage"] == "update")
+		{
+			UpdateBoard();
+			UpdatePlayerScores();
+		}
+		else if (data["stage"] == "result")
+		{
+			m_resultWindow = new ResultWindow(m_players, this);
+			m_resultWindow->show();
+			connect(m_resultWindow, SIGNAL(backToMenu()), this, SLOT(on_gameFinished()));
+			return;
+		}
+	}
+	else
+	{
+		waitingTime = 3000;
+	}
+
+	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
+}
+
+void Game::on_gameFinished()
+{
+	emit finished();
+}
+
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	m_questionWindow.FetchMultipleAnswerQuestion();
-	m_questionWindow.StartTimer();
-	m_questionWindow.show();
+	ShowQuestion(QuestionType::NumericalAnswer);
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
@@ -97,10 +189,9 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 		painter.setPen(color);
 		painter.drawText(playerTable, Qt::AlignCenter, tableText);
 	}
-
 }
 
 void Game::on_exitButton_clicked()
 {
-	emit finished();
+	on_gameFinished();
 }

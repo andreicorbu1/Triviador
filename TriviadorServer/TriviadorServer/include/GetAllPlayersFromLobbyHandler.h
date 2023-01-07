@@ -12,7 +12,6 @@ public:
 	GetAllPlayersFromLobbyHandler(Lobby& lobby);
 	crow::json::wvalue operator()(const crow::request& req) const;
 
-
 private:
 	Lobby& m_lobby;
 };

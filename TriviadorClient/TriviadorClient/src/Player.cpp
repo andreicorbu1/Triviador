@@ -74,6 +74,11 @@ Player::Color Player::GetColor(std::string color)
 	return Color::None;
 }
 
+void Player::SetScore(size_t score)
+{
+	m_score = score;
+}
+
 Player& Player::operator=(const Player& other)
 {
 	if (this == &other)

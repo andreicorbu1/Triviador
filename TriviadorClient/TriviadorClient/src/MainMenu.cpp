@@ -36,14 +36,6 @@ bool MainMenu::CheckGameCanStart()
 	return res.status_code == 200;
 }
 
-void MainMenu::StartGame(std::vector<Player>& players)
-{
-	m_game = new Game(players, this);
-	m_game->show();
-	hide();
-	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
-}
-
 void MainMenu::StartLobby(std::string lobbyID)
 {
 	m_lobby = new Lobby(lobbyID, m_user.GetUsername());
@@ -139,11 +131,4 @@ void MainMenu::on_lobbyFinished()
 	Show();
 	m_lobby->close();
 	delete m_lobby;
-}
-
-void MainMenu::on_gameFinished()
-{
-	Show();
-	m_game->close();
-	delete m_game;
 }

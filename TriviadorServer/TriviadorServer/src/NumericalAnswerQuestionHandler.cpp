@@ -3,7 +3,7 @@
 NumericalAnswerQuestionHandler::NumericalAnswerQuestionHandler(Game& game) : m_game(game)
 {}
 
-crow::json::wvalue NumericalAnswerQuestionHandler::operator()(const crow::request& req) const
+crow::response NumericalAnswerQuestionHandler::operator()(const crow::request& req) const
 {
 	try
 	{
@@ -15,10 +15,9 @@ crow::json::wvalue NumericalAnswerQuestionHandler::operator()(const crow::reques
 			{"id", id}
 		};
 		return questionJson;
-
 	}
 	catch (const std::exception& e)
 	{
-		return crow::json::wvalue{{"Error Code", e.what()}};
+		return crow::response(400);
 	}
 }

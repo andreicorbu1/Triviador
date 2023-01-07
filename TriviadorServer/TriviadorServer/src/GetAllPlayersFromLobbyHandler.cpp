@@ -9,43 +9,36 @@ crow::json::wvalue GetAllPlayersFromLobbyHandler::operator()(const crow::request
 	auto bodyArgs = ParseUrlArgs(req.body);
 	auto end = bodyArgs.end();
 	auto lobbyID = bodyArgs.find("id");
-	if (lobbyID != end)
+	
+	if (lobbyID == end)
 	{
-		auto id = std::stoi(lobbyID->second);
-		if (m_lobby.GetLobbyID()==id)
+		crow::json::wvalue noID
 		{
-			std::vector<Player>players;
-			int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
+			{ "invalid_id", "NO ID" }
+		};
+		return crow::json::wvalue(noID);
+	}
 
-			for (int i = 0; i < numberOfPlayersFromLobby; i++)
-			{
-				Player player = m_lobby.GetPlayerAt(i);
-				players.push_back(player);
-			}
-
-			nlohmann::json json = players;
-			std::string jsonString = json.dump();
-
-			return crow::json::wvalue(crow::json::load(jsonString));
-		}
+	if (auto id = std::stoi(lobbyID->second); m_lobby.GetLobbyID() != id)
+	{
 		crow::json::wvalue invalidID
 		{
 			{ "invalid_id", "No lobby which contains inserted id" }
 		};
 		return crow::json::wvalue(invalidID);
 	}
-	crow::json::wvalue noID
-	{
-		{ "invalid_id", "NO ID" }
-	};
-	return crow::json::wvalue(noID);
-}
 
-void to_json(nlohmann::json& json, const Player& player)
-{
-	json =
+	std::vector<Player>players;
+	int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
+
+	for (int i = 0; i < numberOfPlayersFromLobby; i++)
 	{
-		{"name", player.GetName()},
-		{"color", player.ColorToString(player.GetColor())}
-	};
+		Player player = m_lobby.GetPlayerAt(i);
+		players.push_back(player);
+	}
+
+	nlohmann::json json = players;
+	std::string jsonString = json.dump();
+
+	return crow::json::wvalue(crow::json::load(jsonString));
 }

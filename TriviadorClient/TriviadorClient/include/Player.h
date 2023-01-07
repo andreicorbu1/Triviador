@@ -25,6 +25,9 @@ public:
     const std::string GetColor() const;
     static Color GetColor(std::string color);
 
+	// Setters:
+	void SetScore(size_t score);
+
     // Operators:
     Player& operator =(const Player& other);
     Player& operator+=(int score);
