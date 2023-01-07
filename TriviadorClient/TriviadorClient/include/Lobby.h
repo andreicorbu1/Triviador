@@ -26,6 +26,7 @@ signals:
 private slots:
 	void on_leaveLobbyButton_clicked();
 	void on_startGameButton_clicked();
+	void on_gameFinished();
 
 private:
 	void paintEvent(QPaintEvent* paintEvent);

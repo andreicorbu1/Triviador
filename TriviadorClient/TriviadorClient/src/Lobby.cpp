@@ -23,10 +23,8 @@ void Lobby::on_leaveLobbyButton_clicked()
 		cpr::Url{ "http://localhost:18080/removeplayerfromlobby" },
 		cpr::Body{ "id=" + m_lobbyID + "&" + "username=" + m_currentPlayer.GetName() }
 	);
-	if (res.status_code == 200)
-	{
-		emit finished();
-	}
+
+	emit finished();
 }
 
 void Lobby::on_startGameButton_clicked()
@@ -40,6 +38,14 @@ void Lobby::on_startGameButton_clicked()
 		this->hide();
 		StartGame();
 	}
+}
+
+void Lobby::on_gameFinished()
+{
+	qDebug() << "Here";
+	m_game->close();
+	delete m_game;
+	on_leaveLobbyButton_clicked();
 }
 
 void Lobby::paintEvent(QPaintEvent* paintEvent)
@@ -104,5 +110,5 @@ void Lobby::StartGame()
 	m_game = new Game(m_players, m_currentPlayer, this);
 	m_game->showMaximized();
 	hide();
-	connect(m_game, SIGNAL(finished()), this, SLOT(on_lobbyFinished()));
+	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
 }

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>804</width>
-    <height>507</height>
+    <width>800</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="font">
@@ -475,7 +475,7 @@ background-position: center;</string>
   <widget class="QLabel" name="flag2">
    <property name="geometry">
     <rect>
-     <x>644</x>
+     <x>640</x>
      <y>130</y>
      <width>160</width>
      <height>91</height>
@@ -504,7 +504,7 @@ background-position: center;</string>
   <widget class="QLabel" name="flag4">
    <property name="geometry">
     <rect>
-     <x>644</x>
+     <x>640</x>
      <y>220</y>
      <width>160</width>
      <height>91</height>

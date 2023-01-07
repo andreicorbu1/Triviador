@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ResultWindow.cpp" />
     <ClCompile Include="src\Lobby.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Board.cpp" />
@@ -140,10 +141,12 @@
     <QtUic Include="form\MainMenu.ui" />
     <QtUic Include="form\QuestionWindow.ui" />
     <QtUic Include="form\Registration.ui" />
+    <QtUic Include="form\ResultWindow.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\User.h" />
+    <QtMoc Include="include\ResultWindow.h" />
     <QtMoc Include="include\Lobby.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\Player.h" />

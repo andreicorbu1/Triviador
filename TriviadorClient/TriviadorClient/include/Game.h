@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include "ui_Game.h"
+#include "ResultWindow.h"
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
@@ -29,6 +30,7 @@ private slots:
 
 private slots:
     void on_exitButton_clicked();
+    void on_gameFinished();
     void action(int position);
 
 private:
@@ -46,6 +48,7 @@ private:
 private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
+	ResultWindow* m_resultWindow;
     QPixmap m_background;
     QSignalMapper *m_signalMapper;
 

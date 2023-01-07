@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(QWidget* mainMenu)
+Game::Game(QWidget* parent)
 	: m_questionWindow(QuestionWindow(this))
 	, m_board(Board(1, 1))
 {
@@ -39,6 +39,11 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
+	// TEST
+	m_resultWindow = new ResultWindow(m_players, this);
+	m_resultWindow->show();
+	connect(m_resultWindow, SIGNAL(backToMenu()), this, SLOT(on_gameFinished()));
+	// TEST
 	QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 
@@ -148,7 +153,9 @@ void Game::GameLoop()
 		}
 		else if (data["stage"] == "result")
 		{
-			// window to show who won and who lost
+			m_resultWindow = new ResultWindow(m_players, this);
+			m_resultWindow->show();
+			connect(m_resultWindow, SIGNAL(backToMenu()), this, SLOT(on_gameFinished()));
 			return;
 		}
 	}
@@ -158,6 +165,11 @@ void Game::GameLoop()
 	}
 
 	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
+}
+
+void Game::on_gameFinished()
+{
+	emit finished();
 }
 
 void Game::action(int position)
@@ -186,5 +198,5 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 
 void Game::on_exitButton_clicked()
 {
-	emit finished();
+	on_gameFinished();
 }
