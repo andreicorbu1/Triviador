@@ -59,6 +59,16 @@ Player Game::GetWinner()
 	return copyOfPlayers.back();
 }
 
+uint16_t Game::GetCurrentNumericalAnswerQuestionIndex() const
+{
+	return numericQuestionIndex;
+}
+
+uint16_t Game::GetCurrentMultipleAnswerQuestionIndex() const
+{
+	return numericQuestionIndex;
+}
+
 std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
 {
 	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
@@ -83,6 +93,24 @@ NumericalAnswerQuestion Game::GetNumericalAnswerQuestion(uint16_t index) const
 	}
 }
 
+std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNewNumericalAnswerQuestion() 
+{
+	m_playersWhoSentRequest.clear();
+	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
+	{
+		return { m_numericalAnswerQuestions[++numericQuestionIndex], numericQuestionIndex };
+	}
+	else
+	{
+		throw std::out_of_range("All numerical questions have been selected");
+	}
+}
+
+NumericalAnswerQuestion Game::GetCurrentNumericalAnswerQuestion() const
+{
+	return m_numericalAnswerQuestions[numericQuestionIndex];
+}
+
 std::pair<MultipleAnswerQuestion, uint16_t> Game::GetMultipleAnswerQuestion()
 {
 	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
@@ -93,6 +121,24 @@ std::pair<MultipleAnswerQuestion, uint16_t> Game::GetMultipleAnswerQuestion()
 	{
 		throw std::out_of_range("All multiple questions have been selected");
 	}
+}
+
+std::pair<MultipleAnswerQuestion, uint16_t> Game::GetNewMultipleAnswerQuestion()
+{
+	m_playersWhoSentRequest.clear();
+	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
+	{
+		return { m_multipleAnswerQuestions[++multipleQuestionIndex], multipleQuestionIndex };
+	}
+	else
+	{
+		throw std::out_of_range("All multiple questions have been selected");
+	}
+}
+
+MultipleAnswerQuestion Game::GetCurrentMultipleAnswerQuestion()
+{
+	return m_multipleAnswerQuestions[multipleQuestionIndex];
 }
 
 MultipleAnswerQuestion Game::GetMultipleAnswerQuestion(uint16_t index) const
@@ -126,6 +172,11 @@ std::string Game::CurrentStage() const
 		default:
 			throw std::invalid_argument("Stage invalid");
 	}
+}
+
+const std::unordered_set<std::string>& Game::GetPlayersWhoSentRequest()
+{
+	return m_playersWhoSentRequest;
 }
 
 void Game::SetBoard(const Board& board)
@@ -290,4 +341,9 @@ void Game::ChooseTerritories(const std::vector<std::pair<Player, std::vector<std
 			}
 		}
 	}
+}
+
+void Game::AddPlayerWhoSentRequest(const std::string& playersName)
+{
+	m_playersWhoSentRequest.insert(playersName);
 }
