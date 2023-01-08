@@ -27,6 +27,7 @@ public:
 	PlayerHistoryManager(const std::string& databaseFileName);
 
 	void AddPlayer(Player& Player);
+	std::vector<Player> GetPlayerMatches(const std::string& username);
 private:
 	StorageForGM m_database;
 };

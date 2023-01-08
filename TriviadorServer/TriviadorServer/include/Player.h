@@ -34,7 +34,7 @@ public:
 	void SetColor(const Player::Color& color);
 	void SetScore(const size_t& score);
 	void SetTerritoriesCount(const int& territoriesCount);
-	void SetRank(size_t rank);
+	void SetRank(const size_t& rank);
 
 	//Other:
 	void AddScore(size_t score);

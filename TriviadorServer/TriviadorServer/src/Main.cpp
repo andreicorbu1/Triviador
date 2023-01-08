@@ -72,17 +72,14 @@ int main()
 	/*Player a("asd", Player::Color::Red);
 	Player b("dsa", Player::Color::Red);
 	Player c("boc", Player::Color::Red);
-	std::vector<Player> asd;
-	asd.push_back(a);
-	asd.push_back(b);
-	asd.push_back(c);
-	Game game(asd);
-	gameManager.AddGame(game)*/;
-	/*std::vector<Game> games = gameManager.GetAll("adelin");
-	for (size_t i = 0; i < games.size(); i++)
+	playerHistoryManager.AddPlayer(a);
+	playerHistoryManager.AddPlayer(b);
+	playerHistoryManager.AddPlayer(c);*/
+	std::vector<Player> players = playerHistoryManager.GetPlayerMatches("asd");
+	for (size_t i = 0; i < players.size(); i++)
 	{
-		std::vector<Player> asd = games[i].GetPlayers();
-	}*/
+		std::string name = players[i].GetName();
+	}
 	app.port(18080).multithreaded().run();
 	return 0;
 }

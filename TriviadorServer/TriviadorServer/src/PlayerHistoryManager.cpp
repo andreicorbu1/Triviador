@@ -11,6 +11,11 @@ void PlayerHistoryManager::AddPlayer(Player& Player)
 	m_database.insert(Player);
 }
 
+std::vector<Player> PlayerHistoryManager::GetPlayerMatches(const std::string& username)
+{
+	return m_database.get_all<Player>(sql::where(sql::in(&Player::GetName, {username})));
+}
+
 //std::vector<Game> GameManager::GetAll(const std::string& username)
 //{
 //	std::vector<Game> auxVector1, auxVector2, auxVector3, auxVector4;
