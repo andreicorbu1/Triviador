@@ -134,7 +134,6 @@ int Game::GetNumberOfPlayers()
 	return m_players.size();
 }
 
-
 void Game::SetBoard(const Board& board)
 {
 	this->m_board = board;

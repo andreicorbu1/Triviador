@@ -90,7 +90,7 @@
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameManager.cpp">
+    <ClCompile Include="src\PlayerHistoryManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,7 +170,7 @@
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameManager.h">
+    <ClInclude Include="include\PlayerHistoryManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -187,9 +187,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\Questions.sqlite">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resource\Games.sqlite">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

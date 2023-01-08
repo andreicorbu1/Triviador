@@ -86,23 +86,33 @@ private:
 template<size_t index>
 inline std::string Game::GetPlayerName() const
 {
+	if (m_players.size() <= index)
+	{
+		return "";
+	}
 	return m_players[index].GetName();
 }
 
 template<size_t index>
 inline void Game::SetPlayerName(std::string playerName)
 {
-	m_players[index].SetName(playerName);
+	if(index < m_players.size())
+		m_players[index].SetName(playerName);
 }
 
 template<size_t index>
 inline int Game::GetPlayerPoints() const
 {
+	if (m_players.size() <= index)
+	{
+		return 0;
+	}
 	return m_players[index].GetScore();
 }
 
 template<size_t index>
 inline void Game::SetPlayerScore(int playerScore)
 {
-	m_players[index].SetScore(playerScore);
+	if (index < m_players.size())
+		m_players[index].SetScore(playerScore);
 }

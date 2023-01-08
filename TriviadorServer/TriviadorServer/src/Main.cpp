@@ -13,14 +13,14 @@
 #include "SendAnswerMultipleQuestion.h"
 #include "SendAnswerNumericalQuestion.h"
 #include "QuestionManager.h"
-#include "GameManager.h"
+#include "PlayerHistoryManager.h"
 #include "Game.h"
 
 int main()
 {
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
-	GameManager gameManager("resource/Games.sqlite");
+	PlayerHistoryManager playerHistoryManager("resource/PlayesHistory.sqlite");
 	questionManager.PopulateStorage();
 
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
@@ -69,15 +69,20 @@ int main()
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
 
-	Player a("adelin", Player::Color::Blue);
-	Player b("clementin", Player::Color::Red);
-	std::vector<Player> players;
-	players.push_back(a);
-	players.push_back(b);
-	Game game(players);
-	gameManager.AddGame(game);
-
-
+	/*Player a("asd", Player::Color::Red);
+	Player b("dsa", Player::Color::Red);
+	Player c("boc", Player::Color::Red);
+	std::vector<Player> asd;
+	asd.push_back(a);
+	asd.push_back(b);
+	asd.push_back(c);
+	Game game(asd);
+	gameManager.AddGame(game)*/;
+	/*std::vector<Game> games = gameManager.GetAll("adelin");
+	for (size_t i = 0; i < games.size(); i++)
+	{
+		std::vector<Player> asd = games[i].GetPlayers();
+	}*/
 	app.port(18080).multithreaded().run();
 	return 0;
 }
