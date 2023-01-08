@@ -144,6 +144,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp" />
     <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp" />
+    <ClCompile Include="src\GetBoardHandler.cpp" />
     <ClCompile Include="src\Lobby.cpp" />
     <ClCompile Include="src\MultipleAnswerQuestionHandler.cpp" />
     <ClCompile Include="src\NumericalAnswerQuestionHandler.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h" />
     <ClInclude Include="include\GetAllPlayersFromLobbyHandler.h" />
+    <ClInclude Include="include\GetBoardHandler.h" />
     <ClInclude Include="include\Lobby.h" />
     <ClInclude Include="include\MultipleAnswerQuestionHandler.h" />
     <ClInclude Include="include\NumericalAnswerQuestionHandler.h" />
