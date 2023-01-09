@@ -12,6 +12,7 @@
 #include "MultipleAnswerQuestion.h"
 #include "SendAnswerMultipleQuestion.h"
 #include "SendAnswerNumericalQuestion.h"
+#include "GetBoardHandler.h"
 #include "QuestionManager.h"
 #include "Game.h"
 
@@ -20,8 +21,8 @@ int main()
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
 	questionManager.PopulateStorage();
-	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
-	Game currentGame;
+	Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
+	//Game currentGame;
 	Lobby lobby;
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
@@ -65,6 +66,9 @@ int main()
 
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
+
+	auto& getBoard = CROW_ROUTE(app, "/getboard");
+	getBoard(GetBoardHandler(currentGame));
 
 	app.port(18080).multithreaded().run();
 	return 0;

@@ -90,6 +90,9 @@
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\GetBoardHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h">
@@ -165,6 +168,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GetBoardHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
