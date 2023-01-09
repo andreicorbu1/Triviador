@@ -69,17 +69,6 @@ int main()
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
 
-	/*Player a("asd", Player::Color::Red);
-	Player b("dsa", Player::Color::Red);
-	Player c("boc", Player::Color::Red);
-	playerHistoryManager.AddPlayer(a);
-	playerHistoryManager.AddPlayer(b);
-	playerHistoryManager.AddPlayer(c);*/
-	std::vector<Player> players = playerHistoryManager.GetPlayerMatches("asd");
-	for (size_t i = 0; i < players.size(); i++)
-	{
-		std::string name = players[i].GetName();
-	}
 	app.port(18080).multithreaded().run();
 	return 0;
 }

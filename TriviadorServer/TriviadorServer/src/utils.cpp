@@ -41,3 +41,12 @@ void to_json(nlohmann::json& json, const Player& player)
 		{"score", player.GetScore()}
 	};
 }
+
+void to_json(nlohmann::json& json, const PlayerHistory& playerHistory)
+{
+	json =
+	{
+		{"score", playerHistory.GetScore()},
+		{"rank", playerHistory.GetRank()}
+	};
+}

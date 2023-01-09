@@ -142,6 +142,7 @@
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\PlayerHistory.cpp" />
     <ClCompile Include="src\PlayerHistoryManager.cpp" />
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp" />
     <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="src\RemoveFromLobbyHandler.cpp" />
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp" />
     <ClCompile Include="src\SendAnswerNumericalQuestion.cpp" />
+    <ClCompile Include="src\PlayerHistoryHandler.cpp" />
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
@@ -172,6 +174,7 @@
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\PlayerHistory.h" />
     <ClInclude Include="include\PlayerHistoryManager.h" />
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h" />
     <ClInclude Include="include\GetAllPlayersFromLobbyHandler.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="include\RemoveFromLobbyHandler.h" />
     <ClInclude Include="include\SendAnswerMultipleQuestion.h" />
     <ClInclude Include="include\SendAnswerNumericalQuestion.h" />
+    <ClInclude Include="include\PlayerHistoryHandler.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
