@@ -41,7 +41,7 @@ void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 		this->ui.questionTypes->setCurrentWidget(ui.numerical);
 		FetchNumericalAnswerQuestion();
 	}
-	
+
 	m_players = players;
 	SetFlags(m_players);
 	SetEnabledState();
@@ -49,10 +49,14 @@ void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 
 void QuestionWindow::FetchMultipleAnswerQuestion()
 {
-	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/getmultiplequestion" });
+	cpr::Response res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/getmultiplequestion" },
+		cpr::Body{ "username=" + m_currentPlayer.GetName() }
+	);
 	if (res.status_code == 200)
 	{
-		auto question = crow::json::load(res.text); 
+		auto question = crow::json::load(res.text);
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
 
@@ -65,7 +69,11 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 
 void QuestionWindow::FetchNumericalAnswerQuestion()
 {
-	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/getnumericalquestion" });
+	cpr::Response res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/getnumericalquestion" },
+		cpr::Body{ "username="+m_currentPlayer.GetName()}
+	);
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
@@ -247,7 +255,7 @@ void QuestionWindow::SetButtonsProperties(int i)
 void QuestionWindow::SetFlags(std::vector<Player>& players)
 {
 	HideAllFlags();
-	
+
 	QString baseStyle = "color: #ffffff;\npadding: 15px;\nbackground-repeat: no-repeat;\nbackground-position: center;\n";
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -288,7 +296,7 @@ void QuestionWindow::ResetButtons()
 		button->setChecked(false);
 		button->show();
 	}
-	
+
 	ui.answerInput->setText("");
 	ui.answerInput->setStyleSheet("border: none;\nbackground-color: #725C48;\ncolor: #ffffff;\npadding: 5px;");
 	for (auto* button : ui_telescopeAnswers)

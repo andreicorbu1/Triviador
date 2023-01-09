@@ -27,11 +27,18 @@ public:
 	uint16_t GetRounds() const;
 	int32_t GetGameID() const;
 	Player GetWinner();
+	uint16_t GetCurrentNumericalAnswerQuestionIndex() const;
+	uint16_t GetCurrentMultipleAnswerQuestionIndex() const;
 	std::pair<NumericalAnswerQuestion, uint16_t> GetNumericalAnswerQuestion();
 	NumericalAnswerQuestion GetNumericalAnswerQuestion(uint16_t index) const;
+	std::pair<NumericalAnswerQuestion, uint16_t> GetNewNumericalAnswerQuestion();
+	NumericalAnswerQuestion GetCurrentNumericalAnswerQuestion() const;
 	std::pair < MultipleAnswerQuestion, uint16_t> GetMultipleAnswerQuestion();
+	std::pair < MultipleAnswerQuestion, uint16_t> GetNewMultipleAnswerQuestion();
+	MultipleAnswerQuestion GetCurrentMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetMultipleAnswerQuestion(uint16_t index) const;
 	std::string CurrentStage() const;
+	const std::unordered_set<std::string>& GetPlayersWhoSentRequest();
 	
 
 	//Setters:
@@ -48,6 +55,7 @@ public:
 	// Methods:
 	void Start();
 	void AddToAnswered(int questionId, const Player& player);
+	void AddPlayerWhoSentRequest(const std::string& playersName);
 private:
 	void Cleanup();
 	void ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players);
@@ -70,5 +78,6 @@ private:
 	int32_t m_ID;	
 	uint16_t numericQuestionIndex = 0;
 	uint16_t multipleQuestionIndex = 0;
+	std::unordered_set<std::string> m_playersWhoSentRequest;
 };
 
