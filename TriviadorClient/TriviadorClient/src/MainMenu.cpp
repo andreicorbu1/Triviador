@@ -148,11 +148,12 @@ void MainMenu::ShowPlayerHistory()
 		int column = 0;
 		for (size_t i = 0; i < playerHistory.size(); i++)
 		{
+			int32_t gameID = playerHistory[i]["id"].i();
 			int score = playerHistory[i]["score"].i();
 			int rank = playerHistory[i]["rank"].i();
 
 			auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAtPosition(line, column)->widget()) };
-			playerHistoryLabel->setText("Score: " + QString::number(score) + " Rank: " + QString::number(rank));
+			playerHistoryLabel->setText("GameID: " + QString::number(gameID) + " Score: " + QString::number(score) + " Rank : " + QString::number(rank));
 			column++;
 			if (column > 1)
 			{

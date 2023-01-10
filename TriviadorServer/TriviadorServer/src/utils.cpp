@@ -46,6 +46,7 @@ void to_json(nlohmann::json& json, const PlayerHistory& playerHistory)
 {
 	json =
 	{
+		{"id", playerHistory.GetID()},
 		{"score", playerHistory.GetScore()},
 		{"rank", playerHistory.GetRank()}
 	};

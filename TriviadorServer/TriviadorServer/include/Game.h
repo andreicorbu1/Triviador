@@ -35,10 +35,6 @@ public:
 	uint16_t GetRounds() const;
 	int32_t GetGameID() const;
 	Player GetWinner();
-	template<size_t index>
-	std::string GetPlayerName() const;
-	template<size_t index>
-	int GetPlayerPoints() const;
 	uint16_t GetCurrentNumericalAnswerQuestionIndex() const;
 	uint16_t GetCurrentMultipleAnswerQuestionIndex() const;
 	std::pair<NumericalAnswerQuestion, uint16_t> GetNumericalAnswerQuestion();
@@ -61,10 +57,6 @@ public:
 	void SetGameID(const int32_t& gameID);
 	void SetQuestions(const uint16_t& numberOfPlayers);
 	void GoToNextStage();
-	template<size_t index>
-	void SetPlayerName(std::string playerName);
-	template<size_t index>
-	void SetPlayerScore(int playerScore);
 	void AddNullPlayer();
 
 	//Operators:
@@ -106,38 +98,3 @@ private:
 	uint16_t multipleQuestionIndex = 0;
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 };
-
-
-template<size_t index>
-inline std::string Game::GetPlayerName() const
-{
-	if (m_players.size() <= index)
-	{
-		return "";
-	}
-	return m_players[index].GetName();
-}
-
-template<size_t index>
-inline void Game::SetPlayerName(std::string playerName)
-{
-	if(index < m_players.size())
-		m_players[index].SetName(playerName);
-}
-
-template<size_t index>
-inline int Game::GetPlayerPoints() const
-{
-	if (m_players.size() <= index)
-	{
-		return 0;
-	}
-	return m_players[index].GetScore();
-}
-
-template<size_t index>
-inline void Game::SetPlayerScore(int playerScore)
-{
-	if (index < m_players.size())
-		m_players[index].SetScore(playerScore);
-}

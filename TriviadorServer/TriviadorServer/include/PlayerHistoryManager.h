@@ -10,6 +10,7 @@ static auto CreateStorageForPlayersHistory(const std::string& databaseFileName)
 		databaseFileName,
 		sql::make_table(
 			"Match",
+			sql::make_column("id", &PlayerHistory::SetID, &PlayerHistory::GetID),
 			sql::make_column("userame", &PlayerHistory::SetUsername, &PlayerHistory::GetUsername),
 			sql::make_column("score", &PlayerHistory::SetScore, &PlayerHistory::GetScore),
 			sql::make_column("rank", &PlayerHistory::SetRank, &PlayerHistory::GetRank)
