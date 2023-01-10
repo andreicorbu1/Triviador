@@ -10,6 +10,14 @@ class Game
 public:
 	enum class Stage : uint16_t
 	{
+		NumericalAnswerQuestion,
+		MultipleAnswerQuestion,
+		ChooseBase,
+		ChooseTerritory,
+		Attack,
+		Wait,
+		Update,
+		Result,
 		Stage1,
 		Stage2,
 		Stage3,
@@ -31,12 +39,19 @@ public:
 	std::string GetPlayerName() const;
 	template<size_t index>
 	int GetPlayerPoints() const;
+	uint16_t GetCurrentNumericalAnswerQuestionIndex() const;
+	uint16_t GetCurrentMultipleAnswerQuestionIndex() const;
 	std::pair<NumericalAnswerQuestion, uint16_t> GetNumericalAnswerQuestion();
 	NumericalAnswerQuestion GetNumericalAnswerQuestion(uint16_t index) const;
+	std::pair<NumericalAnswerQuestion, uint16_t> GetNewNumericalAnswerQuestion();
+	NumericalAnswerQuestion GetCurrentNumericalAnswerQuestion() const;
 	std::pair < MultipleAnswerQuestion, uint16_t> GetMultipleAnswerQuestion();
+	std::pair < MultipleAnswerQuestion, uint16_t> GetNewMultipleAnswerQuestion();
+	MultipleAnswerQuestion GetCurrentMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetMultipleAnswerQuestion(uint16_t index) const;
-	std::string CurrentStage() const;
 	int GetNumberOfPlayers();
+	std::string GetCurrentStage() const;
+	const std::unordered_set<std::string>& GetPlayersWhoSentRequest();
 	
 
 	//Setters:
@@ -58,6 +73,11 @@ public:
 	// Methods:
 	void Start();
 	void AddToAnswered(int questionId, const Player& player);
+	void AddPlayerWhoSentRequest(const std::string& playersName);
+	void SetStagesForChooseBase();
+	void SetStagesForChooseTerritory();
+	void SetStagesForDuel();
+	void ClearPlayersWhoSentRequest();
 private:
 	void Cleanup();
 	void ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players);
@@ -67,7 +87,9 @@ private:
 	const uint16_t kThreePlayersNumericAnswerQuestions = 17;
 	const uint16_t kThreePlayersMultipleAnswerQuestions = 12;
 	const uint16_t kFourPlayersNumericAnswerQuestions = 21;
-	const uint16_t kFourPlayersMultipleAnswerQuestions = 16;
+	const uint16_t kFourPlayersMultipleAnswerQuestions = 20;
+	uint16_t m_chooseTerritoryRoundsNumber;
+	uint16_t m_duelRoundsNumber;
 	static QuestionManager m_questionManager;
 private:
 	Board m_board;
@@ -77,9 +99,12 @@ private:
 	std::vector<NumericalAnswerQuestion> m_numericalAnswerQuestions;
 	uint16_t m_gameRounds;
 	Stage m_currentStage;
+	uint16_t m_currentStageIndex;
+	std::vector<Stage>m_stages;
 	int32_t m_ID;	
 	uint16_t numericQuestionIndex = 0;
 	uint16_t multipleQuestionIndex = 0;
+	std::unordered_set<std::string> m_playersWhoSentRequest;
 };
 
 

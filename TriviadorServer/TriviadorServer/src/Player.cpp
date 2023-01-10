@@ -16,8 +16,8 @@ std::string Player::ColorToString(Player::Color color) const
 	case Player::Color::Yellow:
 		return "Yellow";
 		break;
-	case Player::Color::NaN:
-		return "Nan";
+	case Player::Color::None:
+		return "None";
 		break;
 	default:
 		break;
@@ -113,7 +113,7 @@ Player& Player::operator=(Player&& other) noexcept
 	if (this != &other)
 	{
 		m_playerName = std::exchange(other.m_playerName, std::string());
-		m_color = std::exchange(other.m_color, Player::Color::NaN);
+		m_color = std::exchange(other.m_color, Player::Color::None);
 		m_score = std::exchange(other.m_score, 0);
 		m_territoriesCount = std::exchange(other.m_territoriesCount, 0);
 	}

@@ -1,15 +1,15 @@
 #pragma once
-#include <crow.h>
 #include "utils.h"
+#include <crow.h>
 #include "Game.h"
-#include <nlohmann/json.hpp>
 
-class GetAllPlayersFromGameHandler
+class GetBoardHandler
 {
 public:
-	GetAllPlayersFromGameHandler(Game& game);
+	GetBoardHandler(Game& game);
 	crow::response operator()(const crow::request& req) const;
 
 private:
 	Game& m_game;
 };
+

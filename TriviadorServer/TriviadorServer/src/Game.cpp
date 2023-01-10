@@ -9,14 +9,20 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 		case 2:
 			m_board = Board(3, 3);
 			m_gameRounds = 5;
+			m_chooseTerritoryRoundsNumber = 7;
+			m_duelRoundsNumber = 10;
 			break;
 		case 3:
 			m_board = Board(5, 3);
 			m_gameRounds = 4;
+			m_chooseTerritoryRoundsNumber = 4;
+			m_duelRoundsNumber = 12;
 			break;
 		case 4:
 			m_board = Board(6, 4);
 			m_gameRounds = 5;
+			m_chooseTerritoryRoundsNumber = 4;
+			m_duelRoundsNumber = 20;
 			break;
 		default:
 			throw std::out_of_range("Invalid number of players");
@@ -24,6 +30,10 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 	}
 	m_ID = -1;
 	SetQuestions(players.size());
+	SetStagesForChooseBase();
+	SetStagesForChooseTerritory();
+	SetStagesForDuel();
+	m_currentStageIndex = 0;
 }
 
 Game::Game(const Game& other)
@@ -59,6 +69,15 @@ Player Game::GetWinner()
 	return copyOfPlayers.back();
 }
 
+uint16_t Game::GetCurrentNumericalAnswerQuestionIndex() const
+{
+	return numericQuestionIndex;
+}
+
+uint16_t Game::GetCurrentMultipleAnswerQuestionIndex() const
+{
+	return numericQuestionIndex;
+}
 
 std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
 {
@@ -84,6 +103,24 @@ NumericalAnswerQuestion Game::GetNumericalAnswerQuestion(uint16_t index) const
 	}
 }
 
+std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNewNumericalAnswerQuestion() 
+{
+	m_playersWhoSentRequest.clear();
+	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
+	{
+		return { m_numericalAnswerQuestions[++numericQuestionIndex], numericQuestionIndex };
+	}
+	else
+	{
+		throw std::out_of_range("All numerical questions have been selected");
+	}
+}
+
+NumericalAnswerQuestion Game::GetCurrentNumericalAnswerQuestion() const
+{
+	return m_numericalAnswerQuestions[numericQuestionIndex];
+}
+
 std::pair<MultipleAnswerQuestion, uint16_t> Game::GetMultipleAnswerQuestion()
 {
 	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
@@ -94,6 +131,24 @@ std::pair<MultipleAnswerQuestion, uint16_t> Game::GetMultipleAnswerQuestion()
 	{
 		throw std::out_of_range("All multiple questions have been selected");
 	}
+}
+
+std::pair<MultipleAnswerQuestion, uint16_t> Game::GetNewMultipleAnswerQuestion()
+{
+	m_playersWhoSentRequest.clear();
+	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
+	{
+		return { m_multipleAnswerQuestions[++multipleQuestionIndex], multipleQuestionIndex };
+	}
+	else
+	{
+		throw std::out_of_range("All multiple questions have been selected");
+	}
+}
+
+MultipleAnswerQuestion Game::GetCurrentMultipleAnswerQuestion()
+{
+	return m_multipleAnswerQuestions[multipleQuestionIndex];
 }
 
 MultipleAnswerQuestion Game::GetMultipleAnswerQuestion(uint16_t index) const
@@ -108,21 +163,33 @@ MultipleAnswerQuestion Game::GetMultipleAnswerQuestion(uint16_t index) const
 	}
 }
 
-std::string Game::CurrentStage() const
+std::string Game::GetCurrentStage() const
 {
 	switch (m_currentStage)
 	{
-		case Stage::Stage1:
-			return "Stage 1";
+	case Stage::NumericalAnswerQuestion:
+			return "numericalAnswerQuestion";
 			break;
-		case Stage::Stage2:
-			return "Stage 2";
+		case Stage::MultipleAnswerQuestion:
+			return "multipleAnswerQuestion";
 			break;
-		case Stage::Stage3:
-			return "Stage 3";
+		case Stage::ChooseBase:
+			return "chooseBase";
 			break;
-		case Stage::Stage4:
-			return "Stage 4";
+		case Stage::ChooseTerritory:
+			return "chooseTerritory";
+			break;
+		case Stage::Attack:
+			return "attack";
+			break;
+		case Stage::Update:
+			return "update";
+			break;
+		case Stage::Result:
+			return "result";
+			break;
+		case Stage::Wait:
+			return "wait";
 			break;
 		default:
 			throw std::invalid_argument("Stage invalid");
@@ -132,6 +199,9 @@ std::string Game::CurrentStage() const
 int Game::GetNumberOfPlayers()
 {
 	return m_players.size();
+const std::unordered_set<std::string>& Game::GetPlayersWhoSentRequest()
+{
+	return m_playersWhoSentRequest;
 }
 
 void Game::SetBoard(const Board& board)
@@ -215,21 +285,8 @@ void Game::SetQuestions(const uint16_t& numberOfPlayers)
 
 void Game::GoToNextStage()
 {
-	switch (m_currentStage)
-	{
-		case Stage::Stage1:
-			m_currentStage = Stage::Stage2;
-			break;
-		case Stage::Stage2:
-			m_currentStage = Stage::Stage3;
-			break;
-		case Stage::Stage3:
-			m_currentStage = Stage::Stage4;
-			break;
-		default:
-			throw std::invalid_argument("Cannot advance in other stages because you are in a final stage");
-	}
-
+	m_currentStage = m_stages[m_currentStageIndex];
+	m_currentStageIndex++;
 }
 
 void Game::AddNullPlayer()
@@ -301,4 +358,47 @@ void Game::ChooseTerritories(const std::vector<std::pair<Player, std::vector<std
 			}
 		}
 	}
+}
+
+void Game::AddPlayerWhoSentRequest(const std::string& playersName)
+{
+	m_playersWhoSentRequest.insert(playersName);
+}
+
+void Game::SetStagesForChooseBase()
+{
+	m_stages.push_back(Stage::NumericalAnswerQuestion);
+	for (size_t i = 0; i < m_players.size(); i++)
+	{
+		m_stages.push_back(Stage::ChooseBase);
+		m_stages.push_back(Stage::Update);
+	}
+}
+
+void Game::SetStagesForChooseTerritory()
+{
+	for (size_t i = 0; i < m_chooseTerritoryRoundsNumber; i++)
+	{
+		m_stages.push_back(Stage::NumericalAnswerQuestion);
+		m_stages.push_back(Stage::ChooseTerritory);
+		m_stages.push_back(Stage::Update);
+	}
+}
+
+void Game::SetStagesForDuel()
+{
+	std::array<Player, 2>participants;
+	for (size_t i = 0; i < m_duelRoundsNumber; i++)
+	{
+		m_stages.push_back(Stage::Attack);
+		m_stages.push_back(Stage::MultipleAnswerQuestion);
+		m_stages.push_back(Stage::Update);
+		m_stages.push_back(Stage::NumericalAnswerQuestion);
+		m_stages.push_back(Stage::Update);
+	}
+}
+
+void Game::ClearPlayersWhoSentRequest()
+{
+	m_playersWhoSentRequest.clear();
 }

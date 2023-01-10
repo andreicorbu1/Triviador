@@ -5,16 +5,21 @@ Lobby::Lobby(const std::string& lobbyID, const std::string& username, QWidget* p
 {
 	ui.setupUi(this);
 	ui.lobbyID_label->setText(QString::fromUtf8("ID: " + lobbyID));
-
+	ui.startGameButton->hide();
 	m_currentPlayer = Player(username, Player::Color::None);
 
 	HideAllPlayersName();
-	
+
 	SetPlayersLabel();
 }
 
 Lobby::~Lobby()
 {}
+
+void Lobby::closeEvent(QCloseEvent* event)
+{
+	on_leaveLobbyButton_clicked();
+}
 
 void Lobby::on_leaveLobbyButton_clicked()
 {
@@ -23,7 +28,6 @@ void Lobby::on_leaveLobbyButton_clicked()
 		cpr::Url{ "http://localhost:18080/removeplayerfromlobby" },
 		cpr::Body{ "id=" + m_lobbyID + "&" + "username=" + m_currentPlayer.GetName() }
 	);
-
 	emit finished();
 }
 
@@ -48,6 +52,7 @@ void Lobby::on_gameFinished()
 	on_leaveLobbyButton_clicked();
 }
 
+
 void Lobby::paintEvent(QPaintEvent* paintEvent)
 {
 	QPainter painter(this);
@@ -56,7 +61,7 @@ void Lobby::paintEvent(QPaintEvent* paintEvent)
 		cpr::Url{ "http://localhost:18080/getplayersfromlobby" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
-
+	HideAllPlayersName();
 	m_players.clear();
 	auto players = crow::json::load(playersFromLobby.text);
 	for (size_t i = 0; i < players.size(); i++)
@@ -66,6 +71,14 @@ void Lobby::paintEvent(QPaintEvent* paintEvent)
 		m_playersLabel[i]->setText(QString::fromUtf8(name));
 		m_playersLabel[i]->show();
 		m_players.push_back(Player(name, Player::GetColor(color)));
+	}
+	if (m_players.size() > 1)
+	{
+		ui.startGameButton->show();
+	}
+	else
+	{
+		ui.startGameButton->hide();
 	}
 
 	auto res = cpr::Get

@@ -10,7 +10,7 @@ public:
 		Red,
 		Green,
 		Yellow,
-		NaN
+		None
 	};
 
 	std::string ColorToString(Color color) const;
