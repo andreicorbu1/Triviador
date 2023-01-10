@@ -99,7 +99,9 @@
     <ClCompile Include="src\PlayerHistory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AddToPlayerHistoryHandler.cpp">
+    <ClCompile Include="src\AddToPlayerHistoryHandler.cpp"> 
+	  <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\GetBoardHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -193,6 +195,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\AddToPlayerHistoryHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\GetBoardHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
