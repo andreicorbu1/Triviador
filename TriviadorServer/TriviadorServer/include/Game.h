@@ -77,7 +77,7 @@ private:
 	const uint16_t kThreePlayersNumericAnswerQuestions = 17;
 	const uint16_t kThreePlayersMultipleAnswerQuestions = 12;
 	const uint16_t kFourPlayersNumericAnswerQuestions = 21;
-	const uint16_t kFourPlayersMultipleAnswerQuestions = 16;
+	const uint16_t kFourPlayersMultipleAnswerQuestions = 20;
 	uint16_t m_chooseTerritoryRoundsNumber;
 	uint16_t m_duelRoundsNumber;
 	static QuestionManager m_questionManager;
