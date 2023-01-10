@@ -90,6 +90,16 @@
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PlayerHistoryManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerHistoryHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerHistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AddToPlayerHistoryHandler.cpp">
     <ClCompile Include="src\GetBoardHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -173,6 +183,16 @@
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\PlayerHistoryManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerHistoryHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerHistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AddToPlayerHistoryHandler.h">
     <ClInclude Include="include\GetBoardHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -193,6 +213,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\Questions.sqlite">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\PlayesHistory.sqlite">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

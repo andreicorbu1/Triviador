@@ -196,6 +196,9 @@ std::string Game::GetCurrentStage() const
 	}
 }
 
+int Game::GetNumberOfPlayers()
+{
+	return m_players.size();
 const std::unordered_set<std::string>& Game::GetPlayersWhoSentRequest()
 {
 	return m_playersWhoSentRequest;
@@ -284,6 +287,11 @@ void Game::GoToNextStage()
 {
 	m_currentStage = m_stages[m_currentStageIndex];
 	m_currentStageIndex++;
+}
+
+void Game::AddNullPlayer()
+{
+	m_players.push_back(Player("", Player::Color::NaN));
 }
 
 Game& Game::operator=(const Game& other)

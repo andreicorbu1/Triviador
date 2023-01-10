@@ -15,13 +15,16 @@
 #include "StageHandler.h"
 #include "GetBoardHandler.h"
 #include "QuestionManager.h"
+#include "PlayerHistoryHandler.h"
 #include "Game.h"
 
 int main()
 {
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
+	PlayerHistoryManager playerHistoryManager("resource/PlayesHistory.sqlite");
 	questionManager.PopulateStorage();
+
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
 	Game currentGame;
 	Lobby lobby;
@@ -68,12 +71,15 @@ int main()
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
 
-	auto& stage = CROW_ROUTE(app, "/stage");
+  auto& sendPlayerHistory = CROW_ROUTE(app, "/playerhistory");
+	sendPlayerHistory(PlayerHistoryHandler(playerHistoryManager));
+
+  auto& stage = CROW_ROUTE(app, "/stage");
 	stage(StageHandler(currentGame));
 
 	auto& getBoard = CROW_ROUTE(app, "/getboard");
 	getBoard(GetBoardHandler(currentGame));
-
+  
 	app.port(18080).multithreaded().run();
 	return 0;
 }

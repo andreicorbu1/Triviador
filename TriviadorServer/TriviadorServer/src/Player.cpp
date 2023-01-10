@@ -61,6 +61,11 @@ int Player::GetTerritoriesCount() const
 	return m_territoriesCount;
 }
 
+size_t Player::GetRank() const
+{
+	return m_rank;
+}
+
 void Player::SetName(const std::string& name)
 {
 	this->m_playerName = name;
@@ -79,6 +84,11 @@ void Player::SetScore(const size_t& score)
 void Player::SetTerritoriesCount(const int& territoriesCount)
 {
 	this->m_territoriesCount = territoriesCount;
+}
+
+void Player::SetRank(const size_t& rank)
+{
+	m_rank = rank;
 }
 
 void Player::AddScore(size_t score)
