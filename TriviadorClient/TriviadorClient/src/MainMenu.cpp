@@ -144,13 +144,21 @@ void MainMenu::ShowPlayerHistory()
 	try
 	{
 		auto playerHistory = crow::json::load(getPlayerHistory.text);
+		int line = 0;
+		int column = 0;
 		for (size_t i = 0; i < playerHistory.size(); i++)
 		{
 			int score = playerHistory[i]["score"].i();
 			int rank = playerHistory[i]["rank"].i();
 
-			auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAt(i)->widget()) };
-			playerHistoryLabel->setText(QString::number(score) + QString::number(rank));
+			auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAtPosition(line, column)->widget()) };
+			playerHistoryLabel->setText("Score: " + QString::number(score) + " Rank: " + QString::number(rank));
+			column++;
+			if (column > 1)
+			{
+				column = 0;
+				line++;
+			}
 		}
 	}
 	catch (std::exception ex)

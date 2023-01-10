@@ -13,5 +13,12 @@ void PlayerHistoryManager::AddPlayerHistory(const PlayerHistory& playerHistory)
 
 std::vector<PlayerHistory> PlayerHistoryManager::GetPlayerMatches(const std::string& username)
 {
-	return m_database.get_all<PlayerHistory>(sql::where(sql::in(&PlayerHistory::GetUsername, {username})));
+	std::vector<PlayerHistory> all_games = m_database.get_all<PlayerHistory>(sql::where(sql::in(&PlayerHistory::GetUsername, {username})));
+	if (all_games.size() > 10)
+	{
+		std::vector<PlayerHistory> last10Games;
+		last10Games.insert(last10Games.begin(), all_games.end() - 10, all_games.end());
+		return last10Games;
+	}
+	return all_games;
 }
