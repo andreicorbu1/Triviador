@@ -10,9 +10,9 @@ static auto CreateStorageForPlayersHistory(const std::string& databaseFileName)
 		databaseFileName,
 		sql::make_table(
 			"Match",
-			sql::make_column("Name", &PlayerHistory::SetUsername, &PlayerHistory::GetUsername),
-			sql::make_column("Score", &PlayerHistory::SetScore, &PlayerHistory::GetScore),
-			sql::make_column("Rank", &PlayerHistory::SetRank, &PlayerHistory::GetRank)
+			sql::make_column("userame", &PlayerHistory::SetUsername, &PlayerHistory::GetUsername),
+			sql::make_column("score", &PlayerHistory::SetScore, &PlayerHistory::GetScore),
+			sql::make_column("rank", &PlayerHistory::SetRank, &PlayerHistory::GetRank)
 			)
 	); 
 }
@@ -26,7 +26,7 @@ public:
 	PlayerHistoryManager() = default;
 	PlayerHistoryManager(const std::string& databaseFileName);
 
-	void AddPlayerHistory(PlayerHistory& playerHistory);
+	void AddPlayerHistory(const PlayerHistory& playerHistory);
 	std::vector<PlayerHistory> GetPlayerMatches(const std::string& username);
 private:
 	StorageForGM m_database;

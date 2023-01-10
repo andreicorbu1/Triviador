@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AddToLobbyHandler.cpp" />
+    <ClCompile Include="src\AddToPlayerHistoryHandler.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="include\AccountsManager.h" />
     <ClInclude Include="include\AddToAcountListHandler.h" />
     <ClInclude Include="include\AddToLobbyHandler.h" />
+    <ClInclude Include="include\AddToPlayerHistoryHandler.h" />
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />

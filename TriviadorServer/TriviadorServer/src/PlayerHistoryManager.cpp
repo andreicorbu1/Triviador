@@ -6,7 +6,7 @@ PlayerHistoryManager::PlayerHistoryManager(const std::string& databaseFileName)
 	m_database.sync_schema();
 }
 
-void PlayerHistoryManager::AddPlayerHistory(PlayerHistory& playerHistory)
+void PlayerHistoryManager::AddPlayerHistory(const PlayerHistory& playerHistory)
 {
 	m_database.insert(playerHistory);
 }

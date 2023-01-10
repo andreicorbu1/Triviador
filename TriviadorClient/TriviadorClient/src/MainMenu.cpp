@@ -49,9 +49,10 @@ void MainMenu::Show()
 	showMaximized();
 }
 
-void MainMenu::on_myProfileButton_clicked() const
+void MainMenu::on_myProfileButton_clicked()
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.myProfile);
+	ShowPlayerHistory();
 }
 
 void MainMenu::on_creditsButton_clicked() const
@@ -131,4 +132,29 @@ void MainMenu::on_lobbyFinished()
 	Show();
 	m_lobby->close();
 	delete m_lobby;
+}
+
+void MainMenu::ShowPlayerHistory()
+{
+	auto getPlayerHistory = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/playerhistory" },
+		cpr::Body{ "username=" + m_user.GetUsername() }
+	);
+	try
+	{
+		auto playerHistory = crow::json::load(getPlayerHistory.text);
+		for (size_t i = 0; i < playerHistory.size(); i++)
+		{
+			int score = playerHistory[i]["score"].i();
+			int rank = playerHistory[i]["rank"].i();
+
+			auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAt(i)->widget()) };
+			playerHistoryLabel->setText(QString::number(score) + QString::number(rank));
+		}
+	}
+	catch (std::exception ex)
+	{
+		qDebug() << "Can't show matches history!";
+	}
 }

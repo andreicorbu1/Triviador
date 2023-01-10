@@ -13,7 +13,7 @@
 #include "SendAnswerMultipleQuestion.h"
 #include "SendAnswerNumericalQuestion.h"
 #include "QuestionManager.h"
-#include "PlayerHistoryManager.h"
+#include "PlayerHistoryHandler.h"
 #include "Game.h"
 
 int main()
@@ -68,6 +68,15 @@ int main()
 
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
+
+	auto& sendPlayerHistory = CROW_ROUTE(app, "/playerhistory");
+	sendPlayerHistory(PlayerHistoryHandler(playerHistoryManager));
+
+	/*Player a("aimon0", Player::Color::Blue);
+	a.SetRank(3);
+	a.SetScore(400);
+	PlayerHistory playerHistory(a);
+	playerHistoryManager.AddPlayerHistory(playerHistory);*/
 
 	app.port(18080).multithreaded().run();
 	return 0;
