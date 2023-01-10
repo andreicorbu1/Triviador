@@ -209,7 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Accounts.sqlite" />
-    <None Include="resource\PlayesHistory.sqlite" />
     <None Include="resource\Questions.sqlite" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
