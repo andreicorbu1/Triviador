@@ -97,3 +97,8 @@ Player& Player::operator+=(int score)
 	m_score += score;
 	return *this;
 }
+
+bool Player::operator<(const Player& other)
+{
+	return this->m_score < other.m_score;
+}

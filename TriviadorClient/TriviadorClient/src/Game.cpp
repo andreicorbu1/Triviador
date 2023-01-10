@@ -44,7 +44,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 
 Game::~Game()
 {
-	// empty
+	// empt
 }
 
 void Game::ShowQuestion(QuestionType type)
@@ -103,6 +103,30 @@ void Game::UpdatePlayerScores()
 				}
 			}
 		}
+	}
+}
+
+void Game::AddPlayersHistory()
+{
+	auto copyOfPlayers(m_players);
+	std::ranges::sort(copyOfPlayers, std::less());
+	for (size_t i = 0; i < copyOfPlayers.size(); i++)
+	{
+		AddPlayerHistory(copyOfPlayers[i], i);
+	}
+}
+
+void Game::AddPlayerHistory(Player& player, int rank)
+{
+	auto res = cpr::Put
+	(
+		cpr::Url{ "http://localhost:18080/addplayerhistory" },
+		cpr::Body{ "id=" + std::to_string(m_ID) + "&username=" + player.GetName() +
+		"&score=" + std::to_string(player.GetScore()) + "&rank=" + std::to_string(rank) }
+	);
+	if (res.status_code == 400)
+	{
+		qDebug() << "Cannot add player history!";
 	}
 }
 
