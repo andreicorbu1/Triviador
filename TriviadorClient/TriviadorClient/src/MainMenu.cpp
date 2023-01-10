@@ -27,12 +27,13 @@ void MainMenu::hiMessage(const std::string& playerName)
 	ui.hiMessage->setText(message);
 }
 
-void MainMenu::StartGame(std::vector<Player>& players)
+bool MainMenu::CheckGameCanStart()
 {
-	m_game = new Game(players, this);
-	m_game->show();
-	hide();
-	connect(m_game, SIGNAL(finished()), this, SLOT(on_gameFinished()));
+	auto res = cpr::Put
+	(
+		cpr::Url{ "http://localhost:18080/newgame" }
+	);
+	return res.status_code == 200;
 }
 
 void MainMenu::StartLobby(std::string lobbyID)
@@ -48,9 +49,10 @@ void MainMenu::Show()
 	showMaximized();
 }
 
-void MainMenu::on_myProfileButton_clicked() const
+void MainMenu::on_myProfileButton_clicked()
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.myProfile);
+	ShowPlayerHistory();
 }
 
 void MainMenu::on_creditsButton_clicked() const
@@ -63,7 +65,7 @@ void MainMenu::on_playButton_clicked() const
 	this->ui.stackedWidget->setCurrentWidget(ui.play);
 }
 
-void MainMenu::on_joinGameButton_clicked() const
+void MainMenu::on_joinButton_clicked() const
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.joinGame);
 }
@@ -95,14 +97,25 @@ void MainMenu::on_joinLobbyButton_clicked()
 	}
 }
 
-void MainMenu::on_createGameButton_clicked() const
+void MainMenu::on_createButton_clicked()
 {
-	this->ui.stackedWidget->setCurrentWidget(ui.createGame);
-}
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/newlobby" },
+		cpr::Body{ "username=" + m_user.GetUsername() }
+	);
 
-void MainMenu::on_backButton_clicked()
-{
-	this->ui.stackedWidget->setCurrentWidget(ui.play);
+	try
+	{
+		auto id = crow::json::load(res.text);
+		int lobbyId = id["lobby_id"].i();
+
+		StartLobby(std::to_string(lobbyId));
+	}
+	catch (std::exception ex)
+	{
+		qDebug() << "Can't create new lobby";
+	}
 }
 
 void MainMenu::on_logOutButton_clicked()
@@ -114,34 +127,6 @@ void MainMenu::on_logOutButton_clicked()
 	qDebug() << "Log Out button clicked";
 }
 
-void MainMenu::on_twoPlayersButton_clicked()
-{
-	Player a("cristian", Player::Color::Blue);
-	Player b("tibi", Player::Color::Red);
-	std::vector<Player> players = { a, b };
-
-	StartGame(players);
-}
-
-void MainMenu::on_threePlayersButton_clicked()
-{
-	Player a("cristian", Player::Color::Blue);
-	Player b("tibi", Player::Color::Red);
-	Player c("adi", Player::Color::Yellow);
-	std::vector<Player> players = { a, b, c };
-	StartGame(players);
-}
-
-void MainMenu::on_fourPlayersButton_clicked()
-{
-	Player a("cristian", Player::Color::Blue);
-	Player b("tibi", Player::Color::Red);
-	Player c("adi", Player::Color::Yellow);
-	Player d("andrei", Player::Color::Green);
-	std::vector<Player> players = { a, b, c, d };
-	StartGame(players);
-}
-
 void MainMenu::on_lobbyFinished()
 {
 	Show();
@@ -149,9 +134,35 @@ void MainMenu::on_lobbyFinished()
 	delete m_lobby;
 }
 
-void MainMenu::on_gameFinished()
+void MainMenu::ShowPlayerHistory()
 {
-	Show();
-	m_game->close();
-	delete m_game;
+	auto getPlayerHistory = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/playerhistory" },
+		cpr::Body{ "username=" + m_user.GetUsername() }
+	);
+	try
+	{
+		auto playerHistory = crow::json::load(getPlayerHistory.text);
+		int line = 0;
+		int column = 0;
+		for (size_t i = 0; i < playerHistory.size(); i++)
+		{
+			int score = playerHistory[i]["score"].i();
+			int rank = playerHistory[i]["rank"].i();
+
+			auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAtPosition(line, column)->widget()) };
+			playerHistoryLabel->setText("Score: " + QString::number(score) + " Rank: " + QString::number(rank));
+			column++;
+			if (column > 1)
+			{
+				column = 0;
+				line++;
+			}
+		}
+	}
+	catch (std::exception ex)
+	{
+		qDebug() << "Can't show matches history!";
+	}
 }

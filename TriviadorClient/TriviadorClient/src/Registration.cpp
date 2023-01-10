@@ -71,7 +71,7 @@ void Registration::on_signUpButton_clicked()
 	if (res.status_code == 201)
 	{
 		close();
-		MainMenu* mainMenu = new MainMenu;
+		MainMenu* mainMenu = new MainMenu(User(username));
 		mainMenu->hiMessage(username);
 		mainMenu->showMaximized();
 	}

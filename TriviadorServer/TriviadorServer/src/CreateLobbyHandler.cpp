@@ -18,7 +18,7 @@ crow::json::wvalue CreateLobbyHandler::operator()(const crow::request& req) cons
 		{
 			if (m_lobby.GetLobbyID() == INT_MAX)
 			{
-				Lobby lobby(Player(username, Player::Color::NaN));
+				Lobby lobby(Player(username, Player::Color::None));
 				m_lobby = lobby;
 				crow::json::wvalue jsonWithLobbyID
 				{

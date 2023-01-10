@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TriviadorClient", "TriviadorClient\TriviadorClient.vcxproj", "{7BDFCC22-96DD-4086-87DE-BB66EC2582AE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TriviadorCommon", "..\TriviadorCommon\TriviadorCommon.vcxproj", "{FC36D2CF-31F0-45C8-AC72-669DCDB4E97D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TriviadorCommon", "..\DLL\TriviadorCommon.vcxproj", "{FC36D2CF-31F0-45C8-AC72-669DCDB4E97D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

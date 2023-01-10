@@ -2,10 +2,14 @@
 
 #include <QWidget>
 #include "ui_Game.h"
+#include "ResultWindow.h"
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
 #include <QSignalMapper>
+#include <QThread>
+#include <string>
+#include "User.h"
 
 class Game : public QWidget
 {
@@ -13,7 +17,7 @@ class Game : public QWidget
 
 public:
     Game(QWidget* parent = nullptr);
-	Game(std::vector<Player>& players, QWidget* parent = nullptr);
+	Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent = nullptr);
     ~Game();
 
     void paintEvent(QPaintEvent* paintEvent);
@@ -21,15 +25,22 @@ public:
 signals:
 	void finished();
     
+private slots:
+    void GameLoop();
+
+private slots:
+    void on_exitButton_clicked();
+    void on_gameFinished();
+    void action(int position);
+
 private:
     void ShowQuestion(QuestionType type);
     void SetBackground();
     void ConnectButtons();
 
-private slots:
-    void on_exitButton_clicked();
-    void action(int position);
-
+    void UpdateBoard();
+    void UpdatePlayerScores();
+    
 private:
     const std::pair<uint16_t, uint16_t> playersTableSize = { 200, 75 };
     const std::pair<uint16_t, uint16_t> playersTableStartPoint = { 1280, 50 };
@@ -37,10 +48,11 @@ private:
 private:
     Ui::GameClass ui;
     QuestionWindow m_questionWindow;
+	ResultWindow* m_resultWindow;
     QPixmap m_background;
     QSignalMapper *m_signalMapper;
 
     Board m_board;
     std::vector<Player> m_players;
-    int m_rounds;
+	Player m_currentPlayer;
 };

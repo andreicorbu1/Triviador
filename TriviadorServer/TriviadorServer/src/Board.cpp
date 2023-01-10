@@ -31,6 +31,11 @@ const Territory& Board::operator[](Position pos) const
 	return m_board[line * m_width + column];
 }
 
+std::vector<Territory> Board::GetTerritories() const
+{
+	return m_board;
+}
+
 Territory& Board::operator[](Position pos)
 {
 	const auto& [line, column] = pos;

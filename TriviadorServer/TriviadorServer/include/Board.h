@@ -20,6 +20,7 @@ public:
 
 	// Getters:
 	const Territory& operator[] (Position pos) const;
+	std::vector<Territory> GetTerritories() const;
 
 	// Operators:
 	friend std::ostream& operator<< (std::ostream& out, const Board& b);

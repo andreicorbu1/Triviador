@@ -23,3 +23,4 @@ int User::GetId() const
 {
 	return m_id;
 }
+

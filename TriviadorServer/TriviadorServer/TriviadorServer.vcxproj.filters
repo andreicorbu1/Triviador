@@ -87,6 +87,27 @@
     <ClCompile Include="src\SendAnswerNumericalQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerHistoryManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerHistoryHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerHistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AddToPlayerHistoryHandler.cpp"> 
+	  <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GetBoardHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StageHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h">
@@ -161,6 +182,27 @@
     <ClInclude Include="include\SendAnswerNumericalQuestion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GetAllPlayersFromGameHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerHistoryManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerHistoryHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerHistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AddToPlayerHistoryHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GetBoardHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StageHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\multipleAnswerQuestions.txt">
@@ -175,6 +217,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resource\Questions.sqlite">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\PlayesHistory.sqlite">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

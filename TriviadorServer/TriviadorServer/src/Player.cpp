@@ -16,8 +16,8 @@ std::string Player::ColorToString(Player::Color color) const
 	case Player::Color::Yellow:
 		return "Yellow";
 		break;
-	case Player::Color::NaN:
-		return "Nan";
+	case Player::Color::None:
+		return "None";
 		break;
 	default:
 		break;
@@ -61,6 +61,11 @@ int Player::GetTerritoriesCount() const
 	return m_territoriesCount;
 }
 
+size_t Player::GetRank() const
+{
+	return m_rank;
+}
+
 void Player::SetName(const std::string& name)
 {
 	this->m_playerName = name;
@@ -79,6 +84,11 @@ void Player::SetScore(const size_t& score)
 void Player::SetTerritoriesCount(const int& territoriesCount)
 {
 	this->m_territoriesCount = territoriesCount;
+}
+
+void Player::SetRank(const size_t& rank)
+{
+	m_rank = rank;
 }
 
 void Player::AddScore(size_t score)
@@ -103,7 +113,7 @@ Player& Player::operator=(Player&& other) noexcept
 	if (this != &other)
 	{
 		m_playerName = std::exchange(other.m_playerName, std::string());
-		m_color = std::exchange(other.m_color, Player::Color::NaN);
+		m_color = std::exchange(other.m_color, Player::Color::None);
 		m_score = std::exchange(other.m_score, 0);
 		m_territoriesCount = std::exchange(other.m_territoriesCount, 0);
 	}

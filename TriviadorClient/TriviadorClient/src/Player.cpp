@@ -53,6 +53,32 @@ const std::string Player::GetColor() const
 	}
 }
 
+Player::Color Player::GetColor(std::string color)
+{
+	if (color == "Red")
+	{
+		return Color::Red;
+	}
+	else if (color == "Green")
+	{
+		return Color::Green;
+	}
+	else if (color == "Blue")
+	{
+		return Color::Blue;
+	}
+	else if (color == "Yellow")
+	{
+		return Color::Yellow;
+	}
+	return Color::None;
+}
+
+void Player::SetScore(size_t score)
+{
+	m_score = score;
+}
+
 Player& Player::operator=(const Player& other)
 {
 	if (this == &other)

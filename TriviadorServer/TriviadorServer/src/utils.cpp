@@ -30,3 +30,35 @@ std::unordered_map<std::string, std::string> ParseUrlArgs(const std::string& url
 	}
 	return result;
 }
+
+// to_json Overloads
+void to_json(nlohmann::json& json, const Player& player)
+{
+	json =
+	{
+		{"name", player.GetName()},
+		{"color", player.ColorToString(player.GetColor())},
+		{"score", player.GetScore()}
+	};
+}
+
+void to_json(nlohmann::json& json, const PlayerHistory& playerHistory)
+{
+	json =
+	{
+		{"score", playerHistory.GetScore()},
+		{"rank", playerHistory.GetRank()}
+	};
+}
+
+void to_json(nlohmann::json& json, const Territory& territory)
+{
+	Player owner = territory.GetOwner().has_value() ? territory.GetOwner().value() : Player();
+	uint16_t score = territory.GetScore();
+
+	json =
+	{
+		{"owner", owner},
+		{"score", score}
+	};
+}

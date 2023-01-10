@@ -6,7 +6,7 @@
 #include "Registration.h"
 #include <QMessageBox>
 #include "Lobby.h"
-#include "../../TriviadorCommon/User.h"
+#include "User.h"
 
 class MainMenu : public QWidget
 {
@@ -18,31 +18,27 @@ public:
 	~MainMenu();
 
 	void hiMessage(const std::string& playerName);
-	void StartGame(std::vector<Player>& players);
+	bool CheckGameCanStart();
 	void StartLobby(std::string lobbyID);
 
 public slots:
 	void Show();
 
 private slots:
-	void on_myProfileButton_clicked() const;
+	void on_myProfileButton_clicked();
 	void on_creditsButton_clicked() const;
 	void on_logOutButton_clicked();
 	void on_playButton_clicked() const;
-	void on_joinGameButton_clicked() const;
+	void on_joinButton_clicked() const;
 	void on_joinLobbyButton_clicked();
-	void on_createGameButton_clicked() const;
-	void on_backButton_clicked();
-	void on_twoPlayersButton_clicked();
-	void on_threePlayersButton_clicked();
-	void on_fourPlayersButton_clicked();
+	void on_createButton_clicked();
 
 	void on_lobbyFinished();
-	void on_gameFinished();
 
 private:
+	void ShowPlayerHistory();
+private:
 	Ui::MainMenuClass ui;
-	Game* m_game;
 	Lobby* m_lobby;
 	User m_user;
 };

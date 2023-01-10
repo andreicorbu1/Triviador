@@ -8,8 +8,9 @@
 #include <string>
 #include <crow.h>
 #include <cpr/cpr.h>
-#include <User.h>
+#include "User.h"
 #include <Player.h>
+#include "Game.h"
 
 class Lobby : public QWidget
 {
@@ -18,21 +19,28 @@ class Lobby : public QWidget
 public:
 	Lobby(const std::string& lobbyID, const std::string& username, QWidget* parent = nullptr);
 	~Lobby();
+	void closeEvent(QCloseEvent* event) override;
 
 signals:
 	void finished();
 
 private slots:
 	void on_leaveLobbyButton_clicked();
+	void on_startGameButton_clicked();
+	void on_gameFinished();
 
 private:
 	void paintEvent(QPaintEvent* paintEvent);
 	void HideAllPlayersName();
 	void SetPlayersLabel();
+	void StartGame();
+
 	std::string m_lobbyID;
 
 private:
 	Ui::LobbyClass ui;
-	Player m_player;
+	Player m_currentPlayer;
+	std::vector<Player> m_players;
 	std::vector<QLabel*> m_playersLabel;
+	Game* m_game;
 };

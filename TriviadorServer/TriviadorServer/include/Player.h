@@ -10,7 +10,7 @@ public:
 		Red,
 		Green,
 		Yellow,
-		NaN
+		None
 	};
 
 	std::string ColorToString(Color color) const;
@@ -27,12 +27,14 @@ public:
 	Player::Color GetColor() const;
 	size_t GetScore() const;
 	int GetTerritoriesCount() const;
+	size_t GetRank() const;
 
 	// Setters:
 	void SetName(const std::string& name);
 	void SetColor(const Player::Color& color);
 	void SetScore(const size_t& score);
 	void SetTerritoriesCount(const int& territoriesCount);
+	void SetRank(const size_t& rank);
 
 	//Other:
 	void AddScore(size_t score);
@@ -47,5 +49,6 @@ private:
 	Color m_color;
 	size_t m_score;
 	int m_territoriesCount;
+	size_t m_rank;
 };
 

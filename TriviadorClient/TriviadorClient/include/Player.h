@@ -23,6 +23,10 @@ public:
     const std::string& GetName() const;
     const int GetScore() const;
     const std::string GetColor() const;
+    static Color GetColor(std::string color);
+
+	// Setters:
+	void SetScore(size_t score);
 
     // Operators:
     Player& operator =(const Player& other);

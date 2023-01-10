@@ -1,15 +1,11 @@
 #pragma once
-
 #ifdef TRIVIADORCOMMON_EXPORTS
-#define TRIVIADORCOMMON_API __declspec(dllexport)
+#define DLL_API __declspec(dllexport)
 #else
-#define TRIVIADORCOMMON_API __declspec(dllimport)
-#endif // TRIVIADORCOMMON_EXPORTS
-
-
+#define DLL_API __declspec(dllimport)
+#endif
 #include <string>
-
-class TRIVIADORCOMMON_API User
+class DLL_API User
 {
 public:
 	User() = default;
@@ -23,6 +19,6 @@ public:
 	std::string GetUsername() const;
 	int GetId() const;
 private:
-	int m_id;
+	int m_id = -1;
 	std::string m_username;
 };

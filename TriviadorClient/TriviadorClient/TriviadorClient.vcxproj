@@ -70,11 +70,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DEV\TriviadorDLLNew\DLL;$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -85,11 +86,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DEV\TriviadorDLLNew\DLL;$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ResultWindow.cpp" />
     <ClCompile Include="src\Lobby.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Board.cpp" />
@@ -141,9 +142,11 @@
     <QtUic Include="form\MainMenu.ui" />
     <QtUic Include="form\QuestionWindow.ui" />
     <QtUic Include="form\Registration.ui" />
+    <QtUic Include="form\ResultWindow.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Board.h" />
+    <QtMoc Include="include\ResultWindow.h" />
     <QtMoc Include="include\Lobby.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\Player.h" />
@@ -176,15 +179,19 @@
     <Font Include="resource\font\LuckiestGuy-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resource\question\BlueFlag.svg" />
     <None Include="resource\question\EmptyBanner.svg" />
+    <None Include="resource\question\GreenFlag.svg" />
     <None Include="resource\question\Hammer.svg" />
     <None Include="resource\question\Parrot.svg" />
     <None Include="resource\question\Plank.svg" />
     <None Include="resource\question\PlayArrow.svg" />
+    <None Include="resource\question\RedFlag.svg" />
     <None Include="resource\question\Telescope.svg" />
+    <None Include="resource\question\YellowFlag.svg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TriviadorCommon\TriviadorCommon.vcxproj">
+    <ProjectReference Include="..\..\DLL\TriviadorCommon.vcxproj">
       <Project>{fc36d2cf-31f0-45c8-ac72-669dcdb4e97d}</Project>
     </ProjectReference>
   </ItemGroup>
