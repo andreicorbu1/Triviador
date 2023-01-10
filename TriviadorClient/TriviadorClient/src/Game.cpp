@@ -109,7 +109,11 @@ void Game::UpdatePlayerScores()
 void Game::GameLoop()
 {
 	int waitingTime = 0;
-	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/stage" });
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/stage" },
+		cpr::Body{ "username="+m_currentPlayer.GetName()}
+	);
 		
 	if (res.status_code == 200)
 	{
@@ -118,25 +122,25 @@ void Game::GameLoop()
 		{
 			waitingTime = 2000;
 		}
-		if (data["stage"] == "question")
+		if (data["stage"] == "numericalAnswerQuestion")
 		{
-			std::string type = data["type"].s();
-			ShowQuestion(QuestionWindow::GetQuestionType(type));
 			waitingTime = 14000;
+			ShowQuestion(QuestionType::NumericalAnswer);
 		}
-		else if (data["stage"] == "choose")
+		else if (data["stage"] == "multipleAnswerQuestion")
 		{
-			std::string type = data["type"].s();
-				
-			if (type == "base")
-			{
-				// choose base
-			}
-			else if (type == "territory")
-			{
-				// choose territory
-			}
+			waitingTime = 14000;
+			ShowQuestion(QuestionType::MultipleAnswer);
 		}
+		else if (data["stage"] == "chooseBase")
+		{
+			//choose base
+		}
+		else if (data["stage"] == "chooseTerritory")
+		{
+			//choose base
+		}
+
 		else if (data["stage"] == "attack")
 		{
 			// attack
@@ -153,12 +157,16 @@ void Game::GameLoop()
 			connect(m_resultWindow, SIGNAL(backToMenu()), this, SLOT(on_gameFinished()));
 			return;
 		}
+		else
+		{
+			waitingTime = 2000; //temporary
+		}
+		QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 	}
 	else
 	{
 		waitingTime = 3000;
 	}
-
 	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 }
 
@@ -170,7 +178,7 @@ void Game::on_gameFinished()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	ShowQuestion(QuestionType::NumericalAnswer);
+	//ShowQuestion(QuestionType::NumericalAnswer);
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)

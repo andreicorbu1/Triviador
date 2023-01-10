@@ -160,6 +160,7 @@
     <ClCompile Include="src\RemoveFromLobbyHandler.cpp" />
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp" />
     <ClCompile Include="src\SendAnswerNumericalQuestion.cpp" />
+    <ClCompile Include="src\StageHandler.cpp" />
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="include\RemoveFromLobbyHandler.h" />
     <ClInclude Include="include\SendAnswerMultipleQuestion.h" />
     <ClInclude Include="include\SendAnswerNumericalQuestion.h" />
+    <ClInclude Include="include\StageHandler.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
