@@ -158,13 +158,13 @@ void Game::GameLoop()
 		}
 		else if (data["stage"] == "chooseBase")
 		{
-			//display label with choose base
+			ui.stageLabel->setText("Choose a base!");
 			waitingTime = 10000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
-			//display label with choose territory
+			ui.stageLabel->setText("Choose your territories!");
 			waitingTime = 10000;
 			//choose base
 		}
