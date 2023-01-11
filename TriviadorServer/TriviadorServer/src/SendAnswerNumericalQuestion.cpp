@@ -7,28 +7,26 @@ crow::response SendAnswerNumericalQuestion::operator()(const crow::request & req
 {
 	auto bodyArgs = ParseUrlArgs(req.body);
 	auto end = bodyArgs.end();
-	auto questionId = bodyArgs.find("id");
-	auto answer = bodyArgs.find("answer");
-	if (questionId != end && answer != end)
+	auto usernameArg = bodyArgs.find("username");
+	auto idArg = bodyArgs.find("id");
+	auto answerArg = bodyArgs.find("answer");
+	auto responseTimeArg = bodyArgs.find("responseTime");
+	
+	if (idArg == end || answerArg == end)
+		return crow::response(404, "Question not found");
+
+	std::string username = usernameArg->second;
+	uint16_t id = std::stoi(idArg->second);
+	int answer = std::stoi(answerArg->second);
+	int responseTime = std::stoi(responseTimeArg->second);
+		
+	try
 	{
-		uint16_t id = std::stoi(questionId->second);
-		int ans = std::stoi(answer->second);
-		try
-		{
-			int rightAnswer = m_game.GetNumericalAnswerQuestion(id).GetRightAnswer();
-			if (rightAnswer == ans)
-			{
-				return crow::response(200, "0");
-			}
-			else
-			{
-				return crow::response(201, std::to_string(abs(rightAnswer - ans)));
-			}
-		}
-		catch (const std::exception& e)
-		{
-			return crow::response(401, e.what());
-		}
+		int rightAnswer = m_game.GetNumericalAnswerQuestion(id).GetRightAnswer();
+		return crow::response(200, std::to_string(abs(rightAnswer - answer)));
 	}
-	return crow::response(401, "Question not found");
+	catch (const std::exception& e)
+	{
+		return crow::response(401, e.what());
+	}
 }
