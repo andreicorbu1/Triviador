@@ -5,6 +5,25 @@
 #include <chrono>
 #include <algorithm>
 #include <ranges>
+#include <queue>
+#include <tuple>
+
+using Participant = std::tuple<std::string, int, int>;
+
+class ParticipantCompare
+{
+public:
+	bool operator() (Participant participantA, Participant participantB)
+	{
+		if (std::get<1>(participantA) == std::get<1>(participantB))
+		{
+			return std::get<2>(participantA) > std::get<2>(participantB);
+		} 
+
+		return std::get<1>(participantA) > std::get<1>(participantB);
+	}
+};
+
 class Game
 {
 public:
@@ -70,6 +89,10 @@ public:
 	void SetStagesForChooseTerritory();
 	void SetStagesForDuel();
 	void ClearPlayersWhoSentRequest();
+
+	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
+	void ShowQueueParticipants();
+
 private:
 	void Cleanup();
 	void ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players);
@@ -98,4 +121,5 @@ private:
 	uint16_t multipleQuestionIndex = 0;
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 	std::vector<Player> m_duelParticipants;
+	std::priority_queue<Participant, std::vector<Participant>, ParticipantCompare> m_participantsQueue;
 };

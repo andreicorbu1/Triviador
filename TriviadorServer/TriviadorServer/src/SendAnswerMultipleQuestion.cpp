@@ -9,9 +9,8 @@ crow::response SendAnswerMultipleQuestion::operator()(const crow::request& req) 
 	auto bodyArgs = ParseUrlArgs(req.body);
 	auto end = bodyArgs.end();
 	auto usernameArg = bodyArgs.find("username");
-	auto idArg = bodyArgs.find("id");
+    auto idArg = bodyArgs.find("id");
 	auto answerArg = bodyArgs.find("answer");
-	auto responseTimeArg = bodyArgs.find("responseTime");
 
 	if (idArg == end && answerArg == end)
 	{
@@ -21,11 +20,13 @@ crow::response SendAnswerMultipleQuestion::operator()(const crow::request& req) 
 	std::string username = usernameArg != end ? usernameArg->second : "";
 	uint16_t id = std::stoi(idArg->second);
 	std::string answer = answerArg->second;
-	int responseTime = responseTimeArg != end ? std::stoi(responseTimeArg->second) : 0;
 		
 	try
 	{
 		std::string rightAnswer = m_game.GetMultipleAnswerQuestion(id).GetRightAnswer();
+		
+		m_game.InsertQueueParticipant(username, (int)(rightAnswer != answer));
+		
 		if (rightAnswer == answer)
 		{
 			return crow::response(200, "Answer was correct");

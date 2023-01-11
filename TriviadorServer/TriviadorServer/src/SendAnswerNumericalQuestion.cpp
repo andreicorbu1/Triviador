@@ -23,7 +23,11 @@ crow::response SendAnswerNumericalQuestion::operator()(const crow::request & req
 	try
 	{
 		int rightAnswer = m_game.GetNumericalAnswerQuestion(id).GetRightAnswer();
-		return crow::response(200, std::to_string(abs(rightAnswer - answer)));
+		int answerCorrectness = abs(rightAnswer - answer);
+		
+		m_game.InsertQueueParticipant(username, answerCorrectness, responseTime);
+		
+		return crow::response(200, std::to_string(answerCorrectness));
 	}
 	catch (const std::exception& e)
 	{

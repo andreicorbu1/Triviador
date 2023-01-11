@@ -422,3 +422,19 @@ void Game::ClearPlayersWhoSentRequest()
 {
 	m_playersWhoSentRequest.clear();
 }
+
+void Game::InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime)
+{
+	Participant participant(username, answerCorrentness, responseTime);
+	m_participantsQueue.push(participant);
+}
+
+void Game::ShowQueueParticipants()
+{	
+	while (!m_participantsQueue.empty())
+	{
+		Participant participant = m_participantsQueue.top();
+		std::cout << std::get<0>(participant) << " " << std::get<1>(participant) << " " << std::get<2>(participant) << std::endl;
+		m_participantsQueue.pop();
+	}
+}
