@@ -72,15 +72,21 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 	cpr::Response res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/getnumericalquestion" },
-		cpr::Body{ "username="+m_currentPlayer.GetName()}
+		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].i());
-		//SetFlags(question["players"]);
+		for (auto& player : question["players"])
+		{
+			auto name = player["name"].s();
+			if (m_currentPlayer.GetName() == name)
+				ActivateButtons();
+		}
 	}
+	//SetFlags(question["players"]);
 }
 
 void QuestionWindow::Show()
@@ -304,6 +310,14 @@ void QuestionWindow::ResetButtons()
 		button->close();
 	}
 	ui_telescopeAnswers.clear();
+}
+
+void QuestionWindow::ActivateButtons()
+{
+	ui.answerInput->setEnabled(true);
+	ui.parrotButton->setEnabled(true);
+	ui.submitButton->setEnabled(true);
+	ui.telescopeButton->setEnabled(true);
 }
 
 void QuestionWindow::ShowResults() {

@@ -75,6 +75,7 @@ private:
 private:
     void HideAllFlags() const;
 	void ResetButtons();
+    void ActivateButtons();
     
 private:
     // Constants

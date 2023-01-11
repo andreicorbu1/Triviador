@@ -300,6 +300,9 @@ checked: {background-color: rgb(255, 255, 127)}</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="answerInput">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -328,6 +331,9 @@ padding: 5px;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="submitButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>430</x>
@@ -361,6 +367,9 @@ border-radius: 20px;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="telescopeButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -390,6 +399,9 @@ border-radius: 20px;</string>
      </property>
     </widget>
     <widget class="QPushButton" name="parrotButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>610</x>
