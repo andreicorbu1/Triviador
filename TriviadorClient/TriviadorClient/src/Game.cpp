@@ -39,7 +39,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	QTimer::singleShot(3000, this, SLOT(GameLoop()));
+	//QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 
 Game::~Game()
@@ -178,7 +178,7 @@ void Game::on_gameFinished()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	//ShowQuestion(QuestionType::NumericalAnswer);
+	ShowQuestion(QuestionType::MultipleAnswer);
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)

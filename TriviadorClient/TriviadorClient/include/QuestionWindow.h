@@ -1,6 +1,7 @@
 #pragma once
 #include <QWidget>
 #include <QTimer>
+#include <QElapsedTimer>
 #include <QRandomGenerator>
 #include <QDoubleValidator>
 #include <QEventLoop>
@@ -57,6 +58,7 @@ private slots:
     
     void UpdateProgressBar();
     void ShowResults();
+	void SendAnswer();
 
 private:
     // Setters
@@ -66,6 +68,7 @@ private:
     void SetAnswer(int position, const std::string& answer);
     void SetRightAnswer(const std::string& answer);
     void SetRightAnswer(const int& answer);
+	void SetQuestionId(const int& id);
     void SetConnections();
     void StopProgressBar();
     void SetButtonsProperties(int i);
@@ -91,8 +94,10 @@ private:
     QuestionType m_type;
     std::variant<std::string, int> m_rightAnswer;
 	std::variant<std::string, int> m_answer;
+	int m_questionId;
     Player m_currentPlayer;
     
     // temp
     std::vector<Player> m_players;
+	QElapsedTimer m_resultTimer;
 };

@@ -59,6 +59,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 		auto question = crow::json::load(res.text);
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
+		SetQuestionId(question["id"].i());
 
 		for (int i = 0; i < kAnswerCount; i++)
 		{
@@ -79,6 +80,7 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 		auto question = crow::json::load(res.text);
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].i());
+		SetQuestionId(question["id"].i());
 		//SetFlags(question["players"]);
 	}
 }
@@ -94,6 +96,7 @@ void QuestionWindow::StartTimer()
 {
 	ui.timeProgressBar->setValue(100);
 	m_timer->start(100);
+	m_resultTimer.start();
 }
 
 QuestionType QuestionWindow::GetQuestionType(const std::string& type)
@@ -175,11 +178,13 @@ void QuestionWindow::on_answerButton_clicked()
 	button->setChecked(true);
 	m_answer = button->text().toUtf8().constData();
 	setEnabled(false);
+	SendAnswer();
 }
 
 void QuestionWindow::on_submitButton_clicked()
 {
 	setEnabled(false);
+	SendAnswer();
 }
 
 void QuestionWindow::UpdateProgressBar()
@@ -231,6 +236,11 @@ void QuestionWindow::SetRightAnswer(const std::string& answer)
 void QuestionWindow::SetRightAnswer(const int& answer)
 {
 	m_rightAnswer = answer;
+}
+
+void QuestionWindow::SetQuestionId(const int& id)
+{
+	m_questionId = id;
 }
 
 void QuestionWindow::SetConnections()
@@ -327,5 +337,32 @@ void QuestionWindow::ShowResults() {
 	{
 		ui.answerInput->setText("Right answer: " + QString::number(std::get<int>(m_rightAnswer)));
 		ui.answerInput->setStyleSheet("background: #4D8620;\nborder: none;\ncolor: #ffffff;\n");
+	}
+}
+
+void QuestionWindow::SendAnswer()
+{
+	cpr::Response res;
+	qint64 elapsedTime = m_resultTimer.elapsed();
+	auto responseTime = static_cast<int>(elapsedTime);
+	std::string username = m_currentPlayer.GetName();
+	
+	if (m_type == QuestionType::MultipleAnswer)
+	{
+		std::string answer = std::get<std::string>(m_answer);
+		qDebug() << username.c_str();
+		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/multiple" },
+			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime)});
+	}
+	else if (m_type == QuestionType::NumericalAnswer)
+	{
+		int answer = std::get<int>(m_answer);
+		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/numerical" },
+			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + std::to_string(answer) + "&responseTime=" + std::to_string(responseTime) });
+	}
+	
+	if (res.status_code != 200)
+	{
+		qDebug() << "Error sending answer";
 	}
 }
