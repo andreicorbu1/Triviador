@@ -75,7 +75,8 @@ private:
 private:
     void HideAllFlags() const;
 	void ResetButtons();
-    void ActivateButtons();
+    void ActivateButtonsForNQ();
+    void ActivateButtonsForMQ();
     
 private:
     // Constants
@@ -93,7 +94,4 @@ private:
     std::variant<std::string, int> m_rightAnswer;
 	std::variant<std::string, int> m_answer;
     Player m_currentPlayer;
-    
-    // temp
-    std::vector<Player> m_players;
 };

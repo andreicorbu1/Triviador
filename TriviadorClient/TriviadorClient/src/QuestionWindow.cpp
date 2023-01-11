@@ -42,8 +42,6 @@ void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 		FetchNumericalAnswerQuestion();
 	}
 
-	m_players = players;
-	SetFlags(m_players);
 	SetEnabledState();
 }
 
@@ -57,6 +55,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
+		std::vector<Player> players;
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
 
@@ -67,9 +66,13 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 		for (auto& player : question["players"])
 		{
 			auto name = player["name"].s();
+			std::string color = player["color"].s();
+			Player player(name, Player::GetColor(color));
+			players.push_back(player);
 			if (m_currentPlayer.GetName() == name)
 				ActivateButtonsForMQ();
 		}
+		SetFlags(players);
 	}
 }
 
@@ -83,16 +86,20 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
+		std::vector<Player> players;
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].i());
 		for (auto& player : question["players"])
 		{
 			auto name = player["name"].s();
+			std::string color = player["color"].s();
+			Player player(name, Player::GetColor(color));
+			players.push_back(player);
 			if (m_currentPlayer.GetName() == name)
 				ActivateButtonsForNQ();
 		}
+		SetFlags(players);
 	}
-	//SetFlags(question["players"]);
 }
 
 void QuestionWindow::Show()
