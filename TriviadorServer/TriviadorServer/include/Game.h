@@ -66,6 +66,8 @@ public:
 	const std::vector<Player>& GetParticipants() const;
 	std::string GetPlayerWhoWillMakeAChoice() const;
 
+	void IncrementNumericalAnswerQuestionIndex();
+
 	//Setters:
 	void SetBoard(const Board& board);
 	void SetPlayers(const std::vector<Player>& players);

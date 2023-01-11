@@ -18,7 +18,7 @@ crow::response StageHandler::operator()(const crow::request& req) const
 		std::string currentStage = m_game.GetCurrentStage();
 		if (currentStage == "chooseBase")
 		{
-			if (username == m_game.GetPlayerWhoWillMakeAChoose())
+			if (username == m_game.GetPlayerWhoWillMakeAChoice())
 			{
 				crow::json::wvalue response
 				{
@@ -28,6 +28,7 @@ crow::response StageHandler::operator()(const crow::request& req) const
 			}
 			else
 			{
+				std::cout << currentStage;
 				crow::json::wvalue response
 				{
 					{"stage", "wait"}

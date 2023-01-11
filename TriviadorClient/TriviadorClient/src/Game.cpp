@@ -77,7 +77,11 @@ void Game::ConnectButtons()
 
 void Game::UpdateBoard()
 {
-	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getboard" });
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/getboard" },
+		cpr::Body{"username="+m_currentPlayer.GetName()}
+	);
 
 	if (res.status_code == 200)
 	{
@@ -170,25 +174,28 @@ void Game::GameLoop()
 		else if (data["stage"] == "chooseBase")
 		{
 			ui.stageLabel->setText("Choose a base!");
-			waitingTime = 10000;
+			ui.stageLabel->show();
+			waitingTime = 2000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
 			ui.stageLabel->setText("Choose your territories!");
-			waitingTime = 10000;
+			ui.stageLabel->show();
+			waitingTime = 2000;
 			//choose base
 		}
 
 		else if (data["stage"] == "attack")
 		{
+			ui.stageLabel->hide();
 			waitingTime = 2000;
 			// attack
 		}
 		else if (data["stage"] == "update")
 		{
 			UpdateBoard();
-			UpdatePlayerScores();
+			//UpdatePlayerScores();
 		}
 		else if (data["stage"] == "result")
 		{

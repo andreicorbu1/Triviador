@@ -227,6 +227,11 @@ std::string Game::GetPlayerWhoWillMakeAChoice() const
 	return participantName;
 }
 
+void Game::IncrementNumericalAnswerQuestionIndex()
+{
+	numericQuestionIndex++;
+}
+
 void Game::SetBoard(const Board& board)
 {
 	this->m_board = board;
@@ -337,14 +342,14 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 void Game::PopPlayerWhoWillMakeAChoose()
 {
 	m_participantsQueue.pop();
-	if (m_participantsQueue.size() == 0 && m_currentStage == Stage::ChooseBase)
+	/*if (m_participantsQueue.size() == 0 && m_currentStage == Stage::ChooseBase)
 	{
 		GoToNextStage();
 	}
 	else if (m_participantsQueue.size() == 1 && m_currentStage == Stage::ChooseTerritory)
 	{
 		GoToNextStage();
-	}
+	}*/
 }
 
 Game& Game::operator=(const Game& other)
