@@ -36,5 +36,6 @@ private:
 private:
 	std::optional<Player> m_owner;
 	uint16_t m_score;
+	bool m_isBase;
 };
 

@@ -87,7 +87,7 @@ void Game::UpdateBoard()
 void Game::UpdatePlayerScores()
 {
 	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getplayersfromgame" });
-	
+
 	if (res.status_code == 200)
 	{
 		auto players = crow::json::load(res.text);
@@ -136,13 +136,13 @@ void Game::GameLoop()
 	auto res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/stage" },
-		cpr::Body{ "username="+m_currentPlayer.GetName()}
+		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
-		
+
 	if (res.status_code == 200)
 	{
-		auto data = crow::json::load(res.text);
-		if (data["stage"] == "wait") 
+		data = crow::json::load(res.text);
+		if (data["stage"] == "wait")
 		{
 			waitingTime = 2000;
 		}
@@ -158,12 +158,14 @@ void Game::GameLoop()
 		}
 		else if (data["stage"] == "chooseBase")
 		{
-			waitingTime = 2000;
+			//display label with choose base
+			waitingTime = 10000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
-			waitingTime = 2000;
+			//display label with choose territory
+			waitingTime = 10000;
 			//choose base
 		}
 
@@ -205,7 +207,19 @@ void Game::on_gameFinished()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	//ShowQuestion(QuestionType::NumericalAnswer);
+	if (data["stage"] == "chooseBase" || data["stage"] == "chooseTerritory")
+	{
+		std::string isBase = "0";
+		if (data["stage"] == "chooseBase")
+		{
+			isBase = "1";
+		}
+		auto res = cpr::Put
+		(
+			cpr::Url{ "http://localhost:18080/choose" },
+			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) + "&isBase=" + isBase }
+		);
+	}
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
