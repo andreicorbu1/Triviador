@@ -95,6 +95,12 @@ void MainMenu::on_joinLobbyButton_clicked()
 		msgBox.setText("Lobby not found");
 		msgBox.exec();
 	}
+	else if (res.status_code == 404)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("User already in lobby");
+		msgBox.exec();
+	}
 }
 
 void MainMenu::on_createButton_clicked() 

@@ -17,11 +17,15 @@ crow::response AddToLobbyHandler::operator()(const crow::request& req) const
 		if (m_userList.SearchUser(username))
 		{
 			auto id = std::stoi(lobbyID->second);
-			if (m_lobby.GetLobbyID()==id)
+			if (m_lobby.GetLobbyID() == id)
 			{
 				int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
 				if (numberOfPlayersFromLobby < 4)
 				{
+					Player playerToBeInserted(username, Player::Color::None);
+					if (auto result = std::ranges::find_if(m_lobby.GetPlayers(),
+						[&playerToBeInserted](const Player& player) { return player.GetName() == playerToBeInserted.GetName(); }); result != m_lobby.GetPlayers().end())
+						return crow::response(404, "User already in lobby");
 					m_lobby.AddPlayer(Player(username, Player::Color::None));
 					return crow::response(200, "Successfully Added Player to Lobby");
 				}
