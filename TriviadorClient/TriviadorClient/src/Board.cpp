@@ -202,18 +202,3 @@ Territory& Board::operator[](Position pos)
 
 	return m_board[line * m_width + column];
 }
-
-//std::ostream& operator<<(std::ostream& out, const Board& board)
-//{
-//	Board::Position pos;
-//	auto& [line, column] = pos;
-//	for (line = 0; line < board.m_height; line++) {
-//		for (column = 0; column < board.m_width; column++) {
-//			out << board[pos];
-//			out << "  ";
-//		}
-//		out << "\n\n";
-//	}
-//
-//	return out;
-//}
