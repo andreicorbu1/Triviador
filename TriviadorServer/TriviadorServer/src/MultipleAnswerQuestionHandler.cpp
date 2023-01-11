@@ -3,6 +3,19 @@
 MultipleAnswerQuestionHandler::MultipleAnswerQuestionHandler(Game& game) : m_game(game)
 {}
 
+crow::json::wvalue MultipleAnswerQuestionHandler::ToJson(const MultipleAnswerQuestion& question, const crow::json::wvalue& players, const crow::json::wvalue& answers, int id) const
+{
+	crow::json::wvalue questionJson
+	{
+		{"question", question.GetQuestion()},
+		{"right_answer", question.GetRightAnswer()},
+		{"answers", answers},
+		{"id", id},
+		{"players", players}
+	};
+	return crow::json::wvalue(questionJson);
+}
+
 crow::response MultipleAnswerQuestionHandler::operator()(const crow::request& req) const
 {
 	auto bodyArgs = ParseUrlArgs(req.body);
@@ -41,14 +54,18 @@ crow::response MultipleAnswerQuestionHandler::operator()(const crow::request& re
 				answersJson.push_back(crow::json::wvalue(answer));
 			}
 
-			crow::json::wvalue questionJson
+			std::vector<Player> playersWhoCanAskTheQuestion = m_game.GetParticipants();
+			nlohmann::json json = playersWhoCanAskTheQuestion;
+
+			if (playersWhoCanAskTheQuestion.empty())
 			{
-				{"question", multipleAnswerQuestion.GetQuestion()},
-				{"right_answer", multipleAnswerQuestion.GetRightAnswer()},
-				{"answers", answersJson},
-				{"id", id}
-			};
-			return crow::json::wvalue(questionJson);
+				return crow::response(400);
+			}
+
+			std::string jsonString = json.dump();
+			crow::json::wvalue playersJson = crow::json::wvalue(crow::json::load(jsonString));
+
+			return ToJson(multipleAnswerQuestion, playersJson, answersJson, id);
 		}
 		catch (const std::exception& e)
 		{

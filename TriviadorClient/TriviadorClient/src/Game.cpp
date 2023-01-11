@@ -134,15 +134,18 @@ void Game::GameLoop()
 		}
 		else if (data["stage"] == "chooseBase")
 		{
+			waitingTime = 2000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
+			waitingTime = 2000;
 			//choose base
 		}
 
 		else if (data["stage"] == "attack")
 		{
+			waitingTime = 2000;
 			// attack
 		}
 		else if (data["stage"] == "update")

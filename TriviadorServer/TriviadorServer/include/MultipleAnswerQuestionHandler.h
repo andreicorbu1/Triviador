@@ -6,7 +6,7 @@ struct MultipleAnswerQuestionHandler
 {
 public:
 	explicit MultipleAnswerQuestionHandler(Game& game);
-	crow::json::wvalue to_json();
+	crow::json::wvalue ToJson(const MultipleAnswerQuestion& question, const crow::json::wvalue& players, const crow::json::wvalue& answers, int id) const;
 	crow::response operator()(const crow::request& req) const;
 private:
 	Game& m_game;
