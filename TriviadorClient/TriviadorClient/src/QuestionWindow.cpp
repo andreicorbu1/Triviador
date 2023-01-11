@@ -42,8 +42,6 @@ void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 		FetchNumericalAnswerQuestion();
 	}
 
-	m_players = players;
-	SetFlags(m_players);
 	SetEnabledState();
 }
 
@@ -57,6 +55,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
+		std::vector<Player> players;
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
 		SetQuestionId(question["id"].i());
@@ -65,6 +64,14 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 		{
 			SetAnswer(i, question["answers"][i].s());
 		}
+		for (auto& player : question["players"])
+		{
+			auto name = player["name"].s();
+			std::string color = player["color"].s();
+			Player player(name, Player::GetColor(color));
+			players.push_back(player);
+		}
+		SetFlags(players);
 	}
 }
 
@@ -73,15 +80,23 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 	cpr::Response res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/getnumericalquestion" },
-		cpr::Body{ "username="+m_currentPlayer.GetName()}
+		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
+		std::vector<Player> players;
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].i());
+		for (auto& player : question["players"])
+		{
+			auto name = player["name"].s();
+			std::string color = player["color"].s();
+			Player player(name, Player::GetColor(color));
+			players.push_back(player);
+		}
+		SetFlags(players);
 		SetQuestionId(question["id"].i());
-		//SetFlags(question["players"]);
 	}
 }
 
