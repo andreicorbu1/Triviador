@@ -17,11 +17,7 @@ public:
 		Attack,
 		Wait,
 		Update,
-		Result,
-		Stage1,
-		Stage2,
-		Stage3,
-		Stage4
+		Result
 	};
 
 	Game() = default;
