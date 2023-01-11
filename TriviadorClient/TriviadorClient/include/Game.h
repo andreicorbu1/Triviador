@@ -9,7 +9,7 @@
 #include <QSignalMapper>
 #include <QThread>
 #include <string>
-#include "../DLL/User.h"
+#include "../../DLL/User.h"
 
 class Game : public QWidget
 {
