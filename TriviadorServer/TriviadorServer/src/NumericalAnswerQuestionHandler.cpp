@@ -33,10 +33,6 @@ crow::response NumericalAnswerQuestionHandler::operator()(const crow::request& r
 				question = m_game.GetCurrentNumericalAnswerQuestion();
 				id = m_game.GetCurrentNumericalAnswerQuestionIndex();
 				playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
-				if (playersWhoSentRequest.size() == m_game.GetPlayers().size())
-				{
-					m_game.GoToNextStage();
-				}
 			}
 			else
 			{

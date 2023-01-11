@@ -40,6 +40,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	ConnectButtons();
 
 	QTimer::singleShot(3000, this, SLOT(GameLoop()));
+	ui.stageLabel->hide();
 }
 
 Game::~Game()
@@ -144,6 +145,7 @@ void Game::GameLoop()
 		data = crow::json::load(res.text);
 		if (data["stage"] == "wait")
 		{
+			ui.stageLabel->hide();
 			waitingTime = 2000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
@@ -190,7 +192,6 @@ void Game::GameLoop()
 		{
 			waitingTime = 2000; //temporary
 		}
-		QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 	}
 	else
 	{
