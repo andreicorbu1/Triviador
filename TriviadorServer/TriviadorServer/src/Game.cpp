@@ -301,13 +301,30 @@ void Game::SetQuestions(const uint16_t& numberOfPlayers)
 
 void Game::GoToNextStage()
 {
-	m_currentStage = m_stages[m_currentStageIndex];
-	m_currentStageIndex++;
+	m_playersWhoSentRequest.clear();
+	m_currentStage = m_stages[++m_currentStageIndex];
 }
 
 void Game::AddNullPlayer()
 {
 	m_players.push_back(Player("", Player::Color::None));
+}
+
+bool Game::AddTerritory(std::string username, int position, bool isBase)
+{
+	auto player = std::ranges::find_if(m_players, [&username](const Player& player)
+		{
+			return player.GetName() == username;
+		});
+	if (player != m_players.end())
+	{
+		if(!m_board[position].GetOwner().has_value())
+		{
+			m_board[position] = Territory(*player, isBase);
+			return true;
+		}
+	}
+	return false;
 }
 
 Game& Game::operator=(const Game& other)
@@ -328,6 +345,7 @@ Game& Game::operator=(const Game& other)
 		m_currentStageIndex = other.m_currentStageIndex;
 		m_duelRoundsNumber = other.m_duelRoundsNumber;
 		m_duelParticipants = other.m_duelParticipants;
+		m_playersWhoSentRequest = other.m_playersWhoSentRequest;
 	}
 	return *this;
 }

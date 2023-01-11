@@ -59,6 +59,7 @@ public:
 	void GoToNextStage();
 	void AddNullPlayer();
 
+	
 	//Operators:
 	Game& operator =(const Game& other);
 
@@ -70,6 +71,8 @@ public:
 	void SetStagesForChooseTerritory();
 	void SetStagesForDuel();
 	void ClearPlayersWhoSentRequest();
+	bool AddTerritory(std::string username, int position, bool isBase);
+
 private:
 	void Cleanup();
 	void ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players);
