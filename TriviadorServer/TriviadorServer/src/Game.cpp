@@ -35,7 +35,7 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 	SetStagesForDuel();
 	m_currentStageIndex = 0;
 	m_currentStage = m_stages[0];
-	m_duelParticipants.resize(2);
+	//m_duelParticipants.resize(2);
 }
 
 Game::Game(const Game& other)
@@ -352,7 +352,7 @@ Game& Game::operator=(const Game& other)
 
 void Game::Start()
 {
-	m_currentStage = Stage::Stage1;
+	m_currentStage = Stage::NumericalAnswerQuestion;
 }
 
 void Game::AddToAnswered(int questionId, const Player& player)
@@ -403,6 +403,18 @@ void Game::ChooseTerritories(const std::vector<std::pair<Player, std::vector<std
 void Game::AddPlayerWhoSentRequest(const std::string& playersName)
 {
 	m_playersWhoSentRequest.insert(playersName);
+}
+
+void Game::AddPlayerToDuel(const Player& player)
+{
+	if (m_duelParticipants.size() > 2)
+	{
+		throw std::out_of_range("Maximum 2 players can be in a duel");
+	}
+	else
+	{
+		m_duelParticipants.emplace_back(player);
+	}
 }
 
 void Game::SetStagesForChooseBase()
