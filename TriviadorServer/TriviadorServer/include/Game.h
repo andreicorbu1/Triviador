@@ -48,7 +48,7 @@ public:
 	int GetNumberOfPlayers();
 	std::string GetCurrentStage() const;
 	const std::unordered_set<std::string>& GetPlayersWhoSentRequest();
-	
+	const std::vector<Player>& GetParticipants() const;
 
 	//Setters:
 	void SetBoard(const Board& board);
@@ -97,4 +97,5 @@ private:
 	uint16_t numericQuestionIndex = 0;
 	uint16_t multipleQuestionIndex = 0;
 	std::unordered_set<std::string> m_playersWhoSentRequest;
+	std::vector<Player> m_duelParticipants;
 };

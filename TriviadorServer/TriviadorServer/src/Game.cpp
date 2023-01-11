@@ -6,27 +6,27 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 {
 	switch (players.size())
 	{
-		case 2:
-			m_board = Board(3, 3);
-			m_gameRounds = 5;
-			m_chooseTerritoryRoundsNumber = 7;
-			m_duelRoundsNumber = 10;
-			break;
-		case 3:
-			m_board = Board(5, 3);
-			m_gameRounds = 4;
-			m_chooseTerritoryRoundsNumber = 4;
-			m_duelRoundsNumber = 12;
-			break;
-		case 4:
-			m_board = Board(6, 4);
-			m_gameRounds = 5;
-			m_chooseTerritoryRoundsNumber = 4;
-			m_duelRoundsNumber = 20;
-			break;
-		default:
-			throw std::out_of_range("Invalid number of players");
-			break;
+	case 2:
+		m_board = Board(3, 3);
+		m_gameRounds = 5;
+		m_chooseTerritoryRoundsNumber = 7;
+		m_duelRoundsNumber = 10;
+		break;
+	case 3:
+		m_board = Board(5, 3);
+		m_gameRounds = 4;
+		m_chooseTerritoryRoundsNumber = 4;
+		m_duelRoundsNumber = 12;
+		break;
+	case 4:
+		m_board = Board(6, 4);
+		m_gameRounds = 5;
+		m_chooseTerritoryRoundsNumber = 4;
+		m_duelRoundsNumber = 20;
+		break;
+	default:
+		throw std::out_of_range("Invalid number of players");
+		break;
 	}
 	m_ID = -1;
 	SetQuestions(players.size());
@@ -34,6 +34,8 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 	SetStagesForChooseTerritory();
 	SetStagesForDuel();
 	m_currentStageIndex = 0;
+	m_currentStage = m_stages[0];
+	m_duelParticipants.resize(2);
 }
 
 Game::Game(const Game& other)
@@ -83,7 +85,7 @@ std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
 {
 	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
 	{
-		return {m_numericalAnswerQuestions[numericQuestionIndex++], numericQuestionIndex - 1};
+		return { m_numericalAnswerQuestions[numericQuestionIndex++], numericQuestionIndex - 1 };
 	}
 	else
 	{
@@ -103,7 +105,7 @@ NumericalAnswerQuestion Game::GetNumericalAnswerQuestion(uint16_t index) const
 	}
 }
 
-std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNewNumericalAnswerQuestion() 
+std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNewNumericalAnswerQuestion()
 {
 	m_playersWhoSentRequest.clear();
 	if (numericQuestionIndex < m_numericalAnswerQuestions.size())
@@ -125,7 +127,7 @@ std::pair<MultipleAnswerQuestion, uint16_t> Game::GetMultipleAnswerQuestion()
 {
 	if (multipleQuestionIndex < m_multipleAnswerQuestions.size())
 	{
-		return {m_multipleAnswerQuestions[multipleQuestionIndex++], multipleQuestionIndex - 1};
+		return { m_multipleAnswerQuestions[multipleQuestionIndex++], multipleQuestionIndex - 1 };
 	}
 	else
 	{
@@ -168,31 +170,31 @@ std::string Game::GetCurrentStage() const
 	switch (m_currentStage)
 	{
 	case Stage::NumericalAnswerQuestion:
-			return "numericalAnswerQuestion";
-			break;
-		case Stage::MultipleAnswerQuestion:
-			return "multipleAnswerQuestion";
-			break;
-		case Stage::ChooseBase:
-			return "chooseBase";
-			break;
-		case Stage::ChooseTerritory:
-			return "chooseTerritory";
-			break;
-		case Stage::Attack:
-			return "attack";
-			break;
-		case Stage::Update:
-			return "update";
-			break;
-		case Stage::Result:
-			return "result";
-			break;
-		case Stage::Wait:
-			return "wait";
-			break;
-		default:
-			throw std::invalid_argument("Stage invalid");
+		return "numericalAnswerQuestion";
+		break;
+	case Stage::MultipleAnswerQuestion:
+		return "multipleAnswerQuestion";
+		break;
+	case Stage::ChooseBase:
+		return "chooseBase";
+		break;
+	case Stage::ChooseTerritory:
+		return "chooseTerritory";
+		break;
+	case Stage::Attack:
+		return "attack";
+		break;
+	case Stage::Update:
+		return "update";
+		break;
+	case Stage::Result:
+		return "result";
+		break;
+	case Stage::Wait:
+		return "wait";
+		break;
+	default:
+		throw std::invalid_argument("Stage invalid");
 	}
 }
 
@@ -203,6 +205,19 @@ int Game::GetNumberOfPlayers()
 const std::unordered_set<std::string>& Game::GetPlayersWhoSentRequest()
 {
 	return m_playersWhoSentRequest;
+}
+
+const std::vector<Player>& Game::GetParticipants() const
+{
+	try
+	{
+		if (m_stages.at(m_currentStageIndex - 1) == Stage::Attack || m_stages.at(m_currentStageIndex-2) == Stage::Attack)
+		{
+			return m_duelParticipants;
+		}
+	}
+	catch (std::out_of_range ex) {}
+	return m_players;
 }
 
 void Game::SetBoard(const Board& board)
@@ -228,57 +243,57 @@ void Game::SetGameID(const int32_t& gameID)
 void Game::SetQuestions(const uint16_t& numberOfPlayers)
 {
 	std::random_device rd;
-	std::mt19937 gen{rd()};
+	std::mt19937 gen{ rd() };
 	uint16_t questionIndex;
 	switch (numberOfPlayers)
 	{
-		case 2:
-			m_numericalAnswerQuestions.resize(kTwoPlayersNumericAnswerQuestions);
-			m_multipleAnswerQuestions.resize(kTwoPlayersMultipleAnswerQuestions);
-			for (size_t index = 0; index < kTwoPlayersNumericAnswerQuestions; ++index)
-			{
-				questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-				m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
-			}
-			for (size_t index = 0; index < kTwoPlayersMultipleAnswerQuestions; ++index)
-			{
-				questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-				m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
-			}
-			break;
+	case 2:
+		m_numericalAnswerQuestions.resize(kTwoPlayersNumericAnswerQuestions);
+		m_multipleAnswerQuestions.resize(kTwoPlayersMultipleAnswerQuestions);
+		for (size_t index = 0; index < kTwoPlayersNumericAnswerQuestions; ++index)
+		{
+			questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
+			m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+		}
+		for (size_t index = 0; index < kTwoPlayersMultipleAnswerQuestions; ++index)
+		{
+			questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
+			m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
+		}
+		break;
 
-		case 3:
-			m_numericalAnswerQuestions.resize(kThreePlayersNumericAnswerQuestions);
-			m_multipleAnswerQuestions.resize(kThreePlayersMultipleAnswerQuestions);
-			for (size_t index = 0; index < kThreePlayersNumericAnswerQuestions; ++index)
-			{
-				questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-				m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
-			}
+	case 3:
+		m_numericalAnswerQuestions.resize(kThreePlayersNumericAnswerQuestions);
+		m_multipleAnswerQuestions.resize(kThreePlayersMultipleAnswerQuestions);
+		for (size_t index = 0; index < kThreePlayersNumericAnswerQuestions; ++index)
+		{
+			questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
+			m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+		}
 
-			for (size_t index = 0; index < kThreePlayersMultipleAnswerQuestions; ++index)
-			{
-				questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-				m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
-			}
-			break;
+		for (size_t index = 0; index < kThreePlayersMultipleAnswerQuestions; ++index)
+		{
+			questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
+			m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
+		}
+		break;
 
-		case 4:
-			m_numericalAnswerQuestions.resize(kFourPlayersNumericAnswerQuestions);
-			m_multipleAnswerQuestions.resize(kFourPlayersMultipleAnswerQuestions);
-			for (size_t index = 0; index < kFourPlayersNumericAnswerQuestions; ++index)
-			{
-				questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
-				m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
-			}
-			for (size_t index = 0; index < kFourPlayersMultipleAnswerQuestions; ++index)
-			{
-				questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
-				m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
-			}
-			break;
-		default:
-			throw std::out_of_range("Invalid number of players");
+	case 4:
+		m_numericalAnswerQuestions.resize(kFourPlayersNumericAnswerQuestions);
+		m_multipleAnswerQuestions.resize(kFourPlayersMultipleAnswerQuestions);
+		for (size_t index = 0; index < kFourPlayersNumericAnswerQuestions; ++index)
+		{
+			questionIndex = m_questionManager.GetRandomNumericalAnswerQuestionsID();
+			m_numericalAnswerQuestions[index] = m_questionManager.GetNumericalAnswerQuestion(questionIndex);
+		}
+		for (size_t index = 0; index < kFourPlayersMultipleAnswerQuestions; ++index)
+		{
+			questionIndex = m_questionManager.GetRandomMultipleAnswerQuestionsID();
+			m_multipleAnswerQuestions[index] = m_questionManager.GetMultipleAnswerQuestion(questionIndex);
+		}
+		break;
+	default:
+		throw std::out_of_range("Invalid number of players");
 	}
 	std::ranges::shuffle(m_numericalAnswerQuestions, gen);
 	std::ranges::shuffle(m_multipleAnswerQuestions, gen);
@@ -307,6 +322,12 @@ Game& Game::operator=(const Game& other)
 		m_numericalAnswerQuestions = other.m_numericalAnswerQuestions;
 		numericQuestionIndex = other.numericQuestionIndex;
 		multipleQuestionIndex = other.multipleQuestionIndex;
+		m_currentStage = other.m_currentStage;
+		m_stages = other.m_stages;
+		m_chooseTerritoryRoundsNumber = other.m_chooseTerritoryRoundsNumber;
+		m_currentStageIndex = other.m_currentStageIndex;
+		m_duelRoundsNumber = other.m_duelRoundsNumber;
+		m_duelParticipants = other.m_duelParticipants;
 	}
 	return *this;
 }
@@ -388,12 +409,10 @@ void Game::SetStagesForChooseTerritory()
 
 void Game::SetStagesForDuel()
 {
-	std::array<Player, 2>participants;
 	for (size_t i = 0; i < m_duelRoundsNumber; i++)
 	{
 		m_stages.push_back(Stage::Attack);
 		m_stages.push_back(Stage::MultipleAnswerQuestion);
-		m_stages.push_back(Stage::Update);
 		m_stages.push_back(Stage::NumericalAnswerQuestion);
 		m_stages.push_back(Stage::Update);
 	}
