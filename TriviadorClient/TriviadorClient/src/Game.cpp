@@ -39,7 +39,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	//QTimer::singleShot(3000, this, SLOT(GameLoop()));
+	QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 
 Game::~Game()
