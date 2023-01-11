@@ -37,7 +37,8 @@ void Registration::on_logInButton_clicked()
 	if (res.status_code == 200)
 	{
 		close();
-		MainMenu* mainMenu = new MainMenu(User(username));
+		User user(username);
+		MainMenu* mainMenu = new MainMenu(user);
 		mainMenu->hiMessage(username);
 		mainMenu->showMaximized();
 	}
