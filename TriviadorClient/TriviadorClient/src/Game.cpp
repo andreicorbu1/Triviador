@@ -76,11 +76,20 @@ void Game::ConnectButtons()
 
 void Game::UpdateBoard()
 {
-	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/board" });
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getboard" });
 
 	if (res.status_code == 200)
 	{
-		// parse and update board
+		auto board = crow::json::load(res.text);
+		for (int i = 0; i < m_board.Size(); i++)
+		{
+			Player player = Player(board[i]["owner"]["name"].s(), Player::GetColor(board[i]["owner"]["color"].s()));
+			int score = board[i]["score"].i();
+			
+			m_board[i].SetOwner(player);
+			m_board[i].SetScore(score);
+			m_board[i].Update();
+		}
 	}
 }
 

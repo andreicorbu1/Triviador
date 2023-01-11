@@ -6,11 +6,11 @@ class Player
 public:
 	enum class Color
 	{
+		None,
 		Blue,
 		Red,
 		Green,
-		Yellow,
-		None
+		Yellow
 	};
 
 	std::string ColorToString(Color color) const;

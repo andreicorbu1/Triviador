@@ -9,22 +9,26 @@ class Territory
 public:
     Territory() = default;
     Territory(QWidget* parent);
-    //explicit Territory(const Player& owner);
-    //Territory(const Player& owner, const bool& isBase);
     Territory(const Territory& territory);
     Territory(Territory&& territory) noexcept;
     ~Territory();
-    //
-    //// Operators:
+
+    // Operators:
     Territory& operator=(const Territory& territory);
     Territory& operator=(Territory&& territory) noexcept;
 
-    //friend std::ostream& operator<< (std::ostream& out, const Territory& t);
-
+    // Setters:
     void setGeometry(int x, int y, int width, int height);
     void setMask(const QPixmap& mask);
     void SetButtonProperties();
+	void SetOwner(const Player& player);
+	void SetScore(const int& score);
+    
+	// Getters:
     QPushButton* getButton() const;
+    
+    // Methods:
+    void Update();
 
 private:
     const uint16_t kBaseScore = 300;

@@ -26,31 +26,29 @@ void Territory::SetButtonProperties()
     m_button->setText(QString::number(m_score));
 }
 
+void Territory::SetOwner(const Player& player)
+{
+	m_owner = player;
+}
+
+void Territory::SetScore(const int& score)
+{
+}
+
 QPushButton* Territory::getButton() const
 {
     return m_button;
 }
 
-//Territory::Territory(QWidget* parent)
-//    : m_score(kBaseScore)
-//{
-//    //empty
-//    m_bu
-//}
-//
-//Territory::Territory(const Player& owner)
-//    : m_owner(owner)
-//    , m_score(kTerritoryScore)
-//{
-//    // empty
-//}
-//
-//Territory::Territory(const Player& owner, const bool& isBase)
-//    : m_owner(owner)
-//    , m_score(kBaseScore)
-//{
-//    // empty
-//}
+void Territory::Update()
+{
+    QString color = m_owner.GetColor().c_str();
+    if (color == "None")
+        return;
+
+	m_button->setText(QString::number(m_score));
+	m_button->setStyleSheet("background-color: " + color + "; color: white; font: 12pt \"Franklin Gothic Heavy\"; text-align:center;");
+}
 
 Territory::Territory(const Territory& territory)
 {
@@ -83,10 +81,3 @@ Territory& Territory::operator=(Territory&& territory) noexcept
     new(&territory)Territory;
     return *this;
 }
-
-//std::ostream& operator<< (std::ostream& out, const Territory& t)
-//{
-//    out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");
-//    out << "[" << t.m_score << "]";
-//    return out;
-//}

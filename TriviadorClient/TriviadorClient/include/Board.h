@@ -29,8 +29,6 @@ public:
     // Operators:
 	Board& operator= (const Board& other);
 	Board& operator= (Board&& other) noexcept;
-	// friend std::ostream& operator<< (std::ostream& out, const Board& board);
-
 
     void Set2PGame();
     void Set3PGame();
