@@ -23,14 +23,20 @@ crow::response AttackTerritoryHanndler::operator()(const crow::request& req) con
 			}
 		}
 		size_t position = std::stoi(territoryAttacked->second);
-		size_t width = m_game.GetBoard().GetWidth();
-		Territory attackedTerritory = m_game.GetBoard()[{position / width, position% width}];
+		Territory attackedTerritory = m_game.GetBoard()[position];
 		if (attackedTerritory.GetOwner().has_value())
 		{
-			m_game.AddPlayerToDuel(attacker);
-			m_game.AddPlayerToDuel(attackedTerritory.GetOwner().value());
-			m_game.GoToNextStage();
-			return crow::response(200);
+			try 
+			{
+				m_game.AddPlayerToDuel(attacker);
+				m_game.AddPlayerToDuel(attackedTerritory.GetOwner().value());
+				m_game.GoToNextStage();
+				return crow::response(200);
+			}
+			catch (const std::out_of_range& e)
+			{
+				return crow::response(404, e.what());
+			}
 		}
 		else
 		{
