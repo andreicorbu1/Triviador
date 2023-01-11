@@ -64,6 +64,7 @@ public:
 	std::string GetCurrentStage() const;
 	const std::unordered_set<std::string>& GetPlayersWhoSentRequest();
 	const std::vector<Player>& GetParticipants() const;
+	std::string GetPlayerWhoWillMakeAChoose();
 
 	//Setters:
 	void SetBoard(const Board& board);
@@ -89,6 +90,7 @@ public:
 	void ClearPlayersWhoSentRequest();
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
 	bool AddTerritory(std::string username, int position, bool isBase);
+	void PopPlayerWhoWillMakeAChoose();
 
 private:
 	void Cleanup();
