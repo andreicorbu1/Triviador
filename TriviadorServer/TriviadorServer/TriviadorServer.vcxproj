@@ -141,6 +141,7 @@
     <ClCompile Include="src\AddToLobbyHandler.cpp" />
     <ClCompile Include="src\AddToPlayerHistoryHandler.cpp" />
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\ChooseHandler.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\PlayerHistory.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="include\AddToLobbyHandler.h" />
     <ClInclude Include="include\AddToPlayerHistoryHandler.h" />
     <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\ChooseHandler.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\PlayerHistory.h" />

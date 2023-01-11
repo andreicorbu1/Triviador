@@ -17,10 +17,14 @@ public:
 	~Board() = default;
 	// Setters:
 	Territory& operator[] (Position pos);
+	Territory& operator[] (int pos);
 
 	// Getters:
 	const Territory& operator[] (Position pos) const;
+	Territory operator[] (int pos) const;
 	std::vector<Territory> GetTerritories() const;
+	size_t GetWidth() const;
+	size_t GetHeight() const;
 
 	// Operators:
 	friend std::ostream& operator<< (std::ostream& out, const Board& b);

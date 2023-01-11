@@ -16,8 +16,8 @@
 #include "GetBoardHandler.h"
 #include "QuestionManager.h"
 #include "PlayerHistoryHandler.h"
-#include "Game.h"
 #include "AddToPlayerHistoryHandler.h"
+#include "ChooseHandler.h";
 
 int main()
 {
@@ -29,7 +29,7 @@ int main()
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
 	Game currentGame;
 
-  Lobby lobby;
+    Lobby lobby;
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
 	crow::SimpleApp app;
@@ -84,6 +84,9 @@ int main()
 
 	auto& addPlayerHistory = CROW_ROUTE(app, "/addplayerhistory").methods(crow::HTTPMethod::PUT);
 	addPlayerHistory(AddToPlayerHistoryHandler(playerHistoryManager));
+
+	auto& chooseBase = CROW_ROUTE(app, "/choose").methods(crow::HTTPMethod::PUT);
+	chooseBase(ChooseHandler(currentGame));
 
 	app.port(18080).multithreaded().run();
 	return 0;

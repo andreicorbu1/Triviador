@@ -19,11 +19,11 @@ crow::response NumericalAnswerQuestionHandler::operator()(const crow::request& r
 {
 	auto bodyArgs = ParseUrlArgs(req.body);
 	auto end = bodyArgs.end();
-	auto playerWhoSentRequest = bodyArgs.find("username");
-	if (playerWhoSentRequest != end) {
+	auto playerWithRequest = bodyArgs.find("username");
+	if (playerWithRequest != end) {
 		try
 		{
-			std::string username = playerWhoSentRequest->second;
+			std::string username = playerWithRequest->second;
 			std::unordered_set<std::string> playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
 			NumericalAnswerQuestion question;
 			uint16_t id;
@@ -32,14 +32,11 @@ crow::response NumericalAnswerQuestionHandler::operator()(const crow::request& r
 				m_game.AddPlayerWhoSentRequest(username);
 				question = m_game.GetCurrentNumericalAnswerQuestion();
 				id = m_game.GetCurrentNumericalAnswerQuestionIndex();
-			}
-			else if(playersWhoSentRequest.size()==m_game.GetPlayers().size())
-			{
-				//auto [question, id] = m_game.GetNumericalAnswerQuestion();
-				std::pair<NumericalAnswerQuestion, uint16_t>questionFromServer = m_game.GetNewNumericalAnswerQuestion();
-				question = questionFromServer.first;
-				id = questionFromServer.second;
-				m_game.AddPlayerWhoSentRequest(username);
+				playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
+				if (playersWhoSentRequest.size() == m_game.GetPlayers().size())
+				{
+					m_game.GoToNextStage();
+				}
 			}
 			else
 			{

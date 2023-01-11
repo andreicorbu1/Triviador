@@ -55,6 +55,8 @@ private:
     QSignalMapper *m_signalMapper;
     int32_t m_ID;
 
+    crow::json::rvalue data;
+
     Board m_board;
     std::vector<Player> m_players;
 	Player m_currentPlayer;
