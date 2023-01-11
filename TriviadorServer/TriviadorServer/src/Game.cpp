@@ -452,3 +452,9 @@ void Game::ClearPlayersWhoSentRequest()
 {
 	m_playersWhoSentRequest.clear();
 }
+
+void Game::InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime)
+{
+	Participant participant(username, answerCorrentness, responseTime);
+	m_participantsQueue.push(participant);
+}

@@ -27,9 +27,11 @@ int main()
 	questionManager.PopulateStorage();
 
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
+	//currentGame.InsertQueueParticipant("Adi", 1);
+	//currentGame.InsertQueueParticipant("Andrei", 1);
 	Game currentGame;
 
-    Lobby lobby;
+	Lobby lobby;
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
 	crow::SimpleApp app;
