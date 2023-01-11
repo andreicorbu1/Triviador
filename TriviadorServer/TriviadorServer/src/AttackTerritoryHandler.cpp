@@ -24,12 +24,12 @@ crow::response AttackTerritoryHanndler::operator()(const crow::request& req) con
 		}
 		size_t position = std::stoi(territoryAttacked->second);
 		Territory attackedTerritory = m_game.GetBoard()[position];
-		if (attackedTerritory.GetOwner().has_value())
+		if (auto defender = attackedTerritory.GetOwner(); defender.has_value())
 		{
 			try 
 			{
 				m_game.AddPlayerToDuel(attacker);
-				m_game.AddPlayerToDuel(attackedTerritory.GetOwner().value());
+				m_game.AddPlayerToDuel(defender.value());
 				m_game.GoToNextStage();
 				return crow::response(200);
 			}

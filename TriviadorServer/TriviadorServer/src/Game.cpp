@@ -198,11 +198,11 @@ std::string Game::GetCurrentStage() const
 	}
 }
 
-int Game::GetNumberOfPlayers()
+size_t Game::GetNumberOfPlayers() const
 {
 	return m_players.size();
 }
-const std::unordered_set<std::string>& Game::GetPlayersWhoSentRequest()
+const std::unordered_set<std::string>& Game::GetPlayersWhoSentRequest() const
 {
 	return m_playersWhoSentRequest;
 }
@@ -220,7 +220,7 @@ const std::vector<Player>& Game::GetParticipants() const
 	return m_players;
 }
 
-std::string Game::GetPlayerWhoWillMakeAChoose()
+std::string Game::GetPlayerWhoWillMakeAChoice() const
 {
 	Participant participant = m_participantsQueue.top();
 	std::string participantName = std::get<0>(participant);

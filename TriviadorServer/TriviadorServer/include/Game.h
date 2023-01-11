@@ -13,7 +13,7 @@ using Participant = std::tuple<std::string, int, int>;
 class ParticipantCompare
 {
 public:
-	bool operator() (Participant participantA, Participant participantB)
+	bool operator() (Participant participantA, Participant participantB) const
 	{
 		if (std::get<1>(participantA) == std::get<1>(participantB))
 		{
@@ -60,11 +60,11 @@ public:
 	std::pair < MultipleAnswerQuestion, uint16_t> GetNewMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetCurrentMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetMultipleAnswerQuestion(uint16_t index) const;
-	int GetNumberOfPlayers();
+	size_t GetNumberOfPlayers() const;
 	std::string GetCurrentStage() const;
-	const std::unordered_set<std::string>& GetPlayersWhoSentRequest();
+	const std::unordered_set<std::string>& GetPlayersWhoSentRequest() const;
 	const std::vector<Player>& GetParticipants() const;
-	std::string GetPlayerWhoWillMakeAChoose();
+	std::string GetPlayerWhoWillMakeAChoice() const;
 
 	//Setters:
 	void SetBoard(const Board& board);

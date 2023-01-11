@@ -17,11 +17,11 @@ public:
 	~Board() = default;
 	// Setters:
 	Territory& operator[] (Position pos);
-	Territory& operator[] (int pos);
+	Territory& operator[] (size_t pos);
 
 	// Getters:
-	const Territory& operator[] (Position pos) const;
-	Territory operator[] (int pos) const;
+	Territory operator[] (Position pos) const;
+	Territory operator[] (size_t pos) const;
 	std::vector<Territory> GetTerritories() const;
 	size_t GetWidth() const;
 	size_t GetHeight() const;
