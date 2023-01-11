@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QTimer>
 #include "ui_Lobby.h"
 #include <QPaintEvent>
 #include <QPainter>
@@ -28,9 +29,9 @@ private slots:
 	void on_leaveLobbyButton_clicked();
 	void on_startGameButton_clicked();
 	void on_gameFinished();
+	void LobbyLoop();
 
 private:
-	void paintEvent(QPaintEvent* paintEvent);
 	void HideAllPlayersName();
 	void SetPlayersLabel();
 	void StartGame();

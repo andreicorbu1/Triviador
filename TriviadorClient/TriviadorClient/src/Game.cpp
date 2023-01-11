@@ -188,14 +188,14 @@ void Game::GameLoop()
 		}
 		else
 		{
-			waitingTime = 2000; //temporary
+			waitingTime = 2000;
 		}
-		QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 	}
 	else
 	{
 		waitingTime = 3000;
 	}
+	
 	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 }
 
