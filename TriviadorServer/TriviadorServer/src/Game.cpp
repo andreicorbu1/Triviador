@@ -334,7 +334,7 @@ Game& Game::operator=(const Game& other)
 
 void Game::Start()
 {
-	m_currentStage = Stage::Stage1;
+	m_currentStage = Stage::NumericalAnswerQuestion;
 }
 
 void Game::AddToAnswered(int questionId, const Player& player)
@@ -427,14 +427,4 @@ void Game::InsertQueueParticipant(const std::string& username, const int& answer
 {
 	Participant participant(username, answerCorrentness, responseTime);
 	m_participantsQueue.push(participant);
-}
-
-void Game::ShowQueueParticipants()
-{	
-	while (!m_participantsQueue.empty())
-	{
-		Participant participant = m_participantsQueue.top();
-		std::cout << std::get<0>(participant) << " " << std::get<1>(participant) << " " << std::get<2>(participant) << std::endl;
-		m_participantsQueue.pop();
-	}
 }

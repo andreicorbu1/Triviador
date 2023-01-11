@@ -36,11 +36,7 @@ public:
 		Attack,
 		Wait,
 		Update,
-		Result,
-		Stage1,
-		Stage2,
-		Stage3,
-		Stage4
+		Result
 	};
 
 	Game() = default;
@@ -89,9 +85,7 @@ public:
 	void SetStagesForChooseTerritory();
 	void SetStagesForDuel();
 	void ClearPlayersWhoSentRequest();
-
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
-	void ShowQueueParticipants();
 
 private:
 	void Cleanup();

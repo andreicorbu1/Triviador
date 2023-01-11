@@ -29,7 +29,6 @@ int main()
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
 	//currentGame.InsertQueueParticipant("Adi", 1);
 	//currentGame.InsertQueueParticipant("Andrei", 1);
-	//currentGame.ShowQueueParticipants();
 	Game currentGame;
 
 	Lobby lobby;
