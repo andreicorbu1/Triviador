@@ -45,6 +45,7 @@ public:
 	std::pair < MultipleAnswerQuestion, uint16_t> GetNewMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetCurrentMultipleAnswerQuestion();
 	MultipleAnswerQuestion GetMultipleAnswerQuestion(uint16_t index) const;
+	int GetNumberOfPlayers();
 	std::string GetCurrentStage() const;
 	const std::unordered_set<std::string>& GetPlayersWhoSentRequest();
 	const std::vector<Player>& GetParticipants() const;
@@ -56,6 +57,7 @@ public:
 	void SetGameID(const int32_t& gameID);
 	void SetQuestions(const uint16_t& numberOfPlayers);
 	void GoToNextStage();
+	void AddNullPlayer();
 
 	//Operators:
 	Game& operator =(const Game& other);
@@ -97,4 +99,3 @@ private:
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 	std::vector<Player> m_duelParticipants;
 };
-

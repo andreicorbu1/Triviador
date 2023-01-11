@@ -42,6 +42,16 @@ void to_json(nlohmann::json& json, const Player& player)
 	};
 }
 
+void to_json(nlohmann::json& json, const PlayerHistory& playerHistory)
+{
+	json =
+	{
+		{"id", playerHistory.GetID()},
+		{"score", playerHistory.GetScore()},
+		{"rank", playerHistory.GetRank()}
+	};
+}
+
 void to_json(nlohmann::json& json, const Territory& territory)
 {
 	Player owner = territory.GetOwner().has_value() ? territory.GetOwner().value() : Player();

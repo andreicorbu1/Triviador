@@ -25,7 +25,7 @@ public slots:
 	void Show();
 
 private slots:
-	void on_myProfileButton_clicked() const;
+	void on_myProfileButton_clicked();
 	void on_creditsButton_clicked() const;
 	void on_logOutButton_clicked();
 	void on_playButton_clicked() const;
@@ -35,6 +35,8 @@ private slots:
 
 	void on_lobbyFinished();
 
+private:
+	void ShowPlayerHistory();
 private:
 	Ui::MainMenuClass ui;
 	Lobby* m_lobby;

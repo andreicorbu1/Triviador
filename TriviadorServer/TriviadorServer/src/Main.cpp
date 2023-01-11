@@ -15,16 +15,21 @@
 #include "StageHandler.h"
 #include "GetBoardHandler.h"
 #include "QuestionManager.h"
+#include "PlayerHistoryHandler.h"
 #include "Game.h"
+#include "AddToPlayerHistoryHandler.h"
 
 int main()
 {
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
+	PlayerHistoryManager playerHistoryManager("resource/PlayesHistory.sqlite");
 	questionManager.PopulateStorage();
-	Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
-	//Game currentGame;
-	Lobby lobby;
+
+	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
+	Game currentGame;
+
+  Lobby lobby;
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
 	crow::SimpleApp app;
@@ -53,7 +58,7 @@ int main()
 	auto& removePlayerFromLobby = CROW_ROUTE(app, "/removeplayerfromlobby");
 	removePlayerFromLobby(RemoveFromLobbyHandler(lobby, userList));
 
-	auto& getPlayersFromLobby= CROW_ROUTE(app, "/getplayersfromlobby");
+	auto& getPlayersFromLobby = CROW_ROUTE(app, "/getplayersfromlobby");
 	getPlayersFromLobby(GetAllPlayersFromLobbyHandler(lobby));
 
 	auto& sendAnswerForMultipleQuestion = CROW_ROUTE(app, "/sendanswer/multiple");
@@ -68,11 +73,17 @@ int main()
 	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
 
+	auto& sendPlayerHistory = CROW_ROUTE(app, "/playerhistory");
+	sendPlayerHistory(PlayerHistoryHandler(playerHistoryManager));
+
 	auto& stage = CROW_ROUTE(app, "/stage");
 	stage(StageHandler(currentGame));
 
 	auto& getBoard = CROW_ROUTE(app, "/getboard");
 	getBoard(GetBoardHandler(currentGame));
+
+	auto& addPlayerHistory = CROW_ROUTE(app, "/addplayerhistory").methods(crow::HTTPMethod::PUT);
+	addPlayerHistory(AddToPlayerHistoryHandler(playerHistoryManager));
 
 	app.port(18080).multithreaded().run();
 	return 0;

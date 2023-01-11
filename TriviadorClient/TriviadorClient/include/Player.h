@@ -31,6 +31,7 @@ public:
     // Operators:
     Player& operator =(const Player& other);
     Player& operator+=(int score);
+    bool operator <(const Player& other);
 
 private:
     std::string m_playerName;

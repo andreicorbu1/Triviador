@@ -139,9 +139,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AddToLobbyHandler.cpp" />
+    <ClCompile Include="src\AddToPlayerHistoryHandler.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\PlayerHistory.cpp" />
+    <ClCompile Include="src\PlayerHistoryManager.cpp" />
     <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp" />
     <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp" />
     <ClCompile Include="src\GetBoardHandler.cpp" />
@@ -160,6 +163,7 @@
     <ClCompile Include="src\RemoveFromLobbyHandler.cpp" />
     <ClCompile Include="src\SendAnswerMultipleQuestion.cpp" />
     <ClCompile Include="src\SendAnswerNumericalQuestion.cpp" />
+    <ClCompile Include="src\PlayerHistoryHandler.cpp" />
     <ClCompile Include="src\StageHandler.cpp" />
     <ClCompile Include="src\Territory.cpp" />
     <ClCompile Include="src\User.cpp" />
@@ -170,9 +174,12 @@
     <ClInclude Include="include\AccountsManager.h" />
     <ClInclude Include="include\AddToAcountListHandler.h" />
     <ClInclude Include="include\AddToLobbyHandler.h" />
+    <ClInclude Include="include\AddToPlayerHistoryHandler.h" />
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\PlayerHistory.h" />
+    <ClInclude Include="include\PlayerHistoryManager.h" />
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h" />
     <ClInclude Include="include\GetAllPlayersFromLobbyHandler.h" />
     <ClInclude Include="include\GetBoardHandler.h" />
@@ -188,6 +195,7 @@
     <ClInclude Include="include\RemoveFromLobbyHandler.h" />
     <ClInclude Include="include\SendAnswerMultipleQuestion.h" />
     <ClInclude Include="include\SendAnswerNumericalQuestion.h" />
+    <ClInclude Include="include\PlayerHistoryHandler.h" />
     <ClInclude Include="include\StageHandler.h" />
     <ClInclude Include="include\Territory.h" />
     <ClInclude Include="include\User.h" />
