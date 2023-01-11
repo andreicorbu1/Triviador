@@ -42,7 +42,6 @@ private:
     void UpdatePlayerScores();
     void AddPlayersHistory();
     void AddPlayerHistory(Player& player, int rank);
-    
 private:
     const std::pair<uint16_t, uint16_t> playersTableSize = { 200, 75 };
     const std::pair<uint16_t, uint16_t> playersTableStartPoint = { 1280, 50 };
@@ -54,6 +53,8 @@ private:
     QPixmap m_background;
     QSignalMapper *m_signalMapper;
     int32_t m_ID;
+
+    crow::json::rvalue data;
 
     Board m_board;
     std::vector<Player> m_players;

@@ -14,23 +14,22 @@ crow::response StageHandler::operator()(const crow::request& req) const
 	{
 		std::string username = playerWhoSentRequest->second;
 		std::unordered_set<std::string> playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
-		if (!playersWhoSentRequest.contains(username))
-		{
-			m_game.AddPlayerWhoSentRequest(username);
-		}
-		else if (playersWhoSentRequest.size() == m_game.GetPlayers().size())
-		{
-			m_game.ClearPlayersWhoSentRequest();
-			m_game.AddPlayerWhoSentRequest(username);
-			m_game.GoToNextStage();
-		}
-		else
-		{
-			return crow::json::wvalue
-			{
-				{"state", "wait"}
-			};
-		}
+		//if (!playersWhoSentRequest.contains(username))
+		//{
+		//	m_game.AddPlayerWhoSentRequest(username);
+		//	std::unordered_set<std::string> playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
+		//	//if (playersWhoSentRequest.size() == m_game.GetPlayers().size())  //temporary
+		//	//{
+		//	//	m_game.GoToNextStage();
+		//	//}
+		//}
+		//else
+		//{
+		//	return crow::json::wvalue
+		//	{
+		//		{"state", "wait"}
+		//	};
+		//}
 		std::string currentStage = m_game.GetCurrentStage();
 		std::cout << currentStage;
 		crow::json::wvalue response

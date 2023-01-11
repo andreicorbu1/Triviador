@@ -74,6 +74,7 @@ public:
 	void GoToNextStage();
 	void AddNullPlayer();
 
+
 	//Operators:
 	Game& operator =(const Game& other);
 
@@ -81,11 +82,13 @@ public:
 	void Start();
 	void AddToAnswered(int questionId, const Player& player);
 	void AddPlayerWhoSentRequest(const std::string& playersName);
+	void AddPlayerToDuel(const Player& player);
 	void SetStagesForChooseBase();
 	void SetStagesForChooseTerritory();
 	void SetStagesForDuel();
 	void ClearPlayersWhoSentRequest();
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
+	bool AddTerritory(std::string username, int position, bool isBase);
 
 private:
 	void Cleanup();
@@ -100,6 +103,7 @@ private:
 	uint16_t m_chooseTerritoryRoundsNumber;
 	uint16_t m_duelRoundsNumber;
 	static QuestionManager m_questionManager;
+
 private:
 	Board m_board;
 	std::vector<Player> m_players;
@@ -110,7 +114,7 @@ private:
 	Stage m_currentStage;
 	uint16_t m_currentStageIndex;
 	std::vector<Stage>m_stages;
-	int32_t m_ID;	
+	int32_t m_ID;
 	uint16_t numericQuestionIndex = 0;
 	uint16_t multipleQuestionIndex = 0;
 	std::unordered_set<std::string> m_playersWhoSentRequest;
