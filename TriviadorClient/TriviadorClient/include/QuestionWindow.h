@@ -75,8 +75,6 @@ private:
 private:
     void HideAllFlags() const;
 	void ResetButtons();
-    void ActivateButtonsForNQ();
-    void ActivateButtonsForMQ();
     
 private:
     // Constants

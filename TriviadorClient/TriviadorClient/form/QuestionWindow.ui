@@ -135,12 +135,12 @@ QProgressBar::chunk {
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="multiple">
     <widget class="QPushButton" name="answer1">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -170,7 +170,7 @@ checked: {background-color: rgb(255, 244, 160)};
     </widget>
     <widget class="QPushButton" name="answer2">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -201,7 +201,7 @@ checked: {background-color: rgb(255, 255, 127)}</string>
     </widget>
     <widget class="QPushButton" name="answer3">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -232,7 +232,7 @@ checked: {background-color: rgb(255, 255, 127)}</string>
     </widget>
     <widget class="QPushButton" name="answer4">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -263,7 +263,7 @@ checked: {background-color: rgb(255, 255, 127)}</string>
     </widget>
     <widget class="QPushButton" name="hammerButton">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -313,7 +313,7 @@ checked: {background-color: rgb(255, 255, 127)}</string>
     </widget>
     <widget class="QLineEdit" name="answerInput">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -344,7 +344,7 @@ padding: 5px;</string>
     </widget>
     <widget class="QPushButton" name="submitButton">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -380,7 +380,7 @@ border-radius: 20px;</string>
     </widget>
     <widget class="QPushButton" name="telescopeButton">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -412,7 +412,7 @@ border-radius: 20px;</string>
     </widget>
     <widget class="QPushButton" name="parrotButton">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>

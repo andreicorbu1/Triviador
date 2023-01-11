@@ -69,8 +69,6 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 			std::string color = player["color"].s();
 			Player player(name, Player::GetColor(color));
 			players.push_back(player);
-			if (m_currentPlayer.GetName() == name)
-				ActivateButtonsForMQ();
 		}
 		SetFlags(players);
 	}
@@ -95,8 +93,6 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 			std::string color = player["color"].s();
 			Player player(name, Player::GetColor(color));
 			players.push_back(player);
-			if (m_currentPlayer.GetName() == name)
-				ActivateButtonsForNQ();
 		}
 		SetFlags(players);
 	}
@@ -323,23 +319,6 @@ void QuestionWindow::ResetButtons()
 		button->close();
 	}
 	ui_telescopeAnswers.clear();
-}
-
-void QuestionWindow::ActivateButtonsForNQ()
-{
-	ui.answerInput->setEnabled(true);
-	ui.submitButton->setEnabled(true);
-	ui.parrotButton->setEnabled(true);
-	ui.telescopeButton->setEnabled(true);
-}
-
-void QuestionWindow::ActivateButtonsForMQ()
-{
-	ui.answer1->setEnabled(true);
-	ui.answer2->setEnabled(true);
-	ui.answer3->setEnabled(true);
-	ui.answer4->setEnabled(true);
-	ui.hammerButton->setEnabled(true);
 }
 
 void QuestionWindow::ShowResults() {
