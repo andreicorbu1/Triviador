@@ -39,7 +39,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	//QTimer::singleShot(3000, this, SLOT(GameLoop()));
+	QTimer::singleShot(3000, this, SLOT(GameLoop()));
 }
 
 Game::~Game()
@@ -146,7 +146,7 @@ void Game::GameLoop()
 		{
 			waitingTime = 2000;
 		}
-		if (data["stage"] == "numericalAnswerQuestion")
+		else if (data["stage"] == "numericalAnswerQuestion")
 		{
 			waitingTime = 14000;
 			ShowQuestion(QuestionType::NumericalAnswer);
@@ -168,7 +168,6 @@ void Game::GameLoop()
 			waitingTime = 10000;
 			//choose base
 		}
-
 		else if (data["stage"] == "attack")
 		{
 			waitingTime = 2000;

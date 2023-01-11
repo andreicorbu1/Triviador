@@ -28,6 +28,7 @@ private slots:
 	void on_leaveLobbyButton_clicked();
 	void on_startGameButton_clicked();
 	void on_gameFinished();
+	void LobbyLoop();
 
 private:
 	void paintEvent(QPaintEvent* paintEvent);
