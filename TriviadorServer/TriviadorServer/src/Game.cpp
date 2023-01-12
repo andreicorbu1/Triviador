@@ -216,7 +216,7 @@ const std::vector<Player>& Game::GetParticipants() const
 {
 	try
 	{
-		if (m_stages.at(m_currentStageIndex - 1) == Stage::Attack || m_stages.at(m_currentStageIndex-2) == Stage::Attack)
+		if (m_stages.at(m_currentStageIndex - 1) == Stage::Attack || m_stages.at(m_currentStageIndex - 2) == Stage::Attack)
 		{
 			return m_duelParticipants;
 		}
@@ -335,7 +335,7 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 		});
 	if (player != m_players.end())
 	{
-		if(!m_board[position].GetOwner().has_value())
+		if (!m_board[position].GetOwner().has_value())
 		{
 			m_board[position] = isBase == true ? Territory(*player, isBase) : Territory(*player);
 			return true;
@@ -344,21 +344,31 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 	return false;
 }
 
-void Game::PopPlayerWhoWillMakeAChoose()
+bool Game::PopPlayerWhoWillMakeAChoose()
 {
-	m_participantsQueue.pop();
-	if (m_participantsQueue.size() == 0 && m_currentStage == Stage::ChooseBase)
+	//GoToNextStage();
+	if (m_currentStage == Stage::ChooseBase)
 	{
-		//GoToNextStage();
+		m_participantsQueue.pop();
+		GoToNextStage();
+		return true;
 	}
 	else if (m_currentStage == Stage::ChooseTerritory)
 	{
-		if (m_participantsQueue.size() == 1)
+		if (m_choosedTerritoryCounter == m_participantsQueue.size() - 1)
 		{
+			m_choosedTerritoryCounter = 0;
 			m_participantsQueue.pop();
-			//GoToNextStage();
+			if (m_participantsQueue.size() == 1)
+			{
+				m_participantsQueue.pop();
+			}
+			GoToNextStage();
+			return true;
 		}
 	}
+	GoToNextStage();
+	return false;
 }
 
 Game& Game::operator=(const Game& other)
@@ -380,6 +390,7 @@ Game& Game::operator=(const Game& other)
 		m_duelRoundsNumber = other.m_duelRoundsNumber;
 		m_duelParticipants = other.m_duelParticipants;
 		m_playersWhoSentRequest = other.m_playersWhoSentRequest;
+		m_choosedTerritoryCounter = other.m_choosedTerritoryCounter;
 	}
 	return *this;
 }
@@ -466,8 +477,19 @@ void Game::SetStagesForChooseTerritory()
 	for (size_t i = 0; i < m_chooseTerritoryRoundsNumber; i++)
 	{
 		m_stages.push_back(Stage::NumericalAnswerQuestion);
-		m_stages.push_back(Stage::ChooseTerritory);
-		m_stages.push_back(Stage::Update);
+		for (size_t i = 0; i < ((m_players.size() - 1) * m_players.size()) / 2; i++)
+		{
+			m_stages.push_back(Stage::ChooseTerritory);
+			m_stages.push_back(Stage::Update);
+		}
+	}
+	if (m_players.size() == 4)
+	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			m_stages.pop_back();
+			m_stages.pop_back();
+		}
 	}
 }
 

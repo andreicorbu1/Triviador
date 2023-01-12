@@ -27,7 +27,6 @@ crow::response ChooseHandler::operator()(const crow::request& req) const
 				}
 			}
 			m_game.PopPlayerWhoWillMakeAChoose();
-			m_game.GoToNextStage();
 			return crow::response(200, "Successfully added base");
 		}
 		return crow::response(402, "Occupied position/Game doesn't have a player with that user");
