@@ -20,7 +20,6 @@ public:
     // Setters:
     void setGeometry(int x, int y, int width, int height);
     void setMask(const QPixmap& mask);
-    void SetButtonProperties();
 	void SetOwner(const Player& player);
 	void SetScore(const int& score);
     

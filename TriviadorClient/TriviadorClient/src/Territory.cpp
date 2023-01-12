@@ -16,14 +16,8 @@ void Territory::setGeometry(int x, int y, int width, int height)
 
 void Territory::setMask(const QPixmap& mask)
 {
-    m_button->setMask(mask.scaled(m_button->size()).mask());
-}
-
-void Territory::SetButtonProperties()
-{
     m_button->setCursor(QCursor(Qt::PointingHandCursor));
-    m_button->setStyleSheet("background-color: rgb(83, 66, 50); color: white; font: 12pt \"Franklin Gothic Heavy\"; text-align:center;");
-    m_button->setText(QString::number(m_score));
+    m_button->setMask(mask.scaled(m_button->size()).mask());
 }
 
 void Territory::SetOwner(const Player& player)
@@ -33,6 +27,7 @@ void Territory::SetOwner(const Player& player)
 
 void Territory::SetScore(const int& score)
 {
+    m_score = score;
 }
 
 QPushButton* Territory::getButton() const
