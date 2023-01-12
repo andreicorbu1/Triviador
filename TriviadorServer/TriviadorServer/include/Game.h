@@ -66,6 +66,8 @@ public:
 	const std::vector<Player>& GetParticipants() const;
 	std::string GetPlayerWhoWillMakeAChoice() const;
 
+	void IncrementNumericalAnswerQuestionIndex();
+
 	//Setters:
 	void SetBoard(const Board& board);
 	void SetPlayers(const std::vector<Player>& players);
@@ -122,4 +124,5 @@ private:
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 	std::vector<Player> m_duelParticipants;
 	std::priority_queue<Participant, std::vector<Participant>, ParticipantCompare> m_participantsQueue;
+	uint16_t m_choosedTerritoryCounter;
 };
