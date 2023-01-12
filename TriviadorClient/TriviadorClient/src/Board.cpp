@@ -127,7 +127,6 @@ void Board::SetMasks(int playersNumber)
 			QString auxLocation = imageLocation;
 			auxLocation += QString::number(line) + QString::number(column) + ".png";
 			m_board[line * m_width + column].setMask(QPixmap(auxLocation));
-			m_board[line * m_width + column].SetButtonProperties();
 		}
 	}
 }

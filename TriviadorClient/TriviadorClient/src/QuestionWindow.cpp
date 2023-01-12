@@ -368,7 +368,7 @@ void QuestionWindow::SendAnswer()
 	
 	if (m_answer == "")
 	{
-		m_answer = "2147483647";
+		m_answer = "0";
 	}
 
 	if (m_type == QuestionType::MultipleAnswer)
