@@ -342,14 +342,18 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 void Game::PopPlayerWhoWillMakeAChoose()
 {
 	m_participantsQueue.pop();
-	/*if (m_participantsQueue.size() == 0 && m_currentStage == Stage::ChooseBase)
+	if (m_participantsQueue.size() == 0 && m_currentStage == Stage::ChooseBase)
 	{
-		GoToNextStage();
+		//GoToNextStage();
 	}
-	else if (m_participantsQueue.size() == 1 && m_currentStage == Stage::ChooseTerritory)
+	else if (m_currentStage == Stage::ChooseTerritory)
 	{
-		GoToNextStage();
-	}*/
+		if (m_participantsQueue.size() == 1)
+		{
+			m_participantsQueue.pop();
+			//GoToNextStage();
+		}
+	}
 }
 
 Game& Game::operator=(const Game& other)

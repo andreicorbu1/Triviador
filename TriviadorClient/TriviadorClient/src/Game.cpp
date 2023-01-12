@@ -163,11 +163,13 @@ void Game::GameLoop()
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
+			ui.stageLabel->hide();
 			waitingTime = 14000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
+			ui.stageLabel->hide();
 			waitingTime = 14000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
@@ -194,7 +196,9 @@ void Game::GameLoop()
 		}
 		else if (data["stage"] == "update")
 		{
+			ui.stageLabel->hide();
 			UpdateBoard();
+			waitingTime = 2000;
 			//UpdatePlayerScores();
 		}
 		else if (data["stage"] == "result")
