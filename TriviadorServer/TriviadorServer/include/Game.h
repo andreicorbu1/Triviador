@@ -15,7 +15,8 @@ class ParticipantCompare
 public:
 	bool operator() (const Participant& firstParticipant, const Participant& secondParticipant) const
 	{
-		return std::tie(std::get<1>(firstParticipant), std::get<2>(firstParticipant), std::get<0>(firstParticipant)) > std::tie(std::get<1>(secondParticipant), std::get<2>(secondParticipant), std::get<0>(secondParticipant));
+		return std::tie(std::get<1>(firstParticipant), std::get<2>(firstParticipant), std::get<0>(firstParticipant)) > 
+			std::tie(std::get<1>(secondParticipant), std::get<2>(secondParticipant), std::get<0>(secondParticipant));
 	}
 };
 
@@ -42,6 +43,7 @@ public:
 	// Getters:
 	Board GetBoard() const;
 	std::vector<Player> GetPlayers() const;
+	std::vector<Player>& GetPlayers();
 	uint16_t GetRounds() const;
 	int32_t GetGameID() const;
 	Player GetWinner();
@@ -87,7 +89,8 @@ public:
 	void ClearPlayersWhoSentRequest();
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
 	bool AddTerritory(std::string username, int position, bool isBase);
-	void PopPlayerWhoWillMakeAChoose();
+	bool PopPlayerWhoWillMakeAChoose();
+
 
 private:
 	void Cleanup();
@@ -102,6 +105,7 @@ private:
 	uint16_t m_chooseTerritoryRoundsNumber;
 	uint16_t m_duelRoundsNumber;
 	static QuestionManager m_questionManager;
+	uint16_t m_choosedTerritoryCounter = 0;
 
 private:
 	Board m_board;
@@ -119,5 +123,4 @@ private:
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 	std::vector<Player> m_duelParticipants;
 	std::priority_queue<Participant, std::vector<Participant>, ParticipantCompare> m_participantsQueue;
-	uint16_t m_choosedTerritoryCounter;
 };

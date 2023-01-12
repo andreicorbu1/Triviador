@@ -15,7 +15,7 @@ crow::response SendAnswerNumericalQuestion::operator()(const crow::request& req)
 		return crow::response(404, "Question not found");
 
 	std::string username = usernameArg->second;
-	uint16_t id = std::stoi(idArg->second);
+	uint16_t id = std::stoul(idArg->second);
 	int answer = std::stoi(answerArg->second);
 	int responseTime = std::stoi(responseTimeArg->second);
 

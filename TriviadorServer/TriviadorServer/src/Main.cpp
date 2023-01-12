@@ -17,7 +17,7 @@
 #include "QuestionManager.h"
 #include "PlayerHistoryHandler.h"
 #include "AddToPlayerHistoryHandler.h"
-#include "ChooseHandler.h";
+#include "ChooseHandler.h"
 
 int main()
 {
