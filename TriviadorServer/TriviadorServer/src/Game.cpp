@@ -53,6 +53,11 @@ std::vector<Player> Game::GetPlayers() const
 	return m_players;
 }
 
+std::vector<Player>& Game::GetPlayers()
+{
+	return m_players;
+}
+
 uint16_t Game::GetRounds() const
 {
 	return m_gameRounds;
@@ -332,11 +337,7 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 	{
 		if (!m_board[position].GetOwner().has_value())
 		{
-			m_board[position] = Territory(*player, isBase);
-			if (isBase == false)
-			{
-				m_choosedTerritoryCounter++;
-			}
+			m_board[position] = isBase == true ? Territory(*player, isBase) : Territory(*player);
 			return true;
 		}
 	}

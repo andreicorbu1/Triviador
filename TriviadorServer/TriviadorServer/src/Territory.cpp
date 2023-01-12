@@ -1,7 +1,7 @@
 #include "Territory.h"
 
 Territory::Territory()
-	: m_score(kBaseScore)
+	: m_score(kTerritoryScore)
 {
 	// empty
 }

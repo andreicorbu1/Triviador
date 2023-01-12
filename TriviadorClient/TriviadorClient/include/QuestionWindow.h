@@ -93,8 +93,8 @@ private:
 	QTimer* m_timer;
 	QuestionType m_type;
 	std::variant<std::string, int> m_rightAnswer;
-	std::variant<std::string, int> m_answer;
 	int m_questionId;
 	Player m_currentPlayer;
 	QElapsedTimer m_resultTimer;
+	std::string m_answer;
 };

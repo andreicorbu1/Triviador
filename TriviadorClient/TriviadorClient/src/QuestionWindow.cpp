@@ -102,8 +102,8 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 
 void QuestionWindow::Show()
 {
-	m_answer = "";
 	this->show();
+	m_answer = "";
 	StartTimer();
 }
 
@@ -191,8 +191,8 @@ void QuestionWindow::on_answerButton_clicked()
 {
 	QPushButton* button = qobject_cast<QPushButton*>(sender());
 	button->setChecked(true);
-	m_answer = button->text().toUtf8().constData();
 	setEnabled(false);
+	m_answer = button->text().toUtf8().constData();
 	SendAnswer();
 }
 
@@ -334,6 +334,10 @@ void QuestionWindow::ResetButtons()
 
 void QuestionWindow::ShowResults() {
 	QTimer::singleShot(3000, this, SLOT(close()));
+	
+	if (m_answer == "") {
+		SendAnswer();
+	}
 
 	if (m_type == QuestionType::MultipleAnswer)
 	{
@@ -359,22 +363,23 @@ void QuestionWindow::ShowResults() {
 void QuestionWindow::SendAnswer()
 {
 	cpr::Response res;
-	qint64 elapsedTime = m_resultTimer.elapsed();
-	auto responseTime = static_cast<int>(elapsedTime);
+	auto responseTime = static_cast<int>(m_resultTimer.elapsed());
 	std::string username = m_currentPlayer.GetName();
+	
+	if (m_answer == "")
+	{
+		m_answer = "2147483647";
+	}
 
 	if (m_type == QuestionType::MultipleAnswer)
 	{
-		std::string answer = std::get<std::string>(m_answer);
 		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/multiple" },
-			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
+			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + m_answer + "&responseTime=" + std::to_string(responseTime) });
 	}
 	else if (m_type == QuestionType::NumericalAnswer)
 	{
-		std::string answer = std::get<std::string>(m_answer);
-		qDebug() << m_questionId;
 		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/numerical" },
-			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + (answer)+"&responseTime=" + std::to_string(responseTime) });
+			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + m_answer +"&responseTime=" + std::to_string(responseTime) });
 	}
 
 	if (res.status_code != 200)

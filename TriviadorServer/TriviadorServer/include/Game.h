@@ -13,14 +13,9 @@ using Participant = std::tuple<std::string, int, int>;
 class ParticipantCompare
 {
 public:
-	bool operator() (Participant participantA, Participant participantB) const
+	bool operator() (const Participant& firstParticipant, const Participant& secondParticipant) const
 	{
-		if (std::get<1>(participantA) == std::get<1>(participantB))
-		{
-			return std::get<2>(participantA) > std::get<2>(participantB);
-		} 
-
-		return std::get<1>(participantA) > std::get<1>(participantB);
+		return std::tie(std::get<1>(firstParticipant), std::get<2>(firstParticipant), std::get<0>(firstParticipant)) > std::tie(std::get<1>(secondParticipant), std::get<2>(secondParticipant), std::get<0>(secondParticipant));
 	}
 };
 
@@ -47,6 +42,8 @@ public:
 	// Getters:
 	Board GetBoard() const;
 	std::vector<Player> GetPlayers() const;
+	std::vector<Player>& GetPlayers();
+
 	uint16_t GetRounds() const;
 	int32_t GetGameID() const;
 	Player GetWinner();
