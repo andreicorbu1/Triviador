@@ -93,7 +93,7 @@ void Player::SetRank(const size_t& rank)
 
 void Player::AddScore(size_t score)
 {
-	this->m_score = score;
+	this->m_score += score;
 }
 
 Player& Player::operator=(const Player& other)

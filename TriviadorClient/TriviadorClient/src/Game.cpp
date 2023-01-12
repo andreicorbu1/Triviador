@@ -199,7 +199,7 @@ void Game::GameLoop()
 			ui.stageLabel->hide();
 			UpdateBoard();
 			waitingTime = 2000;
-			//UpdatePlayerScores();
+			UpdatePlayerScores();
 		}
 		else if (data["stage"] == "result")
 		{

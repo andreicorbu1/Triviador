@@ -53,6 +53,11 @@ std::vector<Player> Game::GetPlayers() const
 	return m_players;
 }
 
+std::vector<Player>& Game::GetPlayers()
+{
+	return m_players;
+}
+
 uint16_t Game::GetRounds() const
 {
 	return m_gameRounds;
