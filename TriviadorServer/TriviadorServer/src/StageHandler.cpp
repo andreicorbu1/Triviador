@@ -16,7 +16,7 @@ crow::response StageHandler::operator()(const crow::request& req) const
 		std::unordered_set<std::string> playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
 		
 		std::string currentStage = m_game.GetCurrentStage();
-		if (currentStage == "chooseBase")
+		if (currentStage == "chooseBase" || currentStage=="chooseTerritory")
 		{
 			if (username == m_game.GetPlayerWhoWillMakeAChoice())
 			{

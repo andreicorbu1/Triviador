@@ -124,4 +124,5 @@ private:
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 	std::vector<Player> m_duelParticipants;
 	std::priority_queue<Participant, std::vector<Participant>, ParticipantCompare> m_participantsQueue;
+	uint16_t m_choosedTerritoryCounter;
 };
