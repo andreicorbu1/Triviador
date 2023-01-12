@@ -39,7 +39,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	QTimer::singleShot(3000, this, SLOT(GameLoop()));
+	QTimer::singleShot(1000, this, SLOT(GameLoop()));
 	ui.stageLabel->hide();
 }
 
@@ -164,13 +164,13 @@ void Game::GameLoop()
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 14000;
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 14000;
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
 		else if (data["stage"] == "chooseBase")
@@ -255,7 +255,7 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
 		painter.setPen(Qt::black);
 		painter.drawRect(playerTable);
-		QString tableText = (m_players[i].GetName() + " " + std::to_string(m_players[i].GetScore())).c_str();
+		QString tableText = ((m_players[i].GetName() == m_currentPlayer.GetName() ? "You" : m_players[i].GetName()) + " " + std::to_string(m_players[i].GetScore())).c_str();
 		painter.setFont(QFont("Franklin Gothic Heavy", 20));
 		painter.setPen(color);
 		painter.drawText(playerTable, Qt::AlignCenter, tableText);
