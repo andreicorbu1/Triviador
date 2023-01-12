@@ -92,7 +92,7 @@ public:
 	void ClearPlayersWhoSentRequest();
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
 	bool AddTerritory(std::string username, int position, bool isBase);
-	void PopPlayerWhoWillMakeAChoose();
+	bool PopPlayerWhoWillMakeAChoose();
 
 private:
 	void Cleanup();
@@ -107,7 +107,7 @@ private:
 	uint16_t m_chooseTerritoryRoundsNumber;
 	uint16_t m_duelRoundsNumber;
 	static QuestionManager m_questionManager;
-
+	
 private:
 	Board m_board;
 	std::vector<Player> m_players;
@@ -124,5 +124,5 @@ private:
 	std::unordered_set<std::string> m_playersWhoSentRequest;
 	std::vector<Player> m_duelParticipants;
 	std::priority_queue<Participant, std::vector<Participant>, ParticipantCompare> m_participantsQueue;
-	uint16_t m_choosedTerritoryCounter;
+	uint16_t m_choosedTerritoryCounter=0;
 };
