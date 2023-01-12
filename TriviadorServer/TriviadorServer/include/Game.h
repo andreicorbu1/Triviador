@@ -42,6 +42,8 @@ public:
 	// Getters:
 	Board GetBoard() const;
 	std::vector<Player> GetPlayers() const;
+	std::vector<Player>& GetPlayers();
+
 	uint16_t GetRounds() const;
 	int32_t GetGameID() const;
 	Player GetWinner();
