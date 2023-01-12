@@ -49,7 +49,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 {
 	cpr::Response res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getmultiplequestion" },
+		cpr::Url{ "http://25.65.182.120:18080/getmultiplequestion" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
@@ -79,7 +79,7 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 {
 	cpr::Response res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getnumericalquestion" },
+		cpr::Url{ "http://25.65.182.120:18080/getnumericalquestion" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
@@ -366,14 +366,14 @@ void QuestionWindow::SendAnswer()
 	if (m_type == QuestionType::MultipleAnswer)
 	{
 		std::string answer = std::get<std::string>(m_answer);
-		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/multiple" },
+		res = cpr::Get(cpr::Url{ "http://25.65.182.120:18080/sendanswer/multiple" },
 			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
 	}
 	else if (m_type == QuestionType::NumericalAnswer)
 	{
 		std::string answer = std::get<std::string>(m_answer);
 		qDebug() << m_questionId;
-		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/numerical" },
+		res = cpr::Get(cpr::Url{ "http://25.65.182.120:18080/sendanswer/numerical" },
 			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + (answer)+"&responseTime=" + std::to_string(responseTime) });
 	}
 

@@ -35,6 +35,7 @@ int main()
 	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
 	crow::SimpleApp app;
+	app.bindaddr("25.65.182.120");
 
 	auto& addUserToAccountList = CROW_ROUTE(app, "/signup").methods(crow::HTTPMethod::PUT);
 	addUserToAccountList(AddAccountHandler(userList));
