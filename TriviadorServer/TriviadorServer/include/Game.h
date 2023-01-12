@@ -15,7 +15,7 @@ class ParticipantCompare
 public:
 	bool operator() (const Participant& firstParticipant, const Participant& secondParticipant) const
 	{
-		return std::tie(std::get<1>(firstParticipant), std::get<2>(firstParticipant)) > std::tie(std::get<1>(secondParticipant), std::get<2>(secondParticipant));
+		return std::tie(std::get<1>(firstParticipant), std::get<2>(firstParticipant), std::get<0>(firstParticipant)) > std::tie(std::get<1>(secondParticipant), std::get<2>(secondParticipant), std::get<0>(secondParticipant));
 	}
 };
 

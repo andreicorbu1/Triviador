@@ -198,8 +198,8 @@ void Game::GameLoop()
 		{
 			ui.stageLabel->hide();
 			UpdateBoard();
-			waitingTime = 2000;
 			UpdatePlayerScores();
+			waitingTime = 2000;
 		}
 		else if (data["stage"] == "result")
 		{
