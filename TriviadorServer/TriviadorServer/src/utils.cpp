@@ -56,10 +56,11 @@ void to_json(nlohmann::json& json, const Territory& territory)
 {
 	Player owner = territory.GetOwner().has_value() ? territory.GetOwner().value() : Player();
 	uint16_t score = territory.GetScore();
-
+	bool isBase = territory.GetIsBase();
 	json =
 	{
 		{"owner", owner},
-		{"score", score}
+		{"score", score},
+		{"base", isBase}
 	};
 }
