@@ -1,8 +1,9 @@
 #pragma once
 #include "Player.h"
-#include <iostream>
-#include <optional>
+
 #include <QPushButton>
+#include <QPainter>
+#include <QScreen>
 
 class Territory
 {

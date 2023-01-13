@@ -88,7 +88,7 @@ void Game::UpdateBoard()
 		auto board = crow::json::load(res.text);
 		for (int i = 0; i < m_board.Size(); i++)
 		{
-			Player player = Player(board[i]["owner"]["name"].s(), Player::GetColor(board[i]["owner"]["color"].s()));
+			Player player = Player(board[i]["owner"]["name"].s(), Player::ToColor(board[i]["owner"]["color"].s()));
 			int score = board[i]["score"].i();
 			
 			m_board[i].SetOwner(player);
@@ -251,7 +251,7 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 	painter.setBrush(QColor(83, 66, 50));
 	for (size_t i = 0; i < m_players.size(); i++)
 	{
-		QString color = m_players[i].GetColor().c_str();
+		QString color = Player::ToString(m_players[i].GetColor()).c_str();
 		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
 		painter.setPen(Qt::black);
 		painter.drawRect(playerTable);

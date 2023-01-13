@@ -7,7 +7,6 @@ Board::Board()
 	//, m_board(m_size, Territory())
 {
 	// empty
-
 }
 
 Board::Board(const std::size_t& height, const std::size_t& width, QWidget* parent)
@@ -31,17 +30,6 @@ Board::Board(Board&& other) noexcept
 
 Board::~Board() {
 	// empty
-}
-
-Territory Board::operator[](Position pos) const
-{
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width) {
-		throw std::out_of_range("Position is out of range!");
-	}
-
-	return m_board[line * m_width + column];
 }
 
 Territory Board::operator[](int pos) const
@@ -189,15 +177,4 @@ void Board::SetGeometry4PGame()
 	m_board[21].setGeometry(549, 633, 185, 147);
 	m_board[22].setGeometry(700, 633, 187, 152);
 	m_board[23].setGeometry(874, 593, 325, 179);
-}
-
-Territory& Board::operator[](Position pos)
-{
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width) {
-		throw std::out_of_range("Position is out of range!");
-	}
-
-	return m_board[line * m_width + column];
 }

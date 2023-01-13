@@ -37,7 +37,7 @@ QPushButton* Territory::getButton() const
 
 void Territory::Update()
 {
-    QString color = m_owner.GetColor().c_str();
+    QString color = Player::ToString(m_owner.GetColor()).c_str();
     if (color == "None")
         return;
 

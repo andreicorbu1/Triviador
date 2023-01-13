@@ -68,7 +68,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 		{
 			auto name = player["name"].s();
 			std::string color = player["color"].s();
-			Player player(name, Player::GetColor(color));
+			Player player(name, Player::ToColor(color));
 			players.push_back(player);
 		}
 		SetFlags(players);
@@ -92,7 +92,7 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 		{
 			auto name = player["name"].s();
 			std::string color = player["color"].s();
-			Player player(name, Player::GetColor(color));
+			Player player(name, Player::ToColor(color));
 			players.push_back(player);
 		}
 		SetFlags(players);
@@ -102,8 +102,8 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 
 void QuestionWindow::Show()
 {
-	this->show();
-	m_answer = "";
+	show();
+	m_playerAnswered = false;
 	StartTimer();
 }
 
@@ -192,15 +192,15 @@ void QuestionWindow::on_answerButton_clicked()
 	QPushButton* button = qobject_cast<QPushButton*>(sender());
 	button->setChecked(true);
 	setEnabled(false);
-	m_answer = button->text().toUtf8().constData();
-	SendAnswer();
+	m_playerAnswered = true;
+	SendAnswer(button->text().toUtf8().constData());
 }
 
 void QuestionWindow::on_submitButton_clicked()
 {
 	setEnabled(false);
-	m_answer = ui.answerInput->text().toUtf8().constData();
-	SendAnswer();
+	m_playerAnswered = true;
+	SendAnswer(ui.answerInput->text().toUtf8().constData());
 }
 
 void QuestionWindow::UpdateProgressBar()
@@ -268,11 +268,6 @@ void QuestionWindow::SetConnections()
 	}
 }
 
-void QuestionWindow::StopProgressBar()
-{
-	m_timer->stop();
-}
-
 void QuestionWindow::SetButtonsProperties(int i)
 {
 	ui_answers[i]->setCheckable(true);
@@ -285,7 +280,7 @@ void QuestionWindow::SetFlags(std::vector<Player>& players)
 	QString baseStyle = "color: #ffffff;\npadding: 15px;\nbackground-repeat: no-repeat;\nbackground-position: center;\n";
 	for (int i = 0; i < players.size(); i++)
 	{
-		QString color = players[i].GetColor().c_str();
+		QString color = Player::ToString(players[i].GetColor()).c_str();
 		ui_flags[i]->setText(QString::fromUtf8(players[i].GetName()));
 		ui_flags[i]->setStyleSheet(baseStyle + "background-image: url(:/Flags/question/" + color + "Flag.svg);");
 		ui_flags[i]->show();
@@ -335,7 +330,7 @@ void QuestionWindow::ResetButtons()
 void QuestionWindow::ShowResults() {
 	QTimer::singleShot(3000, this, SLOT(close()));
 	
-	if (m_answer == "") {
+	if (!m_playerAnswered) {
 		SendAnswer();
 	}
 
@@ -360,27 +355,19 @@ void QuestionWindow::ShowResults() {
 	}
 }
 
-void QuestionWindow::SendAnswer()
+void QuestionWindow::SendAnswer(std::string answer)
 {
-	cpr::Response res;
 	auto responseTime = static_cast<int>(m_resultTimer.elapsed());
 	std::string username = m_currentPlayer.GetName();
+	std::string type = m_type == QuestionType::MultipleAnswer ? "multiple" : "numerical";
 	
-	if (m_answer == "")
+	if (m_type == QuestionType::NumericalAnswer && answer == "")
 	{
-		m_answer = "0";
+		answer = "0";
 	}
 
-	if (m_type == QuestionType::MultipleAnswer)
-	{
-		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/multiple" },
-			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + m_answer + "&responseTime=" + std::to_string(responseTime) });
-	}
-	else if (m_type == QuestionType::NumericalAnswer)
-	{
-		res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/numerical" },
-			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + m_answer +"&responseTime=" + std::to_string(responseTime) });
-	}
+	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/" + type },
+			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
 
 	if (res.status_code != 200)
 	{

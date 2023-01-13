@@ -422,33 +422,6 @@ void Game::Cleanup()
 	m_numericalAnswerQuestions.clear();
 }
 
-void Game::ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players)
-{
-	for (const auto& player : players)
-	{
-		m_board[player.second] = Territory(player.first, true);
-	}
-	GoToNextStage();
-}
-
-void Game::ChooseTerritories(const std::vector<std::pair<Player, std::vector<std::pair<int, int>>>>& playersOrder)
-{
-	for (size_t idx = 0; idx < playersOrder.size(); ++idx)
-	{
-		for (size_t idx2 = 0; idx < playersOrder[idx].second.size() && (m_players.size() - idx - 1) == playersOrder[idx].second.size(); ++idx2)
-		{
-			if (m_board[playersOrder[idx].second[idx2]].GetOwner().has_value())
-			{
-				throw std::invalid_argument("Territory already ocuppied");
-			}
-			else
-			{
-				m_board[playersOrder[idx].second[idx2]] = Territory(playersOrder[idx].first);
-			}
-		}
-	}
-}
-
 void Game::AddPlayerWhoSentRequest(const std::string& playersName)
 {
 	m_playersWhoSentRequest.insert(playersName);
