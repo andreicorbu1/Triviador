@@ -7,7 +7,7 @@ User::User(const std::string& username, const std::string& password) :
 	m_level = 0;
 	m_gamesPlayed = 0;
 	m_points = 0;
-	m_ID = -1;
+	m_id = -1;
 }
 
 User::User(User&& user) noexcept
@@ -36,29 +36,19 @@ void User::SetGamesPlayed(int gamesPlayed)
 	m_gamesPlayed = gamesPlayed;
 }
 
-void User::SetID(int ID)
+void User::SetPoints(int points)
 {
-	m_ID = ID;
+	m_points = points;
+}
+
+void User::SetId(int id)
+{
+	m_id = id;
 }
 
 void User::AddPoints(int points)
 {
 	m_points += points;
-}
-
-User& User::operator=(User&& user) noexcept
-{
-	if (this != &user)
-	{
-		
-		m_username = std::exchange(user.m_username, std::string());
-		m_password = std::exchange(user.m_password, std::string());
-		m_level = std::exchange(user.m_level, 0);
-		m_gamesPlayed = std::exchange(user.m_gamesPlayed, 0);
-		m_points = std::exchange(user.m_points, 0);
-		m_ID = std::exchange(user.m_ID, 0);
-	}
-	return *this;
 }
 
 void User::UpdateLevel(int matchPoints)
@@ -68,12 +58,12 @@ void User::UpdateLevel(int matchPoints)
 	m_points = m_points % 1000;
 }
 
-const std::string User::GetUsername() const
+const std::string& User::GetUsername() const
 {
 	return m_username;
 }
 
-const std::string User::GetPassword() const
+const std::string& User::GetPassword() const
 {
 	return m_password;
 }
@@ -93,17 +83,22 @@ int User::GetPoints() const
 	return m_points;
 }
 
-int User::GetID() const
+int User::GetId() const
 {
-	return m_ID;
+	return m_id;
 }
 
-std::ostream& operator<<(std::ostream& os, const User& user)
+User& User::operator=(User&& user) noexcept
 {
-	os << "Username: " << user.m_username << std::endl;
-	os << "Password: " << user.m_password << std::endl;
-	os << "Games played: " << user.m_gamesPlayed << std::endl;
-	os << "Level: " << user.m_level << std::endl;
+	if (this != &user)
+	{
 
-	return os;
+		m_username = std::exchange(user.m_username, std::string());
+		m_password = std::exchange(user.m_password, std::string());
+		m_level = std::exchange(user.m_level, 0);
+		m_gamesPlayed = std::exchange(user.m_gamesPlayed, 0);
+		m_points = std::exchange(user.m_points, 0);
+		m_id = std::exchange(user.m_id, 0);
+	}
+	return *this;
 }

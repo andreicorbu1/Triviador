@@ -18,7 +18,7 @@ void AccountManager::AddUser(User& user)
 	if (ValidateCredentials(user))
 	{
 		auto id = m_database.insert(user);
-		user.SetID(id);
+		user.SetId(id);
 		m_accounts[user.GetUsername()] = user;
 	}
 }
@@ -27,7 +27,7 @@ void AccountManager::DeleteUser(const std::string& username)
 {
 	if (SearchUser(username))
 	{
-		m_database.remove<User>(m_accounts[username].m_ID);
+		m_database.remove<User>(m_accounts[username].GetId());
 		m_accounts.erase(username);
 	}
 }
@@ -63,13 +63,4 @@ bool AccountManager::ValidateCredentials(const User& user) const
 		return SearchUser(user.GetUsername()) == false;
 	}
 	return false;
-}
-
-std::ostream& operator<<(std::ostream& os, const AccountManager& manager)
-{
-	for (const auto& it : manager.m_accounts)
-	{
-		os << it.second << "\n";
-	}
-	return os;
 }

@@ -130,7 +130,7 @@ void QuestionWindow::on_hammerButton_clicked()
 	std::iota(indexes.begin(), indexes.end(), 0);
 	std::random_device rd;
 	std::mt19937 g(rd());
-	std::ranges::shuffle(indexes.begin(), indexes.end(), g);
+	std::ranges::shuffle(indexes, g);
 
 	int removed = 0;
 	for (int i = 0; removed < 2; i++)
