@@ -341,7 +341,7 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 			{
 				m_choosedTerritoryCounter++;
 			}
-			m_board[position] = isBase == true ? Territory(*player, isBase) : Territory(*player);
+			m_board[position] = Territory(*player, isBase);
 			return true;
 		}
 	}

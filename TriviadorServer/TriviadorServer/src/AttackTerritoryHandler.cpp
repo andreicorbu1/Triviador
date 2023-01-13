@@ -26,7 +26,7 @@ crow::response AttackTerritoryHanndler::operator()(const crow::request& req) con
 		Territory attackedTerritory = m_game.GetBoard()[position];
 		if (auto defender = attackedTerritory.GetOwner(); defender.has_value())
 		{
-			try 
+			try
 			{
 				m_game.AddPlayerToDuel(attacker);
 				m_game.AddPlayerToDuel(defender.value());

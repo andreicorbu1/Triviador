@@ -2,20 +2,15 @@
 
 Territory::Territory()
 	: m_score(kTerritoryScore)
-{
-	// empty
-}
-
-Territory::Territory(const Player& owner)
-	: m_owner(owner)
-	, m_score(kTerritoryScore)
+	, m_isBase(false)
 {
 	// empty
 }
 
 Territory::Territory(const Player& owner, const bool& isBase)
 	: m_owner(owner)
-	, m_score(kBaseScore)
+	, m_score(isBase == true ? kBaseScore : kTerritoryScore)
+	, m_isBase(isBase)
 {
 	// empty
 }
@@ -56,6 +51,7 @@ Territory& Territory::operator=(const Territory& territory)
 	{
 		m_owner = territory.m_owner;
 		m_score = territory.m_score;
+		m_isBase = territory.m_isBase;
 	}
 	return *this;
 }
@@ -66,6 +62,7 @@ Territory& Territory::operator=(Territory&& territory) noexcept
 	{
 		m_owner = std::exchange(territory.m_owner, {});
 		m_score = std::exchange(territory.m_score, 0);
+		m_isBase = std::exchange(territory.m_isBase, false);
 	}
 	return *this;
 }
