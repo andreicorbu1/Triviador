@@ -41,6 +41,11 @@ QPushButton* Territory::getButton() const
     return m_button;
 }
 
+std::string Territory::GetPayerName() const
+{
+    return m_owner.GetName();
+}
+
 void Territory::Update()
 {
     QString color = m_owner.GetColor().c_str();

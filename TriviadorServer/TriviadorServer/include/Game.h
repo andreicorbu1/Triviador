@@ -72,7 +72,6 @@ public:
 	void SetGameID(const int32_t& gameID);
 	void SetQuestions(const uint16_t& numberOfPlayers);
 	void GoToNextStage();
-	void AddNullPlayer();
 
 
 	//Operators:

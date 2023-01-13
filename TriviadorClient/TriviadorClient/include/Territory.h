@@ -26,6 +26,7 @@ public:
     
 	// Getters:
     QPushButton* getButton() const;
+    std::string GetPayerName() const;
     
     // Methods:
     void Update();

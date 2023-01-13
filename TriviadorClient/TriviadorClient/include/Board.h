@@ -34,6 +34,7 @@ public:
     void Set3PGame();
     void Set4PGame();
     int Size();
+    bool CheckIfIsNeighbour(int position, const std::string& playerName);
 
 private:
     void SetMasks(int playersNumber);

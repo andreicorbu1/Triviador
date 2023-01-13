@@ -250,6 +250,10 @@ void Game::action(int position)
 		{
 			isBase = "1";
 		}
+		if (data["stage"] == "chooseTerritory" && !m_board.CheckIfIsNeighbour(position, m_currentPlayer.GetName()))
+		{
+			return;
+		}
 		auto res = cpr::Put
 		(
 			cpr::Url{ "http://localhost:18080/choose" },

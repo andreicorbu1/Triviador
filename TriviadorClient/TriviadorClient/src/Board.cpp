@@ -13,7 +13,7 @@ Board::Board()
 Board::Board(const std::size_t& height, const std::size_t& width, QWidget* parent)
 	: m_height(height)
 	, m_width(width)
-	, m_size(m_width * m_height)
+	, m_size(m_width* m_height)
 	, m_board(m_size, Territory(parent))
 {
 	// empty
@@ -109,7 +109,7 @@ void Board::SetMasks(int playersNumber)
 	{
 	case 2:
 		imageLocation += QString::number(2);
-		break; 
+		break;
 	case 3:
 		imageLocation += QString::number(3);
 		break;
@@ -189,6 +189,29 @@ void Board::SetGeometry4PGame()
 	m_board[21].setGeometry(549, 633, 185, 147);
 	m_board[22].setGeometry(700, 633, 187, 152);
 	m_board[23].setGeometry(874, 593, 325, 179);
+}
+
+bool Board::CheckIfIsNeighbour(int position, const std::string& playerName)
+{
+	int positioni = position / m_width;
+	int positionj = position % m_width;
+
+	for (int x = -1; x <= 1; x++)
+	{
+		for (int y = -1; y <= 1; y++)
+		{
+			if (x == 0 && y == 0)
+				continue;
+			int i = positioni + x;
+			int j = positionj + y;
+			if (i < 0 || j < 0 || i > m_height || j > m_width)
+				continue;
+			if (m_board[i * m_width + j].GetPayerName() == playerName)
+				return true;
+
+		}
+	}
+	return false;
 }
 
 Territory& Board::operator[](Position pos)
