@@ -109,7 +109,7 @@ void QuestionWindow::Show()
 
 void QuestionWindow::StartTimer()
 {
-	ui.timeProgressBar->setValue(100);
+	ui.timeProgressBar->setValue(50);
 	m_timer->start(100);
 	m_resultTimer.start();
 }

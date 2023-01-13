@@ -158,19 +158,21 @@ void Game::GameLoop()
 		data = crow::json::load(res.text);
 		if (data["stage"] == "wait")
 		{
-			ui.stageLabel->hide();
+			ui.stageLabel->setText("Wait for enemy next move");
+			ui.stageLabel->show();
+			//ui.stageLabel->hide();
 			waitingTime = 2000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 16000;
+			waitingTime = 10000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 16000;
+			waitingTime = 7000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
 		else if (data["stage"] == "chooseBase")
@@ -190,7 +192,9 @@ void Game::GameLoop()
 
 		else if (data["stage"] == "attack")
 		{
-			ui.stageLabel->hide();
+			//ui.stageLabel->hide();
+			ui.stageLabel->setText("Attack someone");
+			ui.stageLabel->show();
 			waitingTime = 2000;
 			// attack
 		}
@@ -240,6 +244,14 @@ void Game::action(int position)
 		(
 			cpr::Url{ "http://localhost:18080/choose" },
 			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) + "&isBase=" + isBase }
+		);
+	}
+	else if (data["stage"] == "attack")
+	{
+		auto res = cpr::Get
+		(
+			cpr::Url{ "http://localhost:18080/attack" },
+			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) }
 		);
 	}
 }

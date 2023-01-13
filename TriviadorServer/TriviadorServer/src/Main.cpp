@@ -18,6 +18,7 @@
 #include "PlayerHistoryHandler.h"
 #include "AddToPlayerHistoryHandler.h"
 #include "ChooseHandler.h"
+#include "AttackTerritoryHandler.h"
 
 int main()
 {
@@ -89,6 +90,9 @@ int main()
 
 	auto& chooseBase = CROW_ROUTE(app, "/choose").methods(crow::HTTPMethod::PUT);
 	chooseBase(ChooseHandler(currentGame));
+
+	auto& attack = CROW_ROUTE(app, "/attack");
+	attack(AttackTerritoryHanndler(currentGame));
 
 	app.port(18080).multithreaded().run();
 	return 0;

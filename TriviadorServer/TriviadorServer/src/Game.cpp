@@ -232,9 +232,30 @@ std::string Game::GetPlayerWhoWillMakeAChoice() const
 	return participantName;
 }
 
+const Player& Game::GetCurrentAttacker()
+{
+	if (m_duelOrderIndex == -1)
+	{
+		m_duelOrderIndex = m_duelOrder.size()-1;
+		std::random_device rd;
+		std::ranges::shuffle(m_duelOrder, rd);
+	}
+	return m_duelOrder[m_duelOrderIndex];
+}
+
+uint16_t Game::GetParticipantsQueueSize() const
+{
+	return m_participantsQueue.size();
+}
+
 void Game::IncrementNumericalAnswerQuestionIndex()
 {
 	numericQuestionIndex++;
+}
+
+void Game::IncrementMultipleAnswerQuestionIndex()
+{
+	multipleQuestionIndex++;
 }
 
 void Game::SetBoard(const Board& board)
@@ -327,6 +348,11 @@ void Game::AddNullPlayer()
 	m_players.push_back(Player("", Player::Color::None));
 }
 
+void Game::SetAttackedPosition(uint16_t position)
+{
+	m_attackedPosition = position;
+}
+
 bool Game::AddTerritory(std::string username, int position, bool isBase)
 {
 	auto player = std::ranges::find_if(m_players, [&username](const Player& player)
@@ -375,6 +401,36 @@ bool Game::PopPlayerWhoWillMakeAChoose()
 	return false;
 }
 
+void Game::DetermineDuelSituation()
+{
+	if (m_participantsQueue.size() == 2)
+	{
+		Participant participant1 = m_participantsQueue.top();
+		m_participantsQueue.pop();
+		Participant participant2 = m_participantsQueue.top();
+		m_participantsQueue.pop();
+
+		if (std::get<1>(participant1) == 1 && std::get<0>(participant1) == m_duelParticipants[0].GetName())
+		{
+			if (m_board[m_attackedPosition].GetScore() == 100)
+			{
+				m_board[m_attackedPosition].SetOwner(m_duelParticipants[0]);
+			}
+			else
+			{
+				m_board[m_attackedPosition].SetScore(m_board[m_attackedPosition].GetScore() - 100);
+			}
+			m_duelOrderIndex--;
+			//GoToNextStage();
+			//GoToNextStage();
+		}
+		m_duelParticipants.clear();
+		GoToNextStage();
+		GoToNextStage();
+	}
+	//else if egal
+}
+
 Game& Game::operator=(const Game& other)
 {
 	if (this != &other)
@@ -395,6 +451,8 @@ Game& Game::operator=(const Game& other)
 		m_duelParticipants = other.m_duelParticipants;
 		m_playersWhoSentRequest = other.m_playersWhoSentRequest;
 		m_choosedTerritoryCounter = other.m_choosedTerritoryCounter;
+		m_duelOrder = other.m_duelOrder;
+		m_duelOrderIndex = other.m_duelOrderIndex;
 	}
 	return *this;
 }
@@ -479,6 +537,10 @@ void Game::SetStagesForDuel()
 		m_stages.push_back(Stage::NumericalAnswerQuestion);
 		m_stages.push_back(Stage::Update);
 	}
+	m_duelOrder = m_players;
+	std::random_device rd;
+	std::ranges::shuffle(m_duelOrder, rd);
+	m_duelOrderIndex = m_duelOrder.size()-1;
 }
 
 void Game::ClearPlayersWhoSentRequest()
