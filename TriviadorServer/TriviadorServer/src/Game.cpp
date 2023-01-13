@@ -322,11 +322,6 @@ void Game::GoToNextStage()
 	m_currentStage = m_stages[++m_currentStageIndex];
 }
 
-void Game::AddNullPlayer()
-{
-	m_players.push_back(Player("", Player::Color::None));
-}
-
 bool Game::AddTerritory(std::string username, int position, bool isBase)
 {
 	auto player = std::ranges::find_if(m_players, [&username](const Player& player)
@@ -337,11 +332,12 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 	{
 		if (!m_board[position].GetOwner().has_value())
 		{
+			m_board[position].SetOwner(*player);
+			m_board[position].SetIsBase(isBase);
 			if (isBase == false)
 			{
 				m_choosedTerritoryCounter++;
 			}
-			m_board[position] = isBase == true ? Territory(*player, isBase) : Territory(*player);
 			return true;
 		}
 	}

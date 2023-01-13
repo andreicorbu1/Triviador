@@ -18,10 +18,12 @@ public:
 	//Getters:
 	std::optional<Player> GetOwner() const;
 	uint16_t GetScore() const;
+	bool GetIsBase() const;
 
 	//Setters:
 	void SetOwner(const std::optional<Player>& owner);
 	void SetScore(const uint16_t& score);
+	void SetIsBase(bool isbase);
 
 	// Operators:
 	Territory& operator=(const Territory& territory);

@@ -30,6 +30,12 @@ void Territory::SetScore(const int& score)
     m_score = score;
 }
 
+void Territory::SetIcon(QPixmap& icon)
+{
+    m_button->setIcon(icon);
+    m_button->setIconSize(QSize(50, 50));
+}
+
 QPushButton* Territory::getButton() const
 {
     return m_button;

@@ -17,6 +17,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
+	GetBaseIcon();
 	m_signalMapper = new QSignalMapper(this);
 	m_questionWindow.SetCurrentPlayer(m_currentPlayer);
 
@@ -75,6 +76,14 @@ void Game::ConnectButtons()
 	}
 }
 
+void Game::GetBaseIcon()
+{
+	if (!m_baseIcon.load("../TriviadorClient/resource/Base-castle.png"))
+	{
+		throw "The base icon couldn't load!";
+	}
+}
+
 void Game::UpdateBoard()
 {
 	auto res = cpr::Get
@@ -90,9 +99,12 @@ void Game::UpdateBoard()
 		{
 			Player player = Player(board[i]["owner"]["name"].s(), Player::GetColor(board[i]["owner"]["color"].s()));
 			int score = board[i]["score"].i();
+			bool isbase = board[i]["isbase"].b();
 			
 			m_board[i].SetOwner(player);
 			m_board[i].SetScore(score);
+			if (isbase)
+				m_board[i].SetIcon(m_baseIcon);
 			m_board[i].Update();
 		}
 	}
@@ -158,7 +170,8 @@ void Game::GameLoop()
 		data = crow::json::load(res.text);
 		if (data["stage"] == "wait")
 		{
-			ui.stageLabel->hide();
+			ui.stageLabel->show();
+			ui.stageLabel->setText("Wait for enemy move!");
 			waitingTime = 2000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
@@ -190,7 +203,8 @@ void Game::GameLoop()
 
 		else if (data["stage"] == "attack")
 		{
-			ui.stageLabel->hide();
+			ui.stageLabel->show();
+			ui.stageLabel->setText("Attack a enemy territory!");
 			waitingTime = 2000;
 			// attack
 		}
