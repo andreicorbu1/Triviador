@@ -135,6 +135,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS /D _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
