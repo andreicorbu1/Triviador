@@ -75,7 +75,7 @@ void MainMenu::on_joinLobbyButton_clicked()
 	std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://localhost:18080/addplayertolobby" },
+		cpr::Url{ "http://localhost:18080/lobby/addplayer" },
 		cpr::Body{ "id=" + lobbyId + "&" + "username=" + m_user.GetUsername() }
 	);
 

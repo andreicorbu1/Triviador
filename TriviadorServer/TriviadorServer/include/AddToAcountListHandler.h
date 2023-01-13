@@ -1,6 +1,9 @@
 #pragma once
 #include <crow.h>
+
+#include "utils.h"
 #include "AccountsManager.h"
+
 struct AddAccountHandler
 {
 public:

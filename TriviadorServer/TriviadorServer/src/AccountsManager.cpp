@@ -18,58 +18,41 @@ void AccountManager::AddUser(User& user)
 	if (ValidateCredentials(user))
 	{
 		auto id = m_database.insert(user);
-		user.SetID(id);
+		user.SetId(id);
 		m_accounts[user.GetUsername()] = user;
 	}
 }
 
 void AccountManager::DeleteUser(const std::string& username)
 {
-	if (SearchUser(username))
-	{
-		m_database.remove<User>(m_accounts[username].m_ID);
-		m_accounts.erase(username);
-	}
+	if (!SearchUser(username))
+		return;
+	
+	m_database.remove<User>(m_accounts[username].m_id);
+	m_accounts.erase(username);
 }
 
 bool AccountManager::SearchUser(const std::string& username) const
 {
-	// True if successful, false otherwise
 	return m_accounts.contains(username);
 }
 
 User AccountManager::GetUser(const std::string& username) const
 {
-	if (SearchUser(username))
-	{
-		return m_accounts.at(username);
-	}
-	return {};
+	return (SearchUser(username) ? m_accounts.at(username) : User());
 }
 
 void AccountManager::UpdateUser(const std::string& username, int matchPoints)
 {
-	if (SearchUser(username) == true)
-	{
-		m_accounts[username].UpdateLevel(matchPoints);
-		m_database.update(m_accounts[username]);
-	}
+	if (!SearchUser(username))
+		return;
+	
+	m_accounts[username].UpdateLevel(matchPoints);
+	m_database.update(m_accounts[username]);
 }
 
 bool AccountManager::ValidateCredentials(const User& user) const
 {
-	if (std::regex_match(user.GetPassword(), std::regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$")))
-	{
-		return SearchUser(user.GetUsername()) == false;
-	}
-	return false;
-}
-
-std::ostream& operator<<(std::ostream& os, const AccountManager& manager)
-{
-	for (const auto& it : manager.m_accounts)
-	{
-		os << it.second << "\n";
-	}
-	return os;
+	std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$");
+	return std::regex_match(user.GetPassword(), passwordRegex) && !SearchUser(user.GetUsername());
 }

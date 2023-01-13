@@ -49,7 +49,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 {
 	cpr::Response res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getmultiplequestion" },
+		cpr::Url{ "http://localhost:18080/question/multiple" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
@@ -79,7 +79,7 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 {
 	cpr::Response res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getnumericalquestion" },
+		cpr::Url{ "http://localhost:18080/question/numerical" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
@@ -209,6 +209,12 @@ void QuestionWindow::UpdateProgressBar()
 	{
 		m_timer->stop();
 		ShowResults();
+
+		if (!m_playerAnswered)
+		{
+			SendAnswer();
+		}
+		
 		return;
 	}
 
@@ -329,10 +335,6 @@ void QuestionWindow::ResetButtons()
 
 void QuestionWindow::ShowResults() {
 	QTimer::singleShot(3000, this, SLOT(close()));
-	
-	if (!m_playerAnswered) {
-		SendAnswer();
-	}
 
 	if (m_type == QuestionType::MultipleAnswer)
 	{
@@ -361,9 +363,16 @@ void QuestionWindow::SendAnswer(std::string answer)
 	std::string username = m_currentPlayer.GetName();
 	std::string type = m_type == QuestionType::MultipleAnswer ? "multiple" : "numerical";
 	
-	if (m_type == QuestionType::NumericalAnswer && answer == "")
+	if (!m_playerAnswered)
 	{
-		answer = "0";
+		if (m_type == QuestionType::MultipleAnswer)
+		{
+			answer = "";
+		}
+		else if (m_type == QuestionType::NumericalAnswer)
+		{
+			answer = "0";
+		}
 	}
 
 	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/" + type },

@@ -2,6 +2,7 @@
 #include "Game.h"
 #include <crow.h>
 #include "utils.h"
+
 struct AttackTerritoryHanndler
 {
 public:

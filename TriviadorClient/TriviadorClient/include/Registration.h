@@ -1,11 +1,12 @@
 #pragma once
+#include "ui_Registration.h"
 
 #include <QWidget>
-#include <regex>
-#include <cpr/cpr.h>
 
-#include "ui_Registration.h"
 #include "MainMenu.h"
+
+#include <cpr/cpr.h>
+#include <regex>
 
 class Registration : public QWidget
 {

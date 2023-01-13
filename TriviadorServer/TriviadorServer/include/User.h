@@ -16,7 +16,7 @@ public:
 	void SetPassword(const std::string& password);
 	void SetLevel(int level);
 	void SetGamesPlayed(int gamesPlayed);
-	void SetID(int ID);
+	void SetId(int id);
 
 	//Getters:
 	const std::string GetUsername() const;
@@ -24,7 +24,7 @@ public:
 	int GetLevel() const;
 	int GetGamesPlayed() const;
 	int GetPoints() const;
-	int GetID() const;
+	int GetId() const;
 
 	//Operators:
 	User& operator=(const User& user) = default;
@@ -41,11 +41,11 @@ private:
 	void AddPoints(int points);
 
 private:
+	int m_id;
 	std::string m_username;
 	std::string m_password;
 	int m_level;
 	int m_gamesPlayed;
 	int m_points;
-	int m_ID;
 };
 

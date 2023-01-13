@@ -1,11 +1,12 @@
 #pragma once
-
-#include <QWidget>
-#include <QPainter>
 #include "ui_ResultWindow.h"
 
-#include <algorithm>
+#include <QPainter>
+#include <QWidget>
+
 #include "Player.h"
+
+#include <algorithm>
 
 class ResultWindow : public QWidget
 {

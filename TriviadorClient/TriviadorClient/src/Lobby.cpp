@@ -27,7 +27,7 @@ void Lobby::on_leaveLobbyButton_clicked()
 {
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/removeplayerfromlobby" },
+		cpr::Url{ "http://localhost:18080/lobby/removeplayer" },
 		cpr::Body{ "id=" + m_lobbyID + "&" + "username=" + m_currentPlayer.GetName() }
 	);
 	emit finished();
@@ -37,7 +37,7 @@ void Lobby::on_startGameButton_clicked()
 {
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://localhost:18080/newgame" }
+		cpr::Url{ "http://localhost:18080/lobby/creategame" }
 	);
 }
 
@@ -55,7 +55,7 @@ void Lobby::LobbyLoop()
 	QPainter painter(this);
 	auto playersFromLobby = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getplayersfromlobby" },
+		cpr::Url{ "http://localhost:18080/lobby/players" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
 	HideAllPlayersName();
@@ -80,7 +80,7 @@ void Lobby::LobbyLoop()
 
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/waitinginlobby" },
+		cpr::Url{ "http://localhost:18080/lobby/waiting" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
 

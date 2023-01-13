@@ -1,9 +1,9 @@
 #pragma once
-#include "Player.h"
-
-#include <QPushButton>
 #include <QPainter>
+#include <QPushButton>
 #include <QScreen>
+
+#include "Player.h"
 
 class Territory
 {
@@ -14,13 +14,9 @@ public:
     Territory(Territory&& territory) noexcept;
     ~Territory();
 
-    // Operators:
-    Territory& operator=(const Territory& territory);
-    Territory& operator=(Territory&& territory) noexcept;
-
     // Setters:
-    void setGeometry(int x, int y, int width, int height);
-    void setMask(const QPixmap& mask);
+    void SetGeometry(int x, int y, int width, int height);
+    void SetMask(const QPixmap& mask);
 	void SetOwner(const Player& player);
 	void SetScore(const int& score);
     
@@ -29,6 +25,10 @@ public:
     
     // Methods:
     void Update();
+
+    // Operators:
+    Territory& operator=(const Territory& territory);
+    Territory& operator=(Territory&& territory) noexcept;
 
 private:
     const uint16_t kBaseScore = 300;

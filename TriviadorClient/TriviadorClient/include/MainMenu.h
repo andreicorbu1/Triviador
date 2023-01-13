@@ -1,11 +1,12 @@
 #pragma once
-
-#include <QWidget>
 #include "ui_MainMenu.h"
-#include "Game.h"
-#include "Registration.h"
+
 #include <QMessageBox>
+#include <QWidget>
+
+#include "Game.h"
 #include "Lobby.h"
+#include "Registration.h"
 #include "User.h"
 
 class MainMenu : public QWidget

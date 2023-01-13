@@ -108,9 +108,27 @@ const std::chrono::system_clock::time_point& Lobby::GetExpirationTime() const
 	return m_expirationTime;
 }
 
-bool Lobby::GetIsActiveGame() const
+bool Lobby::IsActiveGame() const
 {
 	return m_isActiveGame;
+}
+
+bool Lobby::IsInLobby(const std::string& username) const
+{
+	auto it = std::find_if(m_players.begin(), m_players.end(), [&username](const Player& player)
+		{
+			return player.GetName() == username;
+		});
+	if (it != m_players.end())
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Lobby::HadExpired() const
+{
+	return std::chrono::system_clock::now() > m_expirationTime;
 }
 
 void Lobby::SetIsActiveGame(bool activeGame)

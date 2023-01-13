@@ -1,22 +1,22 @@
 #pragma once
-#include <QWidget>
-#include <QTimer>
-#include <QElapsedTimer>
-#include <QRandomGenerator>
-#include <QDoubleValidator>
-#include <QEventLoop>
-#include <QButtonGroup>
-#include <QGraphicsDropShadowEffect>
 #include "ui_QuestionWindow.h"
 
-#include <variant>
-#include <string>
-#include <algorithm>
-#include <unordered_set>
-#include <cpr/cpr.h>
-#include <crow.h>
+#include <QDoubleValidator>
+#include <QElapsedTimer>
+#include <QEventLoop>
+#include <QGraphicsDropShadowEffect>
+#include <QRandomGenerator>
+#include <QTimer>
+#include <QWidget>
 
 #include "Player.h"
+
+#include <algorithm>
+#include <cpr/cpr.h>
+#include <crow.h>
+#include <string>
+#include <unordered_set>
+#include <variant>
 
 enum class QuestionType
 {
@@ -51,8 +51,8 @@ private slots:
 	void on_hammerButton_clicked();
 	void on_telescopeButton_clicked();
 	void on_parrotButton_clicked();
+	// multiple
 	void on_answerButton_clicked();
-
 	// numerical
 	void on_submitButton_clicked();
 
