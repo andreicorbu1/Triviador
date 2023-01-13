@@ -74,6 +74,10 @@
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -129,6 +133,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,7 +172,6 @@
     <ClCompile Include="src\PlayerHistoryHandler.cpp" />
     <ClCompile Include="src\StageHandler.cpp" />
     <ClCompile Include="src\Territory.cpp" />
-    <ClCompile Include="src\User.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\WaitingInLobbyHandler.cpp" />
   </ItemGroup>
@@ -198,7 +203,6 @@
     <ClInclude Include="include\PlayerHistoryHandler.h" />
     <ClInclude Include="include\StageHandler.h" />
     <ClInclude Include="include\Territory.h" />
-    <ClInclude Include="include\User.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\QuestionManager.h" />
     <ClInclude Include="include\WaitingInLobbyHandler.h" />
@@ -210,6 +214,11 @@
   <ItemGroup>
     <None Include="resource\Accounts.sqlite" />
     <None Include="resource\Questions.sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DLL\TriviadorCommon.vcxproj">
+      <Project>{fc36d2cf-31f0-45c8-ac72-669dcdb4e97d}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
