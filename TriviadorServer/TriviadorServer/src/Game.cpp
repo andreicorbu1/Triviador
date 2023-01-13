@@ -329,19 +329,19 @@ void Game::AddNullPlayer()
 
 bool Game::AddTerritory(std::string username, int position, bool isBase)
 {
-	auto player = std::ranges::find_if(m_players, [&username](const Player& player)
+	auto player = std::ranges::find_if(m_players, [&username](const Player& searched)
 		{
-			return player.GetName() == username;
+			return searched.GetName() == username;
 		});
 	if (player != m_players.end())
 	{
-		if (!m_board[position].GetOwner().has_value())
+		if (!m_board[position]->GetOwner().has_value())
 		{
 			if (isBase == false)
 			{
 				m_choosedTerritoryCounter++;
 			}
-			m_board[position] = isBase == true ? Territory(*player, isBase) : Territory(*player);
+			m_board[position] = std::make_shared<Territory>(*player, isBase);
 			return true;
 		}
 	}

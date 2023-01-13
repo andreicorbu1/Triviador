@@ -23,7 +23,7 @@ crow::response AttackTerritoryHanndler::operator()(const crow::request& req) con
 			}
 		}
 		size_t position = std::stoi(territoryAttacked->second);
-		Territory attackedTerritory = m_game.GetBoard()[position];
+		Territory attackedTerritory = *m_game.GetBoard()[position];
 		if (auto defender = attackedTerritory.GetOwner(); defender.has_value())
 		{
 			try 

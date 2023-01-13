@@ -3,7 +3,7 @@
 Board::Board(const std::size_t& width, const std::size_t& height)
 	: m_width(width)
 	, m_height(height)
-	, m_board(width * height, Territory())
+	, m_board(width * height, std::make_shared<Territory>())
 {
 	// empty
 }
@@ -18,7 +18,7 @@ Board::Board(Board&& other) noexcept
 	*this = std::move(other);
 }
 
-Territory Board::operator[](size_t pos) const
+const std::shared_ptr<Territory>& Board::operator[](size_t pos) const
 {
 	if (pos >= m_board.size())
 	{
@@ -27,7 +27,12 @@ Territory Board::operator[](size_t pos) const
 	return m_board[pos];
 }
 
-std::vector<Territory> Board::GetTerritories() const
+std::vector<std::shared_ptr<Territory>> Board::GetTerritories() const
+{
+	return m_board;
+}
+
+std::vector<std::shared_ptr<Territory>>& Board::GetTerritories()
 {
 	return m_board;
 }
@@ -42,7 +47,7 @@ size_t Board::GetHeight() const
 	return m_height;
 }
 
-Territory& Board::operator[](size_t pos)
+std::shared_ptr<Territory>& Board::operator[](size_t pos)
 {
 	if (pos >= m_board.size())
 	{
@@ -55,7 +60,11 @@ Board& Board::operator=(const Board& other)
 {
 	if (this != &other)
 	{
-		this->m_board = other.m_board;
+		m_board.clear();
+		for (auto& territory : other.m_board)
+		{
+			m_board.push_back(std::make_shared<Territory>(*territory));
+		}
 		this->m_height = other.m_height;
 		this->m_width = other.m_width;
 	}
@@ -66,7 +75,7 @@ Board& Board::operator=(Board&& other) noexcept
 {
 	if (this != &other)
 	{
-		m_board = std::exchange(other.m_board, std::vector<Territory>());
+		m_board = std::exchange(other.m_board, {});
 		m_height = std::exchange(other.m_height, 0);
 		m_width = std::exchange(other.m_width, 0);
 	}

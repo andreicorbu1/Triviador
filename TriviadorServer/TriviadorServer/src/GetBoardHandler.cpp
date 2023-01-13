@@ -22,7 +22,11 @@ crow::response GetBoardHandler::operator()(const crow::request& req) const
 				//return ;
 			}
 			Board board = m_game.GetBoard();
-			std::vector<Territory> territories = board.GetTerritories();
+			std::vector<Territory> territories;
+			for (const auto& boardTerr = board.GetTerritories(); const auto& terr : boardTerr)
+			{
+				territories.push_back(*terr);
+			}
 			nlohmann::json json = territories;
 
 			if (json.empty())

@@ -1,5 +1,9 @@
 #pragma once
 #include <string>
+#include "Territory.h"
+#include <vector>
+#include <memory>
+#include <algorithm>
 
 class Player
 {
@@ -28,6 +32,8 @@ public:
 	Player::Color GetColor() const;
 	uint16_t GetScore() const;
 	uint16_t GetRank() const;
+	/*std::vector<std::reference_wrapper<Territory>> GetOwnedTerritories() const;
+	std::vector<std::reference_wrapper<Territory>>& GetOwnedTerritories();*/
 
 	// Setters:
 	void SetName(const std::string& name);
@@ -36,7 +42,9 @@ public:
 	void SetRank(const uint16_t& rank);
 
 	//Other:
-	void AddScore(uint16_t score);
+	void AddScore(uint16_t score);/*
+	void AddTerritory(Territory& territory);
+	void RemoveTerritory(Territory& territory);*/
 
 	// Operators:
 	Player& operator =(const Player& other);
@@ -48,5 +56,6 @@ private:
 	Color m_color;
 	uint16_t m_score;
 	uint16_t m_rank;
+	//std::vector<std::reference_wrapper<Territory>> m_ownedTerritories;
 };
 

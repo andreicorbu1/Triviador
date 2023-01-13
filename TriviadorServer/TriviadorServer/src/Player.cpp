@@ -43,9 +43,9 @@ Player::Color Player::ToColor(std::string color)
 }
 
 Player::Player(const std::string& playerName, const Color& color) :
-	m_playerName(playerName), m_color(color)
+	m_playerName(playerName), m_color(color), m_score(0)
 {
-	m_score = 0;
+	// empty
 }
 
 Player::Player(const Player& other)
@@ -77,6 +77,16 @@ uint16_t Player::GetRank() const
 {
 	return m_rank;
 }
+//
+//std::vector<std::reference_wrapper<Territory>> Player::GetOwnedTerritories() const
+//{
+//	return m_ownedTerritories;
+//}
+//
+//std::vector<std::reference_wrapper<Territory>>& Player::GetOwnedTerritories()
+//{
+//	return m_ownedTerritories;
+//}
 
 void Player::SetName(const std::string& name)
 {
@@ -102,6 +112,20 @@ void Player::AddScore(uint16_t score)
 {
 	this->m_score += score;
 }
+
+//void Player::AddTerritory(Territory& territory)
+//{
+//	m_ownedTerritories.push_back(territory);
+//}
+//
+//void Player::RemoveTerritory(Territory& territory)
+//{
+//	const auto it = std::find(m_ownedTerritories.begin(), m_ownedTerritories.end(), territory);
+//	if (it != m_ownedTerritories.end())
+//	{
+//		m_ownedTerritories.erase(it);
+//	}
+//}
 
 Player& Player::operator=(const Player& other)
 {

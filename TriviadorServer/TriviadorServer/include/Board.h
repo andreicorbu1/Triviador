@@ -16,11 +16,12 @@ public:
 	Board(Board&& other) noexcept;
 	~Board() = default;
 	// Setters
-	Territory& operator[] (size_t pos);
+	std::shared_ptr<Territory>& operator[] (size_t pos);
 
 	// Getters:
-	Territory operator[] (size_t pos) const;
-	std::vector<Territory> GetTerritories() const;
+	const std::shared_ptr<Territory>& operator[] (size_t pos) const;
+	std::vector<std::shared_ptr<Territory>> GetTerritories() const;
+	std::vector<std::shared_ptr<Territory>>& GetTerritories();
 	size_t GetWidth() const;
 	size_t GetHeight() const;
 
@@ -29,7 +30,7 @@ public:
 	Board& operator=(Board&& other) noexcept;
 
 private:
-	std::vector<Territory> m_board;
+	std::vector<std::shared_ptr<Territory>> m_board;
 	size_t m_width;
 	size_t m_height;
 };
