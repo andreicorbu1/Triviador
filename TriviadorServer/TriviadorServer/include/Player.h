@@ -6,14 +6,15 @@ class Player
 public:
 	enum class Color
 	{
+		None,
 		Blue,
 		Red,
 		Green,
-		Yellow,
-		None
+		Yellow
 	};
 
-	std::string ColorToString(Color color) const;
+	static Color ToColor(std::string color);
+	static std::string ToString(Color color);
 
 public:
 	Player() = default;
@@ -25,19 +26,17 @@ public:
 	// Getters:
 	const std::string& GetName() const;
 	Player::Color GetColor() const;
-	size_t GetScore() const;
-	int GetTerritoriesCount() const;
-	size_t GetRank() const;
+	uint16_t GetScore() const;
+	uint16_t GetRank() const;
 
 	// Setters:
 	void SetName(const std::string& name);
 	void SetColor(const Player::Color& color);
-	void SetScore(const size_t& score);
-	void SetTerritoriesCount(const int& territoriesCount);
-	void SetRank(const size_t& rank);
+	void SetScore(const uint16_t& score);
+	void SetRank(const uint16_t& rank);
 
 	//Other:
-	void AddScore(size_t score);
+	void AddScore(uint16_t score);
 
 	// Operators:
 	Player& operator =(const Player& other);
@@ -47,8 +46,7 @@ public:
 private:
 	std::string m_playerName;
 	Color m_color;
-	size_t m_score;
-	int m_territoriesCount;
-	size_t m_rank;
+	uint16_t m_score;
+	uint16_t m_rank;
 };
 

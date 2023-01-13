@@ -18,17 +18,13 @@ Board::Board(Board&& other) noexcept
 	*this = std::move(other);
 }
 
-
-const Territory& Board::operator[](Position pos) const
+Territory Board::operator[](size_t pos) const
 {
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width)
+	if (pos >= m_board.size())
 	{
 		throw std::out_of_range("Position is out of range!");
 	}
-
-	return m_board[line * m_width + column];
+	return m_board[pos];
 }
 
 std::vector<Territory> Board::GetTerritories() const
@@ -36,16 +32,23 @@ std::vector<Territory> Board::GetTerritories() const
 	return m_board;
 }
 
-Territory& Board::operator[](Position pos)
+size_t Board::GetWidth() const
 {
-	const auto& [line, column] = pos;
+	return m_width;
+}
 
-	if (line >= m_height || column >= m_width)
+size_t Board::GetHeight() const
+{
+	return m_height;
+}
+
+Territory& Board::operator[](size_t pos)
+{
+	if (pos >= m_board.size())
 	{
 		throw std::out_of_range("Position is out of range!");
 	}
-
-	return m_board[line * m_width + column];
+	return m_board[pos];
 }
 
 Board& Board::operator=(const Board& other)
@@ -68,26 +71,4 @@ Board& Board::operator=(Board&& other) noexcept
 		m_width = std::exchange(other.m_width, 0);
 	}
 	return *this;
-}
-
-
-std::ostream& operator<<(std::ostream& out, const Board& b)
-{
-	Board::Position pos;
-	auto& [line, column] = pos;
-	for (line = 0; line < b.m_height; line++)
-	{
-		for (column = 0; column < b.m_width; column++)
-		{
-			auto owner = b[pos].GetOwner();
-			if (owner.has_value())
-				out << owner.value().GetName();
-			else
-				out << "[____]";
-			out << "  ";
-		}
-		out << "\n\n";
-	}
-
-	return out;
 }

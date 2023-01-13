@@ -15,15 +15,16 @@ public:
 	Board(const Board& other);
 	Board(Board&& other) noexcept;
 	~Board() = default;
-	// Setters:
-	Territory& operator[] (Position pos);
+	// Setters
+	Territory& operator[] (size_t pos);
 
 	// Getters:
-	const Territory& operator[] (Position pos) const;
+	Territory operator[] (size_t pos) const;
 	std::vector<Territory> GetTerritories() const;
+	size_t GetWidth() const;
+	size_t GetHeight() const;
 
 	// Operators:
-	friend std::ostream& operator<< (std::ostream& out, const Board& b);
 	Board& operator=(const Board& other);
 	Board& operator=(Board&& other) noexcept;
 

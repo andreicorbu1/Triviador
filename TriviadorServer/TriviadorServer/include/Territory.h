@@ -9,7 +9,6 @@ class Territory
 public:
 	//Constructors
 	Territory();
-	explicit Territory(const Player& owner);
 	Territory(const Player& owner, const bool& isBase);
 	Territory(const Territory& territory);
 	Territory(Territory&& territory) noexcept;
@@ -18,6 +17,7 @@ public:
 	//Getters:
 	std::optional<Player> GetOwner() const;
 	uint16_t GetScore() const;
+	bool GetIsBase() const;
 
 	//Setters:
 	void SetOwner(const std::optional<Player>& owner);
@@ -36,5 +36,6 @@ private:
 private:
 	std::optional<Player> m_owner;
 	uint16_t m_score;
+	bool m_isBase;
 };
 

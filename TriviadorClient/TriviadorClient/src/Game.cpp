@@ -39,7 +39,8 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	}
 	ConnectButtons();
 
-	QTimer::singleShot(3000, this, SLOT(GameLoop()));
+	QTimer::singleShot(1000, this, SLOT(GameLoop()));
+	ui.stageLabel->hide();
 }
 
 Game::~Game()
@@ -76,18 +77,31 @@ void Game::ConnectButtons()
 
 void Game::UpdateBoard()
 {
-	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/board" });
+	auto res = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/getboard" },
+		cpr::Body{"username="+m_currentPlayer.GetName()}
+	);
 
 	if (res.status_code == 200)
 	{
-		// parse and update board
+		auto board = crow::json::load(res.text);
+		for (int i = 0; i < m_board.Size(); i++)
+		{
+			Player player = Player(board[i]["owner"]["name"].s(), Player::ToColor(board[i]["owner"]["color"].s()));
+			int score = board[i]["score"].i();
+			
+			m_board[i].SetOwner(player);
+			m_board[i].SetScore(score);
+			m_board[i].Update();
+		}
 	}
 }
 
 void Game::UpdatePlayerScores()
 {
 	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getplayersfromgame" });
-	
+
 	if (res.status_code == 200)
 	{
 		auto players = crow::json::load(res.text);
@@ -136,46 +150,56 @@ void Game::GameLoop()
 	auto res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/stage" },
-		cpr::Body{ "username="+m_currentPlayer.GetName()}
+		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
-		
+
 	if (res.status_code == 200)
 	{
-		auto data = crow::json::load(res.text);
-		if (data["stage"] == "wait") 
+		data = crow::json::load(res.text);
+		if (data["stage"] == "wait")
 		{
+			ui.stageLabel->hide();
 			waitingTime = 2000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
-			waitingTime = 14000;
+			ui.stageLabel->hide();
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
-			waitingTime = 14000;
+			ui.stageLabel->hide();
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
 		else if (data["stage"] == "chooseBase")
 		{
+			ui.stageLabel->setText("Choose a base!");
+			ui.stageLabel->show();
 			waitingTime = 2000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
+			ui.stageLabel->setText("Choose your territories!");
+			ui.stageLabel->show();
 			waitingTime = 2000;
 			//choose base
 		}
 
 		else if (data["stage"] == "attack")
 		{
+			ui.stageLabel->hide();
 			waitingTime = 2000;
 			// attack
 		}
 		else if (data["stage"] == "update")
 		{
+			ui.stageLabel->hide();
 			UpdateBoard();
 			UpdatePlayerScores();
+			waitingTime = 2000;
 		}
 		else if (data["stage"] == "result")
 		{
@@ -186,14 +210,14 @@ void Game::GameLoop()
 		}
 		else
 		{
-			waitingTime = 2000; //temporary
+			waitingTime = 2000;
 		}
-		QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 	}
 	else
 	{
 		waitingTime = 3000;
 	}
+	
 	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 }
 
@@ -205,7 +229,19 @@ void Game::on_gameFinished()
 void Game::action(int position)
 {
 	qDebug() << "The Button " << position << " was clicked!";
-	//ShowQuestion(QuestionType::NumericalAnswer);
+	if (data["stage"] == "chooseBase" || data["stage"] == "chooseTerritory")
+	{
+		std::string isBase = "0";
+		if (data["stage"] == "chooseBase")
+		{
+			isBase = "1";
+		}
+		auto res = cpr::Put
+		(
+			cpr::Url{ "http://localhost:18080/choose" },
+			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) + "&isBase=" + isBase }
+		);
+	}
 }
 
 void Game::paintEvent(QPaintEvent* paintEvent)
@@ -215,11 +251,11 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 	painter.setBrush(QColor(83, 66, 50));
 	for (size_t i = 0; i < m_players.size(); i++)
 	{
-		QString color = m_players[i].GetColor().c_str();
+		QString color = Player::ToString(m_players[i].GetColor()).c_str();
 		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
 		painter.setPen(Qt::black);
 		painter.drawRect(playerTable);
-		QString tableText = (m_players[i].GetName() + " " + std::to_string(m_players[i].GetScore())).c_str();
+		QString tableText = ((m_players[i].GetName() == m_currentPlayer.GetName() ? "You" : m_players[i].GetName()) + " " + std::to_string(m_players[i].GetScore())).c_str();
 		painter.setFont(QFont("Franklin Gothic Heavy", 20));
 		painter.setPen(color);
 		painter.drawText(playerTable, Qt::AlignCenter, tableText);

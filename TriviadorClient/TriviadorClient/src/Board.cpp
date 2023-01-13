@@ -7,7 +7,6 @@ Board::Board()
 	//, m_board(m_size, Territory())
 {
 	// empty
-
 }
 
 Board::Board(const std::size_t& height, const std::size_t& width, QWidget* parent)
@@ -31,17 +30,6 @@ Board::Board(Board&& other) noexcept
 
 Board::~Board() {
 	// empty
-}
-
-Territory Board::operator[](Position pos) const
-{
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width) {
-		throw std::out_of_range("Position is out of range!");
-	}
-
-	return m_board[line * m_width + column];
 }
 
 Territory Board::operator[](int pos) const
@@ -127,7 +115,6 @@ void Board::SetMasks(int playersNumber)
 			QString auxLocation = imageLocation;
 			auxLocation += QString::number(line) + QString::number(column) + ".png";
 			m_board[line * m_width + column].setMask(QPixmap(auxLocation));
-			m_board[line * m_width + column].SetButtonProperties();
 		}
 	}
 }
@@ -191,29 +178,3 @@ void Board::SetGeometry4PGame()
 	m_board[22].setGeometry(700, 633, 187, 152);
 	m_board[23].setGeometry(874, 593, 325, 179);
 }
-
-Territory& Board::operator[](Position pos)
-{
-	const auto& [line, column] = pos;
-
-	if (line >= m_height || column >= m_width) {
-		throw std::out_of_range("Position is out of range!");
-	}
-
-	return m_board[line * m_width + column];
-}
-
-//std::ostream& operator<<(std::ostream& out, const Board& board)
-//{
-//	Board::Position pos;
-//	auto& [line, column] = pos;
-//	for (line = 0; line < board.m_height; line++) {
-//		for (column = 0; column < board.m_width; column++) {
-//			out << board[pos];
-//			out << "  ";
-//		}
-//		out << "\n\n";
-//	}
-//
-//	return out;
-//}

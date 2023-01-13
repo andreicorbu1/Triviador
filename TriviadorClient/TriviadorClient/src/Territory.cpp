@@ -16,14 +16,18 @@ void Territory::setGeometry(int x, int y, int width, int height)
 
 void Territory::setMask(const QPixmap& mask)
 {
+    m_button->setCursor(QCursor(Qt::PointingHandCursor));
     m_button->setMask(mask.scaled(m_button->size()).mask());
 }
 
-void Territory::SetButtonProperties()
+void Territory::SetOwner(const Player& player)
 {
-    m_button->setCursor(QCursor(Qt::PointingHandCursor));
-    m_button->setStyleSheet("background-color: rgb(83, 66, 50); color: white; font: 12pt \"Franklin Gothic Heavy\"; text-align:center;");
-    m_button->setText(QString::number(m_score));
+	m_owner = player;
+}
+
+void Territory::SetScore(const int& score)
+{
+    m_score = score;
 }
 
 QPushButton* Territory::getButton() const
@@ -31,26 +35,15 @@ QPushButton* Territory::getButton() const
     return m_button;
 }
 
-//Territory::Territory(QWidget* parent)
-//    : m_score(kBaseScore)
-//{
-//    //empty
-//    m_bu
-//}
-//
-//Territory::Territory(const Player& owner)
-//    : m_owner(owner)
-//    , m_score(kTerritoryScore)
-//{
-//    // empty
-//}
-//
-//Territory::Territory(const Player& owner, const bool& isBase)
-//    : m_owner(owner)
-//    , m_score(kBaseScore)
-//{
-//    // empty
-//}
+void Territory::Update()
+{
+    QString color = Player::ToString(m_owner.GetColor()).c_str();
+    if (color == "None")
+        return;
+
+	m_button->setText(QString::number(m_score));
+	m_button->setStyleSheet("background-color: " + color + "; color: white; font: 12pt \"Franklin Gothic Heavy\"; text-align:center;");
+}
 
 Territory::Territory(const Territory& territory)
 {
@@ -83,10 +76,3 @@ Territory& Territory::operator=(Territory&& territory) noexcept
     new(&territory)Territory;
     return *this;
 }
-
-//std::ostream& operator<< (std::ostream& out, const Territory& t)
-//{
-//    out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");
-//    out << "[" << t.m_score << "]";
-//    return out;
-//}
