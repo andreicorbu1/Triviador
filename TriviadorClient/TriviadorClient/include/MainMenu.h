@@ -18,7 +18,7 @@ public:
 	MainMenu(const User& user, QWidget* parent = nullptr);
 	~MainMenu();
 
-	void hiMessage(const std::string& playerName);
+	void HiMessage(const std::string& playerName);
 	bool CheckGameCanStart();
 	void StartLobby(std::string lobbyID);
 

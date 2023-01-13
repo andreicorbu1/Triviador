@@ -87,7 +87,7 @@
     <ClCompile Include="src\SendAnswerNumericalQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp">
+    <ClCompile Include="src\GetAllPlayersFromGameHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\PlayerHistoryManager.cpp">

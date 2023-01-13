@@ -4,34 +4,32 @@ GetAllPlayersFromLobbyHandler::GetAllPlayersFromLobbyHandler(Lobby& lobby) : m_l
 {
 }
 
-crow::json::wvalue GetAllPlayersFromLobbyHandler::operator()(const crow::request& req) const
+crow::response GetAllPlayersFromLobbyHandler::operator()(const crow::request& req) const
 {
 	auto bodyArgs = ParseUrlArgs(req.body);
 	auto end = bodyArgs.end();
-	auto lobbyID = bodyArgs.find("id");
+	auto lobbyIdArg = bodyArgs.find("id");
 	
-	if (lobbyID == end)
+	if (lobbyIdArg == end)
 	{
-		crow::json::wvalue noID
-		{
-			{ "invalid_id", "NO ID" }
-		};
-		return crow::json::wvalue(noID);
+		return crow::response(400, "Lobby ID isn't sent properly");
 	}
 
-	if (auto id = std::stoi(lobbyID->second); m_lobby.GetLobbyID() != id)
+	if (auto id = std::stoi(lobbyIdArg->second); m_lobby.GetLobbyID() != id)
 	{
-		crow::json::wvalue invalidID
-		{
-			{ "invalid_id", "No lobby which contains inserted id" }
-		};
-		return crow::json::wvalue(invalidID);
+		return crow::response(402, "No lobby which contains inserted id");
 	}
 
 	std::vector<Player>players;
-	int numberOfPlayersFromLobby = m_lobby.GetNumberOfPlayers();
+	int lobbyPlayerCount = m_lobby.GetNumberOfPlayers();
 
-	for (int i = 0; i < numberOfPlayersFromLobby; i++)
+	if (lobbyPlayerCount == 0)
+	{
+		m_lobby.ClearLobby();
+		return crow::response(404, "Lobby is empty");
+	}
+	
+	for (int i = 0; i < lobbyPlayerCount; i++)
 	{
 		Player player = m_lobby.GetPlayerAt(i);
 		players.push_back(player);

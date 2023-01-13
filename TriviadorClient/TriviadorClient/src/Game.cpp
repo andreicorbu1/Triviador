@@ -252,7 +252,7 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 	painter.setBrush(QColor(83, 66, 50));
 	for (size_t i = 0; i < m_players.size(); i++)
 	{
-		QString color = Player::ToString(m_players[i].GetColor()).c_str();
+		QColor color = m_players[i].GetQColor();
 		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
 		painter.setPen(Qt::black);
 		painter.drawRect(playerTable);

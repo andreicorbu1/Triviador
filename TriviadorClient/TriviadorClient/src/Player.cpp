@@ -68,6 +68,48 @@ Player::Color Player::GetColor() const
 	return m_color;
 }
 
+QString Player::GetRgbColor() const
+{
+	switch (m_color)
+	{
+	case Color::Blue:
+		return "rgb(50, 74, 159)";
+		break;
+	case Color::Green:
+		return "rgb(77, 134, 32)";
+		break;
+	case Color::Red:
+		return "rgb(181, 40, 40)";
+		break;
+	case Color::Yellow:
+		return "rgb(185, 165, 62)";
+		break;
+	default:
+		return "rgb(0, 0, 0)";
+	}
+}
+
+QColor Player::GetQColor() const
+{
+	switch (m_color)
+	{
+	case Color::Blue:
+		return QColor(50, 74, 159);
+		break;
+	case Color::Green:
+		return QColor(77, 134, 32);
+		break;
+	case Color::Red:
+		return QColor(181, 40, 40);
+		break;
+	case Color::Yellow:
+		return QColor(185, 165, 62);
+		break;
+	default:
+		return QColor(0, 0, 0);
+	}
+}
+
 uint16_t Player::GetScore() const
 {
 	return m_score;

@@ -51,10 +51,10 @@ QPushButton* Territory::getButton() const
 
 void Territory::Update()
 {
-    QString color = Player::ToString(m_owner.GetColor()).c_str();
-    if (color == "None")
+	if (m_owner.GetColor() == Player::Color::None)
         return;
-
+    
+    QString color = m_owner.GetRgbColor();
 	m_button->setText(QString::number(m_score));
 	m_button->setStyleSheet("background-color: " + color + "; color: white; font: 12pt \"Franklin Gothic Heavy\"; text-align:center;");
 }

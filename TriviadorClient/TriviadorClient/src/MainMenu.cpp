@@ -20,7 +20,7 @@ MainMenu::~MainMenu()
 	// empty
 }
 
-void MainMenu::hiMessage(const std::string& playerName)
+void MainMenu::HiMessage(const std::string& playerName)
 {
 	QString message = "Salut, ";
 	message += playerName.c_str();
@@ -46,7 +46,7 @@ void MainMenu::StartLobby(std::string lobbyID)
 
 void MainMenu::Show()
 {
-	showMaximized();
+	show();
 }
 
 void MainMenu::on_myProfileButton_clicked()
@@ -137,7 +137,6 @@ void MainMenu::on_lobbyFinished()
 {
 	Show();
 	m_lobby->close();
-	delete m_lobby;
 }
 
 void MainMenu::ShowPlayerHistory()

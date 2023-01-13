@@ -30,6 +30,7 @@ void Lobby::on_leaveLobbyButton_clicked()
 		cpr::Url{ "http://localhost:18080/lobby/removeplayer" },
 		cpr::Body{ "id=" + m_lobbyID + "&" + "username=" + m_currentPlayer.GetName() }
 	);
+	
 	emit finished();
 }
 
@@ -58,6 +59,13 @@ void Lobby::LobbyLoop()
 		cpr::Url{ "http://localhost:18080/lobby/players" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
+	
+	if (playersFromLobby.status_code == 404)
+	{
+		emit finished();
+		return;
+	}
+	
 	HideAllPlayersName();
 	m_players.clear();
 	auto players = crow::json::load(playersFromLobby.text);
@@ -77,7 +85,7 @@ void Lobby::LobbyLoop()
 	{
 		ui.startGameButton->hide();
 	}
-
+	
 	auto res = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/lobby/waiting" },
@@ -90,6 +98,7 @@ void Lobby::LobbyLoop()
 		msgBox.setText("Lobby waiting time has expired");
 		msgBox.exec();
 		on_leaveLobbyButton_clicked();
+		return;
 	}
 	else if (res.status_code == 300)
 	{
