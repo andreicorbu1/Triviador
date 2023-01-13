@@ -58,7 +58,7 @@ private slots:
 
 	void UpdateProgressBar();
 	void ShowResults();
-	void SendAnswer();
+	void SendAnswer(std::string answer = "");
 
 private:
 	// Setters
@@ -70,7 +70,6 @@ private:
 	void SetRightAnswer(const int& answer);
 	void SetQuestionId(const int& id);
 	void SetConnections();
-	void StopProgressBar();
 	void SetButtonsProperties(int i);
 	void SetFlags(std::vector<Player>& players);
 	void SetEnabledState();
@@ -96,5 +95,5 @@ private:
 	int m_questionId;
 	Player m_currentPlayer;
 	QElapsedTimer m_resultTimer;
-	std::string m_answer;
+	bool m_playerAnswered;
 };

@@ -1,16 +1,8 @@
 #pragma once
 #include "Territory.h"
-#include <qpainter.h>
-#include <vector>
-#include <optional>
-#include <algorithm>
-#include "qscreen.h"
 
 class Board
 {
-public:
-    using Position = std::pair<uint8_t, uint8_t>;
-
 public:
 	Board();
     Board(const std::size_t& height, const std::size_t& width, QWidget* parent = nullptr);
@@ -19,11 +11,9 @@ public:
 	~Board();
     
     // Setters:
-    Territory& operator[] (Position pos);
     Territory& operator[] (int pos);
     
     // Getters:
-    Territory operator[] (Position pos) const;
     Territory operator[] (int pos) const;
 
     // Operators:

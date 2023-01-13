@@ -93,8 +93,6 @@ public:
 
 private:
 	void Cleanup();
-	void ChooseBaseTerritories(const std::vector<std::pair<Player, std::pair<int, int>>>& players);
-	void ChooseTerritories(const std::vector<std::pair<Player, std::vector<std::pair<int, int>>>>& playersOrder);
 	const uint16_t kTwoPlayersNumericAnswerQuestions = 18;
 	const uint16_t kTwoPlayersMultipleAnswerQuestions = 10;
 	const uint16_t kThreePlayersNumericAnswerQuestions = 17;

@@ -37,7 +37,7 @@ void to_json(nlohmann::json& json, const Player& player)
 	json =
 	{
 		{"name", player.GetName()},
-		{"color", player.ColorToString(player.GetColor())},
+		{"color", Player::ToString(player.GetColor())},
 		{"score", player.GetScore()}
 	};
 }

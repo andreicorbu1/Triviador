@@ -67,7 +67,7 @@ void Lobby::LobbyLoop()
 		std::string color = players[i]["color"].s();
 		m_playersLabel[i]->setText(QString::fromUtf8(name));
 		m_playersLabel[i]->show();
-		m_players.push_back(Player(name, Player::GetColor(color)));
+		m_players.push_back(Player(name, Player::ToColor(color)));
 	}
 	if (m_players.size() > 1)
 	{
