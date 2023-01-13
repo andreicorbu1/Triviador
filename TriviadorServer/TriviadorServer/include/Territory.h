@@ -9,7 +9,6 @@ class Territory
 public:
 	//Constructors
 	Territory();
-	explicit Territory(const Player& owner);
 	Territory(const Player& owner, const bool& isBase);
 	Territory(const Territory& territory);
 	Territory(Territory&& territory) noexcept;
