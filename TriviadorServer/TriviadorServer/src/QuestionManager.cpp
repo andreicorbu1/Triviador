@@ -86,6 +86,7 @@ int QuestionManager::GetRandomMultipleAnswerQuestionsID()
 	{
 		id = distr(eng);
 	}
+	m_alreadyChoosedMultipleAnswerQuestionsID.insert(id);
 	return id;
 }
 
@@ -99,6 +100,7 @@ int QuestionManager::GetRandomNumericalAnswerQuestionsID()
 	{
 		id = distr(eng);
 	}
+	m_alreadyChoosedNumericalAnswerQuestionsID.insert(id);
 	return id;
 }
 

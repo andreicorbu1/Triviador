@@ -546,7 +546,7 @@ border: none;
 </string>
              </property>
              <property name="text">
-              <string>All time score:</string>
+              <string>Points to the next level:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -574,7 +574,7 @@ border: none;
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="scoreLabel">
+            <widget class="QLabel" name="pointsLabel">
              <property name="font">
               <font>
                <family>Franklin Gothic Heavy</family>

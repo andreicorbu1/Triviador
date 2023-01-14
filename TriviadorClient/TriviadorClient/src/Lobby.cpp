@@ -20,7 +20,7 @@ Lobby::~Lobby()
 
 void Lobby::closeEvent(QCloseEvent* event)
 {
-	on_leaveLobbyButton_clicked();
+	//on_leaveLobbyButton_clicked();
 }
 
 void Lobby::on_leaveLobbyButton_clicked()
