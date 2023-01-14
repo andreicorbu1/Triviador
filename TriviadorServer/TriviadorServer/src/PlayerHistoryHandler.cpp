@@ -20,15 +20,14 @@ crow::response PlayerHistoryHandler::operator()(const crow::request& req) const
 	}
 	std::vector<PlayerHistory> playerHistory = m_playerHistoryManager.GetPlayerMatches(username->second);
 	nlohmann::json json = playerHistory;
-	if (playerHistory.empty())
-	{
-		crow::json::wvalue noMatchHistory
-		{
-			{"invalid_playerHistory", "No games played!"}
-		};
-		return crow::json::wvalue(noMatchHistory);
-	}
+	//if (playerHistory.empty())
+	//{
+	//	crow::json::wvalue noMatchHistory
+	//	{
+	//		{"invalid_playerHistory", "No games played!"}
+	//	};
+	//	return crow::json::wvalue(noMatchHistory);
+	//}
 	std::string jsonString = json.dump();
 	return crow::json::wvalue(crow::json::load(jsonString));
-
 }

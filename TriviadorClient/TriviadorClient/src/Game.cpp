@@ -130,7 +130,7 @@ void Game::AddPlayersHistory()
 	}
 }
 
-void Game::AddPlayerHistory(Player& player, int rank)
+void Game::AddPlayerHistory(Player& player, int rank) const
 {
 	auto res = cpr::Put
 	(
