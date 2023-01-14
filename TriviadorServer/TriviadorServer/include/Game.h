@@ -112,7 +112,7 @@ private:
 	Board m_board;
 	std::vector<Player> m_players;
 	std::vector<Player> m_duelOrder;
-	uint16_t m_duelOrderIndex;
+	int16_t m_duelOrderIndex;
 	std::unordered_map<uint16_t, std::vector<Player>> m_alreadyAnswered;
 	std::vector<MultipleAnswerQuestion> m_multipleAnswerQuestions;
 	std::vector<NumericalAnswerQuestion> m_numericalAnswerQuestions;

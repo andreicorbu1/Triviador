@@ -172,7 +172,7 @@ void Game::GameLoop()
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 7000;
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
 		else if (data["stage"] == "chooseBase")
@@ -203,7 +203,7 @@ void Game::GameLoop()
 			ui.stageLabel->hide();
 			UpdateBoard();
 			UpdatePlayerScores();
-			waitingTime = 2000;
+			waitingTime = 3000;
 		}
 		else if (data["stage"] == "result")
 		{
@@ -248,6 +248,8 @@ void Game::action(int position)
 	}
 	else if (data["stage"] == "attack")
 	{
+		if (m_board[position].GetOwner().GetName() == m_currentPlayer.GetName())
+			return;
 		auto res = cpr::Get
 		(
 			cpr::Url{ "http://localhost:18080/attack" },

@@ -33,6 +33,7 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 	SetStagesForChooseBase();
 	SetStagesForChooseTerritory();
 	SetStagesForDuel();
+	m_stages.push_back(Stage::Result);
 	m_currentStageIndex = 0;
 	m_currentStage = m_stages[0];
 	//m_duelParticipants.resize(2);
@@ -83,7 +84,7 @@ uint16_t Game::GetCurrentNumericalAnswerQuestionIndex() const
 
 uint16_t Game::GetCurrentMultipleAnswerQuestionIndex() const
 {
-	return numericQuestionIndex;
+	return multipleQuestionIndex;
 }
 
 std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
@@ -409,8 +410,9 @@ void Game::DetermineDuelSituation()
 		m_participantsQueue.pop();
 		Participant participant2 = m_participantsQueue.top();
 		m_participantsQueue.pop();
+		m_duelOrderIndex--;
 
-		if (std::get<1>(participant1) == 1 && std::get<0>(participant1) == m_duelParticipants[0].GetName())
+		if (std::get<1>(participant1) == 0 && std::get<0>(participant1) == m_duelParticipants[0].GetName())
 		{
 			if (m_board[m_attackedPosition].GetScore() == 100)
 			{
@@ -420,13 +422,12 @@ void Game::DetermineDuelSituation()
 			{
 				m_board[m_attackedPosition].SetScore(m_board[m_attackedPosition].GetScore() - 100);
 			}
-			m_duelOrderIndex--;
 			//GoToNextStage();
 			//GoToNextStage();
 		}
 		m_duelParticipants.clear();
 		GoToNextStage();
-		GoToNextStage();
+		//GoToNextStage();
 	}
 	//else if egal
 }
@@ -552,7 +553,7 @@ void Game::InsertQueueParticipant(const std::string& username, const int& answer
 {
 	Participant participant(username, answerCorrentness, responseTime);
 	m_participantsQueue.push(participant);
-	if (m_participantsQueue.size() == m_players.size())
+	if (m_participantsQueue.size() == m_players.size() && m_currentStage!=Stage::Attack)
 	{
 		GoToNextStage();
 	}
