@@ -29,7 +29,7 @@ crow::response SendAnswerMultipleQuestion::operator()(const crow::request& req) 
 
 		//if (m_game.GetParticipantsQueueSize() == 2)
 		//{
-		m_game.DetermineDuelSituation();
+		//m_game.DetermineDuelSituation();
 		//}
 		
 		if (rightAnswer == answer)

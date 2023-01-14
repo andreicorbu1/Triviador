@@ -94,10 +94,12 @@ public:
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
 	bool AddTerritory(std::string username, int position, bool isBase);
 	bool PopPlayerWhoWillMakeAChoose();
-	void DetermineDuelSituation();
+	void DetermineDuelSituation(bool isMultiple=true);
 	
 private:
 	void Cleanup();
+	void StealTerritoryFromDefender();
+	void StealAllTerritories();
 	const uint16_t kTwoPlayersNumericAnswerQuestions = 18;
 	const uint16_t kTwoPlayersMultipleAnswerQuestions = 10;
 	const uint16_t kThreePlayersNumericAnswerQuestions = 17;

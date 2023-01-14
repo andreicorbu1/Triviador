@@ -40,6 +40,11 @@ uint16_t Territory::GetScore() const
 	return m_score;
 }
 
+bool Territory::GetIsBase() const
+{
+	return m_isBase;
+}
+
 void Territory::SetOwner(const std::optional<Player>& owner)
 {
 	m_owner = owner;

@@ -18,6 +18,7 @@ public:
 	//Getters:
 	std::optional<Player> GetOwner() const;
 	uint16_t GetScore() const;
+	bool GetIsBase() const;
 
 	//Setters:
 	void SetOwner(const std::optional<Player>& owner);
