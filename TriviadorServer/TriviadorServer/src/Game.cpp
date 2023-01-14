@@ -426,6 +426,10 @@ void Game::DetermineDuelSituation(bool isMultiple)
 				GoToNextStage();
 				m_duelParticipants.clear();
 			}
+			else
+			{
+				GoToNextStage();
+			}
 		}
 		else
 		{
@@ -526,7 +530,10 @@ void Game::StealAllTerritories()
 			break;
 		}
 	}
-	m_duelOrder.erase(it);
+	if (it != m_duelOrder.end())
+	{
+		m_duelOrder.erase(it);
+	}
 	if (m_duelOrder.size() == 1)
 	{
 		for (size_t i = m_currentStageIndex; i < m_stages.size(); i++)
