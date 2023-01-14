@@ -1,5 +1,5 @@
 #pragma once
-#include "User.h"
+#include "../../DLL/User.h"
 #include <regex>
 #include <unordered_map>
 #include <sqlite_orm/sqlite_orm.h>
@@ -12,12 +12,12 @@ static auto CreateStorage(const std::string& databaseFileName)
 		databaseFileName,
 		sql::make_table(
 		"User",
-		sql::make_column("id", &User::m_ID, sql::autoincrement(), sql::primary_key()),
-		sql::make_column("Username", &User::m_username),
-		sql::make_column("Password", &User::m_password),
-		sql::make_column("Level", &User::m_level),
-		sql::make_column("Points", &User::m_points),
-		sql::make_column("Games Played", &User::m_gamesPlayed)
+		sql::make_column("id", &User::SetId, &User::GetId, sql::autoincrement(), sql::primary_key()),
+		sql::make_column("Username", &User::SetUsername, &User::GetUsername),
+		sql::make_column("Password", &User::SetPassword, &User::GetPassword),
+		sql::make_column("Level", &User::SetLevel, &User::GetLevel),
+		sql::make_column("Points", &User::SetPoints, &User::GetPoints),
+		sql::make_column("Games Played", &User::SetGamesPlayed, &User::GetGamesPlayed)
 	)
 	);
 }
@@ -34,7 +34,6 @@ public:
 	bool SearchUser(const std::string& username) const;
 	User GetUser(const std::string& username) const;
 	void UpdateUser(const std::string& username, int matchPoints);
-	friend std::ostream& operator << (std::ostream& os, const AccountManager& manager);
 
 private:
 	std::unordered_map<std::string, User> m_accounts;

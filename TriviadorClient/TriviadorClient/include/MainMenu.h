@@ -6,8 +6,8 @@
 #include "Registration.h"
 #include <QMessageBox>
 #include "Lobby.h"
-#include "User.h"
 #include <algorithm>
+#include "../../DLL/User.h"
 
 class MainMenu : public QWidget
 {
