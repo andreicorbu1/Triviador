@@ -173,40 +173,39 @@ void Game::GameLoop()
 		{
 			ui.stageLabel->setText("Wait for enemy next move");
 			ui.stageLabel->show();
-			waitingTime = 1000;
+			waitingTime = 2000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 14000;
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 14000;
+			waitingTime = 16000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
 		else if (data["stage"] == "chooseBase")
 		{
 			ui.stageLabel->setText("Choose a base!");
 			ui.stageLabel->show();
-			waitingTime = 1000;
+			waitingTime = 2000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
 			ui.stageLabel->setText("Choose your territories!");
 			ui.stageLabel->show();
-			waitingTime = 1000;
+			waitingTime = 2000;
 			//choose base
 		}
-
 		else if (data["stage"] == "attack")
 		{
 			ui.stageLabel->setText("Attack someone");
 			ui.stageLabel->show();
-			waitingTime = 1000;
+			waitingTime = 2000;
 			// attack
 		}
 		else if (data["stage"] == "update")
@@ -225,7 +224,7 @@ void Game::GameLoop()
 		}
 		else
 		{
-			waitingTime = 1000;
+			waitingTime = 2000;
 		}
 	}
 	else

@@ -50,6 +50,11 @@ void Territory::SetScore(const uint16_t& score)
 	m_score = score;
 }
 
+void Territory::SetIsBase(bool isBase)
+{
+	isBase = false;
+}
+
 Territory& Territory::operator=(const Territory& territory)
 {
 	if (this != &territory)

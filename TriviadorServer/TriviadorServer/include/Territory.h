@@ -22,6 +22,7 @@ public:
 	//Setters:
 	void SetOwner(const std::optional<Player>& owner);
 	void SetScore(const uint16_t& score);
+	void SetIsBase(bool isBase);
 
 	// Operators:
 	Territory& operator=(const Territory& territory);
