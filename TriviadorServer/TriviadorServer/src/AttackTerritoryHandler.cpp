@@ -22,6 +22,7 @@ crow::response AttackTerritoryHanndler::operator()(const crow::request& req) con
 			{
 				try
 				{
+					m_game.ClearDuelParticipants();
 					m_game.AddPlayerToDuel(attacker);
 					m_game.AddPlayerToDuel(defender.value());
 					m_game.SetAttackedPosition(position);

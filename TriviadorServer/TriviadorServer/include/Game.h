@@ -93,6 +93,7 @@ public:
 	void DetermineDuelSituation(bool isMultiple=true);
 	void DetermineScoreForAllPlayers();
 	void UpdateGameHistory(const std::string& username);
+	void ClearDuelParticipants();
 
 private:
 	void Cleanup();

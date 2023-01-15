@@ -201,7 +201,6 @@ void Game::GameLoop()
 			waitingTime = 2000;
 			//choose base
 		}
-
 		else if (data["stage"] == "attack")
 		{
 			ui.stageLabel->setText("Attack someone");

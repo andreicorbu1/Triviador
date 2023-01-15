@@ -461,6 +461,11 @@ void Game::UpdateGameHistory(const std::string& username)
 	}
 }
 
+void Game::ClearDuelParticipants()
+{
+	m_duelParticipants.clear();
+}
+
 Game& Game::operator=(const Game& other)
 {
 	if (this != &other)
@@ -515,6 +520,7 @@ void Game::StealTerritoryFromDefender()
 		m_board[m_attackedPosition].SetOwner(m_duelParticipants[0]);
 		if (m_board[m_attackedPosition].GetIsBase())
 		{
+			m_board[m_attackedPosition].SetIsBase(false);
 			StealAllTerritories();
 		}
 	}
@@ -632,7 +638,8 @@ void Game::SetStagesForDuel()
 	}
 	m_duelOrder = m_players;
 	std::random_device rd;
-	std::ranges::shuffle(m_duelOrder, rd);
+	std::mt19937 gen{ rd() };
+	std::ranges::shuffle(m_duelOrder, gen);
 	m_duelOrderIndex = m_duelOrder.size() - 1;
 }
 
