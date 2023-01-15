@@ -204,7 +204,14 @@ void QuestionWindow::on_submitButton_clicked()
 {
 	setEnabled(false);
 	m_playerAnswered = true;
-	SendAnswer(ui.answerInput->text().toUtf8().constData());
+	if (ui.answerInput->text().isEmpty())
+	{
+		SendAnswer();
+	}
+	else
+	{
+		SendAnswer(ui.answerInput->text().toUtf8().constData());
+	}
 }
 
 void QuestionWindow::UpdateProgressBar()
@@ -218,7 +225,7 @@ void QuestionWindow::UpdateProgressBar()
 		{
 			SendAnswer();
 		}
-		
+
 		return;
 	}
 
@@ -366,7 +373,7 @@ void QuestionWindow::SendAnswer(std::string answer)
 	auto responseTime = static_cast<int>(m_resultTimer.elapsed());
 	std::string username = m_currentPlayer.GetName();
 	std::string type = m_type == QuestionType::MultipleAnswer ? "multiple" : "numerical";
-	
+
 	bool containsCurrentPlayer = false;
 	for (const auto& player : m_players)
 	{
@@ -397,7 +404,7 @@ void QuestionWindow::SendAnswer(std::string answer)
 		answer = "232";*/
 
 	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/" + type },
-			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
+		cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
 
 	if (res.status_code != 200)
 	{
