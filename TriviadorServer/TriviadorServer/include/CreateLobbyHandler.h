@@ -10,7 +10,7 @@ class CreateLobbyHandler
 public:
 	CreateLobbyHandler() = delete;
 	CreateLobbyHandler(Lobby& lobby, AccountManager& userList);
-	crow::json::wvalue operator()(const crow::request& req) const;
+	crow::response operator()(const crow::request& req) const;
 
 private:
 	AccountManager& m_userList;

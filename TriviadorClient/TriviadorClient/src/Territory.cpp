@@ -1,11 +1,11 @@
 #include "Territory.h"
 
-
 Territory::Territory(QWidget* parent)
 	:m_owner(Player()),
-	m_score(kTerritoryScore)
+	m_score(kTerritoryScore),
+    m_button(QSharedPointer<QPushButton>(new QPushButton(parent)))
 {
-	m_button = new QPushButton(parent);
+    // empty
 }
 
 Territory::Territory(const Territory& territory)
@@ -16,11 +16,6 @@ Territory::Territory(const Territory& territory)
 Territory::Territory(Territory&& territory) noexcept
 {
     *this = std::move(territory);
-}
-
-Territory::~Territory()
-{
-    delete m_button;
 }
 
 void Territory::SetGeometry(int x, int y, int width, int height)
@@ -44,7 +39,7 @@ void Territory::SetScore(const int& score)
     m_score = score;
 }
 
-QPushButton* Territory::getButton() const
+QSharedPointer<QPushButton> Territory::GetButton() const
 {
     return m_button;
 }
@@ -68,7 +63,7 @@ Territory& Territory::operator=(const Territory& territory)
 {
     m_owner = territory.m_owner;
     m_score = territory.m_score;
-    m_button = new QPushButton(territory.m_button->parentWidget());
+	m_button = QSharedPointer<QPushButton>(new QPushButton(territory.m_button->parentWidget()));
     return *this;
 }
 

@@ -69,8 +69,8 @@ void Game::ConnectButtons()
 	QObject::connect(m_signalMapper, SIGNAL(mappedInt(int)), this, SLOT(action(int)));
 	for (int i = 0; i < m_board.Size(); i++)
 	{
-		QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), m_signalMapper, SLOT(map()));
-		m_signalMapper->setMapping(m_board[i].getButton(), i);
+		QObject::connect(m_board[i].GetButton().get(), SIGNAL(clicked()), m_signalMapper, SLOT(map()));
+		m_signalMapper->setMapping(m_board[i].GetButton().get(), i);
 	}
 }
 
