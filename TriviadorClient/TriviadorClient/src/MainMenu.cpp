@@ -22,7 +22,7 @@ MainMenu::~MainMenu()
 	// empty
 }
 
-void MainMenu::hiMessage(const std::string& playerName)
+void MainMenu::HiMessage(const std::string& playerName)
 {
 	QString message = "Salut, ";
 	message += playerName.c_str();
@@ -48,7 +48,7 @@ void MainMenu::StartLobby(const std::string& lobbyID)
 
 void MainMenu::Show()
 {
-	showMaximized();
+	show();
 }
 
 void MainMenu::on_myProfileButton_clicked()
@@ -77,7 +77,7 @@ void MainMenu::on_joinLobbyButton_clicked()
 	std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://localhost:18080/addplayertolobby" },
+		cpr::Url{ "http://localhost:18080/lobby/addplayer" },
 		cpr::Body{ "id=" + lobbyId + "&" + "username=" + m_user.GetUsername() }
 	);
 
@@ -140,7 +140,6 @@ void MainMenu::on_lobbyFinished()
 	Show();
 	ShowPlayerHistory();
 	m_lobby->close();
-	delete m_lobby;
 }
 
 void MainMenu::ShowPlayerHistory()

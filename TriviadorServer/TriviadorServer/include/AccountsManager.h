@@ -12,7 +12,7 @@ static auto CreateStorage(const std::string& databaseFileName)
 		databaseFileName,
 		sql::make_table(
 		"User",
-		sql::make_column("id", &User::m_ID, sql::autoincrement(), sql::primary_key()),
+		sql::make_column("id", &User::m_id, sql::autoincrement(), sql::primary_key()),
 		sql::make_column("Username", &User::m_username),
 		sql::make_column("Password", &User::m_password),
 		sql::make_column("Level", &User::m_level),
@@ -34,7 +34,6 @@ public:
 	bool SearchUser(const std::string& username) const;
 	User GetUser(const std::string& username) const;
 	void UpdateUser(const std::string& username, int matchPoints);
-	friend std::ostream& operator << (std::ostream& os, const AccountManager& manager);
 
 private:
 	std::unordered_map<std::string, User> m_accounts;

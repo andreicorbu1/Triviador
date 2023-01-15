@@ -1,15 +1,17 @@
 #pragma once
+#include "ui_Game.h"
 
 #include <QWidget>
-#include "ui_Game.h"
+#include <QSignalMapper>
+#include <QThread>
+
 #include "ResultWindow.h"
 #include "QuestionWindow.h"
 #include "Board.h"
 #include "Player.h"
-#include <QSignalMapper>
-#include <QThread>
-#include <string>
 #include "User.h"
+
+#include <string>
 
 class Game : public QWidget
 {

@@ -1,17 +1,18 @@
 #pragma once
-
-#include <QWidget>
-#include <QTimer>
 #include "ui_Lobby.h"
-#include <QPaintEvent>
-#include <QPainter>
+
 #include <QMessageBox>
-#include <string>
-#include <crow.h>
-#include <cpr/cpr.h>
-#include <User.h>
-#include <Player.h>
+#include <QPainter>
+#include <QPaintEvent>
+#include <QTimer>
+#include <QWidget>
+
 #include "Game.h"
+#include "Player.h"
+#include "User.h"
+
+#include <cpr/cpr.h>
+#include <crow.h>
 
 class Lobby : public QWidget
 {

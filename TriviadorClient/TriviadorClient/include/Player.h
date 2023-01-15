@@ -1,4 +1,7 @@
 #pragma once
+#include <QString>
+#include <QColor>
+
 #include <string>
 
 class Player
@@ -26,6 +29,8 @@ public:
     // Getters:
 	const std::string& GetName() const;
 	Player::Color GetColor() const;
+	QString GetRgbColor() const;
+	QColor GetQColor() const;
 	uint16_t GetScore() const;
 
 	// Setters:

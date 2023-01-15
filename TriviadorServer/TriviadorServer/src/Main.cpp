@@ -25,7 +25,7 @@ int main()
 {
 	AccountManager userList("resource/Accounts.sqlite");
 	QuestionManager questionManager("resource/Questions.sqlite");
-	PlayerHistoryManager playerHistoryManager("resource/PlayesHistory.sqlite");
+	PlayerHistoryManager playerHistoryManager("resource/PlayersHistory.sqlite");
 	questionManager.PopulateStorage();
 
 	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
@@ -44,26 +44,11 @@ int main()
 	auto& loginToAccount = CROW_ROUTE(app, "/login").methods(crow::HTTPMethod::POST);
 	loginToAccount(LoginHandler(userList));
 
-	auto& getMultipleAnswerQuestion = CROW_ROUTE(app, "/getmultiplequestion");
+	auto& getMultipleAnswerQuestion = CROW_ROUTE(app, "/question/multiple");
 	getMultipleAnswerQuestion(MultipleAnswerQuestionHandler(currentGame));
 
-	auto& getNumericalAnswerQuestion = CROW_ROUTE(app, "/getnumericalquestion");
+	auto& getNumericalAnswerQuestion = CROW_ROUTE(app, "/question/numerical");
 	getNumericalAnswerQuestion(NumericalAnswerQuestionHandler(currentGame));
-
-	auto& createNewLobby = CROW_ROUTE(app, "/newlobby");
-	createNewLobby(CreateLobbyHandler(lobby, userList));
-
-	auto& addToLobby = CROW_ROUTE(app, "/addplayertolobby").methods(crow::HTTPMethod::PUT);
-	addToLobby(AddToLobbyHandler(lobby, userList));
-
-	auto& waitInLobby = CROW_ROUTE(app, "/waitinginlobby");
-	waitInLobby(WaitingInLobbyHandler(lobby));
-
-	auto& removePlayerFromLobby = CROW_ROUTE(app, "/removeplayerfromlobby");
-	removePlayerFromLobby(RemoveFromLobbyHandler(lobby, userList));
-
-	auto& getPlayersFromLobby = CROW_ROUTE(app, "/getplayersfromlobby");
-	getPlayersFromLobby(GetAllPlayersFromLobbyHandler(lobby));
 
 	auto& sendAnswerForMultipleQuestion = CROW_ROUTE(app, "/sendanswer/multiple");
 	sendAnswerForMultipleQuestion(SendAnswerMultipleQuestion(currentGame));
@@ -71,25 +56,40 @@ int main()
 	auto& sendAsnwerForNumericalQuestion = CROW_ROUTE(app, "/sendanswer/numerical");
 	sendAsnwerForNumericalQuestion(SendAnswerNumericalQuestion(currentGame));
 
-	auto& createNewGame = CROW_ROUTE(app, "/newgame").methods(crow::HTTPMethod::PUT);
+	auto& createNewLobby = CROW_ROUTE(app, "/newlobby");
+	createNewLobby(CreateLobbyHandler(lobby, userList));
+
+	auto& addToLobby = CROW_ROUTE(app, "/lobby/addplayer").methods(crow::HTTPMethod::PUT);
+	addToLobby(AddToLobbyHandler(lobby, userList));
+
+	auto& waitInLobby = CROW_ROUTE(app, "/lobby/waiting");
+	waitInLobby(WaitingInLobbyHandler(lobby));
+
+	auto& removePlayerFromLobby = CROW_ROUTE(app, "/lobby/removeplayer");
+	removePlayerFromLobby(RemoveFromLobbyHandler(lobby, userList));
+
+	auto& getPlayersFromLobby = CROW_ROUTE(app, "/lobby/players");
+	getPlayersFromLobby(GetAllPlayersFromLobbyHandler(lobby));
+	
+	auto& createNewGame = CROW_ROUTE(app, "/lobby/creategame").methods(crow::HTTPMethod::PUT);
 	createNewGame(CreateGameHandler(currentGame, lobby));
 
-	auto& getPlayersFromGame = CROW_ROUTE(app, "/getplayersfromgame");
+	auto& stage = CROW_ROUTE(app, "/game/stage");
+	stage(StageHandler(currentGame));
+
+	auto& getBoard = CROW_ROUTE(app, "/game/board");
+	getBoard(GetBoardHandler(currentGame));
+
+	auto& getPlayersFromGame = CROW_ROUTE(app, "/game/players");
 	getPlayersFromGame(GetAllPlayersFromGameHandler(currentGame));
 
 	auto& sendPlayerHistory = CROW_ROUTE(app, "/playerhistory");
 	sendPlayerHistory(PlayerHistoryHandler(playerHistoryManager));
 
-	auto& stage = CROW_ROUTE(app, "/stage");
-	stage(StageHandler(currentGame));
-
-	auto& getBoard = CROW_ROUTE(app, "/getboard");
-	getBoard(GetBoardHandler(currentGame));
-
 	auto& addPlayerHistory = CROW_ROUTE(app, "/addplayerhistory").methods(crow::HTTPMethod::PUT);
 	addPlayerHistory(AddToPlayerHistoryHandler(playerHistoryManager));
 
-	auto& chooseBase = CROW_ROUTE(app, "/choose").methods(crow::HTTPMethod::PUT);
+	auto& chooseBase = CROW_ROUTE(app, "/game/choose").methods(crow::HTTPMethod::PUT);
 	chooseBase(ChooseHandler(currentGame));
 
 

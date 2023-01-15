@@ -26,7 +26,9 @@ public:
 	int GetLobbyID() const;
 	const std::vector<Player>& GetPlayers();
 	const std::chrono::system_clock::time_point& GetExpirationTime() const;
-	bool GetIsActiveGame() const;
+	bool IsActiveGame() const;
+	bool IsInLobby(const std::string& username) const;
+	bool HadExpired() const;
 
 	//Setters
 	void SetIsActiveGame(bool activeGame);
@@ -36,11 +38,11 @@ private:
 	void SetAvailableColors();
 
 	std::vector<Player> m_players;
-	int m_lobbyId=INT_MAX;
+	int m_lobbyId = INT_MAX;
 	uint32_t GenerateRandomLobbyID();
 	std::chrono::system_clock::time_point m_expirationTime;
 	static const size_t kNumberOfColors = 4;
-	std::vector<int>m_availableColors;
-	bool m_isActiveGame=false;
+	std::vector<int> m_availableColors;
+	bool m_isActiveGame = false;
 };
 

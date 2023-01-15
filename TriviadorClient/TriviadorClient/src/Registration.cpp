@@ -38,7 +38,7 @@ void Registration::on_logInButton_clicked()
 	{
 		close();
 		MainMenu* mainMenu = new MainMenu(User(username));
-		mainMenu->hiMessage(username);
+		mainMenu->HiMessage(username);
 		mainMenu->showMaximized();
 	}
 	else
@@ -72,7 +72,7 @@ void Registration::on_signUpButton_clicked()
 	{
 		close();
 		MainMenu* mainMenu = new MainMenu(User(username));
-		mainMenu->hiMessage(username);
+		mainMenu->HiMessage(username);
 		mainMenu->showMaximized();
 	}
 	else {

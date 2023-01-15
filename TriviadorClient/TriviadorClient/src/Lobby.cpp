@@ -27,9 +27,10 @@ void Lobby::on_leaveLobbyButton_clicked()
 {
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/removeplayerfromlobby" },
+		cpr::Url{ "http://localhost:18080/lobby/removeplayer" },
 		cpr::Body{ "id=" + m_lobbyID + "&" + "username=" + m_currentPlayer.GetName() }
 	);
+	
 	emit finished();
 }
 
@@ -37,7 +38,7 @@ void Lobby::on_startGameButton_clicked()
 {
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://localhost:18080/newgame" }
+		cpr::Url{ "http://localhost:18080/lobby/creategame" }
 	);
 }
 
@@ -55,9 +56,16 @@ void Lobby::LobbyLoop()
 	QPainter painter(this);
 	auto playersFromLobby = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getplayersfromlobby" },
+		cpr::Url{ "http://localhost:18080/lobby/players" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
+	
+	if (playersFromLobby.status_code == 404)
+	{
+		emit finished();
+		return;
+	}
+	
 	HideAllPlayersName();
 	m_players.clear();
 	auto players = crow::json::load(playersFromLobby.text);
@@ -77,10 +85,10 @@ void Lobby::LobbyLoop()
 	{
 		ui.startGameButton->hide();
 	}
-
+	
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/waitinginlobby" },
+		cpr::Url{ "http://localhost:18080/lobby/waiting" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
 
@@ -90,6 +98,7 @@ void Lobby::LobbyLoop()
 		msgBox.setText("Lobby waiting time has expired");
 		msgBox.exec();
 		on_leaveLobbyButton_clicked();
+		return;
 	}
 	else if (res.status_code == 300)
 	{

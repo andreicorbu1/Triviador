@@ -1,11 +1,12 @@
 #pragma once
-
-#include <QWidget>
 #include "ui_MainMenu.h"
-#include "Game.h"
-#include "Registration.h"
+
 #include <QMessageBox>
+#include <QWidget>
+
+#include "Game.h"
 #include "Lobby.h"
+#include "Registration.h"
 #include "User.h"
 #include <algorithm>
 
@@ -18,7 +19,7 @@ public:
 	MainMenu(const User& user, QWidget* parent = nullptr);
 	~MainMenu();
 
-	void hiMessage(const std::string& playerName);
+	void HiMessage(const std::string& playerName);
 	bool CheckGameCanStart();
 	void StartLobby(const std::string& lobbyID);
 

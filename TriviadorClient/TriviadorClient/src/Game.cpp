@@ -69,7 +69,6 @@ void Game::ConnectButtons()
 	QObject::connect(m_signalMapper, SIGNAL(mappedInt(int)), this, SLOT(action(int)));
 	for (int i = 0; i < m_board.Size(); i++)
 	{
-		//QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), this, SLOT(action(int)));
 		QObject::connect(m_board[i].getButton(), SIGNAL(clicked()), m_signalMapper, SLOT(map()));
 		m_signalMapper->setMapping(m_board[i].getButton(), i);
 	}
@@ -79,7 +78,7 @@ void Game::UpdateBoard()
 {
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getboard" },
+		cpr::Url{ "http://localhost:18080/game/board" },
 		cpr::Body{"username="+m_currentPlayer.GetName()}
 	);
 
@@ -100,7 +99,7 @@ void Game::UpdateBoard()
 
 void Game::UpdatePlayerScores()
 {
-	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/getplayersfromgame" });
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/game/players" });
 
 	if (res.status_code == 200)
 	{
@@ -118,6 +117,8 @@ void Game::UpdatePlayerScores()
 			}
 		}
 	}
+	
+	update();
 }
 
 void Game::AddPlayersHistory()
@@ -149,7 +150,7 @@ void Game::GameLoop()
 	int waitingTime = 0;
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/stage" },
+		cpr::Url{ "http://localhost:18080/game/stage" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 
@@ -242,7 +243,7 @@ void Game::action(int position)
 		}
 		auto res = cpr::Put
 		(
-			cpr::Url{ "http://localhost:18080/choose" },
+			cpr::Url{ "http://localhost:18080/game/choose" },
 			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) + "&isBase=" + isBase }
 		);
 	}
@@ -265,7 +266,7 @@ void Game::paintEvent(QPaintEvent* paintEvent)
 	painter.setBrush(QColor(83, 66, 50));
 	for (size_t i = 0; i < m_players.size(); i++)
 	{
-		QString color = Player::ToString(m_players[i].GetColor()).c_str();
+		QColor color = m_players[i].GetQColor();
 		QRect playerTable(playersTableStartPoint.first, playersTableStartPoint.second + (i * playersTableSize.second), playersTableSize.first, playersTableSize.second);
 		painter.setPen(Qt::black);
 		painter.drawRect(playerTable);
