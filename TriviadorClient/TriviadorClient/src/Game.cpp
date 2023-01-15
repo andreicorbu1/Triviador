@@ -231,7 +231,7 @@ void Game::GameLoop()
 	{
 		waitingTime = 3000;
 	}
-	
+
 	QTimer::singleShot(waitingTime, this, SLOT(GameLoop()));
 }
 
