@@ -8,19 +8,16 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 	{
 	case 2:
 		m_board = Board(3, 3);
-		m_gameRounds = 5;
 		m_chooseTerritoryRoundsNumber = 7;
 		m_duelRoundsNumber = 10;
 		break;
 	case 3:
 		m_board = Board(5, 3);
-		m_gameRounds = 4;
 		m_chooseTerritoryRoundsNumber = 4;
 		m_duelRoundsNumber = 12;
 		break;
 	case 4:
 		m_board = Board(6, 4);
-		m_gameRounds = 5;
 		m_chooseTerritoryRoundsNumber = 4;
 		m_duelRoundsNumber = 20;
 		break;
@@ -28,7 +25,7 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 		throw std::out_of_range("Invalid number of players");
 		break;
 	}
-	m_ID = -1;
+	
 	SetQuestions(players.size());
 	SetStagesForChooseBase();
 	SetStagesForChooseTerritory();
@@ -57,16 +54,6 @@ std::vector<Player> Game::GetPlayers() const
 std::vector<Player>& Game::GetPlayers()
 {
 	return m_players;
-}
-
-uint16_t Game::GetRounds() const
-{
-	return m_gameRounds;
-}
-
-int32_t Game::GetGameID() const
-{
-	return m_ID;
 }
 
 Player Game::GetWinner()
@@ -269,16 +256,6 @@ void Game::SetPlayers(const std::vector<Player>& players)
 	this->m_players = players;
 }
 
-void Game::SetRounds(const uint16_t& rounds)
-{
-	this->m_gameRounds = rounds;
-}
-
-void Game::SetGameID(const int32_t& gameID)
-{
-	this->m_ID = gameID;
-}
-
 void Game::SetQuestions(const uint16_t& numberOfPlayers)
 {
 	std::random_device rd;
@@ -377,7 +354,6 @@ bool Game::AddTerritory(std::string username, int position, bool isBase)
 
 bool Game::PopPlayerWhoWillMakeAChoose()
 {
-	//GoToNextStage();
 	if (m_currentStage == Stage::ChooseBase)
 	{
 		m_participantsQueue.pop();
@@ -450,8 +426,6 @@ Game& Game::operator=(const Game& other)
 	if (this != &other)
 	{
 		m_board = other.m_board;
-		m_gameRounds = other.m_gameRounds;
-		m_ID = other.m_ID;
 		m_players = other.m_players;
 		m_multipleAnswerQuestions = other.m_multipleAnswerQuestions;
 		m_numericalAnswerQuestions = other.m_numericalAnswerQuestions;
