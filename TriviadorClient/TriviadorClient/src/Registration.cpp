@@ -25,7 +25,7 @@ void Registration::on_logInButton_clicked()
 	}
 
 	auto res = cpr::Post(
-		cpr::Url{ "http://25.65.182.120:18080/login" },
+		cpr::Url{ "http://localhost:18080/login" },
 		cpr::Body{ "username=" + username + "&password=" + password }
 	);
 
@@ -59,7 +59,7 @@ void Registration::on_signUpButton_clicked()
 	}
 
 	auto res = cpr::Put(
-		cpr::Url{ "http://25.65.182.120:18080/signup" },
+		cpr::Url{ "http://localhost:18080/signup" },
 		cpr::Body{ "username=" + username + "&password=" + password }
 	);
 

@@ -32,7 +32,6 @@ int main()
 	Lobby lobby;
 
 	crow::SimpleApp app;
-	app.bindaddr("25.65.182.120");
 
 	auto& addUserToAccountList = CROW_ROUTE(app, "/signup").methods(crow::HTTPMethod::PUT);
 	addUserToAccountList(AddAccountHandler(userList));

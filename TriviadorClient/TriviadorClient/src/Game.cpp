@@ -87,7 +87,7 @@ void Game::UpdateBoard()
 {
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://25.65.182.120:18080/game/board" },
+		cpr::Url{ "http://localhost:18080/game/board" },
 		cpr::Body{"username="+m_currentPlayer.GetName()}
 	);
 
@@ -111,7 +111,7 @@ void Game::UpdateBoard()
 
 void Game::UpdatePlayerScores()
 {
-	auto res = cpr::Get(cpr::Url{ "http://25.65.182.120:18080/game/players" });
+	auto res = cpr::Get(cpr::Url{ "http://localhost:18080/game/players" });
 
 	if (res.status_code == 200)
 	{
@@ -147,7 +147,7 @@ void Game::AddPlayerHistory(Player& player, int rank) const
 {
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://25.65.182.120:18080/addplayerhistory" },
+		cpr::Url{ "http://localhost:18080/addplayerhistory" },
 		cpr::Body{ "id=" + std::to_string(m_ID) + "&username=" + player.GetName() +
 		"&score=" + std::to_string(player.GetScore()) + "&rank=" + std::to_string(rank) }
 	);
@@ -162,7 +162,7 @@ void Game::GameLoop()
 	int waitingTime = 0;
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://25.65.182.120:18080/game/stage" },
+		cpr::Url{ "http://localhost:18080/game/stage" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 
@@ -253,7 +253,7 @@ void Game::action(int position)
 		}
 		auto res = cpr::Put
 		(
-			cpr::Url{ "http://25.65.182.120:18080/game/choose" },
+			cpr::Url{ "http://localhost:18080/game/choose" },
 			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) + "&isBase=" + isBase }
 		);
 	}
@@ -263,7 +263,7 @@ void Game::action(int position)
 			return;
 		auto res = cpr::Get
 		(
-			cpr::Url{ "http://25.65.182.120:18080/attack" },
+			cpr::Url{ "http://localhost:18080/attack" },
 			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) }
 		);
 	}
