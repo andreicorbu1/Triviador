@@ -429,6 +429,8 @@ void Game::DetermineDuelSituation(bool isMultiple)
 			else
 			{
 				GoToNextStage();
+				GoToNextStage();
+				m_duelParticipants.clear();
 			}
 		}
 		else

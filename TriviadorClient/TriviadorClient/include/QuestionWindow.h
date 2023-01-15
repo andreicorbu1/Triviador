@@ -94,6 +94,7 @@ private:
 	std::variant<std::string, int> m_rightAnswer;
 	int m_questionId;
 	Player m_currentPlayer;
+	std::vector<Player> m_players;
 	QElapsedTimer m_resultTimer;
 	bool m_playerAnswered;
 };
