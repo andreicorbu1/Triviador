@@ -29,6 +29,9 @@ public:
 
 	friend std::ostream& operator<< (std::ostream& out, const Territory& t);
 
+	void AddScore(uint16_t score);
+	void DecrementScore(uint16_t score);
+
 private:
 	const uint16_t kBaseScore = 300;
 	const uint16_t kTerritoryScore = 100;

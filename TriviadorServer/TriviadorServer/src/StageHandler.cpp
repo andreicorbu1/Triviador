@@ -1,7 +1,8 @@
 #include "StageHandler.h"
 
-StageHandler::StageHandler(Game& game):
-	m_game(game)
+StageHandler::StageHandler(Game& game, AccountManager& userList):
+	m_game(game),
+	m_userList(userList)
 {
 }
 
@@ -39,6 +40,12 @@ crow::response StageHandler::operator()(const crow::request& req) const
 		else if(currentStage=="attack" && username != m_game.GetCurrentAttacker().GetName())
 		{
 				currentStage = "wait";
+		}
+		else if (currentStage == "result")
+		{
+			m_game.AddPlayerWhoSentRequest(username);
+			m_game.UpdateGameHistory(username);
+			m_userList.InsertUsersFromDbInAccounts();
 		}
 		std::cout << currentStage;
 		crow::json::wvalue response

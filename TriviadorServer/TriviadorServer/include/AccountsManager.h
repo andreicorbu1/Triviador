@@ -34,6 +34,7 @@ public:
 	bool SearchUser(const std::string& username) const;
 	User GetUser(const std::string& username) const;
 	void UpdateUser(const std::string& username, int matchPoints);
+	void InsertUsersFromDbInAccounts();
 
 private:
 	std::unordered_map<std::string, User> m_accounts;

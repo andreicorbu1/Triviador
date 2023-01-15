@@ -19,13 +19,6 @@ crow::response ChooseHandler::operator()(const crow::request& req) const
 		bool isBase = std::stoi(base->second.c_str());
 		if (m_game.AddTerritory(username, position, isBase))
 		{
-			for (auto& player : m_game.GetPlayers())
-			{
-				if (player.GetName() == username)
-				{
-					player.AddScore(isBase == true ? 300 : 100);
-				}
-			}
 			m_game.PopPlayerWhoWillMakeAChoose();
 			return crow::response(200, "Successfully added base");
 		}

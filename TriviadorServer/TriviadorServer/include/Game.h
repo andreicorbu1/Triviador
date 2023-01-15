@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "QuestionManager.h"
 #include "Player.h"
+#include "AccountsManager.h"
 #include <chrono>
 #include <algorithm>
 #include <ranges>
@@ -78,7 +79,6 @@ public:
 	void AddNullPlayer();
 	void SetAttackedPosition(uint16_t position);
 
-
 	//Operators:
 	Game& operator =(const Game& other);
 
@@ -95,11 +95,14 @@ public:
 	bool AddTerritory(std::string username, int position, bool isBase);
 	bool PopPlayerWhoWillMakeAChoose();
 	void DetermineDuelSituation(bool isMultiple=true);
-	
+	void DetermineScoreForAllPlayers();
+	void UpdateGameHistory(const std::string& username);
+
 private:
 	void Cleanup();
 	void StealTerritoryFromDefender();
 	void StealAllTerritories();
+	void ClearPlayersScore();
 	const uint16_t kTwoPlayersNumericAnswerQuestions = 18;
 	const uint16_t kTwoPlayersMultipleAnswerQuestions = 10;
 	const uint16_t kThreePlayersNumericAnswerQuestions = 17;

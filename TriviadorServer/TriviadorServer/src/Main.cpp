@@ -75,7 +75,7 @@ int main()
 	createNewGame(CreateGameHandler(currentGame, lobby));
 
 	auto& stage = CROW_ROUTE(app, "/game/stage");
-	stage(StageHandler(currentGame));
+	stage(StageHandler(currentGame, userList));
 
 	auto& getBoard = CROW_ROUTE(app, "/game/board");
 	getBoard(GetBoardHandler(currentGame));
