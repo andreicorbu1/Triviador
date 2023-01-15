@@ -39,6 +39,7 @@ private:
     void ShowQuestion(QuestionType type);
     void SetBackground();
     void ConnectButtons();
+    void GetBaseIcon();
 
     void UpdateBoard();
     void UpdatePlayerScores();
@@ -55,6 +56,7 @@ private:
     QPixmap m_background;
     QSignalMapper *m_signalMapper;
     int32_t m_ID;
+    QPixmap m_baseIcon;
 
     crow::json::rvalue data;
 

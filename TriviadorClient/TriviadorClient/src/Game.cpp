@@ -17,6 +17,7 @@ Game::Game(std::vector<Player>& players, Player currentPlayer, QWidget* parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 	ui.setupUi(this);
 	SetBackground();
+	GetBaseIcon();
 	m_signalMapper = new QSignalMapper(this);
 	m_questionWindow.SetCurrentPlayer(m_currentPlayer);
 
@@ -74,6 +75,14 @@ void Game::ConnectButtons()
 	}
 }
 
+void Game::GetBaseIcon()
+{
+	if (!m_baseIcon.load("../TriviadorClient/resource/Base-castle.png"))
+	{
+		throw "The base icon couldn't load!";
+	}
+}
+
 void Game::UpdateBoard()
 {
 	auto res = cpr::Get
@@ -89,9 +98,12 @@ void Game::UpdateBoard()
 		{
 			Player player = Player(board[i]["owner"]["name"].s(), Player::ToColor(board[i]["owner"]["color"].s()));
 			int score = board[i]["score"].i();
+			bool isbase = board[i]["base"].b();
 			
 			m_board[i].SetOwner(player);
 			m_board[i].SetScore(score);
+			if(isbase)
+				m_board[i].SetBaseIcon(m_baseIcon);
 			m_board[i].Update();
 		}
 	}
