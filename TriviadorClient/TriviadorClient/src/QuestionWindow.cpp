@@ -50,7 +50,7 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 {
 	cpr::Response res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/question/multiple" },
+		cpr::Url{ "http://25.65.182.120:18080/question/multiple" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
@@ -79,7 +79,7 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 {
 	cpr::Response res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/question/numerical" },
+		cpr::Url{ "http://25.65.182.120:18080/question/numerical" },
 		cpr::Body{ "username=" + m_currentPlayer.GetName() }
 	);
 	if (res.status_code == 200)
@@ -398,7 +398,7 @@ void QuestionWindow::SendAnswer(std::string answer)
 		}
 	}
 
-	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/" + type },
+	cpr::Response res = cpr::Get(cpr::Url{ "http://25.65.182.120:18080/sendanswer/" + type },
 		cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
 
 	if (res.status_code != 200)

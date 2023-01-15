@@ -33,7 +33,7 @@ bool MainMenu::CheckGameCanStart()
 {
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://localhost:18080/newgame" }
+		cpr::Url{ "http://25.65.182.120:18080/newgame" }
 	);
 	return res.status_code == 200;
 }
@@ -77,7 +77,7 @@ void MainMenu::on_joinLobbyButton_clicked()
 	std::string lobbyId = this->ui.lineEdit->text().toUtf8().constData();
 	auto res = cpr::Put
 	(
-		cpr::Url{ "http://localhost:18080/lobby/addplayer" },
+		cpr::Url{ "http://25.65.182.120:18080/lobby/addplayer" },
 		cpr::Body{ "id=" + lobbyId + "&" + "username=" + m_user.GetUsername() }
 	);
 
@@ -109,7 +109,7 @@ void MainMenu::on_createButton_clicked()
 {
 	auto res = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/newlobby" },
+		cpr::Url{ "http://25.65.182.120:18080/newlobby" },
 		cpr::Body{ "username=" + m_user.GetUsername() }
 	);
 
@@ -146,12 +146,12 @@ void MainMenu::ShowPlayerHistory()
 {
 	auto getPlayerHistory = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/playerhistory" },
+		cpr::Url{ "http://25.65.182.120:18080/playerhistory" },
 		cpr::Body{ "username=" + m_user.GetUsername() }
 	);
 	auto getUserLevel = cpr::Get
 	(
-		cpr::Url{ "http://localhost:18080/getuserstats" },
+		cpr::Url{ "http://25.65.182.120:18080/getuserstats" },
 		cpr::Body{ "username=" + m_user.GetUsername() }
 	);
 	try

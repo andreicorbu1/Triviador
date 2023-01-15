@@ -27,16 +27,12 @@ int main()
 	QuestionManager questionManager("resource/Questions.sqlite");
 	PlayerHistoryManager playerHistoryManager("resource/PlayersHistory.sqlite");
 	questionManager.PopulateStorage();
-
-	//Game currentGame({Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red)}); // for tests only
-	//currentGame.InsertQueueParticipant("Adi", 1);
-	//currentGame.InsertQueueParticipant("Andrei", 1);
 	Game currentGame;
 
 	Lobby lobby;
-	//lobby.SetPlayers(std::vector<Player>{ Player("Andrei", Player::Color::Blue), Player("Adi", Player::Color::Red) }); //for tests only
 
 	crow::SimpleApp app;
+	app.bindaddr("25.65.182.120");
 
 	auto& addUserToAccountList = CROW_ROUTE(app, "/signup").methods(crow::HTTPMethod::PUT);
 	addUserToAccountList(AddAccountHandler(userList));
@@ -91,7 +87,6 @@ int main()
 
 	auto& chooseBase = CROW_ROUTE(app, "/game/choose").methods(crow::HTTPMethod::PUT);
 	chooseBase(ChooseHandler(currentGame));
-
 
 	auto& attack = CROW_ROUTE(app, "/attack");
 	attack(AttackTerritoryHanndler(currentGame));
