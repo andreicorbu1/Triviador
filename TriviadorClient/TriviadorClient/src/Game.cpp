@@ -131,7 +131,7 @@ void Game::AddPlayersHistory()
 	}
 }
 
-void Game::AddPlayerHistory(Player& player, int rank)
+void Game::AddPlayerHistory(Player& player, int rank) const
 {
 	auto res = cpr::Put
 	(
@@ -159,13 +159,15 @@ void Game::GameLoop()
 		data = crow::json::load(res.text);
 		if (data["stage"] == "wait")
 		{
-			ui.stageLabel->hide();
+			ui.stageLabel->setText("Wait for enemy next move");
+			ui.stageLabel->show();
+			//ui.stageLabel->hide();
 			waitingTime = 2000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 16000;
+			waitingTime = 10000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
@@ -191,7 +193,9 @@ void Game::GameLoop()
 
 		else if (data["stage"] == "attack")
 		{
-			ui.stageLabel->hide();
+			//ui.stageLabel->hide();
+			ui.stageLabel->setText("Attack someone");
+			ui.stageLabel->show();
 			waitingTime = 2000;
 			// attack
 		}
@@ -200,7 +204,7 @@ void Game::GameLoop()
 			ui.stageLabel->hide();
 			UpdateBoard();
 			UpdatePlayerScores();
-			waitingTime = 2000;
+			waitingTime = 3000;
 		}
 		else if (data["stage"] == "result")
 		{
@@ -241,6 +245,16 @@ void Game::action(int position)
 		(
 			cpr::Url{ "http://localhost:18080/game/choose" },
 			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) + "&isBase=" + isBase }
+		);
+	}
+	else if (data["stage"] == "attack")
+	{
+		if (m_board[position].GetOwner().GetName() == m_currentPlayer.GetName())
+			return;
+		auto res = cpr::Get
+		(
+			cpr::Url{ "http://localhost:18080/attack" },
+			cpr::Body{ "username=" + m_currentPlayer.GetName() + "&position=" + std::to_string(position) }
 		);
 	}
 }

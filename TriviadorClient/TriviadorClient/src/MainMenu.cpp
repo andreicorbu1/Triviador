@@ -6,6 +6,7 @@ MainMenu::MainMenu(QWidget* parent)
 	ui.setupUi(this);
 	m_user.SetUsername("No name");
 	m_user.SetId(-1);
+	ShowPlayerHistory();
 }
 
 MainMenu::MainMenu(const User& user, QWidget* parent) :
@@ -13,6 +14,7 @@ MainMenu::MainMenu(const User& user, QWidget* parent) :
 	m_user(user)
 {
 	ui.setupUi(this);
+	ShowPlayerHistory();
 }
 
 MainMenu::~MainMenu()
@@ -36,7 +38,7 @@ bool MainMenu::CheckGameCanStart()
 	return res.status_code == 200;
 }
 
-void MainMenu::StartLobby(std::string lobbyID)
+void MainMenu::StartLobby(const std::string& lobbyID)
 {
 	m_lobby = new Lobby(lobbyID, m_user.GetUsername());
 	m_lobby->show();
@@ -52,7 +54,7 @@ void MainMenu::Show()
 void MainMenu::on_myProfileButton_clicked()
 {
 	this->ui.stackedWidget->setCurrentWidget(ui.myProfile);
-	ShowPlayerHistory();
+	//ShowPlayerHistory();
 }
 
 void MainMenu::on_creditsButton_clicked() const
@@ -103,7 +105,7 @@ void MainMenu::on_joinLobbyButton_clicked()
 	}
 }
 
-void MainMenu::on_createButton_clicked() 
+void MainMenu::on_createButton_clicked()
 {
 	auto res = cpr::Get
 	(
@@ -118,7 +120,7 @@ void MainMenu::on_createButton_clicked()
 
 		StartLobby(std::to_string(lobbyId));
 	}
-	catch(std::exception ex)
+	catch (std::exception ex)
 	{
 		qDebug() << "Can't create new lobby";
 	}
@@ -136,6 +138,7 @@ void MainMenu::on_logOutButton_clicked()
 void MainMenu::on_lobbyFinished()
 {
 	Show();
+	ShowPlayerHistory();
 	m_lobby->close();
 }
 
@@ -146,29 +149,42 @@ void MainMenu::ShowPlayerHistory()
 		cpr::Url{ "http://localhost:18080/playerhistory" },
 		cpr::Body{ "username=" + m_user.GetUsername() }
 	);
+	auto getUserLevel = cpr::Get
+	(
+		cpr::Url{ "http://localhost:18080/getuserstats" },
+		cpr::Body{ "username=" + m_user.GetUsername() }
+	);
 	try
 	{
 		auto playerHistory = crow::json::load(getPlayerHistory.text);
+		auto levelRequest = crow::json::load(getUserLevel.text);
 		int line = 0;
 		int column = 0;
-		for (size_t i = 0; i < playerHistory.size(); i++)
+		if (playerHistory.size() > 0)
 		{
-			int32_t gameID = playerHistory[i]["id"].i();
-			int score = playerHistory[i]["score"].i();
-			int rank = playerHistory[i]["rank"].i();
-
-			auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAtPosition(line, column)->widget()) };
-			playerHistoryLabel->setText("GameID: " + QString::number(gameID) + " Score: " + QString::number(score) + " Rank : " + QString::number(rank));
-			column++;
-			if (column > 1)
+			for (size_t i = 0; i < playerHistory.size(); i++)
 			{
-				column = 0;
-				line++;
+				int32_t gameID = playerHistory[i]["id"].i();
+				int score = playerHistory[i]["score"].i();
+				int rank = playerHistory[i]["rank"].i();
+				auto* playerHistoryLabel{ static_cast<QLabel*>(ui.playerHistoryGrid->itemAtPosition(line, column)->widget()) };
+				playerHistoryLabel->setText("GameID: " + QString::number(gameID) + " Score: " + QString::number(score) + " Rank : " + QString::number(rank));
+				column++;
+				if (column > 1)
+				{
+					column = 0;
+					line++;
+				}
 			}
 		}
+		std::string level = levelRequest["level"].s();
+		std::string points = levelRequest["points"].s();
+		ui.levelLabel->setText(QString(level.c_str()));
+		ui.pointsLabel->setText(QString((points + "/1000").c_str()));
 	}
-	catch (std::exception ex)
+	catch (const std::exception& ex)
 	{
+		qDebug() << ex.what();
 		qDebug() << "Can't show matches history!";
 	}
 }

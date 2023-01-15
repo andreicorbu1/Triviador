@@ -6,7 +6,7 @@ GetAllPlayersFromGameHandler::GetAllPlayersFromGameHandler(Game& game) : m_game(
 
 crow::response GetAllPlayersFromGameHandler::operator()(const crow::request& req) const
 {
-	std::vector<Player> players = m_game.GetPlayers();
+	std::vector<Player>& players = m_game.GetPlayers();
 	nlohmann::json json = players;
 
 	if (players.empty())

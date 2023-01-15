@@ -1,6 +1,6 @@
 #include "ChooseHandler.h"
 
-ChooseHandler::ChooseHandler(Game& game):
+ChooseHandler::ChooseHandler(Game& game) :
 	m_game(game)
 {
 }
@@ -12,7 +12,7 @@ crow::response ChooseHandler::operator()(const crow::request& req) const
 	auto userName = bodyArgs.find("username");
 	auto boardPosition = bodyArgs.find("position");
 	auto base = bodyArgs.find("isBase");
-	if (userName != end && boardPosition!=end)
+	if (userName != end && boardPosition != end)
 	{
 		std::string username = userName->second;
 		int position = std::stoi(boardPosition->second);

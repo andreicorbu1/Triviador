@@ -109,7 +109,11 @@ void QuestionWindow::Show()
 
 void QuestionWindow::StartTimer()
 {
-	ui.timeProgressBar->setValue(100);
+	ui.timeProgressBar->setValue(50);
+	if (m_type == QuestionType::MultipleAnswer)
+	{
+		ui.timeProgressBar->setValue(100);
+	}
 	m_timer->start(100);
 	m_resultTimer.start();
 }
@@ -374,6 +378,8 @@ void QuestionWindow::SendAnswer(std::string answer)
 			answer = "0";
 		}
 	}
+	else if (m_type == QuestionType::MultipleAnswer && answer == "")
+		answer = "232";
 
 	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/" + type },
 			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });

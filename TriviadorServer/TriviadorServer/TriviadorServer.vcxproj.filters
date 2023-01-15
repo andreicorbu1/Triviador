@@ -114,6 +114,9 @@
     <ClCompile Include="src\AttackTerritoryHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\GetUserStatsHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AccountsManager.h">
@@ -213,6 +216,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\AttackTerritoryHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GetUserStatsHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -49,6 +49,11 @@ QPushButton* Territory::getButton() const
     return m_button;
 }
 
+Player Territory::GetOwner() const
+{
+    return m_owner;
+}
+
 void Territory::Update()
 {
 	if (m_owner.GetColor() == Player::Color::None)

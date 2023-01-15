@@ -18,6 +18,8 @@
 #include "PlayerHistoryHandler.h"
 #include "AddToPlayerHistoryHandler.h"
 #include "ChooseHandler.h"
+#include "AttackTerritoryHandler.h"
+#include "GetUserStatsHandler.h"
 
 int main()
 {
@@ -89,6 +91,13 @@ int main()
 
 	auto& chooseBase = CROW_ROUTE(app, "/game/choose").methods(crow::HTTPMethod::PUT);
 	chooseBase(ChooseHandler(currentGame));
+
+
+	auto& attack = CROW_ROUTE(app, "/attack");
+	attack(AttackTerritoryHanndler(currentGame));
+
+	auto&getPlayerLevelForStats = CROW_ROUTE(app, "/getuserstats");
+	getPlayerLevelForStats(GetUserStatsHandler(userList));
 
 	app.port(18080).multithreaded().run();
 	return 0;

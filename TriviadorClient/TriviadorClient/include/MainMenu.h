@@ -8,6 +8,7 @@
 #include "Lobby.h"
 #include "Registration.h"
 #include "User.h"
+#include <algorithm>
 
 class MainMenu : public QWidget
 {
@@ -20,7 +21,7 @@ public:
 
 	void HiMessage(const std::string& playerName);
 	bool CheckGameCanStart();
-	void StartLobby(std::string lobbyID);
+	void StartLobby(const std::string& lobbyID);
 
 public slots:
 	void Show();

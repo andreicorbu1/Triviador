@@ -26,6 +26,11 @@ crow::response SendAnswerMultipleQuestion::operator()(const crow::request& req) 
 		std::string rightAnswer = m_game.GetMultipleAnswerQuestion(id).GetRightAnswer();
 		
 		m_game.InsertQueueParticipant(username, (int)(rightAnswer != answer));
+
+		//if (m_game.GetParticipantsQueueSize() == 2)
+		//{
+		//m_game.DetermineDuelSituation();
+		//}
 		
 		if (rightAnswer == answer)
 		{

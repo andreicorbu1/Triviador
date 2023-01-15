@@ -22,6 +22,7 @@ public:
     
 	// Getters:
     QPushButton* getButton() const;
+    Player GetOwner() const;
     
     // Methods:
     void Update();

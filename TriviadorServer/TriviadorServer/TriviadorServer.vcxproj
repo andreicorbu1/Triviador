@@ -134,6 +134,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS /D _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +151,7 @@
     <ClCompile Include="src\ChooseHandler.cpp" />
     <ClCompile Include="src\CreateLobbyHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GetUserStatsHandler.cpp" />
     <ClCompile Include="src\PlayerHistory.cpp" />
     <ClCompile Include="src\PlayerHistoryManager.cpp" />
     <ClCompile Include="src\GetAllPlayersFromGameHandler.cpp" />
@@ -187,6 +189,7 @@
     <ClInclude Include="include\ChooseHandler.h" />
     <ClInclude Include="include\CreateLobbyHandler.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GetUserStatsHandler.h" />
     <ClInclude Include="include\PlayerHistory.h" />
     <ClInclude Include="include\PlayerHistoryManager.h" />
     <ClInclude Include="include\GetAllPlayersFromGameHandler.h" />
