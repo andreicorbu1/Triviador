@@ -36,6 +36,11 @@ void User::SetGamesPlayed(int gamesPlayed)
 	m_gamesPlayed = gamesPlayed;
 }
 
+void User::SetPoints(int points)
+{
+	m_points = points;
+}
+
 void User::SetId(int id)
 {
 	m_id = id;
@@ -53,12 +58,12 @@ void User::UpdateLevel(int matchPoints)
 	m_points = m_points % 1000;
 }
 
-const std::string User::GetUsername() const
+const std::string& User::GetUsername() const
 {
 	return m_username;
 }
 
-const std::string User::GetPassword() const
+const std::string& User::GetPassword() const
 {
 	return m_password;
 }
@@ -96,14 +101,4 @@ User& User::operator=(User&& user) noexcept
 		m_id = std::exchange(user.m_id, 0);
 	}
 	return *this;
-}
-
-std::ostream& operator<<(std::ostream& os, const User& user)
-{
-	os << "Username: " << user.m_username << std::endl;
-	os << "Password: " << user.m_password << std::endl;
-	os << "Games played: " << user.m_gamesPlayed << std::endl;
-	os << "Level: " << user.m_level << std::endl;
-
-	return os;
 }
