@@ -7,7 +7,7 @@
 #include "Game.h"
 #include "Lobby.h"
 #include "Registration.h"
-#include "User.h"
+#include "../../DLL/User.h"
 #include <algorithm>
 
 class MainMenu : public QWidget

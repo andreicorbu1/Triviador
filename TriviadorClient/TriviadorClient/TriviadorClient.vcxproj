@@ -127,7 +127,6 @@
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\QuestionWindow.cpp" />
     <ClCompile Include="src\Registration.cpp" />
-    <ClCompile Include="src\User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Game.h" />
@@ -145,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Board.h" />
-    <ClInclude Include="include\User.h" />
     <QtMoc Include="include\ResultWindow.h" />
     <QtMoc Include="include\Lobby.h" />
     <ClInclude Include="include\Territory.h" />
@@ -189,6 +187,11 @@
     <None Include="resource\question\RedFlag.svg" />
     <None Include="resource\question\Telescope.svg" />
     <None Include="resource\question\YellowFlag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DLL\DLL.vcxproj">
+      <Project>{9e2136b6-2306-4123-885c-bac6bd2ba278}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

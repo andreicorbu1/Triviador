@@ -1,5 +1,5 @@
 #include "AccountsManager.h"
-AccountManager::AccountManager(const std::string& databaseFileName) : m_database(CreateStorage(databaseFileName))
+AccountManager::AccountManager(const std::string& databaseFileName) : m_database(CreateStorageForAccounts(databaseFileName))
 {
 	m_database.sync_schema();
 	auto initUsersCount = m_database.count<User>();
@@ -25,34 +25,42 @@ void AccountManager::AddUser(User& user)
 
 void AccountManager::DeleteUser(const std::string& username)
 {
-	if (!SearchUser(username))
-		return;
-	
-	m_database.remove<User>(m_accounts[username].m_id);
-	m_accounts.erase(username);
+	if (SearchUser(username))
+	{
+		m_database.remove<User>(m_accounts[username].GetId());
+		m_accounts.erase(username);
+	}
 }
 
 bool AccountManager::SearchUser(const std::string& username) const
 {
+	// True if successful, false otherwise
 	return m_accounts.contains(username);
 }
 
 User AccountManager::GetUser(const std::string& username) const
 {
-	return (SearchUser(username) ? m_accounts.at(username) : User());
+	if (SearchUser(username))
+	{
+		return m_accounts.at(username);
+	}
+	return {};
 }
 
 void AccountManager::UpdateUser(const std::string& username, int matchPoints)
 {
-	if (!SearchUser(username))
-		return;
-	
-	m_accounts[username].UpdateLevel(matchPoints);
-	m_database.update(m_accounts[username]);
+	if (SearchUser(username) == true)
+	{
+		m_accounts[username].UpdateLevel(matchPoints);
+		m_database.update(m_accounts[username]);
+	}
 }
 
 bool AccountManager::ValidateCredentials(const User& user) const
 {
-	std::regex passwordRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$");
-	return std::regex_match(user.GetPassword(), passwordRegex) && !SearchUser(user.GetUsername());
+	if (std::regex_match(user.GetPassword(), std::regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,25}$")))
+	{
+		return SearchUser(user.GetUsername()) == false;
+	}
+	return false;
 }

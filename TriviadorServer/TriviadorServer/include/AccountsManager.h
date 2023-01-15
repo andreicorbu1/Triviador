@@ -1,28 +1,28 @@
 #pragma once
-#include "User.h"
+#include "../../DLL/User.h"
 #include <regex>
 #include <unordered_map>
 #include <sqlite_orm/sqlite_orm.h>
 
 namespace sql = sqlite_orm;
 
-static auto CreateStorage(const std::string& databaseFileName)
+static auto CreateStorageForAccounts(const std::string& databaseFileName)
 {
 	return sql::make_storage(
 		databaseFileName,
 		sql::make_table(
-		"User",
-		sql::make_column("id", &User::m_id, sql::autoincrement(), sql::primary_key()),
-		sql::make_column("Username", &User::m_username),
-		sql::make_column("Password", &User::m_password),
-		sql::make_column("Level", &User::m_level),
-		sql::make_column("Points", &User::m_points),
-		sql::make_column("Games Played", &User::m_gamesPlayed)
-	)
+			"User",
+			sql::make_column("id", &User::SetId, &User::GetId, sql::autoincrement(), sql::primary_key()),
+			sql::make_column("Username", &User::SetUsername, &User::GetUsername),
+			sql::make_column("Password", &User::SetPassword, &User::GetPassword),
+			sql::make_column("Level", &User::SetLevel, &User::GetLevel),
+			sql::make_column("Points", &User::SetPoints, &User::GetPoints),
+			sql::make_column("Games Played", &User::SetGamesPlayed, &User::GetGamesPlayed)
+		)
 	);
 }
 
-using Storage = decltype(CreateStorage(""));
+using Storage = decltype(CreateStorageForAccounts(""));
 
 class AccountManager
 {
