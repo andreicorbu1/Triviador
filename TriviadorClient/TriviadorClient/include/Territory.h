@@ -21,6 +21,7 @@ public:
     void SetMask(const QPixmap& mask);
 	void SetOwner(const Player& player);
 	void SetScore(const int& score);
+    void SetBaseIcon(const QPixmap& baseIcon);
     
 	// Getters:
     QSharedPointer<QPushButton> GetButton() const;

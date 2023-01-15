@@ -1,71 +1,72 @@
 <RCC>
-  <qresource prefix="/icon">
-    <file>Triviador-castle.png</file>
-    <file>Logout.png</file>
-    <file>Triviador.ico</file>
-    <file>back_arrow.png</file>
-  </qresource>
-  <qresource prefix="/Others">
-    <file>question/Hammer.svg</file>
-    <file>question/Parrot.svg</file>
-    <file>question/Telescope.svg</file>
-    <file>question/Plank.svg</file>
-    <file>question/PlayArrow.svg</file>
-  </qresource>
-  <qresource prefix="Flags">
-    <file>question/BlueFlag.svg</file>
-    <file>question/GreenFlag.svg</file>
-    <file>question/RedFlag.svg</file>
-    <file>question/YellowFlag.svg</file>
-  </qresource>
-  <qresource prefix="/Fonts">
-    <file>font/KiwiMaru-Light.ttf</file>
-    <file>font/KiwiMaru-Medium.ttf</file>
-    <file>font/KiwiMaru-Regular.ttf</file>
-    <file>font/LuckiestGuy-Regular.ttf</file>
-  </qresource>
-  <qresource prefix="/Banner">
-    <file>question/EmptyBanner.svg</file>
-    <file>Banner.png</file>
-  </qresource>
-  <qresource prefix="/background">
-    <file>Background.png</file>
-  </qresource>
-  <qresource prefix="/map4players">
-    <file>map4players/00.png</file>
-    <file>map4players/01.png</file>
-    <file>map4players/02.png</file>
-    <file>map4players/03.png</file>
-    <file>map4players/10.png</file>
-    <file>map4players/11.png</file>
-    <file>map4players/12.png</file>
-    <file>map4players/13.png</file>
-    <file>map4players/20.png</file>
-    <file>map4players/21.png</file>
-    <file>map4players/22.png</file>
-    <file>map4players/23.png</file>
-    <file>map4players/30.png</file>
-    <file>map4players/31.png</file>
-    <file>map4players/32.png</file>
-    <file>map4players/33.png</file>
-    <file>map4players/40.png</file>
-    <file>map4players/41.png</file>
-    <file>map4players/42.png</file>
-    <file>map4players/43.png</file>
-    <file>map4players/50.png</file>
-    <file>map4players/51.png</file>
-    <file>map4players/52.png</file>
-    <file>map4players/53.png</file>
-  </qresource>
-  <qresource prefix="/map2players">
-    <file>map2players/00.png</file>
-    <file>map2players/01.png</file>
-    <file>map2players/02.png</file>
-    <file>map2players/10.png</file>
-    <file>map2players/11.png</file>
-    <file>map2players/12.png</file>
-    <file>map2players/20.png</file>
-    <file>map2players/21.png</file>
-    <file>map2players/22.png</file>
-  </qresource>
+    <qresource prefix="/icon">
+        <file>Triviador-castle.png</file>
+        <file>Logout.png</file>
+        <file>Triviador.ico</file>
+        <file>back_arrow.png</file>
+        <file>Base-castle.png</file>
+    </qresource>
+    <qresource prefix="/Others">
+        <file>question/Hammer.svg</file>
+        <file>question/Parrot.svg</file>
+        <file>question/Telescope.svg</file>
+        <file>question/Plank.svg</file>
+        <file>question/PlayArrow.svg</file>
+    </qresource>
+    <qresource prefix="/Flags">
+        <file>question/BlueFlag.svg</file>
+        <file>question/GreenFlag.svg</file>
+        <file>question/RedFlag.svg</file>
+        <file>question/YellowFlag.svg</file>
+    </qresource>
+    <qresource prefix="/Fonts">
+        <file>font/KiwiMaru-Light.ttf</file>
+        <file>font/KiwiMaru-Medium.ttf</file>
+        <file>font/KiwiMaru-Regular.ttf</file>
+        <file>font/LuckiestGuy-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/Banner">
+        <file>question/EmptyBanner.svg</file>
+        <file>Banner.png</file>
+    </qresource>
+    <qresource prefix="/background">
+        <file>Background.png</file>
+    </qresource>
+    <qresource prefix="/map4players">
+        <file>map4players/00.png</file>
+        <file>map4players/01.png</file>
+        <file>map4players/02.png</file>
+        <file>map4players/03.png</file>
+        <file>map4players/10.png</file>
+        <file>map4players/11.png</file>
+        <file>map4players/12.png</file>
+        <file>map4players/13.png</file>
+        <file>map4players/20.png</file>
+        <file>map4players/21.png</file>
+        <file>map4players/22.png</file>
+        <file>map4players/23.png</file>
+        <file>map4players/30.png</file>
+        <file>map4players/31.png</file>
+        <file>map4players/32.png</file>
+        <file>map4players/33.png</file>
+        <file>map4players/40.png</file>
+        <file>map4players/41.png</file>
+        <file>map4players/42.png</file>
+        <file>map4players/43.png</file>
+        <file>map4players/50.png</file>
+        <file>map4players/51.png</file>
+        <file>map4players/52.png</file>
+        <file>map4players/53.png</file>
+    </qresource>
+    <qresource prefix="/map2players">
+        <file>map2players/00.png</file>
+        <file>map2players/01.png</file>
+        <file>map2players/02.png</file>
+        <file>map2players/10.png</file>
+        <file>map2players/11.png</file>
+        <file>map2players/12.png</file>
+        <file>map2players/20.png</file>
+        <file>map2players/21.png</file>
+        <file>map2players/22.png</file>
+    </qresource>
 </RCC>
