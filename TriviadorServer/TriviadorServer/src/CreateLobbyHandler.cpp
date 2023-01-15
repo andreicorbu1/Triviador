@@ -6,44 +6,38 @@ CreateLobbyHandler::CreateLobbyHandler(Lobby& lobby, AccountManager& userList) :
 {
 }
 
-crow::json::wvalue CreateLobbyHandler::operator()(const crow::request& req) const
+crow::response CreateLobbyHandler::operator()(const crow::request& req) const
 {
 	auto bodyArgs = ParseUrlArgs(req.body);
 	auto end = bodyArgs.end();
-	auto userName = bodyArgs.find("username");
-	if (userName != end)
+	auto usernameArg = bodyArgs.find("username");
+	if (usernameArg == end)
 	{
-		std::string username = userName->second;
-		if (m_userList.SearchUser(username))
-		{
-			if (m_lobby.GetLobbyID() == INT_MAX)
-			{
-				Lobby lobby(Player(username, Player::Color::None));
-				m_lobby = lobby;
-				crow::json::wvalue jsonWithLobbyID
-				{
-					{"lobby_id", lobby.GetLobbyID()}
-				};
-				return crow::json::wvalue(jsonWithLobbyID);
-			}
-			return crow::json::wvalue
-			{
-				{"lobby is already active", "400"}
-			};
-		}
-		else
-		{
-			crow::json::wvalue jsonWithInvalidUsername
-			{
-				{"invalid_username", "404"}
-			};
-			return crow::json::wvalue(jsonWithInvalidUsername);
-		}
+		return crow::response(404, "Username is invalid");
 	}
-
-	crow::json::wvalue jsonWithResponse
+	
+	if (m_lobby.HadExpired())
 	{
-		{"no_username", "404"}
+		m_lobby.ClearLobby();
+	}
+	
+	std::string username = usernameArg->second;
+	if (!m_userList.SearchUser(username))
+	{
+		return crow::response(404, "Username is invalid");
+	}
+		
+	if (m_lobby.GetLobbyID() != INT_MAX)
+	{
+		return crow::response(402, "Lobby is already created");
+	}
+	
+	Lobby lobby(Player(username, Player::Color::None));
+	m_lobby = lobby;
+	crow::json::wvalue jsonWithLobbyID
+	{
+		{"lobby_id", lobby.GetLobbyID()}
 	};
-	return crow::json::wvalue(jsonWithResponse);
+
+	return crow::json::wvalue(jsonWithLobbyID);
 }

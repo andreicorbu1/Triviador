@@ -19,7 +19,6 @@ crow::response GetBoardHandler::operator()(const crow::request& req) const
 			if (playersWhoSentRequest.size() == m_game.GetPlayers().size())
 			{
 				m_game.GoToNextStage();
-				//return ;
 			}
 			Board board = m_game.GetBoard();
 			std::vector<Territory> territories = board.GetTerritories();
@@ -31,7 +30,6 @@ crow::response GetBoardHandler::operator()(const crow::request& req) const
 			}
 
 			std::string jsonString = json.dump();
-			//std::cout << jsonString;
 			return crow::json::wvalue(crow::json::load(jsonString));
 		}
 	}

@@ -2,6 +2,8 @@
 #include <QPainter>
 #include <QPushButton>
 #include <QScreen>
+#include <QSharedPointer>
+#include <memory>
 
 #include "Player.h"
 
@@ -12,7 +14,7 @@ public:
     Territory(QWidget* parent);
     Territory(const Territory& territory);
     Territory(Territory&& territory) noexcept;
-    ~Territory();
+    ~Territory() = default;
 
     // Setters:
     void SetGeometry(int x, int y, int width, int height);
@@ -22,7 +24,7 @@ public:
     void SetBaseIcon(const QPixmap& baseIcon);
     
 	// Getters:
-    QPushButton* getButton() const;
+    QSharedPointer<QPushButton> GetButton() const;
     Player GetOwner() const;
     
     // Methods:
@@ -39,6 +41,6 @@ private:
 private:
     Player m_owner;
     uint16_t m_score;
-    QPushButton* m_button;
+    QSharedPointer<QPushButton> m_button;
 };
 

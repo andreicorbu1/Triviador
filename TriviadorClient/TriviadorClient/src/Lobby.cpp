@@ -15,14 +15,6 @@ Lobby::Lobby(const std::string& lobbyID, const std::string& username, QWidget* p
 	QTimer::singleShot(0, this, SLOT(LobbyLoop()));
 }
 
-Lobby::~Lobby()
-{}
-
-void Lobby::closeEvent(QCloseEvent* event)
-{
-	//on_leaveLobbyButton_clicked();
-}
-
 void Lobby::on_leaveLobbyButton_clicked()
 {
 	auto res = cpr::Get
@@ -44,7 +36,6 @@ void Lobby::on_startGameButton_clicked()
 
 void Lobby::on_gameFinished()
 {
-	qDebug() << "Here";
 	m_game->close();
 	delete m_game;
 	on_leaveLobbyButton_clicked();
@@ -53,21 +44,21 @@ void Lobby::on_gameFinished()
 void Lobby::LobbyLoop()
 {
 	int waitingTime = 0;
-	QPainter painter(this);
+	
 	auto playersFromLobby = cpr::Get
 	(
 		cpr::Url{ "http://localhost:18080/lobby/players" },
 		cpr::Body{ "id=" + m_lobbyID }
 	);
 	
-	if (playersFromLobby.status_code == 404)
+	if (playersFromLobby.status_code != 200)
 	{
-		emit finished();
 		return;
 	}
 	
 	HideAllPlayersName();
 	m_players.clear();
+	QPainter painter(this);
 	auto players = crow::json::load(playersFromLobby.text);
 	for (size_t i = 0; i < players.size(); i++)
 	{
@@ -75,7 +66,7 @@ void Lobby::LobbyLoop()
 		std::string color = players[i]["color"].s();
 		m_playersLabel[i]->setText(QString::fromUtf8(name));
 		m_playersLabel[i]->show();
-		m_players.push_back(Player(name, Player::ToColor(color)));
+		m_players.emplace_back(name, Player::ToColor(color));
 	}
 	if (m_players.size() > 1)
 	{

@@ -20,8 +20,7 @@ class Lobby : public QWidget
 
 public:
 	Lobby(const std::string& lobbyID, const std::string& username, QWidget* parent = nullptr);
-	~Lobby();
-	void closeEvent(QCloseEvent* event) override;
+	~Lobby() = default;
 
 signals:
 	void finished();

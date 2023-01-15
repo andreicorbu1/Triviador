@@ -475,7 +475,7 @@ border: none;
            </property>
            <property name="styleSheet">
             <string notr="true">background: rgb(128, 18, 18);
-</string>
+height: 50px;</string>
            </property>
            <property name="text">
             <string>JOIN</string>

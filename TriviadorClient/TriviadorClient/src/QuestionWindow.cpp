@@ -30,6 +30,7 @@ void QuestionWindow::SetCurrentPlayer(const Player& player)
 
 void QuestionWindow::FetchQuestion(std::vector<Player>& players)
 {
+	m_players.clear();
 	ResetButtons();
 	if (m_type == QuestionType::MultipleAnswer)
 	{
@@ -55,7 +56,6 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
-		std::vector<Player> players;
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].s());
 		SetQuestionId(question["id"].i());
@@ -69,9 +69,9 @@ void QuestionWindow::FetchMultipleAnswerQuestion()
 			auto name = player["name"].s();
 			std::string color = player["color"].s();
 			Player player(name, Player::ToColor(color));
-			players.push_back(player);
+			m_players.push_back(player);
 		}
-		SetFlags(players);
+		SetFlags(m_players);
 	}
 }
 
@@ -85,17 +85,18 @@ void QuestionWindow::FetchNumericalAnswerQuestion()
 	if (res.status_code == 200)
 	{
 		auto question = crow::json::load(res.text);
-		std::vector<Player> players;
 		SetQuestion(question["question"].s());
 		SetRightAnswer(question["right_answer"].i());
+
 		for (auto& player : question["players"])
 		{
 			auto name = player["name"].s();
 			std::string color = player["color"].s();
 			Player player(name, Player::ToColor(color));
-			players.push_back(player);
+			m_players.push_back(player);
 		}
-		SetFlags(players);
+
+		SetFlags(m_players);
 		SetQuestionId(question["id"].i());
 	}
 }
@@ -218,7 +219,7 @@ void QuestionWindow::UpdateProgressBar()
 		{
 			SendAnswer();
 		}
-		
+
 		return;
 	}
 
@@ -366,23 +367,36 @@ void QuestionWindow::SendAnswer(std::string answer)
 	auto responseTime = static_cast<int>(m_resultTimer.elapsed());
 	std::string username = m_currentPlayer.GetName();
 	std::string type = m_type == QuestionType::MultipleAnswer ? "multiple" : "numerical";
-	
+
+	bool containsCurrentPlayer = false;
+	for (const auto& player : m_players)
+	{
+		std::string usernamePlayer = player.GetName();
+		if (username == usernamePlayer)
+		{
+			containsCurrentPlayer = true;
+		}
+	}
+
+	if (!containsCurrentPlayer)
+	{
+		return;
+	}
+
 	if (!m_playerAnswered)
 	{
 		if (m_type == QuestionType::MultipleAnswer)
 		{
-			answer = "";
+			answer = "Wrong Answer";
 		}
 		else if (m_type == QuestionType::NumericalAnswer)
 		{
 			answer = "0";
 		}
 	}
-	else if (m_type == QuestionType::MultipleAnswer && answer == "")
-		answer = "232";
 
 	cpr::Response res = cpr::Get(cpr::Url{ "http://localhost:18080/sendanswer/" + type },
-			cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
+		cpr::Body{ "username=" + username + "&id=" + std::to_string(m_questionId) + "&answer=" + answer + "&responseTime=" + std::to_string(responseTime) });
 
 	if (res.status_code != 200)
 	{
