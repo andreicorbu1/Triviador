@@ -34,15 +34,19 @@ crow::response MultipleAnswerQuestionHandler::operator()(const crow::request& re
 				multipleAnswerQuestion = m_game.GetCurrentMultipleAnswerQuestion();
 				id = m_game.GetCurrentMultipleAnswerQuestionIndex();
 				m_game.AddPlayerWhoSentRequest(username);
-
+				playersWhoSentRequest = m_game.GetPlayersWhoSentRequest();
+				if (playersWhoSentRequest.size() == m_game.GetPlayers().size())
+				{
+					m_game.IncrementMultipleAnswerQuestionIndex();
+				}
 			}
-			else if(playersWhoSentRequest.size()==m_game.GetPlayers().size())
-			{
-				std::pair<MultipleAnswerQuestion, uint16_t> questionFromServer = m_game.GetNewMultipleAnswerQuestion();
-				multipleAnswerQuestion = questionFromServer.first;
-				id = questionFromServer.second;
-				m_game.AddPlayerWhoSentRequest(username);
-			}
+			//else if(playersWhoSentRequest.size()==m_game.GetPlayers().size())
+			//{
+			//	std::pair<MultipleAnswerQuestion, uint16_t> questionFromServer = m_game.GetNewMultipleAnswerQuestion();
+			//	multipleAnswerQuestion = questionFromServer.first;
+			//	id = questionFromServer.second;
+			//	//m_game.AddPlayerWhoSentRequest(username);
+			//}
 			else
 			{
 				return crow::response(402, "Player already did this request");

@@ -36,6 +36,10 @@ crow::response StageHandler::operator()(const crow::request& req) const
 				return response;
 			}
 		}
+		else if(currentStage=="attack" && username != m_game.GetCurrentAttacker().GetName())
+		{
+				currentStage = "wait";
+		}
 		std::cout << currentStage;
 		crow::json::wvalue response
 		{

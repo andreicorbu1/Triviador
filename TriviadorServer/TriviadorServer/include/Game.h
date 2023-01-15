@@ -62,8 +62,11 @@ public:
 	const std::unordered_set<std::string>& GetPlayersWhoSentRequest() const;
 	const std::vector<Player>& GetParticipants() const;
 	std::string GetPlayerWhoWillMakeAChoice() const;
+	const Player& GetCurrentAttacker();
+	uint16_t GetParticipantsQueueSize() const;
 
 	void IncrementNumericalAnswerQuestionIndex();
+	void IncrementMultipleAnswerQuestionIndex();
 
 	//Setters:
 	void SetBoard(const Board& board);
@@ -73,6 +76,7 @@ public:
 	void SetQuestions(const uint16_t& numberOfPlayers);
 	void GoToNextStage();
 	void AddNullPlayer();
+	void SetAttackedPosition(uint16_t position);
 
 
 	//Operators:
@@ -90,9 +94,12 @@ public:
 	void InsertQueueParticipant(const std::string& username, const int& answerCorrentness, const int& responseTime = 0);
 	bool AddTerritory(std::string username, int position, bool isBase);
 	bool PopPlayerWhoWillMakeAChoose();
-
+	void DetermineDuelSituation(bool isMultiple=true);
+	
 private:
 	void Cleanup();
+	void StealTerritoryFromDefender();
+	void StealAllTerritories();
 	const uint16_t kTwoPlayersNumericAnswerQuestions = 18;
 	const uint16_t kTwoPlayersMultipleAnswerQuestions = 10;
 	const uint16_t kThreePlayersNumericAnswerQuestions = 17;
@@ -106,6 +113,8 @@ private:
 private:
 	Board m_board;
 	std::vector<Player> m_players;
+	std::vector<Player> m_duelOrder;
+	int16_t m_duelOrderIndex;
 	std::unordered_map<uint16_t, std::vector<Player>> m_alreadyAnswered;
 	std::vector<MultipleAnswerQuestion> m_multipleAnswerQuestions;
 	std::vector<NumericalAnswerQuestion> m_numericalAnswerQuestions;
@@ -120,4 +129,5 @@ private:
 	std::vector<Player> m_duelParticipants;
 	std::priority_queue<Participant, std::vector<Participant>, ParticipantCompare> m_participantsQueue;
 	uint16_t m_choosedTerritoryCounter=0;
+	uint16_t m_attackedPosition;
 };

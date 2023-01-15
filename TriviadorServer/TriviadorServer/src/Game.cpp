@@ -33,6 +33,7 @@ Game::Game(const std::vector<Player>& players) : m_players(players)
 	SetStagesForChooseBase();
 	SetStagesForChooseTerritory();
 	SetStagesForDuel();
+	m_stages.push_back(Stage::Result);
 	m_currentStageIndex = 0;
 	m_currentStage = m_stages[0];
 	//m_duelParticipants.resize(2);
@@ -83,7 +84,7 @@ uint16_t Game::GetCurrentNumericalAnswerQuestionIndex() const
 
 uint16_t Game::GetCurrentMultipleAnswerQuestionIndex() const
 {
-	return numericQuestionIndex;
+	return multipleQuestionIndex;
 }
 
 std::pair<NumericalAnswerQuestion, uint16_t> Game::GetNumericalAnswerQuestion()
@@ -232,9 +233,30 @@ std::string Game::GetPlayerWhoWillMakeAChoice() const
 	return participantName;
 }
 
+const Player& Game::GetCurrentAttacker()
+{
+	if (m_duelOrderIndex < 0)
+	{
+		m_duelOrderIndex = m_duelOrder.size() - 1;
+		std::random_device rd;
+		std::ranges::shuffle(m_duelOrder, rd);
+	}
+	return m_duelOrder[m_duelOrderIndex];
+}
+
+uint16_t Game::GetParticipantsQueueSize() const
+{
+	return m_participantsQueue.size();
+}
+
 void Game::IncrementNumericalAnswerQuestionIndex()
 {
 	numericQuestionIndex++;
+}
+
+void Game::IncrementMultipleAnswerQuestionIndex()
+{
+	multipleQuestionIndex++;
 }
 
 void Game::SetBoard(const Board& board)
@@ -327,6 +349,11 @@ void Game::AddNullPlayer()
 	m_players.push_back(Player("", Player::Color::None));
 }
 
+void Game::SetAttackedPosition(uint16_t position)
+{
+	m_attackedPosition = position;
+}
+
 bool Game::AddTerritory(std::string username, int position, bool isBase)
 {
 	auto player = std::ranges::find_if(m_players, [&username](const Player& player)
@@ -375,6 +402,47 @@ bool Game::PopPlayerWhoWillMakeAChoose()
 	return false;
 }
 
+void Game::DetermineDuelSituation(bool isMultiple)
+{
+	if (m_participantsQueue.size() == 2)
+	{
+		Participant participant1 = m_participantsQueue.top();
+		m_participantsQueue.pop();
+		Participant participant2 = m_participantsQueue.top();
+		m_participantsQueue.pop();
+		m_duelOrderIndex--;
+
+		if (isMultiple)
+		{
+			if (std::get<1>(participant1) == 0 && std::get<1>(participant2) == 0)
+			{
+				GoToNextStage();
+				return;
+			}
+			else if (std::get<1>(participant1) == 0 && std::get<0>(participant1) == m_duelParticipants[0].GetName())
+			{
+				StealTerritoryFromDefender();
+				GoToNextStage();
+				GoToNextStage();
+				m_duelParticipants.clear();
+			}
+			else
+			{
+				GoToNextStage();
+			}
+		}
+		else
+		{
+			if (std::get<0>(participant1) == m_duelParticipants[0].GetName())
+			{
+				StealTerritoryFromDefender();
+			}
+			GoToNextStage();
+			m_duelParticipants.clear();
+		}
+	}
+}
+
 Game& Game::operator=(const Game& other)
 {
 	if (this != &other)
@@ -395,6 +463,8 @@ Game& Game::operator=(const Game& other)
 		m_duelParticipants = other.m_duelParticipants;
 		m_playersWhoSentRequest = other.m_playersWhoSentRequest;
 		m_choosedTerritoryCounter = other.m_choosedTerritoryCounter;
+		m_duelOrder = other.m_duelOrder;
+		m_duelOrderIndex = other.m_duelOrderIndex;
 	}
 	return *this;
 }
@@ -420,6 +490,63 @@ void Game::Cleanup()
 	m_players.clear();
 	m_multipleAnswerQuestions.clear();
 	m_numericalAnswerQuestions.clear();
+}
+
+void Game::StealTerritoryFromDefender()
+{
+	if (m_board[m_attackedPosition].GetScore() == 100)
+	{
+		m_board[m_attackedPosition].SetOwner(m_duelParticipants[0]);
+		if (m_board[m_attackedPosition].GetIsBase())
+		{
+			StealAllTerritories();
+		}
+	}
+	else
+	{
+		m_board[m_attackedPosition].SetScore(m_board[m_attackedPosition].GetScore() - 100);
+	}
+}
+
+void Game::StealAllTerritories()
+{
+	uint16_t position = 0;
+	size_t height = m_board.GetHeight();
+	size_t width = m_board.GetWidth();
+	for (size_t i = 0; i < height * width; i++)
+	{
+		if (m_board[position].GetOwner().value().GetName() == m_duelParticipants[1].GetName())
+		{
+			m_board[position].SetOwner(m_duelParticipants[0]);
+		}
+		position++;
+	}
+
+	std::vector<Player>::iterator it;
+	for (it = m_duelOrder.begin(); it != m_duelOrder.end(); it++)
+	{
+		if (it->GetName() == m_duelParticipants[1].GetName())
+		{
+			break;
+		}
+	}
+	if (it != m_duelOrder.end())
+	{
+		m_duelOrder.erase(it);
+	}
+	if (m_duelOrder.size() == 1)
+	{
+		for (size_t i = m_currentStageIndex; i < m_stages.size(); i++)
+		{
+			if (m_stages[i] == Stage::Update)
+			{
+				m_stages[i + 1] = Stage::Result;
+				break;
+			}
+		}
+	}
+	std::ranges::shuffle(m_duelOrder, std::random_device());
+	m_duelOrderIndex = m_duelOrder.size() - 1;
 }
 
 void Game::AddPlayerWhoSentRequest(const std::string& playersName)
@@ -479,6 +606,10 @@ void Game::SetStagesForDuel()
 		m_stages.push_back(Stage::NumericalAnswerQuestion);
 		m_stages.push_back(Stage::Update);
 	}
+	m_duelOrder = m_players;
+	std::random_device rd;
+	std::ranges::shuffle(m_duelOrder, rd);
+	m_duelOrderIndex = m_duelOrder.size() - 1;
 }
 
 void Game::ClearPlayersWhoSentRequest()
@@ -490,7 +621,25 @@ void Game::InsertQueueParticipant(const std::string& username, const int& answer
 {
 	Participant participant(username, answerCorrentness, responseTime);
 	m_participantsQueue.push(participant);
-	if (m_participantsQueue.size() == m_players.size())
+	if (m_currentStageIndex > 1)
+	{
+		bool isMultiple;
+		if (m_stages[m_currentStageIndex - 1] == Stage::Attack)
+		{
+			isMultiple = true;
+			DetermineDuelSituation(isMultiple);
+		}
+		else if (m_stages[m_currentStageIndex - 2] == Stage::Attack)
+		{
+			isMultiple = false;
+			DetermineDuelSituation(isMultiple);
+		}
+		else if (m_participantsQueue.size() == m_players.size())
+		{
+			GoToNextStage();
+		}
+	}
+	else if (m_participantsQueue.size() == m_players.size())
 	{
 		GoToNextStage();
 	}
