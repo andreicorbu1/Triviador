@@ -44,8 +44,6 @@ public:
 	std::vector<Player> GetPlayers() const;
 	std::vector<Player>& GetPlayers();
 
-	uint16_t GetRounds() const;
-	int32_t GetGameID() const;
 	Player GetWinner();
 	uint16_t GetCurrentNumericalAnswerQuestionIndex() const;
 	uint16_t GetCurrentMultipleAnswerQuestionIndex() const;
@@ -71,8 +69,6 @@ public:
 	//Setters:
 	void SetBoard(const Board& board);
 	void SetPlayers(const std::vector<Player>& players);
-	void SetRounds(const uint16_t& rounds);
-	void SetGameID(const int32_t& gameID);
 	void SetQuestions(const uint16_t& numberOfPlayers);
 	void GoToNextStage();
 	void AddNullPlayer();
@@ -118,11 +114,9 @@ private:
 	std::unordered_map<uint16_t, std::vector<Player>> m_alreadyAnswered;
 	std::vector<MultipleAnswerQuestion> m_multipleAnswerQuestions;
 	std::vector<NumericalAnswerQuestion> m_numericalAnswerQuestions;
-	uint16_t m_gameRounds;
 	Stage m_currentStage;
 	uint16_t m_currentStageIndex;
 	std::vector<Stage>m_stages;
-	int32_t m_ID;
 	uint16_t numericQuestionIndex = 0;
 	uint16_t multipleQuestionIndex = 0;
 	std::unordered_set<std::string> m_playersWhoSentRequest;

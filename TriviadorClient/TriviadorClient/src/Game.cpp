@@ -173,42 +173,40 @@ void Game::GameLoop()
 		{
 			ui.stageLabel->setText("Wait for enemy next move");
 			ui.stageLabel->show();
-			//ui.stageLabel->hide();
-			waitingTime = 2000;
+			waitingTime = 1000;
 		}
 		if (data["stage"] == "numericalAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 10000;
+			waitingTime = 14000;
 			ShowQuestion(QuestionType::NumericalAnswer);
 		}
 		else if (data["stage"] == "multipleAnswerQuestion")
 		{
 			ui.stageLabel->hide();
-			waitingTime = 16000;
+			waitingTime = 14000;
 			ShowQuestion(QuestionType::MultipleAnswer);
 		}
 		else if (data["stage"] == "chooseBase")
 		{
 			ui.stageLabel->setText("Choose a base!");
 			ui.stageLabel->show();
-			waitingTime = 2000;
+			waitingTime = 1000;
 			//choose base
 		}
 		else if (data["stage"] == "chooseTerritory")
 		{
 			ui.stageLabel->setText("Choose your territories!");
 			ui.stageLabel->show();
-			waitingTime = 2000;
+			waitingTime = 1000;
 			//choose base
 		}
 
 		else if (data["stage"] == "attack")
 		{
-			//ui.stageLabel->hide();
 			ui.stageLabel->setText("Attack someone");
 			ui.stageLabel->show();
-			waitingTime = 2000;
+			waitingTime = 1000;
 			// attack
 		}
 		else if (data["stage"] == "update")
@@ -216,7 +214,7 @@ void Game::GameLoop()
 			ui.stageLabel->hide();
 			UpdateBoard();
 			UpdatePlayerScores();
-			waitingTime = 3000;
+			waitingTime = 2000;
 		}
 		else if (data["stage"] == "result")
 		{
@@ -227,7 +225,7 @@ void Game::GameLoop()
 		}
 		else
 		{
-			waitingTime = 2000;
+			waitingTime = 1000;
 		}
 	}
 	else
