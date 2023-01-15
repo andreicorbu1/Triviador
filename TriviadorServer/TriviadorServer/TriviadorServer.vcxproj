@@ -154,7 +154,7 @@
     <ClCompile Include="src\GetUserStatsHandler.cpp" />
     <ClCompile Include="src\PlayerHistory.cpp" />
     <ClCompile Include="src\PlayerHistoryManager.cpp" />
-    <ClCompile Include="src\GetAllPlayersFromGameHandlercpp.cpp" />
+    <ClCompile Include="src\GetAllPlayersFromGameHandler.cpp" />
     <ClCompile Include="src\GetAllPlayersFromLobbyHandler.cpp" />
     <ClCompile Include="src\GetBoardHandler.cpp" />
     <ClCompile Include="src\Lobby.cpp" />
