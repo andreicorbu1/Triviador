@@ -40,20 +40,16 @@ crow::response MultipleAnswerQuestionHandler::operator()(const crow::request& re
 					m_game.IncrementMultipleAnswerQuestionIndex();
 				}
 			}
-			//else if(playersWhoSentRequest.size()==m_game.GetPlayers().size())
-			//{
-			//	std::pair<MultipleAnswerQuestion, uint16_t> questionFromServer = m_game.GetNewMultipleAnswerQuestion();
-			//	multipleAnswerQuestion = questionFromServer.first;
-			//	id = questionFromServer.second;
-			//	//m_game.AddPlayerWhoSentRequest(username);
-			//}
 			else
 			{
 				return crow::response(402, "Player already did this request");
 			}
-
+			std::random_device rd;
+			std::mt19937 g(rd());
 			std::vector <crow::json::wvalue> answersJson;
-			for (auto& answer : multipleAnswerQuestion.GetAnswers())
+			auto answers = multipleAnswerQuestion.GetAnswers();
+			std::ranges::shuffle(answers, g);
+			for (auto& answer : answers)
 			{
 				answersJson.push_back(crow::json::wvalue(answer));
 			}

@@ -72,6 +72,16 @@ Territory& Territory::operator=(Territory&& territory) noexcept
 	return *this;
 }
 
+void Territory::AddScore(uint16_t score)
+{
+	m_score += score;
+}
+
+void Territory::DecrementScore(uint16_t score)
+{
+	m_score -= score;
+}
+
 std::ostream& operator<< (std::ostream& out, const Territory& t)
 {
 	out << (t.m_owner.has_value() ? t.m_owner.value().GetName() : "No owner");

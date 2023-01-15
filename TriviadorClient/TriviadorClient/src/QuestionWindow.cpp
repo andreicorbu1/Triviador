@@ -201,7 +201,14 @@ void QuestionWindow::on_submitButton_clicked()
 {
 	setEnabled(false);
 	m_playerAnswered = true;
-	SendAnswer(ui.answerInput->text().toUtf8().constData());
+	if (ui.answerInput->text().isEmpty())
+	{
+		SendAnswer();
+	}
+	else
+	{
+		SendAnswer(ui.answerInput->text().toUtf8().constData());
+	}
 }
 
 void QuestionWindow::UpdateProgressBar()

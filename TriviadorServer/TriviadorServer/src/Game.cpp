@@ -406,6 +406,7 @@ void Game::DetermineDuelSituation(bool isMultiple)
 			{
 				GoToNextStage();
 				GoToNextStage();
+				m_board[m_attackedPosition].AddScore(100);
 				m_duelParticipants.clear();
 			}
 		}
@@ -415,8 +416,47 @@ void Game::DetermineDuelSituation(bool isMultiple)
 			{
 				StealTerritoryFromDefender();
 			}
+			else
+			{
+				m_board[m_attackedPosition].AddScore(100);
+			}
 			GoToNextStage();
 			m_duelParticipants.clear();
+		}
+	}
+}
+
+void Game::DetermineScoreForAllPlayers()
+{
+	ClearPlayersScore();
+	uint16_t position = 0;
+	size_t height = m_board.GetHeight();
+	size_t width = m_board.GetWidth();
+	for (size_t i = 0; i < height * width; i++)
+	{
+		if (auto owner = m_board[i].GetOwner(); owner.has_value())
+		{
+			for (auto& player : m_players)
+			{
+				if (player.GetName() == owner.value().GetName())
+				{
+					player.AddScore(m_board[i].GetScore());
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Game::UpdateGameHistory(const std::string& username)
+{
+	AccountManager userList("resource/Accounts.sqlite");
+	for (Player& player : m_players)
+	{
+		if (player.GetName() == username)
+		{
+			userList.UpdateUser(player.GetName(), player.GetScore());
+			break;
 		}
 	}
 }
@@ -480,7 +520,7 @@ void Game::StealTerritoryFromDefender()
 	}
 	else
 	{
-		m_board[m_attackedPosition].SetScore(m_board[m_attackedPosition].GetScore() - 100);
+		m_board[m_attackedPosition].DecrementScore(100);
 	}
 }
 
@@ -523,6 +563,14 @@ void Game::StealAllTerritories()
 	}
 	std::ranges::shuffle(m_duelOrder, std::random_device());
 	m_duelOrderIndex = m_duelOrder.size() - 1;
+}
+
+void Game::ClearPlayersScore()
+{
+	for (Player& player : m_players)
+	{
+		player.SetScore(0);
+	}
 }
 
 void Game::AddPlayerWhoSentRequest(const std::string& playersName)

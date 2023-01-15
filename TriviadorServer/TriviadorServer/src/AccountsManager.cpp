@@ -2,15 +2,7 @@
 AccountManager::AccountManager(const std::string& databaseFileName) : m_database(CreateStorage(databaseFileName))
 {
 	m_database.sync_schema();
-	auto initUsersCount = m_database.count<User>();
-	if (initUsersCount > 0)
-	{
-		auto allUsers = m_database.get_all<User>();
-		for (auto& user : allUsers)
-		{
-			m_accounts.emplace(user.GetUsername(), user);
-		}
-	}
+	InsertUsersFromDbInAccounts();
 }
 
 void AccountManager::AddUser(User& user)
@@ -49,6 +41,19 @@ void AccountManager::UpdateUser(const std::string& username, int matchPoints)
 	
 	m_accounts[username].UpdateLevel(matchPoints);
 	m_database.update(m_accounts[username]);
+}
+
+void AccountManager::InsertUsersFromDbInAccounts()
+{
+	auto initUsersCount = m_database.count<User>();
+	if (initUsersCount > 0)
+	{
+		auto allUsers = m_database.get_all<User>();
+		for (auto& user : allUsers)
+		{
+			m_accounts.emplace(user.GetUsername(), user);
+		}
+	}
 }
 
 bool AccountManager::ValidateCredentials(const User& user) const
