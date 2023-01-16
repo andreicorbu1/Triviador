@@ -22,7 +22,8 @@ public:
 	void SetOwner(const Player& player);
 	void SetScore(const int& score);
     void SetBaseIcon(const QPixmap& baseIcon);
-    
+    void SetNoBaseIcon();
+
 	// Getters:
     QSharedPointer<QPushButton> GetButton() const;
     Player GetOwner() const;

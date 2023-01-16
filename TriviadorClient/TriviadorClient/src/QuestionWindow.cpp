@@ -175,7 +175,6 @@ void QuestionWindow::on_telescopeButton_clicked()
 		ui_telescopeAnswers.push_back(telescopeAnswer);
 		i++;
 	}
-
 	ui.telescopeButton->close();
 }
 

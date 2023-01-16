@@ -102,8 +102,14 @@ void Game::UpdateBoard()
 			
 			m_board[i].SetOwner(player);
 			m_board[i].SetScore(score);
-			if(isbase)
+			if (isbase)
+			{
 				m_board[i].SetBaseIcon(m_baseIcon);
+			}
+			else
+			{
+				m_board[i].SetNoBaseIcon();
+			}
 			m_board[i].Update();
 		}
 	}
