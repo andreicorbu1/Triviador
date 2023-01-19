@@ -586,6 +586,13 @@ void Game::AddPlayerWhoSentRequest(const std::string& playersName)
 
 void Game::AddPlayerToDuel(const Player& player)
 {
+	if (m_duelParticipants.size() == 0)
+	{
+		while (m_participantsQueue.size())
+		{
+			m_participantsQueue.pop();
+		}
+	}
 	if (m_duelParticipants.size() > 2)
 	{
 		throw std::out_of_range("Maximum 2 players can be in a duel");

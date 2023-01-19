@@ -45,6 +45,11 @@ void Territory::SetBaseIcon(const QPixmap& baseIcon)
 	m_button->setIconSize(QSize(35,35));
 }
 
+void Territory::SetNoBaseIcon()
+{
+    m_button->setIcon(QIcon());
+}
+
 QSharedPointer<QPushButton> Territory::GetButton() const
 {
     return m_button;
